@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dvrx8wmadvywy"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftBar" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.289
+anchor_bottom = 1.0
+offset_right = -0.559998
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RightBar" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.711
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BattleAreaReference" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.289
+anchor_right = 0.711
+anchor_bottom = 1.0
+offset_left = 0.071991
+offset_right = -0.0720215
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.391367, 0.314731, 0.551999, 1)
