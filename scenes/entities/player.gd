@@ -1,11 +1,24 @@
 extends Area2D
 
+const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
+
 const RADIUS := 16.0
 
 const SPEED := 240.0
 const SLOW_SPEED := 180.0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+@export var bullet_container: Node
+
+@onready var bullet_timer: Timer = $BulletTimer
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		if bullet_timer.is_stopped():
+			shoot_bullet()
+			bullet_timer.start()
+	if event.is_action_released("shoot"):
+		bullet_timer.stop()
+
 func _process(delta: float) -> void:
 	var x_direction = Input.get_axis("left", "right")
 	var y_direction = Input.get_axis("up", "down")
@@ -14,5 +27,13 @@ func _process(delta: float) -> void:
 	position += velocity
 	
 	position.x = clampf(position.x, RADIUS, GameProperties.STAGE_WIDTH - RADIUS)
-	print(GameProperties.STAGE_WIDTH, "  ", position.x)
 	position.y = clampf(position.y, RADIUS, GameProperties.STAGE_HEIGHT - RADIUS)
+
+func shoot_bullet():
+	var bullet = PLAYER_BULLET.instantiate()
+	bullet.position = position
+	bullet_container.add_child(bullet)
+
+
+func _on_bullet_timer_timeout() -> void:
+	shoot_bullet()
