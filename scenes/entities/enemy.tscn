@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgmdfxt0ngpi6"]
+
+[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="1_d7j71"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/hitbox_component.tscn" id="3_ktqfp"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/health_component.tscn" id="4_defa4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_defa4"]
+radius = 14.0
+
+[node name="Enemy" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_d7j71")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_ktqfp")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_defa4")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_defa4")]
+max_health = 3

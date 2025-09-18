@@ -5,7 +5,7 @@ const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 const RADIUS := 16.0
 
 const SPEED := 240.0
-const SLOW_SPEED := 180.0
+const SLOW_SPEED := 120.0
 
 @export var bullet_container: Node
 
@@ -19,7 +19,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("shoot"):
 		bullet_timer.stop()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var x_direction = Input.get_axis("left", "right")
 	var y_direction = Input.get_axis("up", "down")
 	var direction = Vector2(x_direction, y_direction).normalized()

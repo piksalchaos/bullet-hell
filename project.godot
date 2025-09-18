@@ -65,6 +65,13 @@ shoot={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy_hitboxes"
+2d_physics/layer_3="player_bullets"
+2d_physics/layer_4="enemy_bullets"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
