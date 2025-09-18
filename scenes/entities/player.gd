@@ -7,8 +7,6 @@ const RADIUS := 16.0
 const SPEED := 240.0
 const SLOW_SPEED := 120.0
 
-@export var bullet_container: Node
-
 @onready var bullet_timer: Timer = $BulletTimer
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -28,11 +26,12 @@ func _physics_process(delta: float) -> void:
 	
 	position.x = clampf(position.x, RADIUS, GameProperties.STAGE_WIDTH - RADIUS)
 	position.y = clampf(position.y, RADIUS, GameProperties.STAGE_HEIGHT - RADIUS)
+	GameProperties.update_player_position(position)
 
 func shoot_bullet():
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.position = position
-	bullet_container.add_child(bullet)
+	GameProperties.bullet_container.add_child(bullet)
 
 
 func _on_bullet_timer_timeout() -> void:

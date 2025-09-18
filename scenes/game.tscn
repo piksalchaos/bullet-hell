@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp24suxtg5xp5"]
+
+[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/hud.tscn" id="1_lbhrr"]
+[ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/game.gd" id="1_p57ef"]
+[ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player.tscn" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dgmdfxt0ngpi6" path="res://scenes/entities/enemy.tscn" id="4_u5sy4"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_p57ef")
+
+[node name="Stage" type="Node2D" parent="."]
+position = Vector2(333, 0)
+
+[node name="BulletContainer" type="Node2D" parent="Stage"]
+
+[node name="Player" parent="Stage" instance=ExtResource("3_p57ef")]
+position = Vector2(243, 550)
+
+[node name="Enemy" parent="Stage" instance=ExtResource("4_u5sy4")]
+position = Vector2(270, 105)
+
+[node name="HUD" parent="." instance=ExtResource("1_lbhrr")]

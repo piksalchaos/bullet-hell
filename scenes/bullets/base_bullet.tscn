@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://hpbcou7sy0s2"]
+
+[ext_resource type="Script" uid="uid://cq5x1fj243pi3" path="res://scenes/bullets/base_bullet.gd" id="1_0xma0"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="1_gfgx0"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="3_3u0jw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3u0jw"]
+
+[node name="BaseBullet" type="Node2D"]
+script = ExtResource("1_0xma0")
+
+[node name="BulletComponent" parent="." instance=ExtResource("1_gfgx0")]
+offscreen_distance = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_3u0jw")
+
+[node name="CircleDrawing" parent="." instance=ExtResource("3_3u0jw")]

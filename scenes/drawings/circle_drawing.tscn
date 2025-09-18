@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dstuu3qr7iaia"]
+
+[ext_resource type="Script" uid="uid://5yc16phbtul8" path="res://scenes/drawings/circle_drawing.gd" id="1_l3bw0"]
+
+[node name="CircleDrawing" type="Node2D"]
+script = ExtResource("1_l3bw0")
+radius = 10.0

@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgmdfxt0ngpi6"]
+[gd_scene load_steps=6 format=3 uid="uid://dgmdfxt0ngpi6"]
 
+[ext_resource type="Script" uid="uid://ynoen8cogpu6" path="res://scenes/entities/enemy.gd" id="1_67neu"]
 [ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="1_d7j71"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/hitbox_component.tscn" id="3_ktqfp"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/health_component.tscn" id="4_defa4"]
@@ -8,6 +9,7 @@
 radius = 14.0
 
 [node name="Enemy" type="Node2D"]
+script = ExtResource("1_67neu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -21,3 +23,9 @@ shape = SubResource("CircleShape2D_defa4")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_defa4")]
 max_health = 3
+
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
