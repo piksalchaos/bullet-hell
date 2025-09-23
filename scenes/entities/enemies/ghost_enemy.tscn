@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgmdfxt0ngpi6"]
+
+[ext_resource type="Script" uid="uid://ynoen8cogpu6" path="res://scenes/entities/enemies/ghost_enemy.gd" id="1_h5v6m"]
+[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="2_b7aru"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/hitbox_component.tscn" id="3_h2v7a"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/health_component.tscn" id="4_462g3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_defa4"]
+radius = 14.0
+
+[node name="GhostEnemy" type="Node2D"]
+script = ExtResource("1_h5v6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_b7aru")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_h2v7a")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_defa4")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_462g3")]
+
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]

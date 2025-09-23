@@ -1,4 +1,4 @@
-class_name Enemy extends Node2D
+extends Node2D
 
 const GHOST_BULLET = preload("res://scenes/bullets/ghost_bullet.tscn")
 const TWEEN_DURATION := 0.75

@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/hud.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/game.gd" id="1_p57ef"]
 [ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager.gd" id="2_iywne"]
-[ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player.tscn" id="3_p57ef"]
-[ext_resource type="Script" uid="uid://cpvgpkefedhkk" path="res://scenes/enemy_spawner.gd" id="4_iywne"]
+[ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://nke5gij7chmn" path="res://scenes/round.gd" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/enemy_spawners/ghost_enemy_spawner.tscn" id="5_p57ef"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_p57ef")
@@ -13,10 +13,10 @@ script = ExtResource("1_p57ef")
 [node name="Stage" type="Node2D" parent="."]
 position = Vector2(333, 0)
 
-[node name="BulletContainer" type="Node2D" parent="Stage"]
-
 [node name="Player" parent="Stage" instance=ExtResource("3_p57ef")]
 position = Vector2(243, 550)
+
+[node name="BulletContainer" type="Node2D" parent="Stage"]
 
 [node name="EnemyContainer" type="Node2D" parent="Stage"]
 
@@ -26,15 +26,13 @@ script = ExtResource("2_iywne")
 [node name="Round" type="Node2D" parent="Stage/RoundManager"]
 script = ExtResource("4_p57ef")
 
-[node name="EnemySpawner" type="Marker2D" parent="Stage/RoundManager/Round"]
+[node name="EnemySpawner" parent="Stage/RoundManager/Round" instance=ExtResource("5_p57ef")]
 position = Vector2(102, 110)
-script = ExtResource("4_iywne")
 
 [node name="Round2" type="Node2D" parent="Stage/RoundManager"]
 script = ExtResource("4_p57ef")
 
-[node name="EnemySpawner" type="Marker2D" parent="Stage/RoundManager/Round2"]
-position = Vector2(366, 200)
-script = ExtResource("4_iywne")
+[node name="EnemySpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("5_p57ef")]
+position = Vector2(334, 170)
 
 [node name="HUD" parent="." instance=ExtResource("1_lbhrr")]

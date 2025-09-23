@@ -7,15 +7,15 @@ const WIDTH := 16.0
 const SPEED := 240.0
 const SLOW_SPEED := 120.0
 
-@onready var bullet_timer: Timer = $BulletTimer
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		if bullet_timer.is_stopped():
-			shoot_bullet()
-			bullet_timer.start()
-	if event.is_action_released("shoot"):
-		bullet_timer.stop()
+#@onready var bullet_timer: Timer = $BulletTimer
+#
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event.is_action_pressed("shoot"):
+		#if bullet_timer.is_stopped():
+			#shoot_bullet()
+			#bullet_timer.start()
+	#if event.is_action_released("shoot"):
+		#bullet_timer.stop()
 
 func _physics_process(delta: float) -> void:
 	var x_direction = Input.get_axis("left", "right")
@@ -34,5 +34,5 @@ func shoot_bullet():
 	GameProperties.bullet_container.add_child(bullet)
 
 
-func _on_bullet_timer_timeout() -> void:
-	shoot_bullet()
+#func _on_bullet_timer_timeout() -> void:
+	#shoot_bullet()

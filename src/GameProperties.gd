@@ -16,6 +16,7 @@ const LAYER_ENEMY_BULLETS := 4
 var player_position: Vector2
 var bullet_container: Node2D
 var enemy_container: Node2D
+var captured_color_ids: Array[COLOR_ID]
 
 func update_player_position(position: Vector2):
 	player_position = position

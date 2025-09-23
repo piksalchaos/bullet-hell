@@ -7,7 +7,7 @@ signal enemies_defeated
 func begin() -> void:
 	for spawner in get_children():
 		enemy_count += 1
-		var enemy: Enemy = spawner.create_enemy()
+		var enemy: Node2D = spawner.create_enemy()
 		enemy.tree_exited.connect(decrement_enemy_count)
 
 func decrement_enemy_count() -> void:
