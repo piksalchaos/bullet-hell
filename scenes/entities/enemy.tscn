@@ -26,6 +26,5 @@ max_health = 3
 
 [node name="BulletTimer" type="Timer" parent="."]
 wait_time = 0.6
-autostart = true
 
 [connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]

@@ -9,10 +9,8 @@ const LAYER_PLAYER_BULLETS := 3
 const LAYER_ENEMY_BULLETS := 4
 
 var player_position: Vector2
-var bullet_container: Node
+var bullet_container: Node2D
+var enemy_container: Node2D
 
 func update_player_position(position: Vector2):
 	player_position = position
-
-func set_bullet_container(node: Node):
-	bullet_container = node

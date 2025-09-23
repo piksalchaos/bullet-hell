@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=7 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/hud.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/game.gd" id="1_p57ef"]
+[ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager.gd" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player.tscn" id="3_p57ef"]
-[ext_resource type="PackedScene" uid="uid://dgmdfxt0ngpi6" path="res://scenes/entities/enemy.tscn" id="4_u5sy4"]
+[ext_resource type="Script" uid="uid://cpvgpkefedhkk" path="res://scenes/enemy_spawner.gd" id="4_iywne"]
+[ext_resource type="Script" uid="uid://nke5gij7chmn" path="res://scenes/round.gd" id="4_p57ef"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_p57ef")
@@ -16,7 +18,23 @@ position = Vector2(333, 0)
 [node name="Player" parent="Stage" instance=ExtResource("3_p57ef")]
 position = Vector2(243, 550)
 
-[node name="Enemy" parent="Stage" instance=ExtResource("4_u5sy4")]
-position = Vector2(270, 105)
+[node name="EnemyContainer" type="Node2D" parent="Stage"]
+
+[node name="RoundManager" type="Node2D" parent="Stage"]
+script = ExtResource("2_iywne")
+
+[node name="Round" type="Node2D" parent="Stage/RoundManager"]
+script = ExtResource("4_p57ef")
+
+[node name="EnemySpawner" type="Marker2D" parent="Stage/RoundManager/Round"]
+position = Vector2(102, 110)
+script = ExtResource("4_iywne")
+
+[node name="Round2" type="Node2D" parent="Stage/RoundManager"]
+script = ExtResource("4_p57ef")
+
+[node name="EnemySpawner" type="Marker2D" parent="Stage/RoundManager/Round2"]
+position = Vector2(366, 200)
+script = ExtResource("4_iywne")
 
 [node name="HUD" parent="." instance=ExtResource("1_lbhrr")]
