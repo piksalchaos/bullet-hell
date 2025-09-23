@@ -76,4 +76,4 @@ shoot={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.155464, 0.145352, 0.279327, 1)
+environment/defaults/default_clear_color=Color(0.19, 0.1083, 0.14098, 1)

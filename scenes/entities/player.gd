@@ -1,8 +1,8 @@
-extends Area2D
+class_name Player extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 
-const RADIUS := 16.0
+const WIDTH := 16.0
 
 const SPEED := 240.0
 const SLOW_SPEED := 120.0
@@ -24,8 +24,8 @@ func _physics_process(delta: float) -> void:
 	var velocity = direction * (SLOW_SPEED if Input.is_action_pressed("slow") else SPEED) * delta
 	position += velocity
 	
-	position.x = clampf(position.x, RADIUS, GameProperties.STAGE_WIDTH - RADIUS)
-	position.y = clampf(position.y, RADIUS, GameProperties.STAGE_HEIGHT - RADIUS)
+	position.x = clampf(position.x, WIDTH, GameProperties.STAGE_WIDTH - WIDTH)
+	position.y = clampf(position.y, WIDTH, GameProperties.STAGE_HEIGHT - WIDTH)
 	GameProperties.update_player_position(position)
 
 func shoot_bullet():

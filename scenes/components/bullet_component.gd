@@ -9,3 +9,6 @@ func _physics_process(_delta: float) -> void:
 	or position.y < -offscreen_distance \
 	or position.y > GameProperties.STAGE_HEIGHT + offscreen_distance:
 		parent.queue_free()
+
+func _on_area_entered(area: Player) -> void:
+	parent.queue_free()

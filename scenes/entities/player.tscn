@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b43avh08mlvxf" path="res://images/player_placeholder.png" id="2_08t41"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 16.0
+radius = 3.0
 
 [node name="Player" type="Area2D"]
 collision_mask = 8
@@ -15,6 +15,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_08t41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="BulletTimer" type="Timer" parent="."]

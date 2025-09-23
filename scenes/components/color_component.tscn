@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xqi3gat184am"]
+
+[ext_resource type="Script" uid="uid://c0473s17d5ej3" path="res://scenes/components/color_component.gd" id="1_lrbur"]
+
+[node name="ColorComponent" type="Node"]
+script = ExtResource("1_lrbur")

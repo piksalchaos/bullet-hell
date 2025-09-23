@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg3mxwy62bmbu"]
+
+[ext_resource type="Script" uid="uid://bp72g0omjdlvf" path="res://scenes/bullets/ghost_bullet.gd" id="1_t8pb2"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_12sdl"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_rkrj1"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="3_12sdl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_no6a4"]
+
+[node name="GhostBullet" type="Node2D"]
+script = ExtResource("1_t8pb2")
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_12sdl")]
+
+[node name="BulletComponent" parent="." instance=ExtResource("2_rkrj1")]
+offscreen_distance = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_no6a4")
+
+[node name="CircleDrawing" parent="." instance=ExtResource("3_12sdl")]

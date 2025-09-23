@@ -5,3 +5,5 @@
 [node name="BulletComponent" type="Area2D"]
 collision_layer = 8
 script = ExtResource("1_c3qan")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
