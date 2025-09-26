@@ -35,3 +35,7 @@ script = ExtResource("4_42nxq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletAbsorber"]
 shape = SubResource("CircleShape2D_1ie0h")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

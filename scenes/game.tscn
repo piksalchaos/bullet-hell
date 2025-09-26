@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bp24suxtg5xp5"]
 
-[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/hud.tscn" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/game.gd" id="1_p57ef"]
 [ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager.gd" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="3_p57ef"]
@@ -45,3 +45,6 @@ position = Vector2(329, 52)
 position = Vector2(126, 196)
 
 [node name="HUD" parent="." instance=ExtResource("1_lbhrr")]
+
+[connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
+[connection signal="start_button_pressed" from="HUD" to="." method="_on_hud_start_button_pressed"]

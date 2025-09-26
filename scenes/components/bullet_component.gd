@@ -11,7 +11,9 @@ func _physics_process(_delta: float) -> void:
 		parent.queue_free()
 
 func _on_area_entered(area: Player) -> void:
-	parent.queue_free()
+	if not area.is_on_cooldown:
+		parent.queue_free()
+		area.hit()
 
 func capture_color():
 	GameProperties.captured_color_ids.append(parent.color_component.color_id)

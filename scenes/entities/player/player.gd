@@ -1,23 +1,21 @@
 class_name Player extends Area2D
 
+@onready var cooldown_timer: Timer = $CooldownTimer
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
-
 const WIDTH := 16.0
-
 const SPEED := 240.0
 const SLOW_SPEED := 120.0
+const COOLDOWN_ALPHA = 0.3
 
-#@onready var bullet_timer: Timer = $BulletTimer
-#
-#func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("shoot"):
-		#if bullet_timer.is_stopped():
-			#shoot_bullet()
-			#bullet_timer.start()
-	#if event.is_action_released("shoot"):
-		#bullet_timer.stop()
+var is_active = false
+var is_on_cooldown = false
+
+signal got_hit()
 
 func _physics_process(delta: float) -> void:
+	if not is_active: return
 	var x_direction = Input.get_axis("left", "right")
 	var y_direction = Input.get_axis("up", "down")
 	var direction = Vector2(x_direction, y_direction).normalized()
@@ -28,11 +26,12 @@ func _physics_process(delta: float) -> void:
 	position.y = clampf(position.y, WIDTH, GameProperties.STAGE_HEIGHT - WIDTH)
 	GameProperties.update_player_position(position)
 
-func shoot_bullet():
-	var bullet = PLAYER_BULLET.instantiate()
-	bullet.position = position
-	GameProperties.bullet_container.add_child(bullet)
+func hit() -> void:
+	got_hit.emit()
+	sprite_2d.modulate.a = COOLDOWN_ALPHA
+	is_on_cooldown = true
+	cooldown_timer.start()
 
-
-#func _on_bullet_timer_timeout() -> void:
-	#shoot_bullet()
+func _on_cooldown_timer_timeout() -> void:
+	is_on_cooldown = false
+	sprite_2d.modulate.a = 1
