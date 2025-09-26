@@ -1,6 +1,6 @@
 extends Area2D
 
-const RADIUS := 6.0
+const RADIUS := 16.0
 const SPEED := 1200.0
 
 @export var initial_color_id: GameProperties.COLOR_ID
@@ -19,4 +19,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(area: HitboxComponent) -> void:
 	queue_free()
-	area.hit(damage)
+	area.hit(damage, color_component.color_id)

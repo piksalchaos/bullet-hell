@@ -3,11 +3,14 @@ extends Node2D
 const GHOST_BULLET = preload("res://scenes/bullets/ghost_bullet.tscn")
 const TWEEN_DURATION := 0.75
 @onready var bullet_timer: Timer = $BulletTimer
+@onready var color_component: ColorComponent = $ColorComponent
 
 @export var starting_position: Vector2
+@export var initial_color_id: GameProperties.COLOR_ID
 
 func _ready() -> void:
 	change_position(starting_position)
+	color_component.color_id = initial_color_id
 
 func change_position(new_position: Vector2) -> void:
 	bullet_timer.stop()
