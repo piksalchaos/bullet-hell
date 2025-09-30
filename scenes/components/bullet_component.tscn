@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cckt7n3ig8xfc" path="res://scenes/components/bullet_component.gd" id="1_c3qan"]
 
-[node name="BulletComponent" type="Area2D"]
+[node name="BulletComponent" type="Area2D" groups=["bullet_components"]]
 collision_layer = 8
 script = ExtResource("1_c3qan")
 

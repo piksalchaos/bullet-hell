@@ -47,4 +47,5 @@ position = Vector2(126, 196)
 [node name="HUD" parent="." instance=ExtResource("1_lbhrr")]
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
+[connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
 [connection signal="start_button_pressed" from="HUD" to="." method="_on_hud_start_button_pressed"]
