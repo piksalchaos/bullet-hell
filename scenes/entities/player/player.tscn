@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=9 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b43avh08mlvxf" path="res://images/player_placeholder.png" id="2_08t41"]
 [ext_resource type="Texture2D" uid="uid://oukxw7ad0r61" path="res://images/heart.png" id="3_1ie0h"]
+[ext_resource type="Script" uid="uid://dopm7mmmuaqd2" path="res://scenes/entities/player/magic_display.gd" id="4_8akj5"]
 [ext_resource type="Script" uid="uid://cs734ayyynx5e" path="res://scenes/entities/player/bullet_absorber.gd" id="4_42nxq"]
 [ext_resource type="Script" uid="uid://cqg8xn2lhlwxa" path="res://scenes/entities/player/bullet_shooter.gd" id="5_bjvvg"]
 
@@ -29,19 +30,21 @@ texture = ExtResource("3_1ie0h")
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_u8vuu")
 
-[node name="BulletAbsorber" type="Area2D" parent="."]
-position = Vector2(0, -46)
+[node name="MagicDisplay" type="Node2D" parent="."]
+script = ExtResource("4_8akj5")
+
+[node name="BulletAbsorber" type="Area2D" parent="MagicDisplay"]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_42nxq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletAbsorber"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagicDisplay/BulletAbsorber"]
 shape = SubResource("CircleShape2D_1ie0h")
 
-[node name="BulletShooter" type="Node2D" parent="."]
+[node name="BulletShooter" type="Node2D" parent="MagicDisplay"]
 script = ExtResource("5_bjvvg")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 
-[connection signal="child_order_changed" from="BulletShooter" to="BulletShooter" method="_on_child_order_changed"]
+[connection signal="child_order_changed" from="MagicDisplay/BulletShooter" to="MagicDisplay/BulletShooter" method="_on_child_order_changed"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

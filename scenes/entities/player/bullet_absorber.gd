@@ -1,7 +1,7 @@
 extends Area2D
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("absorb") and GameProperties.captured_color_ids.size() <= 6:
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("absorb") and GameProperties.captured_color_ids.size() < 6:
 		capture_closest_bullet()
 
 func capture_closest_bullet():
