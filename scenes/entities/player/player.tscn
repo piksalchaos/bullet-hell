@@ -10,7 +10,7 @@
 radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
-radius = 42.0
+radius = 15.0
 
 [node name="Player" type="Area2D"]
 collision_mask = 8
@@ -30,6 +30,7 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="BulletAbsorber" type="Area2D" parent="."]
+position = Vector2(0, -46)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_42nxq")
@@ -42,4 +43,5 @@ script = ExtResource("5_bjvvg")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 
+[connection signal="child_order_changed" from="BulletShooter" to="BulletShooter" method="_on_child_order_changed"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

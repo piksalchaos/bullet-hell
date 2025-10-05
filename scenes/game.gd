@@ -10,6 +10,7 @@ extends Node
 var player_health = 0
 
 func _ready() -> void:
+	GameProperties.captured_color_ids = []
 	GameProperties.bullet_container = bullet_container
 	GameProperties.enemy_container = enemy_container
 
