@@ -17,13 +17,8 @@ func _on_area_entered(area: Player) -> void:
 		parent.queue_free()
 		area.hit()
 
-func capture_color():
-	GameProperties.captured_color_ids.append(parent.color_component.color_id)
-	var tween = get_tree().create_tween()
-	tween.tween_property(parent, "scale", Vector2.ZERO, CAPTURE_SHRINK_DURATION)
-	tween.tween_callback(capture_tween_callback)
-
-func capture_tween_callback():
-	SignalBus.bullet_captured.emit(parent.position, parent.color_component.color_id)
-	parent.queue_free()
-	
+func capture_color_id():
+	var color_component = parent.color_component
+	if not color_component.disabled:
+		color_component.disable()
+		return color_component.color_id
