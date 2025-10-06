@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=8 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/game.gd" id="1_p57ef"]
-[ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager.gd" id="2_iywne"]
+[ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="3_p57ef"]
-[ext_resource type="Script" uid="uid://nke5gij7chmn" path="res://scenes/round.gd" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/enemy_spawners/ghost_enemy_spawner.tscn" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/enemy_spawners/timer_spawner.tscn" id="6_u5sy4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_p57ef")
@@ -23,20 +24,23 @@ position = Vector2(243, 550)
 [node name="RoundManager" type="Node2D" parent="Stage"]
 script = ExtResource("2_iywne")
 
-[node name="Round" type="Node2D" parent="Stage/RoundManager"]
-script = ExtResource("4_p57ef")
+[node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_p57ef")]
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round" instance=ExtResource("5_p57ef")]
 position = Vector2(90, 65)
 
-[node name="Round2" type="Node2D" parent="Stage/RoundManager"]
-script = ExtResource("4_p57ef")
+[node name="Round2" parent="Stage/RoundManager" instance=ExtResource("4_p57ef")]
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("5_p57ef")]
 position = Vector2(365, 101)
 
-[node name="Round3" type="Node2D" parent="Stage/RoundManager"]
-script = ExtResource("4_p57ef")
+[node name="TimerSpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("6_u5sy4")]
+wait_time = 2.0
+
+[node name="GhostEnemySpawner" parent="Stage/RoundManager/Round2/TimerSpawner" instance=ExtResource("5_p57ef")]
+position = Vector2(88, 155)
+
+[node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_p57ef")]
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("5_p57ef")]
 position = Vector2(343, 41)

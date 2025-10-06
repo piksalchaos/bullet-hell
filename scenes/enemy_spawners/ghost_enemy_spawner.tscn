@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://cpvgpkefedhkk" path="res://scenes/enemy_spawners/ghost_enemy_spawner.gd" id="1_baypi"]
 
-[node name="EnemySpawner" type="Marker2D"]
+[node name="GhostEnemySpawner" type="Marker2D"]
 script = ExtResource("1_baypi")

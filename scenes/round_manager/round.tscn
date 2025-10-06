@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://473s7ceqps1b"]
+
+[ext_resource type="Script" uid="uid://nke5gij7chmn" path="res://scenes/round_manager/round.gd" id="1_vfk7k"]
+
+[node name="Round" type="Node2D"]
+script = ExtResource("1_vfk7k")
+
+[connection signal="child_order_changed" from="." to="." method="_on_child_order_changed"]

@@ -24,7 +24,6 @@ func _on_color_amount_changed(color_id, percentage):
 	get_child(color_id).percentage = percentage
 
 func _on_selected_color_changed(color_id):
-	print(color_id)
 	var tween = get_tree().create_tween()
 	var color_count = GameProperties.COLOR_ID.size()
 	var cw_difference = (color_id - selected_color_id + color_count) % color_count
