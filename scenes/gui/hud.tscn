@@ -49,8 +49,10 @@ alignment = 1
 
 [node name="Palette" parent="RightBar" instance=ExtResource("2_624ws")]
 layout_mode = 1
-offset_top = 93.0
-offset_bottom = 93.0
+offset_left = -1.0
+offset_top = 124.0
+offset_right = -1.0
+offset_bottom = 124.0
 
 [node name="BattleAreaReference" type="ColorRect" parent="."]
 visible = false

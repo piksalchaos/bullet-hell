@@ -13,7 +13,7 @@ var rotation_factor: int = 0
 func _ready() -> void:
 	SignalBus.color_amount_changed.connect(_on_color_amount_changed)
 	SignalBus.selected_color_changed.connect(_on_selected_color_changed)
-	for i in GameProperties.COLOR_ID.size():
+	for i in GameProperties.COLOR_ID.size() - 1:
 		var palette_color = PALETTE_COLOR.instantiate()
 		var angle = i * PI/3 - PI/2
 		palette_color.position = Vector2(cos(angle), sin(angle)) * CENTER_DISTANCE

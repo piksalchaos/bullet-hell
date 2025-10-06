@@ -11,7 +11,7 @@ func _draw() -> void:
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
-	if color_id < 0: return
+	if color_id < 0 or color_id > 5: return
 	if color_amounts.has(color_id):
 		if color_amounts[color_id] < MAX_COLOR_AMOUNT:
 			color_amounts[color_id] = clampi(color_amounts[color_id] + 1, 0, MAX_COLOR_AMOUNT)
