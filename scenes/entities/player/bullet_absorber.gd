@@ -22,7 +22,6 @@ func _on_area_entered(bullet: Area2D) -> void:
 			selected_color_id = color_id
 			SignalBus.selected_color_changed.emit(selected_color_id)
 	SignalBus.color_amount_changed.emit(color_id, color_amounts[color_id])
-	print(color_amounts)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch_right"):
@@ -38,7 +37,7 @@ func _input(event: InputEvent) -> void:
 func switch_color(is_right: bool = true) -> void:
 	if color_amounts.size() <= 0: return
 	var color_id_count = GameProperties.COLOR_ID.size()
-	var id_offset = 1 if is_right else - 1
+	var id_offset = 1 if is_right else -1
 	var color_id_to_check = (selected_color_id + id_offset + color_id_count) % color_id_count
 	while not color_amounts.has(color_id_to_check):
 		color_id_to_check = (color_id_to_check + id_offset + color_id_count) % color_id_count
@@ -55,6 +54,7 @@ func shoot_bullet():
 	SignalBus.color_amount_changed.emit(selected_color_id, color_amounts[selected_color_id])
 	if color_amounts[selected_color_id] <= 0:
 		color_amounts.erase(selected_color_id)
+		SignalBus.color_amount_changed.emit(selected_color_id, 0)
 		switch_color()
 
 func _on_bullet_timer_timeout() -> void:

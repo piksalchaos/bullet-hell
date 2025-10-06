@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	GameProperties.update_player_position(position)
 
 func hit() -> void:
-	got_hit.emit()
+	#got_hit.emit()
 	sprite_2d.modulate.a = COOLDOWN_ALPHA
 	is_on_cooldown = true
 	cooldown_timer.start()

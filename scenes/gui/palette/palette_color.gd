@@ -12,7 +12,6 @@ func _ready() -> void:
 	color_component.color_id = color_id
 
 func set_percentage(new_percentage):
-	print(new_percentage)
 	percentage = new_percentage
 	var tween = get_tree().create_tween()
 	tween.tween_property(color_circle, "radius", (circle_outline.radius+2) * new_percentage, TWEEN_DURATION)

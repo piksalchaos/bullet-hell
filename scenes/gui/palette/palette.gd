@@ -6,7 +6,8 @@ const SELECTED_RADIUS = 50.0
 const LINE_WIDTH = 2
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
-var selected_color_id = 0
+var selected_color_id: int = 0
+var rotation_factor: int = 0
 
 func _ready() -> void:
 	SignalBus.color_amount_changed.connect(_on_color_amount_changed)
@@ -23,8 +24,14 @@ func _on_color_amount_changed(color_id, percentage):
 
 func _on_selected_color_changed(color_id):
 	var tween = get_tree().create_tween()
-	var new_rotation = -color_id * PI/3
 	var color_count = GameProperties.COLOR_ID.size()
-	if (selected_color_id + color_count - color_id) < (selected_color_id + color_id):
-		new_rotation = -color_id * PI/3 + 2*PI
-	tween.tween_property(self, "rotation", new_rotation, 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	var cw_difference = (color_id - selected_color_id + color_count) % color_count
+	var ccw_difference = (selected_color_id - color_id + color_count) % color_count
+	selected_color_id = color_id
+	
+	if cw_difference < ccw_difference:
+		rotation_factor -= cw_difference
+	else:
+		rotation_factor += ccw_difference
+	
+	tween.tween_property(self, "rotation", rotation_factor * PI/3, 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
