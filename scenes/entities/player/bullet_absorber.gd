@@ -1,7 +1,7 @@
 extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
-const BULLET_COLOR_AMOUNT := 0.05
+const MAX_COLOR_AMOUNT = 20
 var color_amounts: Dictionary = {}
 var selected_color_id := 0
 @onready var bullet_timer: Timer = $BulletTimer
@@ -13,15 +13,16 @@ func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
 	if color_id < 0: return
 	if color_amounts.has(color_id):
-		if color_amounts[color_id] < 1:
-			color_amounts[color_id] = clampf(color_amounts[color_id] + BULLET_COLOR_AMOUNT, 0, 1)
+		if color_amounts[color_id] < MAX_COLOR_AMOUNT:
+			color_amounts[color_id] = clampi(color_amounts[color_id] + 1, 0, MAX_COLOR_AMOUNT)
 			bullet.disable_color()
 	else:
-		color_amounts[color_id] = BULLET_COLOR_AMOUNT
 		if not color_amounts.has(selected_color_id):
 			selected_color_id = color_id
 			SignalBus.selected_color_changed.emit(selected_color_id)
-	SignalBus.color_amount_changed.emit(color_id, color_amounts[color_id])
+		color_amounts[color_id] = 1
+		bullet.disable_color()
+	SignalBus.color_amount_changed.emit(color_id, float(color_amounts[color_id]) / float(MAX_COLOR_AMOUNT))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch_right"):
@@ -50,12 +51,15 @@ func shoot_bullet():
 	bullet.initial_color_id = selected_color_id
 	bullet.position = get_parent().position
 	GameProperties.bullet_container.add_child(bullet)
-	color_amounts[selected_color_id] -= BULLET_COLOR_AMOUNT
-	SignalBus.color_amount_changed.emit(selected_color_id, color_amounts[selected_color_id])
+	color_amounts[selected_color_id] -= 1
 	if color_amounts[selected_color_id] <= 0:
 		color_amounts.erase(selected_color_id)
 		SignalBus.color_amount_changed.emit(selected_color_id, 0)
 		switch_color()
+		return
+	SignalBus.color_amount_changed.emit(selected_color_id, float(color_amounts[selected_color_id]) / float(MAX_COLOR_AMOUNT))
+
+	
 
 func _on_bullet_timer_timeout() -> void:
 	shoot_bullet()

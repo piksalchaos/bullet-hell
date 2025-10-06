@@ -27,22 +27,22 @@ script = ExtResource("2_iywne")
 script = ExtResource("4_p57ef")
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round" instance=ExtResource("5_p57ef")]
-position = Vector2(102, 110)
+position = Vector2(90, 65)
 
 [node name="Round2" type="Node2D" parent="Stage/RoundManager"]
 script = ExtResource("4_p57ef")
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("5_p57ef")]
-position = Vector2(334, 170)
+position = Vector2(365, 101)
 
 [node name="Round3" type="Node2D" parent="Stage/RoundManager"]
 script = ExtResource("4_p57ef")
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("5_p57ef")]
-position = Vector2(329, 52)
+position = Vector2(343, 41)
 
 [node name="EnemySpawner2" parent="Stage/RoundManager/Round3" instance=ExtResource("5_p57ef")]
-position = Vector2(126, 196)
+position = Vector2(135, 129)
 
 [node name="HUD" parent="." instance=ExtResource("1_lbhrr")]
 

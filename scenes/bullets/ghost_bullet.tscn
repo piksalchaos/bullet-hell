@@ -9,8 +9,6 @@
 
 [node name="GhostBullet" type="Node2D"]
 script = ExtResource("1_t8pb2")
-speed = 300.0
-initial_color_id = 5
 
 [node name="ColorComponent" parent="." instance=ExtResource("2_12sdl")]
 

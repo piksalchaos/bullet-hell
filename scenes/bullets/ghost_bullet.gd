@@ -5,8 +5,7 @@ extends Node2D
 @onready var color_component: ColorComponent = $ColorComponent
 
 func _ready() -> void:
-	#color_component.color_id = initial_color_id
-	color_component.color_id = randi_range(0, 5) as GameProperties.COLOR_ID
+	color_component.color_id = initial_color_id
 
 func _physics_process(delta: float) -> void:
 	position += Vector2(cos(rotation), sin(rotation)) * speed * delta

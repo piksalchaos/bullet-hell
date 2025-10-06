@@ -25,7 +25,8 @@ func begin_attacking() -> void:
 	bullet_timer.start()
 
 func _on_bullet_timer_timeout() -> void:
-	var bullet = GHOST_BULLET.instantiate()
-	bullet.position = position
-	bullet.rotation = (GameProperties.player_position - position).angle()
-	GameProperties.bullet_container.add_child(bullet)
+	for i in 3:
+		var bullet = GHOST_BULLET.instantiate()
+		bullet.position = position
+		bullet.rotation = (GameProperties.player_position - position).angle() + PI*0.1*(i - 1)
+		GameProperties.bullet_container.add_child(bullet)
