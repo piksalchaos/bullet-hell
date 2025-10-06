@@ -1,23 +1,28 @@
 extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
-var color_absorption: Dictionary = {}
+const BULLET_COLOR_AMOUNT := 0.05
+var color_amounts: Dictionary = {}
 var selected_color_id := 0
 @onready var bullet_timer: Timer = $BulletTimer
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, 32, Color.WHITE, false, 2)
+	draw_circle(Vector2.ZERO, 42, Color.WHITE, false, 2)
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
-	if not color_id: return
-	if color_absorption.has(color_id):
-		color_absorption[color_id] += 1
+	if color_id < 0: return
+	if color_amounts.has(color_id):
+		if color_amounts[color_id] < 1:
+			color_amounts[color_id] = clampf(color_amounts[color_id] + BULLET_COLOR_AMOUNT, 0, 1)
+			bullet.disable_color()
 	else:
-		color_absorption[color_id] = 1
-		if not color_absorption.has(selected_color_id):
+		color_amounts[color_id] = BULLET_COLOR_AMOUNT
+		if not color_amounts.has(selected_color_id):
 			selected_color_id = color_id
-	print(color_absorption)
+			SignalBus.selected_color_changed.emit(selected_color_id)
+	SignalBus.color_amount_changed.emit(color_id, color_amounts[color_id])
+	print(color_amounts)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch_right"):
@@ -31,23 +36,25 @@ func _input(event: InputEvent) -> void:
 		bullet_timer.stop()
 
 func switch_color(is_right: bool = true) -> void:
-	if color_absorption.size() <= 0: return
+	if color_amounts.size() <= 0: return
 	var color_id_count = GameProperties.COLOR_ID.size()
 	var id_offset = 1 if is_right else - 1
 	var color_id_to_check = (selected_color_id + id_offset + color_id_count) % color_id_count
-	while not color_absorption.has(color_id_to_check):
+	while not color_amounts.has(color_id_to_check):
 		color_id_to_check = (color_id_to_check + id_offset + color_id_count) % color_id_count
 	selected_color_id = color_id_to_check
+	SignalBus.selected_color_changed.emit(selected_color_id)
 
 func shoot_bullet():
-	if not color_absorption.has(selected_color_id): return
+	if not color_amounts.has(selected_color_id): return
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.initial_color_id = selected_color_id
 	bullet.position = get_parent().position
 	GameProperties.bullet_container.add_child(bullet)
-	color_absorption[selected_color_id] -= 1
-	if color_absorption[selected_color_id] <= 0:
-		color_absorption.erase(selected_color_id)
+	color_amounts[selected_color_id] -= BULLET_COLOR_AMOUNT
+	SignalBus.color_amount_changed.emit(selected_color_id, color_amounts[selected_color_id])
+	if color_amounts[selected_color_id] <= 0:
+		color_amounts.erase(selected_color_id)
 		switch_color()
 
 func _on_bullet_timer_timeout() -> void:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvrx8wmadvywy"]
+[gd_scene load_steps=3 format=3 uid="uid://dvrx8wmadvywy"]
 
 [ext_resource type="Script" uid="uid://xr2b6wha55l" path="res://scenes/gui/hud.gd" id="1_624ws"]
+[ext_resource type="PackedScene" uid="uid://c0hmb6lqnynne" path="res://scenes/gui/palette/palette.tscn" id="2_624ws"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -20,6 +21,9 @@ offset_right = -0.559998
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Palette" parent="LeftBar" instance=ExtResource("2_624ws")]
+layout_mode = 1
 
 [node name="RightBar" type="ColorRect" parent="."]
 layout_mode = 1

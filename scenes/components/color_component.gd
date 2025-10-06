@@ -3,7 +3,7 @@ class_name ColorComponent extends Node
 const TWEEN_DURATION = 0.2
 @export var color_id: GameProperties.COLOR_ID:
 	set = set_color_id
-@onready var parent: Node2D = get_parent()
+@onready var parent = get_parent()
 
 var disabled = false
 

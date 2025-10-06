@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnfbbe0r3do7e"]
+
+[ext_resource type="Script" uid="uid://dbirraxa2obfj" path="res://scenes/gui/palette/palette_color.gd" id="1_4jpu5"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="2_xcmbf"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_32xwn"]
+
+[node name="PaletteColor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4jpu5")
+
+[node name="CircleOutline" parent="." instance=ExtResource("2_xcmbf")]
+radius = 30.0
+is_filled = false
+line_width = 2
+
+[node name="ColorCircle" parent="." instance=ExtResource("2_xcmbf")]
+radius = 0.0
+
+[node name="ColorComponent" parent="ColorCircle" instance=ExtResource("3_32xwn")]
