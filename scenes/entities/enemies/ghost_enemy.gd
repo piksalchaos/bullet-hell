@@ -15,6 +15,7 @@ func _ready() -> void:
 	change_position(starting_position, begin_attacking, TWEEN_ENTER_DURATION)
 	color_component.color_id = initial_color_id
 	exit_timer.wait_time = exit_time
+	exit_timer.start()
 
 func change_position(
 	new_position: Vector2,
@@ -29,15 +30,19 @@ func change_position(
 	tween.tween_callback(callback)
 	
 func begin_attacking() -> void:
+	shoot()
 	bullet_timer.start()
 
 func _on_bullet_timer_timeout() -> void:
-	var red_bullet_index = randi_range(0, 2)
+	shoot()
+
+func shoot() -> void:
+	var white_bullet_index = randi_range(0, 2)
 	for i in 3:
 		var bullet = GHOST_BULLET.instantiate()
 		bullet.position = position
-		bullet.rotation = (GameProperties.player_position - position).angle() + PI*0.1*(i - 1)
-		bullet.initial_color_id = GameProperties.COLOR_ID.RED if red_bullet_index == i else GameProperties.COLOR_ID.WHITE
+		bullet.rotation = (GameProperties.player_position - position).angle() + PI*0.15*(i - 1)
+		bullet.initial_color_id = GameProperties.COLOR_ID.WHITE if white_bullet_index == i else GameProperties.COLOR_ID.RED
 		GameProperties.bullet_container.add_child(bullet)
 
 func _on_exit_timer_timeout() -> void:

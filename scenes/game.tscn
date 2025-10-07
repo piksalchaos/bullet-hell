@@ -43,10 +43,29 @@ position = Vector2(88, 155)
 [node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_p57ef")]
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("5_p57ef")]
-position = Vector2(343, 41)
+position = Vector2(423, 112)
+exit_time = 10.0
 
-[node name="EnemySpawner2" parent="Stage/RoundManager/Round3" instance=ExtResource("5_p57ef")]
-position = Vector2(135, 129)
+[node name="TimerSpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("6_u5sy4")]
+wait_time = 0.75
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round3/TimerSpawner" instance=ExtResource("5_p57ef")]
+position = Vector2(303, 112)
+exit_time = 9.25
+
+[node name="TimerSpawner2" parent="Stage/RoundManager/Round3" instance=ExtResource("6_u5sy4")]
+wait_time = 1.5
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round3/TimerSpawner2" instance=ExtResource("5_p57ef")]
+position = Vector2(174, 112)
+exit_time = 8.5
+
+[node name="TimerSpawner3" parent="Stage/RoundManager/Round3" instance=ExtResource("6_u5sy4")]
+wait_time = 2.25
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round3/TimerSpawner3" instance=ExtResource("5_p57ef")]
+position = Vector2(56, 112)
+exit_time = 7.75
 
 [node name="HUD" parent="." instance=ExtResource("1_lbhrr")]
 

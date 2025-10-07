@@ -23,14 +23,16 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_defa4")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_462g3")]
+max_health = 2
 
 [node name="ColorComponent" parent="." instance=ExtResource("5_chsm8")]
 
 [node name="BulletTimer" type="Timer" parent="."]
+wait_time = 1.5
 
 [node name="ExitTimer" type="Timer" parent="."]
 wait_time = 4.0
-autostart = true
+one_shot = true
 
 [connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
 [connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]

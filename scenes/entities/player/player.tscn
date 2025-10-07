@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://cs734ayyynx5e" path="res://scenes/entities/player/bullet_absorber.gd" id="4_42nxq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 3.0
+radius = 3.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
-radius = 42.0
+radius = 45.0
 
 [node name="Player" type="Area2D"]
 collision_mask = 8
@@ -21,7 +21,7 @@ texture = ExtResource("2_08t41")
 
 [node name="HeartSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 8)
-scale = Vector2(0.09, 0.09)
+scale = Vector2(0.11, 0.11)
 texture = ExtResource("3_1ie0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

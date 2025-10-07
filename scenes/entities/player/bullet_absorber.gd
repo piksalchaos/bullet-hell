@@ -7,7 +7,7 @@ var selected_color_id := 0
 @onready var bullet_timer: Timer = $BulletTimer
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, 42, Color.WHITE, false, 2)
+	draw_circle(Vector2.ZERO, 45, Color.WHITE, false, 2)
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
