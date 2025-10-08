@@ -22,9 +22,9 @@ func _physics_process(delta: float) -> void:
 	var velocity = direction * (SLOW_SPEED if Input.is_action_pressed("slow") else SPEED) * delta
 	position += velocity
 	
-	position.x = clampf(position.x, WIDTH, GameProperties.STAGE_WIDTH - WIDTH)
-	position.y = clampf(position.y, WIDTH, GameProperties.STAGE_HEIGHT - WIDTH)
-	GameProperties.update_player_position(position)
+	position.x = clampf(position.x, WIDTH, Globals.STAGE_WIDTH - WIDTH)
+	position.y = clampf(position.y, WIDTH, Globals.STAGE_HEIGHT - WIDTH)
+	Globals.update_player_position(position)
 
 func hit() -> void:
 	got_hit.emit()

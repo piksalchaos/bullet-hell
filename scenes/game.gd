@@ -10,8 +10,8 @@ extends Node
 var player_health = 0
 
 func _ready() -> void:
-	GameProperties.bullet_container = bullet_container
-	GameProperties.enemy_container = enemy_container
+	Globals.bullet_container = bullet_container
+	Globals.enemy_container = enemy_container
 
 func start_game():
 	player_health = max_player_health

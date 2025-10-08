@@ -8,7 +8,7 @@ const TWEEN_EXIT_DURATION := 1.5
 @onready var color_component: ColorComponent = $ColorComponent
 
 @export var starting_position: Vector2
-@export var initial_color_id: GameProperties.COLOR_ID
+@export var initial_color_id: Globals.COLOR_ID
 @export var exit_time: float = 8
 
 func _ready() -> void:
@@ -41,13 +41,14 @@ func shoot() -> void:
 	for i in 3:
 		var bullet = GHOST_BULLET.instantiate()
 		bullet.position = position
-		bullet.rotation = (GameProperties.player_position - position).angle() + PI*0.15*(i - 1)
-		bullet.initial_color_id = GameProperties.COLOR_ID.WHITE if white_bullet_index == i else GameProperties.COLOR_ID.RED
-		GameProperties.bullet_container.add_child(bullet)
+		bullet.rotation = (Globals.player_position - position).angle() + PI*0.15*(i - 1)
+		#bullet.initial_color_id = Globals.COLOR_ID.WHITE if white_bullet_index == i else Globals.COLOR_ID.RED
+		bullet.initial_color_id = randi_range(0, 5)
+		Globals.bullet_container.add_child(bullet)
 
 func _on_exit_timer_timeout() -> void:
 	var new_position = Vector2(
-		-100 if GameProperties.STAGE_WIDTH - position.x > GameProperties.STAGE_WIDTH*0.5 else GameProperties.STAGE_WIDTH + 100,
+		-100 if Globals.STAGE_WIDTH - position.x > Globals.STAGE_WIDTH*0.5 else Globals.STAGE_WIDTH + 100,
 		position.y + 40
 	)
 	change_position(new_position, func(): queue_free(), TWEEN_EXIT_DURATION, Tween.EASE_IN)

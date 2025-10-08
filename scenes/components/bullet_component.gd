@@ -7,9 +7,9 @@ const CAPTURE_SHRINK_DURATION = 0.1
 
 func _physics_process(_delta: float) -> void:
 	if parent.position.x < -offscreen_distance \
-	or parent.position.x > GameProperties.STAGE_WIDTH + offscreen_distance \
+	or parent.position.x > Globals.STAGE_WIDTH + offscreen_distance \
 	or position.y < -offscreen_distance \
-	or position.y > GameProperties.STAGE_HEIGHT + offscreen_distance:
+	or position.y > Globals.STAGE_HEIGHT + offscreen_distance:
 		parent.queue_free()
 
 func _on_area_entered(area: Player) -> void:

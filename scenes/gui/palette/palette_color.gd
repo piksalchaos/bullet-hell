@@ -1,6 +1,6 @@
 extends Control
 
-@export var color_id: GameProperties.COLOR_ID
+@export var color_id: Globals.COLOR_ID
 @export var percentage := 0.0:
 	set = set_percentage
 @export var radius := 30.0:

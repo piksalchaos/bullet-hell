@@ -9,5 +9,5 @@ func begin() -> void:
 	enemy.position = Vector2(position.x, -100)
 	enemy.starting_position = position
 	enemy.exit_time = exit_time
-	GameProperties.enemy_container.add_child(enemy)
+	Globals.enemy_container.add_child(enemy)
 	enemy.tree_exited.connect(queue_free)
