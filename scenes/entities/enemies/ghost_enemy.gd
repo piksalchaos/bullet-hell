@@ -42,8 +42,7 @@ func shoot() -> void:
 		var bullet = GHOST_BULLET.instantiate()
 		bullet.position = position
 		bullet.rotation = (Globals.player_position - position).angle() + PI*0.15*(i - 1)
-		#bullet.initial_color_id = Globals.COLOR_ID.WHITE if white_bullet_index == i else Globals.COLOR_ID.RED
-		bullet.initial_color_id = randi_range(0, 5)
+		bullet.initial_color_id = Globals.COLOR_ID.WHITE if white_bullet_index == i else Globals.COLOR_ID.RED
 		Globals.bullet_container.add_child(bullet)
 
 func _on_exit_timer_timeout() -> void:
