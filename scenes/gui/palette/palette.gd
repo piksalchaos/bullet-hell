@@ -7,6 +7,7 @@ const SELECTED_RADIUS = 65.0
 const TWEEN_DURATION = 0.35
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
+@onready var color_container: Control = $ColorContainer
 var selected_primary_color_index: int = 0
 var rotation_factor: int = 0
 
@@ -15,13 +16,17 @@ func _ready() -> void:
 	SignalBus.selected_color_changed.connect(_on_selected_color_changed)
 	for i in Globals.PRIMARY_COLORS.size():
 		var palette_color = PALETTE_COLOR.instantiate()
-		var angle = i * PI*(2.0/3) - PI/2
-		palette_color.position = Vector2(cos(angle), sin(angle)) * CENTER_DISTANCE
 		palette_color.color_id = Globals.PRIMARY_COLORS[i]
-		add_child(palette_color)
+		color_container.add_child(palette_color)
+		var angle = i * PI*(2.0/3) - PI/2
+		if i == selected_primary_color_index:
+			palette_color.position = Vector2(cos(angle), sin(angle)) * SELECTED_CENTER_DISTANCE
+			palette_color.radius = SELECTED_RADIUS
+		else:
+			palette_color.position = Vector2(cos(angle), sin(angle)) * CENTER_DISTANCE
 
 func _on_color_amount_changed(primary_color_index, percentage):
-	get_child(primary_color_index).percentage = percentage
+	color_container.get_child(primary_color_index).percentage = percentage
 
 func _on_selected_color_changed(primary_color_index):
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
@@ -33,12 +38,12 @@ func _on_selected_color_changed(primary_color_index):
 		rotation_factor -= cw_offset
 		
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "rotation", rotation_factor * PI*(2.0/3), TWEEN_DURATION) \
+	tween.tween_property(color_container, "rotation", rotation_factor * PI*(2.0/3), TWEEN_DURATION) \
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.set_parallel()
 	
-	var selected_color = get_child(primary_color_index)
-	var previous_selected_color = get_child(selected_primary_color_index)
+	var selected_color = color_container.get_child(primary_color_index)
+	var previous_selected_color = color_container.get_child(selected_primary_color_index)
 	#
 	tween.tween_property(selected_color, "radius", SELECTED_RADIUS, TWEEN_DURATION) \
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)

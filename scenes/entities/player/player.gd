@@ -1,5 +1,7 @@
 class_name Player extends Area2D
 
+@export var is_vulnerable := true
+
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
@@ -27,7 +29,8 @@ func _physics_process(delta: float) -> void:
 	Globals.update_player_position(position)
 
 func hit() -> void:
-	got_hit.emit()
+	if is_vulnerable:
+		got_hit.emit()
 	sprite_2d.modulate.a = COOLDOWN_ALPHA
 	is_on_cooldown = true
 	cooldown_timer.start()

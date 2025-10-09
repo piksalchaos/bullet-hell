@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn0cnxlnduxm7"]
+
+[ext_resource type="Script" uid="uid://mhrmws40cvwd" path="res://scenes/entities/enemies/dummy_enemy.gd" id="1_ummet"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_4b57w"]
+[ext_resource type="Texture2D" uid="uid://cuywvpoxd4211" path="res://images/dummy.png" id="3_1cytd"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/hitbox_component.tscn" id="4_xwkor"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/health_component.tscn" id="5_glh40"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_03np2"]
+radius = 26.0
+height = 60.0
+
+[node name="DummyEnemy" type="Node2D"]
+script = ExtResource("1_ummet")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.36)
+texture = ExtResource("3_1cytd")
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_4b57w")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_xwkor")]
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CapsuleShape2D_03np2")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_glh40")]
+max_health = 4
+
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]

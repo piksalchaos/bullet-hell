@@ -16,9 +16,9 @@ script = ExtResource("1_h5v6m")
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_b7aru")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_h2v7a")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("3_h2v7a")]
 health_component = NodePath("../HealthComponent")
-color_id = null
+color_component = NodePath("../ColorComponent")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_defa4")

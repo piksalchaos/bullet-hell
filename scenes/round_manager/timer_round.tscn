@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcit7wu58ad5n"]
+
+[ext_resource type="Script" uid="uid://c0g1glllnv7kc" path="res://scenes/round_manager/timer_round.gd" id="1_k7vi6"]
+[ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="2_4d3h3"]
+
+[node name="TimerRound" type="Node2D" groups=["spawners"]]
+script = ExtResource("1_k7vi6")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Round" parent="." node_paths=PackedStringArray("spawner_container") instance=ExtResource("2_4d3h3")]
+spawner_container = NodePath("..")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

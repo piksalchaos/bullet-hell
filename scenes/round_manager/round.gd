@@ -1,9 +1,26 @@
 class_name Round extends Node2D
 
-func begin() -> void:
-	for spawner in get_children():
-		spawner.begin()
+@export var spawner_container: Node2D = self
 
-func _on_child_order_changed() -> void:
-	if get_child_count() <= 0:
-		queue_free()
+func _ready():
+	hide()
+	spawner_container.child_order_changed.connect(_on_spawner_container_child_order_changed)
+
+func begin() -> void:
+	show()
+	var spawner_children = get_spawner_children()
+	if spawner_children.is_empty(): spawner_container.queue_free()
+	for spawner in spawner_children:
+		if spawner.has_method("begin"):
+			spawner.begin()
+
+func _on_spawner_container_child_order_changed() -> void:
+	if get_spawner_children().is_empty(): spawner_container.queue_free()
+
+func get_spawner_children() -> Array:
+	var spawner_children = []
+	for child in spawner_container.get_children():
+		if child.is_in_group("spawners") and child != self:
+			spawner_children.append(child)
+	print(spawner_children)
+	return spawner_children

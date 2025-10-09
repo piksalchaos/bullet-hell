@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/enemy_spawners/ghost_enemy_spawner.tscn" id="5_p57ef"]
-[ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/enemy_spawners/timer_spawner.tscn" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_u5sy4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_p57ef")

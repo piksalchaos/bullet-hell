@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0hmb6lqnynne"]
+[gd_scene load_steps=3 format=3 uid="uid://c0hmb6lqnynne"]
 
 [ext_resource type="Script" uid="uid://b0tkj077blslc" path="res://scenes/gui/palette/palette.gd" id="1_dv22i"]
+[ext_resource type="Texture2D" uid="uid://c2egoeq5g6day" path="res://images/palette_arrow.png" id="2_j3s2e"]
 
-[node name="Palette" type="Container"]
+[node name="Palette" type="Control"]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -11,3 +13,99 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dv22i")
+
+[node name="ColorContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 85.0
+offset_top = -89.0
+offset_right = 185.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.2617994
+pivot_offset = Vector2(50, 0)
+texture = ExtResource("2_j3s2e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 19.74669
+offset_top = 18.459106
+offset_right = 59.74669
+offset_bottom = 41.459106
+rotation = -0.6584221
+text = "S"
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -89.0
+offset_right = -85.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.2617994
+pivot_offset = Vector2(50, 0)
+texture = ExtResource("2_j3s2e")
+expand_mode = 1
+flip_h = true
+
+[node name="Label" type="Label" parent="TextureRect2"]
+layout_mode = 0
+offset_left = 71.55995
+offset_top = 16.12975
+offset_right = 111.55995
+offset_bottom = 39.129753
+rotation = 0.78136456
+text = "A"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = 68.0
+offset_right = -33.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 33.0
+offset_top = 68.0
+offset_right = 73.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "S"
+horizontal_alignment = 1

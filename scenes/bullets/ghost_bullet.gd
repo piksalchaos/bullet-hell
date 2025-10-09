@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed := 180.0
+@export var speed := 130.0
 @export var initial_color_id: Globals.COLOR_ID
 @onready var color_component: ColorComponent = $ColorComponent
 
