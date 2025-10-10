@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck23ayao5qg1t"]
+
+[ext_resource type="Script" uid="uid://cyclr0y068la6" path="res://scenes/components/pattern_components/pattern_aimer.gd" id="1_3hx71"]
+
+[node name="PatternAimer" type="Node2D" groups=["pattern_components"]]
+rotation = 1.5707964
+script = ExtResource("1_3hx71")
+
+[node name="RateTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="RateTimer" to="." method="_on_rate_timer_timeout"]

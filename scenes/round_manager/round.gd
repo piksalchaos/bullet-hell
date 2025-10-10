@@ -22,5 +22,4 @@ func get_spawner_children() -> Array:
 	for child in spawner_container.get_children():
 		if child.is_in_group("spawners") and child != self:
 			spawner_children.append(child)
-	print(spawner_children)
 	return spawner_children

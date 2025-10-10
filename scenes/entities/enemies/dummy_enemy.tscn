@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn0cnxlnduxm7"]
+[gd_scene load_steps=11 format=3 uid="uid://dn0cnxlnduxm7"]
 
 [ext_resource type="Script" uid="uid://mhrmws40cvwd" path="res://scenes/entities/enemies/dummy_enemy.gd" id="1_ummet"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_4b57w"]
 [ext_resource type="Texture2D" uid="uid://cuywvpoxd4211" path="res://images/dummy.png" id="3_1cytd"]
-[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/hitbox_component.tscn" id="4_xwkor"]
-[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/health_component.tscn" id="5_glh40"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_xwkor"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_glh40"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_glh40"]
+[ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_03np2"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_imctr"]
+[ext_resource type="PackedScene" uid="uid://bg3mxwy62bmbu" path="res://scenes/bullets/ghost_bullet.tscn" id="9_jtsvo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_03np2"]
 radius = 26.0
@@ -29,7 +33,10 @@ shape = SubResource("CapsuleShape2D_03np2")
 [node name="HealthComponent" parent="." instance=ExtResource("5_glh40")]
 max_health = 4
 
-[node name="BulletTimer" type="Timer" parent="."]
-wait_time = 1.5
+[node name="PatternRepeater" parent="." instance=ExtResource("6_glh40")]
+seconds_per_shot = 1.0
 
-[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
+[node name="PatternAimer" parent="PatternRepeater" instance=ExtResource("7_03np2")]
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternAimer" instance=ExtResource("8_imctr")]
+bullet_scene = ExtResource("9_jtsvo")

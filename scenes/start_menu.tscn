@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8n3kh1ff5dg1"]
+
+[ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/start_menu.gd" id="1_thu50"]
+[ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://images/startmenuimageplaceholder.png" id="2_m7x51"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_thu50")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -293.0
+offset_top = -255.0
+offset_right = 293.0
+offset_bottom = -186.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "UNNAMED BULLET HELL"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 162.0
+offset_right = 1098.0
+offset_bottom = 612.0
+texture = ExtResource("2_m7x51")
+expand_mode = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 212.0
+offset_right = 64.0
+offset_bottom = 252.0
+
+[node name="TutorialButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "TUTORIAL"
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "START GAME"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 175.0
+offset_right = 705.0
+offset_bottom = 250.0
+text = "as of right now neither tutorial or the game
+will go back to the start menu. Please reset the 
+game if you want to replay!"
+
+[connection signal="pressed" from="Buttons/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]

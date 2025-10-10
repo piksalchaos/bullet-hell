@@ -3,6 +3,9 @@ extends Node
 const STAGE_WIDTH := 486
 const STAGE_HEIGHT := 648
 
+func get_position_relative_to_stage(global_position: Vector2):
+	return global_position - stage_position
+
 enum COLOR_ID {RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE}
 const PRIMARY_COLORS: Array[COLOR_ID] = [COLOR_ID.RED, COLOR_ID.YELLOW, COLOR_ID.BLUE]
 const SECONDARY_COLOR_MAP: Dictionary = {
@@ -19,6 +22,7 @@ const LAYER_ENEMY_HITBOXES := 2
 const LAYER_PLAYER_BULLETS := 3
 const LAYER_ENEMY_BULLETS := 4
 
+var stage_position: Vector2
 var player_position: Vector2
 var bullet_container: Node2D
 var enemy_container: Node2D

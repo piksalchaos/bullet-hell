@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvwrgsurk7ecc"]
+
+[ext_resource type="Script" uid="uid://cm0rb3bc4mhjk" path="res://scenes/components/pattern_components/pattern_repeater.gd" id="1_jphe4"]
+
+[node name="PatternRepeater" type="Node2D" groups=["pattern_components"]]
+script = ExtResource("1_jphe4")
+seconds_per_shot = 0.5
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

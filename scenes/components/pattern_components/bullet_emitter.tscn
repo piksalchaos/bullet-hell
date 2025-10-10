@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn1fmn3in30iu"]
+
+[ext_resource type="Script" uid="uid://66vkf4g0ir6g" path="res://scenes/components/pattern_components/bullet_emitter.gd" id="1_x8yc8"]
+
+[node name="BulletEmitter" type="Node2D" groups=["pattern_components"]]
+script = ExtResource("1_x8yc8")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(40, 0)
+rotation = 0.7853982

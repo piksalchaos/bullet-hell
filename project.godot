@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Spacecat"
-run/main_scene="uid://bp24suxtg5xp5"
+config/name="Unnamed Bullet Hell"
+run/main_scene="uid://c8n3kh1ff5dg1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -32,6 +32,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
 bullet_components=""
 spawners=""
+pattern_components=""
 
 [input]
 

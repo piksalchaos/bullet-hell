@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu583r4y73euh"]
 
-[ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/game.gd" id="1_gbqnl"]
+[ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/game.gd" id="1_gbqnl"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_ckvwl"]
 [ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="3_nlqja"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_0epgs"]
@@ -112,51 +112,5 @@ initial_color_id = 4
 
 [node name="HUD" parent="." instance=ExtResource("7_ej4tf")]
 
-[node name="Tutorial" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 333.0
-offset_right = -335.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Part1" type="Label" parent="Tutorial"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -105.5
-offset_top = -11.5
-offset_right = 105.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Move Using the Arrow Keys"
-
-[node name="Part2" type="Label" parent="Tutorial"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -105.5
-offset_top = -11.5
-offset_right = 105.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Move next to the colored bullets
-to absorb them"
-horizontal_alignment = 1
-
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
-[connection signal="start_button_pressed" from="HUD" to="." method="_on_hud_start_button_pressed"]
