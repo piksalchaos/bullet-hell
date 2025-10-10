@@ -1,11 +1,11 @@
 extends Node2D
 
-const GHOST_BULLET = preload("res://scenes/bullets/ghost_bullet.tscn")
 const TWEEN_ENTER_DURATION := 0.75
 const TWEEN_EXIT_DURATION := 1.5
-@onready var bullet_timer: Timer = $BulletTimer
 @onready var exit_timer: Timer = $ExitTimer
 @onready var color_component: ColorComponent = $ColorComponent
+@onready var bullet_emitter: Node2D = $PatternRepeater/PatternAimer/PatternSpreader/BulletEmitter
+@onready var pattern_repeater: Node2D = $PatternRepeater
 
 @export var starting_position: Vector2
 @export var initial_color_id: Globals.COLOR_ID
@@ -14,6 +14,7 @@ const TWEEN_EXIT_DURATION := 1.5
 func _ready() -> void:
 	change_position(starting_position, begin_attacking, TWEEN_ENTER_DURATION)
 	color_component.color_id = initial_color_id
+	bullet_emitter.color_id = initial_color_id
 	exit_timer.wait_time = exit_time
 	exit_timer.start()
 
@@ -30,21 +31,8 @@ func change_position(
 	tween.tween_callback(callback)
 	
 func begin_attacking() -> void:
-	shoot()
-	bullet_timer.start()
-
-func _on_bullet_timer_timeout() -> void:
-	shoot()
-
-func shoot() -> void:
-	var white_bullet_index = randi_range(0, 2)
-	for i in 3:
-		var bullet = GHOST_BULLET.instantiate()
-		bullet.position = position
-		bullet.rotation = (Globals.player_position - position).angle() + PI*0.15*(i - 1)
-		bullet.initial_color_id = Globals.COLOR_ID.WHITE if white_bullet_index == i else Globals.COLOR_ID.RED
-		Globals.bullet_container.add_child(bullet)
-
+	pattern_repeater.begin()
+	
 func _on_exit_timer_timeout() -> void:
 	var new_position = Vector2(
 		-100 if Globals.STAGE_WIDTH - position.x > Globals.STAGE_WIDTH*0.5 else Globals.STAGE_WIDTH + 100,

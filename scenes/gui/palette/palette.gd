@@ -1,9 +1,9 @@
 extends Control
 
-const CENTER_DISTANCE = 60.0
-const SELECTED_CENTER_DISTANCE = 100.0
-const RADIUS = 30.0
-const SELECTED_RADIUS = 65.0
+const CENTER_DISTANCE = 70.0
+const SELECTED_CENTER_DISTANCE = 115.0
+const RADIUS = 45.0
+const SELECTED_RADIUS = 85.0
 const TWEEN_DURATION = 0.35
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
@@ -24,6 +24,7 @@ func _ready() -> void:
 			palette_color.radius = SELECTED_RADIUS
 		else:
 			palette_color.position = Vector2(cos(angle), sin(angle)) * CENTER_DISTANCE
+			palette_color.radius = RADIUS
 
 func _on_color_amount_changed(primary_color_index, percentage):
 	color_container.get_child(primary_color_index).percentage = percentage

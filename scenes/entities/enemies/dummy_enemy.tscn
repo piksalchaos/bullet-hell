@@ -34,9 +34,13 @@ shape = SubResource("CapsuleShape2D_03np2")
 max_health = 4
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_glh40")]
-seconds_per_shot = 1.0
+seconds_per_shot = 1.7
 
-[node name="PatternAimer" parent="PatternRepeater" instance=ExtResource("7_03np2")]
+[node name="PatternRepeater" parent="PatternRepeater" instance=ExtResource("6_glh40")]
+seconds_per_shot = 0.15
+max_shots = 3
 
-[node name="BulletEmitter" parent="PatternRepeater/PatternAimer" instance=ExtResource("8_imctr")]
+[node name="PatternAimer" parent="PatternRepeater/PatternRepeater" instance=ExtResource("7_03np2")]
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternRepeater/PatternAimer" instance=ExtResource("8_imctr")]
 bullet_scene = ExtResource("9_jtsvo")

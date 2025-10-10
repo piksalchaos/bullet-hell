@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgmdfxt0ngpi6"]
+[gd_scene load_steps=12 format=3 uid="uid://dgmdfxt0ngpi6"]
 
 [ext_resource type="Script" uid="uid://ynoen8cogpu6" path="res://scenes/entities/enemies/ghost_enemy.gd" id="1_h5v6m"]
 [ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="2_b7aru"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="3_h2v7a"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="4_462g3"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="5_chsm8"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_hp2it"]
+[ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_qvsyn"]
+[ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="8_qvsyn"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vcyrx"]
+[ext_resource type="PackedScene" uid="uid://bg3mxwy62bmbu" path="res://scenes/bullets/ghost_bullet.tscn" id="9_4qyjx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_defa4"]
 radius = 14.0
@@ -29,12 +34,18 @@ max_health = 2
 [node name="ColorComponent" parent="." instance=ExtResource("5_chsm8")]
 color_id = null
 
-[node name="BulletTimer" type="Timer" parent="."]
-wait_time = 1.5
-
 [node name="ExitTimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
 
-[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
+[node name="PatternRepeater" parent="." instance=ExtResource("6_hp2it")]
+seconds_per_shot = 1.75
+
+[node name="PatternAimer" parent="PatternRepeater" instance=ExtResource("7_qvsyn")]
+
+[node name="PatternSpreader" parent="PatternRepeater/PatternAimer" instance=ExtResource("8_qvsyn")]
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternSpreader" instance=ExtResource("8_vcyrx")]
+bullet_scene = ExtResource("9_4qyjx")
+
 [connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]

@@ -1,11 +1,11 @@
 extends Node2D
 
-const GHOST_BULLET = preload("res://scenes/bullets/ghost_bullet.tscn")
 const TWEEN_ENTER_DURATION := 0.75
 const TWEEN_EXIT_DURATION := 1.5
 
 @onready var color_component: ColorComponent = $ColorComponent
 @onready var pattern_repeater: Node2D = $PatternRepeater
+@onready var bullet_emitter: Node2D = $PatternRepeater/PatternRepeater/PatternAimer/BulletEmitter
 
 @export var starting_position: Vector2
 @export var initial_color_id: Globals.COLOR_ID
@@ -13,6 +13,7 @@ const TWEEN_EXIT_DURATION := 1.5
 func _ready() -> void:
 	change_position(starting_position, begin_attacking, TWEEN_ENTER_DURATION)
 	color_component.color_id = initial_color_id
+	bullet_emitter.color_id = initial_color_id
 
 func change_position(
 	new_position: Vector2,

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsa2fd4o0c5bh"]
+
+[ext_resource type="Script" uid="uid://c5sjoyi4hm7ee" path="res://scenes/components/pattern_components/pattern_spreader.gd" id="1_61gj7"]
+
+[node name="PatternSpreader" type="Node2D" groups=["pattern_components"]]
+script = ExtResource("1_61gj7")
