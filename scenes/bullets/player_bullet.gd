@@ -1,7 +1,7 @@
 extends Area2D
 
 const RADIUS := 16.0
-const SPEED := 1500.0
+const SPEED := 1600.0
 
 
 @export var initial_color_id: Globals.COLOR_ID

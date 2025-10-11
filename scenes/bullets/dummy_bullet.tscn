@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://fpsablwbyj3y"]
+
+[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/angled_bullet.tscn" id="1_rjoa5"]
+[ext_resource type="Texture2D" uid="uid://nsceybpc061q" path="res://assets/images/bullets/dummy_bullet.png" id="2_rc0km"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rjoa5"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc0km"]
+atlas = ExtResource("2_rc0km")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqavq"]
+atlas = ExtResource("2_rc0km")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn460"]
+atlas = ExtResource("2_rc0km")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8r7k6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc0km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqavq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn460")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="AngledBullet" instance=ExtResource("1_rjoa5")]
+
+[node name="BulletComponent" parent="." index="1"]
+offscreen_distance = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent" index="0"]
+shape = SubResource("CircleShape2D_rjoa5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_8r7k6")
+autoplay = "default"
+frame_progress = 0.7269917

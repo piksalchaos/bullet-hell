@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cctifyojjkvwd"
-path="res://.godot/imported/cooler_ghost_placeholder.png-293959709d8c85d214bc6b33ab5d2d10.ctex"
+uid="uid://d3chwqdylu5q7"
+path="res://.godot/imported/dummy_enemy.png-73422691f0259c2408de69ae7e71c3df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/cooler_ghost_placeholder.png"
-dest_files=["res://.godot/imported/cooler_ghost_placeholder.png-293959709d8c85d214bc6b33ab5d2d10.ctex"]
+source_file="res://assets/images/enemies/dummy_enemy.png"
+dest_files=["res://.godot/imported/dummy_enemy.png-73422691f0259c2408de69ae7e71c3df.ctex"]
 
 [params]
 

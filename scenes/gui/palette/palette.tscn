@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0hmb6lqnynne"]
 
 [ext_resource type="Script" uid="uid://b0tkj077blslc" path="res://scenes/gui/palette/palette.gd" id="1_dv22i"]
-[ext_resource type="Texture2D" uid="uid://c2egoeq5g6day" path="res://images/palette_arrow.png" id="2_j3s2e"]
+[ext_resource type="Texture2D" uid="uid://c2egoeq5g6day" path="res://assets/images/palette_arrow.png" id="2_j3s2e"]
 
 [node name="Palette" type="Control"]
 layout_mode = 3

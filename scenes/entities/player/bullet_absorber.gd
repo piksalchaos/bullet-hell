@@ -8,6 +8,7 @@ const MIN_SHOT_COLOR_AMOUNT = 3
 var color_amounts := [0, 0, 0]
 var selected_primary_color_index := 0
 @onready var bullet_timer: Timer = $BulletTimer
+@onready var shoot_audio: AudioStreamPlayer = $ShootAudio
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, 45, Color.WHITE, false, 2)
@@ -52,9 +53,6 @@ func _input(event: InputEvent) -> void:
 		switch_color(false)
 	if event.is_action_pressed("shoot"):
 		shoot_bullet()
-		#bullet_timer.start()
-	#if event.is_action_released("shoot"):
-		#bullet_timer.stop()
 
 func switch_color(is_right: bool = true) -> void:
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
@@ -64,19 +62,14 @@ func switch_color(is_right: bool = true) -> void:
 
 func shoot_bullet():
 	if color_amounts[selected_primary_color_index] < MIN_SHOT_COLOR_AMOUNT: return
+	#shoot_audio.play()
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.initial_color_id = Globals.PRIMARY_COLORS[selected_primary_color_index]
 	bullet.position = get_parent().position
 	bullet.damage = color_amounts[selected_primary_color_index]
 	Globals.bullet_container.add_child(bullet)
 	color_amounts[selected_primary_color_index] = 0
-	#if color_amounts[selected_primary_color_index] <= 0:
 	SignalBus.color_amount_changed.emit(selected_primary_color_index, 0)
-		#return
-	#SignalBus.color_amount_changed.emit(
-		#selected_primary_color_index,
-		#float(color_amounts[selected_primary_color_index]) / float(MAX_COLOR_AMOUNT)
-	#)
 
 func _on_bullet_timer_timeout() -> void:
 	shoot_bullet()

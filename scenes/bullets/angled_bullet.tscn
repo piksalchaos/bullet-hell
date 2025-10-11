@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://brjl1igieycsd"]
+
+[ext_resource type="Script" uid="uid://c5exjn0s6mvah" path="res://scenes/bullets/angled_bullet.gd" id="1_4uwxt"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="1_aebcy"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_oh6mx"]
+
+[node name="AngledBullet" type="Node2D"]
+script = ExtResource("1_4uwxt")
+
+[node name="ColorComponent" parent="." instance=ExtResource("1_aebcy")]
+
+[node name="BulletComponent" parent="." instance=ExtResource("2_oh6mx")]
+offscreen_distance = 20.0

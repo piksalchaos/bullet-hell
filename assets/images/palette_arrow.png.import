@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxjbt2m3ltb5"
-path="res://.godot/imported/player_bullet.png-0cd3578cfc4a659ec10d87a8f2fd759a.ctex"
+uid="uid://c2egoeq5g6day"
+path="res://.godot/imported/palette_arrow.png-cf9870fa9e5653be1530eedd3c7177c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/player_bullet.png"
-dest_files=["res://.godot/imported/player_bullet.png-0cd3578cfc4a659ec10d87a8f2fd759a.ctex"]
+source_file="res://assets/images/palette_arrow.png"
+dest_files=["res://.godot/imported/palette_arrow.png-cf9870fa9e5653be1530eedd3c7177c2.ctex"]
 
 [params]
 

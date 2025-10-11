@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://lo3vyw11povn"]
 
-[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="1_5f5km"]
+[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://assets/images/ghost_placeholder.png" id="1_5f5km"]
 [ext_resource type="Script" uid="uid://dsxwwcqp3iuek" path="res://scenes/entities/enemies/small_ghost_enemy.gd" id="1_hny2k"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="2_hny2k"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="3_fuvh0"]

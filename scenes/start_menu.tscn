@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8n3kh1ff5dg1"]
 
 [ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/start_menu.gd" id="1_thu50"]
-[ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://images/startmenuimageplaceholder.png" id="2_m7x51"]
+[ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
