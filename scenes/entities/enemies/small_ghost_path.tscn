@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1thepo2x4ww5"]
+
+[ext_resource type="Script" uid="uid://bm7i5egs3c1ge" path="res://scenes/entities/enemies/small_ghost_path.gd" id="1_5jk5c"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="2_g0ub2"]
+[ext_resource type="PackedScene" uid="uid://b26vuvsbq30kd" path="res://scenes/components/pattern_components/signal_emitter.tscn" id="3_ky2vk"]
+
+[node name="SmallGhostPath" type="Path2D"]
+script = ExtResource("1_5jk5c")
+time_between_spawns = 1.0
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="PatternRepeater" parent="." instance=ExtResource("2_g0ub2")]
+delay_time = 1.0
+seconds_per_shot = 2.0
+
+[node name="SignalEmitter" parent="PatternRepeater" instance=ExtResource("3_ky2vk")]
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

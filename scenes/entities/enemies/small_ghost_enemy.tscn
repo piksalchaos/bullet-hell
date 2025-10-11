@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://lo3vyw11povn"]
+
+[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="1_5f5km"]
+[ext_resource type="Script" uid="uid://dsxwwcqp3iuek" path="res://scenes/entities/enemies/small_ghost_enemy.gd" id="1_hny2k"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="2_hny2k"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="3_fuvh0"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="4_8yy5l"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="5_vtc18"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="6_fg7nt"]
+[ext_resource type="PackedScene" uid="uid://bg3mxwy62bmbu" path="res://scenes/bullets/ghost_bullet.tscn" id="7_f0nus"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvoiu"]
+radius = 25.0
+
+[node name="SmallGhostEnemy" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_hny2k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_5f5km")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("2_hny2k")]
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_wvoiu")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_fuvh0")]
+
+[node name="ColorComponent" parent="." instance=ExtResource("4_8yy5l")]
+
+[node name="PatternRepeater" parent="." instance=ExtResource("5_vtc18")]
+seconds_per_shot = 2.5
+
+[node name="BulletEmitter" parent="." instance=ExtResource("6_fg7nt")]
+rotation = 1.5707964
+bullet_scene = ExtResource("7_f0nus")

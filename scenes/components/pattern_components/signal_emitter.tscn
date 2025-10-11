@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b26vuvsbq30kd"]
+
+[ext_resource type="Script" uid="uid://b1fitotx1wfcb" path="res://scenes/components/pattern_components/signal_emitter.gd" id="1_41ona"]
+
+[node name="SignalEmitter" type="Node" groups=["pattern_components"]]
+script = ExtResource("1_41ona")

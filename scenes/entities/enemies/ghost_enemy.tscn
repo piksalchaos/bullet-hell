@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dgmdfxt0ngpi6"]
 
 [ext_resource type="Script" uid="uid://ynoen8cogpu6" path="res://scenes/entities/enemies/ghost_enemy.gd" id="1_h5v6m"]
-[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://images/ghost_placeholder.png" id="2_b7aru"]
+[ext_resource type="Texture2D" uid="uid://cctifyojjkvwd" path="res://images/cooler_ghost_placeholder.png" id="2_qvsyn"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="3_h2v7a"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="4_462g3"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="5_chsm8"]
@@ -12,14 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://bg3mxwy62bmbu" path="res://scenes/bullets/ghost_bullet.tscn" id="9_4qyjx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_defa4"]
-radius = 14.0
+radius = 30.0
 
 [node name="GhostEnemy" type="Node2D"]
 script = ExtResource("1_h5v6m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_b7aru")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_qvsyn")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("3_h2v7a")]
 health_component = NodePath("../HealthComponent")
@@ -29,7 +29,7 @@ color_component = NodePath("../ColorComponent")
 shape = SubResource("CircleShape2D_defa4")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_462g3")]
-max_health = 2
+max_health = 3
 
 [node name="ColorComponent" parent="." instance=ExtResource("5_chsm8")]
 color_id = null

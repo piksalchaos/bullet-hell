@@ -27,3 +27,6 @@ func _on_player_got_hit() -> void:
 	if player_health < 0:
 		get_tree().call_deferred("reload_current_scene")
 	hud.update_life_heart_count(player_health)
+
+func _on_round_manager_finished() -> void:
+	get_tree().change_scene_to_file("res://scenes/start_menu.tscn")

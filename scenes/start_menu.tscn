@@ -54,15 +54,5 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "START GAME"
 
-[node name="Label2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 339.0
-offset_top = 175.0
-offset_right = 705.0
-offset_bottom = 250.0
-text = "as of right now neither tutorial or the game
-will go back to the start menu. Please reset the 
-game if you want to replay!"
-
 [connection signal="pressed" from="Buttons/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]

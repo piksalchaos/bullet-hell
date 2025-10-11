@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu583r4y73euh"]
 
-[ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/game.gd" id="1_gbqnl"]
+[ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_gbqnl"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_ckvwl"]
 [ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="3_nlqja"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_0epgs"]
@@ -45,8 +45,10 @@ text = "Arrow Keys: Move around"
 horizontal_alignment = 1
 
 [node name="TimerRound2" parent="Stage/RoundManager" instance=ExtResource("4_6yjpi")]
+visible = false
 
 [node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_0epgs")]
+visible = false
 
 [node name="Label" type="Label" parent="Stage/RoundManager/Round"]
 anchors_preset = 8
@@ -110,7 +112,26 @@ wait_time = 4.0
 position = Vector2(388.8, 182)
 initial_color_id = 4
 
+[node name="TimerRound3" parent="Stage/RoundManager" instance=ExtResource("4_6yjpi")]
+wait_time = 4.0
+
+[node name="Label" type="Label" parent="Stage/RoundManager/TimerRound3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 93.0
+offset_top = 157.0
+offset_right = 393.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "That's the end of the tutorial!"
+horizontal_alignment = 1
+
 [node name="HUD" parent="." instance=ExtResource("7_ej4tf")]
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
+[connection signal="finished" from="Stage/RoundManager" to="." method="_on_round_manager_finished"]

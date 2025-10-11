@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=3 uid="uid://bp24suxtg5xp5"]
+
+[ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
+[ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
+[ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="3_dga24"]
+[ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
+[ext_resource type="PackedScene" uid="uid://c5sqsb0h1lute" path="res://scenes/enemy_spawners/small_ghost_path_spawner.tscn" id="5_s8va5"]
+[ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_iav0o"]
+[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_dnkej"]
+
+[sub_resource type="Curve2D" id="Curve2D_dga24"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -53, 14, -204.49573, 28.977272, 204.49573, -28.977272, 193, 98, -17.844923, -40.64844, 17.844923, 40.64844, 458, 147, 57.131252, -4.464453, -57.131252, 4.464453, 375, 232, 81.71797, 13.165626, -81.71797, -13.165626, 61, 213, 0, 0, 0, 0, -128, 159)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_s8va5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -22, 30, -1.7015626, -75.17813, 1.7015626, 75.17813, 466, 104, 0, 0, 0, 0, -25, 159)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_qxy0u"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 498, 36, -1.1171876, -68.64688, 1.1171876, 68.64688, 23, 101, 0, 0, 0, 0, 502, 165)
+}
+point_count = 3
+
+[node name="Game" type="Node"]
+script = ExtResource("1_oc4kc")
+
+[node name="Stage" type="Node2D" parent="."]
+position = Vector2(333, 0)
+
+[node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
+position = Vector2(243, 550)
+
+[node name="BulletContainer" type="Node2D" parent="Stage"]
+
+[node name="EnemyContainer" type="Node2D" parent="Stage"]
+
+[node name="RoundManager" type="Node2D" parent="Stage"]
+script = ExtResource("3_dga24")
+
+[node name="Round4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="SmallGhostPathSpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_s8va5")]
+curve = SubResource("Curve2D_dga24")
+number_of_enemies = 6
+
+[node name="Round5" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+
+[node name="SmallGhostPathSpawner2" parent="Stage/RoundManager/Round5" instance=ExtResource("5_s8va5")]
+curve = SubResource("Curve2D_s8va5")
+color_id = 2
+number_of_enemies = 4
+
+[node name="SmallGhostPathSpawner" parent="Stage/RoundManager/Round5" instance=ExtResource("5_s8va5")]
+curve = SubResource("Curve2D_qxy0u")
+color_id = 4
+number_of_enemies = 4
+
+[node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round" instance=ExtResource("5_excbq")]
+position = Vector2(90, 65)
+
+[node name="Round2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("5_excbq")]
+position = Vector2(365, 101)
+
+[node name="TimerSpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("6_iav0o")]
+wait_time = 2.0
+
+[node name="GhostEnemySpawner" parent="Stage/RoundManager/Round2/TimerSpawner" instance=ExtResource("5_excbq")]
+position = Vector2(88, 155)
+
+[node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("5_excbq")]
+position = Vector2(423, 112)
+exit_time = 10.0
+
+[node name="TimerSpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("6_iav0o")]
+wait_time = 0.75
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round3/TimerSpawner" instance=ExtResource("5_excbq")]
+position = Vector2(243, 112)
+exit_time = 9.25
+
+[node name="TimerSpawner3" parent="Stage/RoundManager/Round3" instance=ExtResource("6_iav0o")]
+wait_time = 2.25
+
+[node name="EnemySpawner" parent="Stage/RoundManager/Round3/TimerSpawner3" instance=ExtResource("5_excbq")]
+position = Vector2(56, 112)
+exit_time = 7.75
+
+[node name="TimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]
+wait_time = 2.0
+
+[node name="HUD" parent="." instance=ExtResource("7_dnkej")]
+
+[connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
+[connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
+[connection signal="finished" from="Stage/RoundManager" to="." method="_on_round_manager_finished"]

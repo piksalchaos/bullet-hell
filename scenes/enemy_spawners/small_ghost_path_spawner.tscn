@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5sqsb0h1lute"]
+
+[ext_resource type="Script" uid="uid://dkujtr60xvu48" path="res://scenes/enemy_spawners/small_ghost_path_spawner.gd" id="1_60ioi"]
+
+[node name="SmallGhostPathSpawner" type="Path2D" groups=["spawners"]]
+script = ExtResource("1_60ioi")

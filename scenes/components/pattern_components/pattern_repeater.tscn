@@ -6,6 +6,10 @@
 script = ExtResource("1_jphe4")
 seconds_per_shot = 0.5
 
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
