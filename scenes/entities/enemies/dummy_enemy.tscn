@@ -31,6 +31,7 @@ color_component = NodePath("../ColorComponent")
 shape = SubResource("CapsuleShape2D_03np2")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_glh40")]
+position = Vector2(0, -40)
 max_health = 4
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_glh40")]

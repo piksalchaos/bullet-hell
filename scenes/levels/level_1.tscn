@@ -45,12 +45,14 @@ script = ExtResource("3_dga24")
 
 [node name="Round4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false
+is_disabled = true
 
 [node name="SmallGhostPathSpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_s8va5")]
 curve = SubResource("Curve2D_dga24")
 number_of_enemies = 6
 
 [node name="Round5" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+is_disabled = true
 
 [node name="SmallGhostPathSpawner2" parent="Stage/RoundManager/Round5" instance=ExtResource("5_s8va5")]
 curve = SubResource("Curve2D_s8va5")

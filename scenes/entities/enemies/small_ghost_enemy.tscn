@@ -29,6 +29,7 @@ color_component = NodePath("../ColorComponent")
 shape = SubResource("CircleShape2D_wvoiu")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_fuvh0")]
+position = Vector2(0, -29)
 
 [node name="ColorComponent" parent="." instance=ExtResource("4_8yy5l")]
 

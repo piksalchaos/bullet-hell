@@ -16,7 +16,7 @@ func _ready() -> void:
 	color_component.color_id = initial_color_id
 	bullet_emitter.color_id = initial_color_id
 	exit_timer.wait_time = exit_time
-	exit_timer.start()
+	#exit_timer.start() what if they have no exit time at all?
 
 func change_position(
 	new_position: Vector2,

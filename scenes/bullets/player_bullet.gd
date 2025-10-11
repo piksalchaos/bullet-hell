@@ -5,9 +5,10 @@ const SPEED := 1500.0
 
 
 @export var initial_color_id: Globals.COLOR_ID
+@export var damage := 1 
+
 @onready var color_component: ColorComponent = $ColorComponent
 
-var damage := 1 
 var angle_direction := PI*1.5
 
 func _ready():
