@@ -62,7 +62,8 @@ offset_right = 405.0
 offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Move near colored bullets to absorb them
+text = "Move near colored bullets to absorb them,
+but don't let them touch your heart.
 Press 'Z' to shoot them back"
 horizontal_alignment = 1
 
@@ -113,6 +114,7 @@ position = Vector2(388.8, 182)
 initial_color_id = 4
 
 [node name="TimerRound3" parent="Stage/RoundManager" instance=ExtResource("4_6yjpi")]
+visible = false
 wait_time = 4.0
 
 [node name="Label" type="Label" parent="Stage/RoundManager/TimerRound3"]

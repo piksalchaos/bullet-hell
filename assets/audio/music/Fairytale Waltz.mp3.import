@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dc1tvgtya0sip"
+path="res://.godot/imported/Fairytale Waltz.mp3-56e8eb0df3de772806716b0bb81ce072.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Fairytale Waltz.mp3"
+dest_files=["res://.godot/imported/Fairytale Waltz.mp3-56e8eb0df3de772806716b0bb81ce072.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

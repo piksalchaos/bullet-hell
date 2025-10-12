@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8n3kh1ff5dg1"]
+[gd_scene load_steps=4 format=3 uid="uid://c8n3kh1ff5dg1"]
 
 [ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/start_menu.gd" id="1_thu50"]
 [ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
+[ext_resource type="AudioStream" uid="uid://dc1tvgtya0sip" path="res://assets/audio/music/Fairytale Waltz.mp3" id="3_m7x51"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -53,6 +54,10 @@ text = "TUTORIAL"
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "START GAME"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_m7x51")
+autoplay = true
 
 [connection signal="pressed" from="Buttons/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]

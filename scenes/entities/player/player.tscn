@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://ga6ha2dr8o4q" path="res://assets/audio/shoot.wav" id="5_bjvvg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 3.5
+radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
 radius = 45.0
