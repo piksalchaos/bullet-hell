@@ -3,7 +3,8 @@ class_name Player extends Area2D
 @export var is_vulnerable := true
 
 @onready var cooldown_timer: Timer = $CooldownTimer
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var main_sprite: AnimatedSprite2D = $MainSprite
+@onready var shadow_sprite: AnimatedSprite2D = $ShadowSprite
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 const WIDTH := 16.0
@@ -28,13 +29,22 @@ func _physics_process(delta: float) -> void:
 	position.y = clampf(position.y, WIDTH, Globals.STAGE_HEIGHT - WIDTH)
 	Globals.update_player_position(position)
 
+func update_animation(velocity_x):
+	var animation_name = "default"
+	if velocity_x > 0:
+		animation_name = "move_right"
+	elif velocity_x < 0:
+		animation_name = "move_left"
+	main_sprite.play(animation_name)
+	shadow_sprite.play(animation_name)
+
 func hit() -> void:
 	if is_vulnerable:
 		got_hit.emit()
-	sprite_2d.modulate.a = COOLDOWN_ALPHA
+	main_sprite.modulate.a = COOLDOWN_ALPHA
 	is_on_cooldown = true
 	cooldown_timer.start()
 
 func _on_cooldown_timer_timeout() -> void:
 	is_on_cooldown = false
-	sprite_2d.modulate.a = 1
+	main_sprite.modulate.a = 1

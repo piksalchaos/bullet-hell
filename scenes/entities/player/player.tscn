@@ -1,39 +1,153 @@
-[gd_scene load_steps=11 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=27 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://b43avh08mlvxf" path="res://assets/images/player_placeholder.png" id="2_08t41"]
+[ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
 [ext_resource type="Texture2D" uid="uid://oukxw7ad0r61" path="res://assets/images/heart.png" id="3_1ie0h"]
+[ext_resource type="Script" uid="uid://b0nh6p70cv0b3" path="res://scenes/entities/player/aura_drawing.gd" id="3_5sj0x"]
 [ext_resource type="Script" uid="uid://cs734ayyynx5e" path="res://scenes/entities/player/bullet_absorber.gd" id="4_42nxq"]
 [ext_resource type="AudioStream" uid="uid://dxh85agqkp0lf" path="res://assets/audio/shoot.wav" id="5_bjvvg"]
 [ext_resource type="AudioStream" uid="uid://bjcjwufid7usf" path="res://assets/audio/switch_left.wav" id="6_8akj5"]
 [ext_resource type="AudioStream" uid="uid://b56uq6l2c1q4w" path="res://assets/audio/switch_right.wav" id="7_bj7e2"]
 [ext_resource type="AudioStream" uid="uid://dvqav18c42i1a" path="res://assets/audio/absorb.wav" id="8_1murt"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 3.0
+[ext_resource type="Texture2D" uid="uid://cqjjdx88qomxh" path="res://assets/images/player_shadow.png" id="9_ovg4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
 radius = 45.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4dfn"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70kwc"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yywfu"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcd0u"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3p2j"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knby6"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_18p7g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4dfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70kwc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yywfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcd0u")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3p2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knby6")
+}],
+"loop": true,
+"name": &"move_right",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1murt"]
+atlas = ExtResource("2_1murt")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sj0x"]
+atlas = ExtResource("2_1murt")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0oqr"]
+atlas = ExtResource("2_1murt")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy2vv"]
+atlas = ExtResource("2_1murt")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovg4i"]
+atlas = ExtResource("2_1murt")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wli1"]
+atlas = ExtResource("2_1murt")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovg4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1murt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sj0x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0oqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xy2vv")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovg4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wli1")
+}],
+"loop": true,
+"name": &"move_right",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
+radius = 2.0
 
 [node name="Player" type="Area2D"]
 collision_mask = 8
 script = ExtResource("1_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_08t41")
-
-[node name="HeartSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.11, 0.11)
-texture = ExtResource("3_1ie0h")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_u8vuu")
-
 [node name="BulletAbsorber" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_42nxq")
+
+[node name="AuraDrawing" type="Node2D" parent="BulletAbsorber"]
+script = ExtResource("3_5sj0x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletAbsorber"]
 shape = SubResource("CircleShape2D_1ie0h")
@@ -54,6 +168,24 @@ volume_db = -3.0
 
 [node name="AbsorbAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("8_1murt")
+
+[node name="ShadowSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_18p7g")
+autoplay = "default"
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_ovg4i")
+autoplay = "default"
+frame_progress = 0.2953438
+
+[node name="HeartSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("3_1ie0h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 

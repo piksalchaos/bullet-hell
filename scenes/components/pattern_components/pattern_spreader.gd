@@ -5,7 +5,7 @@ extends Node2D
 
 func begin() -> void:
 	for i in bullet_count:
-		rotation = -angle_range/2 + i*(angle_range/bullet_count)
+		rotation = -angle_range/2 + i*(angle_range/(bullet_count-1))
 		shoot()
 
 func shoot() -> void:

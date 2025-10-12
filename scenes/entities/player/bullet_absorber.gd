@@ -3,8 +3,6 @@ extends Area2D
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 const MAX_COLOR_AMOUNT = 20
 const MIN_SHOT_COLOR_AMOUNT = 3
-#const NORMAL_SHOT_COLOR_AMOUNT = 10
-#const BOMB_SHOT_AMOUNT = 20
 var color_amounts := [0, 0, 0]
 var selected_primary_color_index := 0
 @onready var bullet_timer: Timer = $BulletTimer
@@ -12,9 +10,6 @@ var selected_primary_color_index := 0
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio
 @onready var switch_right_audio: AudioStreamPlayer = $SwitchRightAudio
 @onready var absorb_audio: AudioStreamPlayer = $AbsorbAudio
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, 45, Color.WHITE, false, 2)
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
