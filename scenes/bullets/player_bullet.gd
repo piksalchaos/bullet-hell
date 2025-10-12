@@ -12,7 +12,7 @@ const SPEED := 1600.0
 var angle_direction := PI*1.5
 
 func _ready():
-	color_component.color_id = initial_color_id
+	color_component.set_color_id(initial_color_id)
 
 func _physics_process(delta: float) -> void:
 	position.y += sin(angle_direction) * SPEED * delta

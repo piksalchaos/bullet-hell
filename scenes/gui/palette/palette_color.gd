@@ -12,7 +12,7 @@ const CIRCLE_OUTLINE_WIDTH = 2.0
 const TWEEN_DURATION = 0.1
 
 func _ready() -> void:
-	color_component.color_id = color_id
+	color_component.set_color_id(color_id)
 
 func set_percentage(new_percentage):
 	percentage = new_percentage

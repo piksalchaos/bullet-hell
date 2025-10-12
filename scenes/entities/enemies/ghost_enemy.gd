@@ -13,7 +13,7 @@ const TWEEN_EXIT_DURATION := 1.5
 
 func _ready() -> void:
 	change_position(starting_position, begin_attacking, TWEEN_ENTER_DURATION)
-	color_component.color_id = initial_color_id
+	color_component.set_color_id(initial_color_id)
 	bullet_emitter.color_id = initial_color_id
 	exit_timer.wait_time = exit_time
 	#exit_timer.start() what if they have no exit time at all?

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=32 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
@@ -9,7 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://bjcjwufid7usf" path="res://assets/audio/switch_left.wav" id="6_8akj5"]
 [ext_resource type="AudioStream" uid="uid://b56uq6l2c1q4w" path="res://assets/audio/switch_right.wav" id="7_bj7e2"]
 [ext_resource type="AudioStream" uid="uid://dvqav18c42i1a" path="res://assets/audio/absorb.wav" id="8_1murt"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="9_7wli1"]
+[ext_resource type="Script" uid="uid://dhoupr1nbh817" path="res://scenes/entities/player/shadow_sprite.gd" id="9_j0oqr"]
 [ext_resource type="Texture2D" uid="uid://cqjjdx88qomxh" path="res://assets/images/player_shadow.png" id="9_ovg4i"]
+[ext_resource type="AudioStream" uid="uid://cu7li6cqg4r47" path="res://assets/audio/player_hit.wav" id="13_xy2vv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
 radius = 45.0
@@ -21,6 +24,14 @@ region = Rect2(0, 0, 256, 256)
 [sub_resource type="AtlasTexture" id="AtlasTexture_70kwc"]
 atlas = ExtResource("9_ovg4i")
 region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18p7g"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(0, 768, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg2wu"]
+atlas = ExtResource("9_ovg4i")
+region = Rect2(256, 768, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yywfu"]
 atlas = ExtResource("9_ovg4i")
@@ -50,6 +61,17 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18p7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fg2wu")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -172,7 +194,13 @@ stream = ExtResource("8_1murt")
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_18p7g")
+animation = &"hit"
 autoplay = "default"
+frame = 1
+frame_progress = 0.39038286
+script = ExtResource("9_j0oqr")
+
+[node name="ColorComponent" parent="ShadowSprite" instance=ExtResource("9_7wli1")]
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -188,6 +216,9 @@ texture = ExtResource("3_1ie0h")
 shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="CooldownTimer" type="Timer" parent="."]
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_xy2vv")
 
 [connection signal="area_entered" from="BulletAbsorber" to="BulletAbsorber" method="_on_area_entered"]
 [connection signal="timeout" from="BulletAbsorber/BulletTimer" to="BulletAbsorber" method="_on_bullet_timer_timeout"]

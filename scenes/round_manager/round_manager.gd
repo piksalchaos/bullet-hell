@@ -11,7 +11,8 @@ func begin_upcoming_round() -> void:
 		return
 	var upcoming_round = get_child(0)
 	#upcoming_round.enemies_defeated.connect(goto_next_round)
-	upcoming_round.tree_exited.connect(begin_upcoming_round)
+	if not upcoming_round.is_connected("tree_exited", begin_upcoming_round):
+		upcoming_round.tree_exited.connect(begin_upcoming_round)
 	upcoming_round.begin()
 
 func goto_next_round() -> void:

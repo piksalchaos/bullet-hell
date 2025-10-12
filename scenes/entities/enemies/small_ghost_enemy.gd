@@ -8,7 +8,7 @@ extends PathFollow2D
 @export var speed: float = 120
 
 func _ready() -> void:
-	color_component.color_id = initial_color_id
+	color_component.set_color_id(initial_color_id)
 	bullet_emitter.color_id = initial_color_id
 
 func _process(delta: float) -> void:
