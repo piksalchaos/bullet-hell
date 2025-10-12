@@ -14,7 +14,13 @@ const SECONDARY_COLOR_MAP: Dictionary = {
 	COLOR_ID.PURPLE: [COLOR_ID.BLUE, COLOR_ID.RED]
 }
 const COLORS: Array[Color] = [
-	Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE, Color.WHITE
+	Color(0.98, 0.255, 0.255, 1.0),
+	Color(1.0, 0.61, 0.22, 1.0),
+	Color(1.0, 0.99, 0.41, 1.0),
+	Color(0.46, 1.0, 0.46, 1.0),
+	Color(0.24, 0.24, 1.0, 1.0),
+	Color(0.625, 0.25, 1.0, 1.0),
+	Color.WHITE
 ]
 
 const LAYER_PLAYER := 1

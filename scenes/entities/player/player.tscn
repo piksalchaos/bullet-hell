@@ -179,6 +179,7 @@ wait_time = 0.2
 
 [node name="ShootAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("5_bjvvg")
+volume_db = -3.0
 
 [node name="SwitchLeftAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("6_8akj5")

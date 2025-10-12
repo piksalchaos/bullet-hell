@@ -1,11 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwiadvf7qwd20"]
+[gd_scene load_steps=9 format=3 uid="uid://dwiadvf7qwd20"]
 
 [ext_resource type="Script" uid="uid://b8edggpc6x8cv" path="res://scenes/bullets/player_bullet.gd" id="1_48eg6"]
 [ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="3_gdqi6"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_ttfd6"]
+[ext_resource type="Texture2D" uid="uid://dxjbt2m3ltb5" path="res://assets/images/player_bullet.png" id="4_gdqi6"]
+[ext_resource type="AudioStream" uid="uid://k7kfoh2i345x" path="res://assets/audio/player_bullet_explode.wav" id="5_oskw0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ttfd6"]
 radius = 16.0
+
+[sub_resource type="Curve" id="Curve_ttfd6"]
+_data = [Vector2(0, 1), 0.0, -2.5295916, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ttfd6"]
+offsets = PackedFloat32Array(0, 0.29, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.19215687, 1, 1, 1, 0)
 
 [node name="PlayerBullet" type="Area2D"]
 z_index = -1
@@ -18,7 +28,31 @@ shape = SubResource("CircleShape2D_ttfd6")
 
 [node name="ColorComponent" parent="." instance=ExtResource("3_ttfd6")]
 
-[node name="CircleDrawing" parent="." instance=ExtResource("3_gdqi6")]
-radius = 16.0
+[node name="BulletParticles" type="CPUParticles2D" parent="."]
+amount = 40
+texture = ExtResource("4_gdqi6")
+lifetime = 0.2
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+split_scale = true
+scale_curve_x = SubResource("Curve_ttfd6")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_ttfd6")
+
+[node name="ExplosionCircle" parent="." instance=ExtResource("3_gdqi6")]
+visible = false
+radius = 1.0
+is_filled = false
+line_width = 2
+
+[node name="InnerExplosionCircle" parent="." instance=ExtResource("3_gdqi6")]
+visible = false
+radius = 1.0
+is_filled = false
+line_width = 2
+
+[node name="ExplodeAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oskw0")
+volume_db = 1.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
