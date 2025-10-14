@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://xapp2c4vr12o"]
+
+[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/angled_bullet.tscn" id="1_nfouj"]
+[ext_resource type="Texture2D" uid="uid://dqiej8sf8wg5y" path="res://assets/images/bullets/electric_bullet.png" id="2_rjy4c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjy4c"]
+atlas = ExtResource("2_rjy4c")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noxuh"]
+atlas = ExtResource("2_rjy4c")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htk5r"]
+atlas = ExtResource("2_rjy4c")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htk5r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjy4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noxuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htk5r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="ElectricBullet" instance=ExtResource("1_nfouj")]
+speed = 300.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_htk5r")
+autoplay = "default"
+frame_progress = 0.14325179
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletComponent" index="0"]
+polygon = PackedVector2Array(-12, 0, 0, 5, 12, 0, 0, -5)

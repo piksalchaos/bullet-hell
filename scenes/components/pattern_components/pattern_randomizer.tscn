@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6hr3vdkca36h"]
+
+[ext_resource type="Script" uid="uid://dq4dwgewv7ksq" path="res://scenes/components/pattern_components/pattern_randomizer.gd" id="1_cuip7"]
+
+[node name="PatternRandomizer" type="Node2D" groups=["pattern_components"]]
+script = ExtResource("1_cuip7")
+angle_range = 0.1

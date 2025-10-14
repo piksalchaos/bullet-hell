@@ -1,0 +1,82 @@
+[gd_scene load_steps=16 format=3 uid="uid://ba1bqocppfdjj"]
+
+[ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_qwpmo"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_10ng8"]
+[ext_resource type="Texture2D" uid="uid://ftfiwgpvks1u" path="res://assets/images/enemies/electric_ghost_enemy.png" id="3_10ng8"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_14kce"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_xn6ix"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_xn6ix"]
+[ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="7_8xymb"]
+[ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_vsbjv"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_gjgqk"]
+[ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="9_bpik3"]
+[ext_resource type="PackedScene" uid="uid://xapp2c4vr12o" path="res://scenes/bullets/electric_bullet.tscn" id="10_8xymb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjrpu"]
+atlas = ExtResource("3_10ng8")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14kce"]
+atlas = ExtResource("3_10ng8")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xn6ix"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjrpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14kce")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14kce"]
+radius = 34.0
+
+[node name="ElectricGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter")]
+script = ExtResource("1_qwpmo")
+color_component = NodePath("ColorComponent")
+pattern_root = NodePath("PatternRepeater")
+bullet_emitter = NodePath("PatternRepeater/PatternAimer/PatternRepeater/PatternRandomizer/BulletEmitter")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_xn6ix")
+autoplay = "default"
+frame = 1
+frame_progress = 0.51462966
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_10ng8")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_14kce")]
+position = Vector2(-1, -1)
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_14kce")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_xn6ix")]
+position = Vector2(0, -37)
+max_health = 8
+
+[node name="PatternRepeater" parent="." instance=ExtResource("6_xn6ix")]
+seconds_per_shot = 1.2
+
+[node name="LoopedColorizer" parent="PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("7_8xymb")]
+bullet_emitters = [NodePath("../PatternAimer/PatternRepeater/PatternRandomizer/BulletEmitter")]
+
+[node name="PatternAimer" parent="PatternRepeater" instance=ExtResource("7_vsbjv")]
+
+[node name="PatternRepeater" parent="PatternRepeater/PatternAimer" instance=ExtResource("6_xn6ix")]
+seconds_per_shot = 0.13
+max_shots = 3
+
+[node name="PatternRandomizer" parent="PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("9_bpik3")]
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternRepeater/PatternRandomizer" instance=ExtResource("8_gjgqk")]
+bullet_scene = ExtResource("10_8xymb")

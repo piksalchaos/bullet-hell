@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dol55n63ye15h"]
+
+[ext_resource type="Script" uid="uid://cnjpcre5mplha" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.gd" id="1_1imib"]
+
+[node name="LoopedColorizer" type="Node" groups=["pattern_components"]]
+script = ExtResource("1_1imib")

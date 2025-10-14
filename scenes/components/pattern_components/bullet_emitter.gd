@@ -1,4 +1,4 @@
-extends Node2D
+class_name BulletEmitter extends Node2D
 
 @export var bullet_scene: PackedScene
 @export var color_id: Globals.COLOR_ID

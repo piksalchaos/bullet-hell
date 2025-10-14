@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbu17cqiyi67h"]
+
+[ext_resource type="Script" uid="uid://lrrbohjdkdgg" path="res://scenes/components/pattern_components/colorizers/randomized_colorizer.gd" id="1_4brjq"]
+
+[node name="RandomizedColorizer" type="Node" groups=["pattern_components"]]
+script = ExtResource("1_4brjq")
