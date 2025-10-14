@@ -1,6 +1,6 @@
 extends Node2D
 
-@export_range(0, PI) var angle_range: float = PI*0.25
+@export_range(0, 2*PI) var angle_range: float = PI*0.25
 @export var bullet_count: int = 3
 
 func begin() -> void:

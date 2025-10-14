@@ -1,0 +1,64 @@
+[gd_scene load_steps=13 format=3 uid="uid://c4h4q8uea4l2x"]
+
+[ext_resource type="Script" uid="uid://coswjkrcjpnhd" path="res://scenes/entities/enemies/frolicker_ghost_enemy.gd" id="1_kdqb8"]
+[ext_resource type="Texture2D" uid="uid://di30i84l2ucut" path="res://assets/images/enemies/frolicker_ghost_enemy.png" id="2_vxwpj"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_4ma56"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_o0pnq"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_77o0b"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_l3j2b"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vkpqe"]
+[ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="9_sc6tb"]
+[ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_bn713"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3j2b"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bn713"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3j2b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxwpj"]
+radius = 46.0
+
+[node name="FrolickerGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter")]
+script = ExtResource("1_kdqb8")
+color_component = NodePath("ColorComponent")
+pattern_root = NodePath("PatternRepeater")
+bullet_emitter = NodePath("PatternRepeater/PatternSpreader/BulletEmitter")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_bn713")
+
+[node name="ColorComponent" parent="." instance=ExtResource("3_4ma56")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_o0pnq")]
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_vxwpj")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_77o0b")]
+position = Vector2(0, -55)
+max_health = 40
+
+[node name="PatternRepeater" parent="." instance=ExtResource("6_l3j2b")]
+delay_time = 1.0
+seconds_per_shot = 1.5
+
+[node name="PatternSpreader" parent="PatternRepeater" instance=ExtResource("10_bn713")]
+angle_range = 5.655
+bullet_count = 10
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternSpreader" instance=ExtResource("8_vkpqe")]
+rotation = 1.5707964
+bullet_scene = ExtResource("9_sc6tb")
