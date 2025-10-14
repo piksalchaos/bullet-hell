@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4h4q8uea4l2x"]
+[gd_scene load_steps=20 format=3 uid="uid://c4h4q8uea4l2x"]
 
 [ext_resource type="Script" uid="uid://coswjkrcjpnhd" path="res://scenes/entities/enemies/frolicker_ghost_enemy.gd" id="1_kdqb8"]
 [ext_resource type="Texture2D" uid="uid://di30i84l2ucut" path="res://assets/images/enemies/frolicker_ghost_enemy.png" id="2_vxwpj"]
@@ -7,22 +7,71 @@
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_77o0b"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_l3j2b"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vkpqe"]
-[ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="9_sc6tb"]
+[ext_resource type="PackedScene" uid="uid://dsf8p31orcxl8" path="res://scenes/bullets/thorn_bullet.tscn" id="9_l3j2b"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_bn713"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3j2b"]
 atlas = ExtResource("2_vxwpj")
 region = Rect2(0, 0, 256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn713"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkpqe"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc6tb"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wmut"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq4g0"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o6t8"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv1kb"]
+atlas = ExtResource("2_vxwpj")
+region = Rect2(256, 512, 256, 256)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bn713"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l3j2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bn713")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkpqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc6tb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wmut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq4g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o6t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv1kb")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxwpj"]
@@ -37,6 +86,8 @@ bullet_emitter = NodePath("PatternRepeater/PatternSpreader/BulletEmitter")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_bn713")
+autoplay = "default"
+frame_progress = 0.53497493
 
 [node name="ColorComponent" parent="." instance=ExtResource("3_4ma56")]
 
@@ -61,4 +112,4 @@ bullet_count = 10
 
 [node name="BulletEmitter" parent="PatternRepeater/PatternSpreader" instance=ExtResource("8_vkpqe")]
 rotation = 1.5707964
-bullet_scene = ExtResource("9_sc6tb")
+bullet_scene = ExtResource("9_l3j2b")

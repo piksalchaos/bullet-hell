@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsf8p31orcxl8"]
+
+[ext_resource type="Script" uid="uid://b6a1gauy4j2ua" path="res://scenes/bullets/thorn_bullet.gd" id="1_qiuud"]
+[ext_resource type="Texture2D" uid="uid://ckaup6i8u6ilw" path="res://assets/images/bullets/thorn_bullet.png" id="1_uagqa"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_5164b"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_5164b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiuud"]
+atlas = ExtResource("1_uagqa")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub28v"]
+atlas = ExtResource("1_uagqa")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtmms"]
+atlas = ExtResource("1_uagqa")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i7m4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiuud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub28v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtmms")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="ThornBullet" type="Node2D"]
+script = ExtResource("1_qiuud")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5707964
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_7i7m4")
+autoplay = "default"
+frame_progress = 0.56212306
+
+[node name="BulletComponent" parent="." instance=ExtResource("2_5164b")]
+offscreen_distance = 200.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletComponent"]
+polygon = PackedVector2Array(11, 0, -11, 4, -11, -4)
+
+[node name="ColorComponent" parent="." instance=ExtResource("3_5164b")]
