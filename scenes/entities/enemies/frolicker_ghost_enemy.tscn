@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4h4q8uea4l2x"]
+[gd_scene load_steps=22 format=3 uid="uid://c4h4q8uea4l2x"]
 
 [ext_resource type="Script" uid="uid://coswjkrcjpnhd" path="res://scenes/entities/enemies/frolicker_ghost_enemy.gd" id="1_kdqb8"]
 [ext_resource type="Texture2D" uid="uid://di30i84l2ucut" path="res://assets/images/enemies/frolicker_ghost_enemy.png" id="2_vxwpj"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_77o0b"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_l3j2b"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vkpqe"]
-[ext_resource type="PackedScene" uid="uid://dsf8p31orcxl8" path="res://scenes/bullets/thorn_bullet.tscn" id="9_l3j2b"]
+[ext_resource type="PackedScene" uid="uid://dsf8p31orcxl8" path="res://scenes/bullets/homing_thorn_bullet.tscn" id="9_l3j2b"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_bn713"]
+[ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="10_vkpqe"]
+[ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="11_vkpqe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3j2b"]
 atlas = ExtResource("2_vxwpj")
@@ -77,10 +79,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxwpj"]
 radius = 46.0
 
-[node name="FrolickerGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter")]
+[node name="FrolickerGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "pattern_root_2", "bullet_emitter")]
 script = ExtResource("1_kdqb8")
 color_component = NodePath("ColorComponent")
 pattern_root = NodePath("PatternRepeater")
+pattern_root_2 = NodePath("PatternRepeater2")
 bullet_emitter = NodePath("PatternRepeater/PatternSpreader/BulletEmitter")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -103,7 +106,7 @@ position = Vector2(0, -55)
 max_health = 40
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_l3j2b")]
-delay_time = 1.0
+delay_time = 2.0
 seconds_per_shot = 1.5
 
 [node name="PatternSpreader" parent="PatternRepeater" instance=ExtResource("10_bn713")]
@@ -113,3 +116,16 @@ bullet_count = 10
 [node name="BulletEmitter" parent="PatternRepeater/PatternSpreader" instance=ExtResource("8_vkpqe")]
 rotation = 1.5707964
 bullet_scene = ExtResource("9_l3j2b")
+
+[node name="PatternRepeater2" parent="." instance=ExtResource("6_l3j2b")]
+delay_time = 1.5
+seconds_per_shot = 0.15
+
+[node name="PatternRandomizer" parent="PatternRepeater2" instance=ExtResource("11_vkpqe")]
+angle_range = 4.366
+
+[node name="BulletEmitter" parent="PatternRepeater2/PatternRandomizer" instance=ExtResource("8_vkpqe")]
+rotation = 1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+bullet_scene = ExtResource("10_vkpqe")
+color_id = 6

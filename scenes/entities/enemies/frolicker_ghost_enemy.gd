@@ -5,6 +5,7 @@ const TWEEN_EXIT_DURATION := 1.5
 
 @export var color_component: ColorComponent
 @export var pattern_root: Node2D
+@export var pattern_root_2: Node2D
 @export var bullet_emitter: BulletEmitter
 
 @export var starting_position: Vector2
@@ -32,6 +33,7 @@ func change_position(
 	
 func begin_attacking() -> void:
 	pattern_root.begin()
+	pattern_root_2.begin()
 	goto_end_position()
 
 func goto_end_position():
