@@ -32,7 +32,7 @@ shape = SubResource("CapsuleShape2D_03np2")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_glh40")]
 position = Vector2(0, -40)
-max_health = 4
+max_health = 2
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_glh40")]
 seconds_per_shot = 1.7

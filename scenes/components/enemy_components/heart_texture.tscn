@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca7ucvqcibr7o"]
+
+[ext_resource type="Texture2D" uid="uid://bhhw865pdfagv" path="res://assets/images/enemy_heart.png" id="1_cr5ke"]
+
+[node name="HeartTexture" type="TextureRect"]
+texture = ExtResource("1_cr5ke")
+expand_mode = 2

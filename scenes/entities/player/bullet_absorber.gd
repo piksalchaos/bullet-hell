@@ -1,8 +1,8 @@
 extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
-const MAX_COLOR_AMOUNT = 20
-const MIN_SHOT_COLOR_AMOUNT = 3
+const SHOT_COLOR_AMOUNT = 3
+const MAX_COLOR_AMOUNT = 9
 var color_amounts := [0, 0, 0]
 var selected_primary_color_index := 0
 @onready var bullet_timer: Timer = $BulletTimer
@@ -62,15 +62,18 @@ func switch_color(is_right: bool = true) -> void:
 	SignalBus.selected_color_changed.emit(selected_primary_color_index)
 
 func shoot_bullet():
-	if color_amounts[selected_primary_color_index] < MIN_SHOT_COLOR_AMOUNT: return
+	var color_amount = color_amounts[selected_primary_color_index]
+	if color_amount < SHOT_COLOR_AMOUNT: return
 	shoot_audio.play()
+	var final_color_amount = color_amount % SHOT_COLOR_AMOUNT
+	SignalBus.color_amount_changed.emit(selected_primary_color_index, float(final_color_amount) / float(MAX_COLOR_AMOUNT))
+	color_amounts[selected_primary_color_index] = final_color_amount
+	
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.initial_color_id = Globals.PRIMARY_COLORS[selected_primary_color_index]
 	bullet.position = get_parent().position
-	bullet.damage = color_amounts[selected_primary_color_index]
+	bullet.damage = (color_amount - final_color_amount) / SHOT_COLOR_AMOUNT
 	Globals.bullet_container.add_child(bullet)
-	color_amounts[selected_primary_color_index] = 0
-	SignalBus.color_amount_changed.emit(selected_primary_color_index, 0)
 
 func _on_bullet_timer_timeout() -> void:
 	shoot_bullet()

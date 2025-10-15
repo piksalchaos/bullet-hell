@@ -24,7 +24,7 @@ func start_game():
 
 func _on_player_got_hit() -> void:
 	player_health -= 1
-	if player_health < 0:
+	if player_health <= 0:
 		get_tree().call_deferred("reload_current_scene")
 	hud.update_life_heart_count(player_health)
 
