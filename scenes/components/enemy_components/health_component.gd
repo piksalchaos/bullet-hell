@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func attack(amount: int):
 	health -= amount
-	for i in min(amount, get_child_count()):
+	for i in min(amount, heart_container.get_child_count()):
 		heart_container.get_child(i).queue_free()
 	if health <= 0:
 		get_parent().queue_free() #might need to change to adapt to other enemy needs?

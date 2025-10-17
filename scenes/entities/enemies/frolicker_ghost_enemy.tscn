@@ -103,7 +103,7 @@ shape = SubResource("CircleShape2D_vxwpj")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_77o0b")]
 position = Vector2(0, -55)
-max_health = 8
+max_health = 11
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_l3j2b")]
 delay_time = 2.0

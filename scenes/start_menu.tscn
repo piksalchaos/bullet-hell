@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8n3kh1ff5dg1"]
+[gd_scene load_steps=9 format=3 uid="uid://c8n3kh1ff5dg1"]
 
 [ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/start_menu.gd" id="1_thu50"]
 [ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
+[ext_resource type="Texture2D" uid="uid://brfq58ye0lxtl" path="res://assets/images/start_menu_buttons.png" id="3_fcv5n"]
+[ext_resource type="Script" uid="uid://cjjiuxpmibury" path="res://scenes/start_menu_visuals.gd" id="3_h61rw"]
 [ext_resource type="AudioStream" uid="uid://dc1tvgtya0sip" path="res://assets/audio/music/Fairytale Waltz.mp3" id="3_m7x51"]
+[ext_resource type="Script" uid="uid://cbm0gbffng0b3" path="res://scenes/hover_button.gd" id="4_4v6gu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v6gu"]
+atlas = ExtResource("3_fcv5n")
+region = Rect2(47.07602, 14.553619, 894.1764, 332.1626)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxjfj"]
+atlas = ExtResource("3_fcv5n")
+region = Rect2(128.99179, 387.2588, 778.90137, 427.16022)
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -13,6 +24,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_thu50")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -20,44 +40,77 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -293.0
-offset_top = -255.0
-offset_right = 293.0
-offset_bottom = -186.0
+offset_left = -558.0
+offset_top = -301.0
+offset_right = 28.0
+offset_bottom = -232.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "UNNAMED BULLET HELL"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TutorialButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 0
-offset_left = 498.0
-offset_top = 162.0
-offset_right = 1098.0
-offset_bottom = 612.0
+offset_left = 44.0
+offset_top = 177.0
+offset_right = 402.0
+offset_bottom = 327.0
+pivot_offset = Vector2(179, 75)
+texture_normal = SubResource("AtlasTexture_4v6gu")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_4v6gu")
+
+[node name="BeginButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 0
+offset_left = 44.0
+offset_top = 346.0
+offset_right = 402.0
+offset_bottom = 496.0
+pivot_offset = Vector2(179, 75)
+texture_normal = SubResource("AtlasTexture_nxjfj")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_4v6gu")
+
+[node name="StartMenuVisuals" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 818.0
+offset_top = 327.0
+offset_right = 818.0
+offset_bottom = 327.0
+mouse_filter = 2
+script = ExtResource("3_h61rw")
+
+[node name="RedrawTimer" type="Timer" parent="StartMenuVisuals"]
+wait_time = 0.75
+autostart = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 108.0
+offset_top = -108.99997
+offset_right = 708.0
+offset_bottom = 341.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5384341, 0.5384341)
 texture = ExtResource("2_m7x51")
 expand_mode = 1
-
-[node name="Buttons" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 212.0
-offset_right = 64.0
-offset_bottom = 252.0
-
-[node name="TutorialButton" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "TUTORIAL"
-
-[node name="StartButton" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "START GAME"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_m7x51")
 autoplay = true
 
-[connection signal="pressed" from="Buttons/TutorialButton" to="." method="_on_tutorial_button_pressed"]
-[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="BeginButton" to="." method="_on_begin_button_pressed"]
+[connection signal="timeout" from="StartMenuVisuals/RedrawTimer" to="StartMenuVisuals" method="_on_redraw_timer_timeout"]
