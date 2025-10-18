@@ -36,13 +36,6 @@ position = Vector2(243, 550)
 [node name="RoundManager" type="Node2D" parent="Stage"]
 script = ExtResource("3_dga24")
 
-[node name="Round4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-position = Vector2(1, 0)
-
-[node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_qxy0u")]
-position = Vector2(70, 111)
-ending_position = Vector2(416, 111)
-
 [node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round" instance=ExtResource("5_excbq")]
@@ -73,6 +66,13 @@ color_id = 2
 
 [node name="GhostEnemySpawner2" parent="Stage/RoundManager/Round3" instance=ExtResource("5_excbq")]
 position = Vector2(396, 91)
+
+[node name="Round4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+position = Vector2(1, 0)
+
+[node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_qxy0u")]
+position = Vector2(70, 111)
+ending_position = Vector2(416, 111)
 
 [node name="TimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]
 wait_time = 2.0
