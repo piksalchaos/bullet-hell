@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=33 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bjcjwufid7usf" path="res://assets/audio/switch_left.wav" id="6_8akj5"]
 [ext_resource type="AudioStream" uid="uid://b56uq6l2c1q4w" path="res://assets/audio/switch_right.wav" id="7_bj7e2"]
 [ext_resource type="AudioStream" uid="uid://dvqav18c42i1a" path="res://assets/audio/absorb.wav" id="8_1murt"]
+[ext_resource type="AudioStream" uid="uid://si8wdggbi5mx" path="res://assets/audio/color_upgrade.wav" id="8_r4dfn"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="9_7wli1"]
 [ext_resource type="Script" uid="uid://dhoupr1nbh817" path="res://scenes/entities/player/shadow_sprite.gd" id="9_j0oqr"]
 [ext_resource type="Texture2D" uid="uid://cqjjdx88qomxh" path="res://assets/images/player_shadow.png" id="9_ovg4i"]
@@ -191,6 +192,11 @@ volume_db = -3.0
 
 [node name="AbsorbAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("8_1murt")
+
+[node name="ColorUpgradeAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
+stream = ExtResource("8_r4dfn")
+volume_db = -2.0
+pitch_scale = 1.5
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

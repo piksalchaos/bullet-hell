@@ -10,6 +10,7 @@ var selected_primary_color_index := 0
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio
 @onready var switch_right_audio: AudioStreamPlayer = $SwitchRightAudio
 @onready var absorb_audio: AudioStreamPlayer = $AbsorbAudio
+@onready var color_upgrade_audio: AudioStreamPlayer = $ColorUpgradeAudio
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
@@ -42,6 +43,8 @@ func increment_primary_color_amount(primary_color_index) -> bool:
 	if color_amounts[primary_color_index] >= MAX_COLOR_AMOUNT:
 		return false
 	color_amounts[primary_color_index] += 1
+	if color_amounts[primary_color_index] == MAX_COLOR_AMOUNT:
+		color_upgrade_audio.play()
 	SignalBus.color_amount_changed.emit(primary_color_index, float(color_amounts[primary_color_index]) / float(MAX_COLOR_AMOUNT))
 	return true
 

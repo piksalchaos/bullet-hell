@@ -20,11 +20,7 @@ func _process(delta: float) -> void:
 func get_polygon_points():
 	var points = []
 	for i in POINT_COUNT:
-		var point_distance
-		if has_spikes:
-			point_distance = radius if i % 2 == 0 else radius * 1.2
-		else:
-			point_distance = radius
+		var point_distance = radius if i % 2 == 0 else radius * 1.2
 		var x = cos(2*PI*float(i)/POINT_COUNT) * point_distance
 		var y = sin(2*PI*float(i)/POINT_COUNT) * point_distance
 		points.append(Vector2(x, y))

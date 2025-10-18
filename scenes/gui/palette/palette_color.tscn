@@ -16,6 +16,12 @@ radius = 30.0
 is_filled = false
 line_width = 2
 
+[node name="CircleFill" parent="." instance=ExtResource("2_xcmbf")]
+self_modulate = Color(1, 1, 1, 0)
+radius = 0.0
+
+[node name="ColorComponent" parent="CircleFill" instance=ExtResource("3_32xwn")]
+
 [node name="PaletteColorVisual" type="Node2D" parent="."]
 script = ExtResource("4_rjhvv")
 
