@@ -15,6 +15,7 @@ var is_mixing = false
 @onready var switch_right_audio: AudioStreamPlayer = $SwitchRightAudio
 @onready var absorb_audio: AudioStreamPlayer = $AbsorbAudio
 @onready var color_upgrade_audio: AudioStreamPlayer = $ColorUpgradeAudio
+@onready var prepare_shot_audio: AudioStreamPlayer = $PrepareShotAudio
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
@@ -67,10 +68,12 @@ func _input(event: InputEvent) -> void:
 			switch_color(false)
 			switch_right_audio.play()
 	if event.is_action_pressed("shoot"):
+		prepare_shot_audio.play()
 		is_mixing = true
 		mixed_primary_color_index = selected_primary_color_index
 		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	if event.is_action_released("shoot"):
+		prepare_shot_audio.stop()
 		is_mixing = false
 		SignalBus.mixed_colors_changed.emit(-1, -1)
 		if found_color_to_mix:
@@ -82,7 +85,7 @@ func _input(event: InputEvent) -> void:
 func get_adjacent_color_index(is_right: bool = true) -> int:
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
 	var offset = 1 if is_right else -1
-	return (selected_primary_color_index + offset) % primary_color_count
+	return (selected_primary_color_index + offset + primary_color_count) % primary_color_count
 
 func switch_color(is_right: bool = true) -> void:
 	selected_primary_color_index = get_adjacent_color_index(is_right)

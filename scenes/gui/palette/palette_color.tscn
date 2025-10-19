@@ -11,10 +11,18 @@ anchors_preset = 0
 script = ExtResource("1_4jpu5")
 
 [node name="CircleOutline" parent="." instance=ExtResource("2_xcmbf")]
-modulate = Color(0.29513082, 0.29513085, 0.29513085, 1)
+modulate = Color(0.27, 0.27, 0.27, 1)
 radius = 30.0
 is_filled = false
 line_width = 2
+
+[node name="InnerCircleOutline" parent="." instance=ExtResource("2_xcmbf")]
+self_modulate = Color(1, 1, 1, 0.39607844)
+radius = 0.0
+is_filled = false
+line_width = 1
+
+[node name="ColorComponent" parent="InnerCircleOutline" instance=ExtResource("3_32xwn")]
 
 [node name="CircleFill" parent="." instance=ExtResource("2_xcmbf")]
 self_modulate = Color(1, 1, 1, 0)

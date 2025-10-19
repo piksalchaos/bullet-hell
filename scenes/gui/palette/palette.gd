@@ -3,7 +3,7 @@ extends Control
 const CENTER_DISTANCE = 70.0
 const SELECTED_CENTER_DISTANCE = 115.0
 const RADIUS = 40.0
-const SELECTED_RADIUS = 65.0
+const SELECTED_RADIUS = 80.0
 const TWEEN_DURATION = 0.35
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
@@ -63,6 +63,7 @@ func _on_selected_color_changed(primary_color_index):
 	selected_primary_color_index = primary_color_index
 
 func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_primary_color_index: int):
+	print("alskdjfsldkf", "selected: ", new_selected_primary_color_index, "   mixed:", mixed_primary_color_index)
 	for palette_color in color_container.get_children():
 		palette_color.set_highlight(
 			palette_color.get_index() == new_selected_primary_color_index \
