@@ -69,9 +69,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		is_mixing = true
 		mixed_primary_color_index = selected_primary_color_index
-		#SignalBus.highlighted_color_changed.emit()
+		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	if event.is_action_released("shoot"):
 		is_mixing = false
+		SignalBus.mixed_colors_changed.emit(-1, -1)
 		if found_color_to_mix:
 			found_color_to_mix = false
 			shoot_mixed_bullet()
@@ -94,6 +95,7 @@ func mix_color(is_right: bool = true) -> void:
 		return
 	switch_color(is_right)
 	found_color_to_mix = selected_primary_color_index != mixed_primary_color_index
+	SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 
 func shoot_bullet():
 	var color_amount = color_amounts[selected_primary_color_index]

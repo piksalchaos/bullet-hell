@@ -14,6 +14,7 @@ var rotation_factor: int = 0
 func _ready() -> void:
 	SignalBus.color_amount_changed.connect(_on_color_amount_changed)
 	SignalBus.selected_color_changed.connect(_on_selected_color_changed)
+	SignalBus.mixed_colors_changed.connect(_on_mixed_colors_changed)
 	for i in Globals.PRIMARY_COLORS.size():
 		var palette_color = PALETTE_COLOR.instantiate()
 		palette_color.color_id = Globals.PRIMARY_COLORS[i]
@@ -60,3 +61,10 @@ func _on_selected_color_changed(primary_color_index):
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	
 	selected_primary_color_index = primary_color_index
+
+func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_primary_color_index: int):
+	for palette_color in color_container.get_children():
+		palette_color.set_highlight(
+			palette_color.get_index() == new_selected_primary_color_index \
+			or palette_color.get_index() == mixed_primary_color_index
+		)
