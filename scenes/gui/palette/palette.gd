@@ -45,7 +45,7 @@ func _on_selected_color_changed(primary_color_index):
 	
 	var selected_color = color_container.get_child(primary_color_index)
 	var previous_selected_color = color_container.get_child(selected_primary_color_index)
-	#
+	
 	tween.tween_property(selected_color, "radius", SELECTED_RADIUS, TWEEN_DURATION) \
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(selected_color, "position", selected_color.position.normalized() * SELECTED_CENTER_DISTANCE, TWEEN_DURATION) \

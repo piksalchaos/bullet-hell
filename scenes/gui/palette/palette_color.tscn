@@ -26,3 +26,9 @@ radius = 0.0
 script = ExtResource("4_rjhvv")
 
 [node name="ColorComponent" parent="PaletteColorVisual" instance=ExtResource("3_32xwn")]
+
+[node name="HighlightOutline" parent="." instance=ExtResource("2_xcmbf")]
+visible = false
+radius = 0.0
+is_filled = false
+line_width = 4

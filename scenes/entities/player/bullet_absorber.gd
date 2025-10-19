@@ -5,6 +5,10 @@ const SHOT_COLOR_AMOUNT = 3
 const MAX_COLOR_AMOUNT = 9
 var color_amounts := [0, 0, 0]
 var selected_primary_color_index := 0
+var mixed_primary_color_index := 0
+var found_color_to_mix := false
+
+var is_mixing = false
 @onready var bullet_timer: Timer = $BulletTimer
 @onready var shoot_audio: AudioStreamPlayer = $ShootAudio
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio
@@ -42,41 +46,99 @@ func add_color_id_to_color_amounts(color_id: Globals.COLOR_ID) -> Array[Globals.
 func increment_primary_color_amount(primary_color_index) -> bool:
 	if color_amounts[primary_color_index] >= MAX_COLOR_AMOUNT:
 		return false
-	color_amounts[primary_color_index] += 1
+	set_color_amount(primary_color_index, color_amounts[primary_color_index] + 1)
 	if color_amounts[primary_color_index] == MAX_COLOR_AMOUNT:
 		color_upgrade_audio.play()
-	SignalBus.color_amount_changed.emit(primary_color_index, float(color_amounts[primary_color_index]) / float(MAX_COLOR_AMOUNT))
 	return true
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("switch_right"):
-		switch_color(true)
-		switch_left_audio.play()
-	if event.is_action_pressed("switch_left"):
-		switch_color(false)
-		switch_right_audio.play()
+	if is_mixing:
+		if event.is_action_pressed("switch_right"):
+			mix_color(true)
+			switch_left_audio.play()
+		if event.is_action_pressed("switch_left"):
+			mix_color(false)
+			switch_right_audio.play()
+	else:
+		if event.is_action_pressed("switch_right"):
+			switch_color(true)
+			switch_left_audio.play()
+		if event.is_action_pressed("switch_left"):
+			switch_color(false)
+			switch_right_audio.play()
 	if event.is_action_pressed("shoot"):
-		shoot_bullet()
+		is_mixing = true
+		mixed_primary_color_index = selected_primary_color_index
+		#SignalBus.highlighted_color_changed.emit()
+	if event.is_action_released("shoot"):
+		is_mixing = false
+		if found_color_to_mix:
+			found_color_to_mix = false
+			shoot_mixed_bullet()
+		else:
+			shoot_bullet()
 
-func switch_color(is_right: bool = true) -> void:
+func get_adjacent_color_index(is_right: bool = true) -> int:
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
 	var offset = 1 if is_right else -1
-	selected_primary_color_index = (selected_primary_color_index + offset) % primary_color_count
+	return (selected_primary_color_index + offset) % primary_color_count
+
+func switch_color(is_right: bool = true) -> void:
+	selected_primary_color_index = get_adjacent_color_index(is_right)
 	SignalBus.selected_color_changed.emit(selected_primary_color_index)
+
+func mix_color(is_right: bool = true) -> void:
+	var next_primary_color_index = get_adjacent_color_index(is_right)
+	if color_amounts[next_primary_color_index] < SHOT_COLOR_AMOUNT \
+	or color_amounts[selected_primary_color_index] < SHOT_COLOR_AMOUNT:
+		return
+	switch_color(is_right)
+	found_color_to_mix = selected_primary_color_index != mixed_primary_color_index
 
 func shoot_bullet():
 	var color_amount = color_amounts[selected_primary_color_index]
 	if color_amount < SHOT_COLOR_AMOUNT: return
 	shoot_audio.play()
 	var final_color_amount = color_amount % SHOT_COLOR_AMOUNT
-	SignalBus.color_amount_changed.emit(selected_primary_color_index, float(final_color_amount) / float(MAX_COLOR_AMOUNT))
-	color_amounts[selected_primary_color_index] = final_color_amount
-	
+	set_color_amount(selected_primary_color_index, final_color_amount)
+
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.initial_color_id = Globals.PRIMARY_COLORS[selected_primary_color_index]
 	bullet.position = get_parent().position
 	bullet.damage = (color_amount - final_color_amount) / SHOT_COLOR_AMOUNT
 	Globals.bullet_container.add_child(bullet)
+
+func shoot_mixed_bullet():
+	var amount_subtractor = mini(
+		get_color_amount_bullet_subtractor(selected_primary_color_index),
+		get_color_amount_bullet_subtractor(mixed_primary_color_index)
+	)
+	set_color_amount(selected_primary_color_index, color_amounts[selected_primary_color_index] - amount_subtractor)
+	set_color_amount(mixed_primary_color_index, color_amounts[mixed_primary_color_index] - amount_subtractor)
+	
+	shoot_audio.play()
+	print("mixed bullet")
+	print("selected: ", selected_primary_color_index, "   mixed: ", mixed_primary_color_index)
+	var bullet_color_id: Globals.COLOR_ID
+	for secondary_color_id in Globals.SECONDARY_COLOR_MAP:
+		var secondary_color_primary_ids = Globals.SECONDARY_COLOR_MAP[secondary_color_id]
+		if secondary_color_primary_ids.has(Globals.PRIMARY_COLORS[selected_primary_color_index]) \
+		and secondary_color_primary_ids.has(Globals.PRIMARY_COLORS[mixed_primary_color_index]):
+			bullet_color_id = secondary_color_id
+			break
+	
+	var bullet = PLAYER_BULLET.instantiate()
+	bullet.initial_color_id = bullet_color_id
+	bullet.position = get_parent().position
+	bullet.damage = float(amount_subtractor) / SHOT_COLOR_AMOUNT
+	Globals.bullet_container.add_child(bullet)
+
+func get_color_amount_bullet_subtractor(primary_color_index):
+	return color_amounts[primary_color_index]/SHOT_COLOR_AMOUNT * SHOT_COLOR_AMOUNT
+
+func set_color_amount(primary_color_index: int, new_color_amount: int):
+	color_amounts[primary_color_index] = new_color_amount
+	SignalBus.color_amount_changed.emit(primary_color_index, float(new_color_amount) / float(MAX_COLOR_AMOUNT))
 
 func _on_bullet_timer_timeout() -> void:
 	shoot_bullet()
