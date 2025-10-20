@@ -25,7 +25,7 @@ line_width = 0.5
 [node name="ColorComponent" parent="InnerCircleOutline" instance=ExtResource("3_32xwn")]
 
 [node name="InnerCircleOutline2" parent="." instance=ExtResource("2_xcmbf")]
-self_modulate = Color(1, 1, 1, 0.39607844)
+self_modulate = Color(1, 1, 1, 0.3137255)
 radius = 0.0
 is_filled = false
 line_width = 0.5

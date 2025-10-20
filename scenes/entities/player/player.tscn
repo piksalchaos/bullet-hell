@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=38 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
@@ -14,6 +14,10 @@
 [ext_resource type="AudioStream" uid="uid://8h7gvbv3inek" path="res://assets/audio/prepare_shot.wav" id="9_70kwc"]
 [ext_resource type="Script" uid="uid://dhoupr1nbh817" path="res://scenes/entities/player/shadow_sprite.gd" id="9_j0oqr"]
 [ext_resource type="Texture2D" uid="uid://cqjjdx88qomxh" path="res://assets/images/player_shadow.png" id="9_ovg4i"]
+[ext_resource type="AudioStream" uid="uid://bd62nl25ug5sc" path="res://assets/audio/release_shot.wav" id="10_yywfu"]
+[ext_resource type="AudioStream" uid="uid://ce8llkxbio3qf" path="res://assets/audio/release_mixed_shot.wav" id="11_pcd0u"]
+[ext_resource type="AudioStream" uid="uid://c6wxykvutfwgr" path="res://assets/audio/mix_color.wav" id="12_w3p2j"]
+[ext_resource type="AudioStream" uid="uid://db8cvvbndc3wh" path="res://assets/audio/fail_color_action.wav" id="13_knby6"]
 [ext_resource type="AudioStream" uid="uid://cu7li6cqg4r47" path="res://assets/audio/player_hit.wav" id="13_xy2vv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
@@ -202,6 +206,22 @@ pitch_scale = 1.5
 [node name="PrepareShotAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("9_70kwc")
 volume_db = -5.0
+
+[node name="ReleaseShotAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
+stream = ExtResource("10_yywfu")
+volume_db = -5.0
+
+[node name="ReleaseMixedShotAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
+stream = ExtResource("11_pcd0u")
+volume_db = -5.0
+
+[node name="MixColorAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
+stream = ExtResource("12_w3p2j")
+volume_db = -5.0
+
+[node name="FailColorActionAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
+stream = ExtResource("13_knby6")
+volume_db = -3.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

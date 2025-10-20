@@ -10,11 +10,13 @@ const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
 @onready var color_container: Control = $ColorContainer
 var selected_primary_color_index: int = 0
 var rotation_factor: int = 0
+var vibration_amount: float = 0
 
 func _ready() -> void:
 	SignalBus.color_amount_changed.connect(_on_color_amount_changed)
 	SignalBus.selected_color_changed.connect(_on_selected_color_changed)
 	SignalBus.mixed_colors_changed.connect(_on_mixed_colors_changed)
+	SignalBus.cannot_perform_color_action.connect(_on_cannot_perform_color_action)
 	for i in Globals.PRIMARY_COLORS.size():
 		var palette_color = PALETTE_COLOR.instantiate()
 		palette_color.color_id = Globals.PRIMARY_COLORS[i]
@@ -69,3 +71,13 @@ func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_prima
 			palette_color.get_index() == new_selected_primary_color_index \
 			or palette_color.get_index() == mixed_primary_color_index
 		)
+
+func _on_cannot_perform_color_action():
+	vibration_amount = 8.0
+
+func _process(delta: float) -> void:
+	if vibration_amount > 0:
+		color_container.position.x = vibration_amount * (randf()-0.5)
+		vibration_amount -= 30 * delta
+		if vibration_amount <= 0.5:
+			vibration_amount = 0

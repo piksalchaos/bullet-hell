@@ -41,6 +41,7 @@ offset_right = 393.0
 offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 32
 text = "Arrow Keys: Move around"
 horizontal_alignment = 1
 
@@ -48,7 +49,6 @@ horizontal_alignment = 1
 visible = false
 
 [node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_0epgs")]
-visible = false
 
 [node name="Label" type="Label" parent="Stage/RoundManager/Round"]
 anchors_preset = 8
@@ -56,22 +56,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 81.0
-offset_top = 35.0
-offset_right = 405.0
-offset_bottom = 84.0
+offset_left = 37.5
+offset_top = 37.0
+offset_right = 448.5
+offset_bottom = 158.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 20
 text = "Move near colored bullets to absorb them,
 but don't let them touch your heart.
-Press 'Z' to shoot them back"
+
+Press 'S' to shoot them back"
 horizontal_alignment = 1
 
 [node name="TimerRound" parent="Stage/RoundManager/Round" instance=ExtResource("4_6yjpi")]
 wait_time = 2.5
 
 [node name="DummySpawner" parent="Stage/RoundManager/Round/TimerRound" instance=ExtResource("5_6yjpi")]
-position = Vector2(243, 173)
+position = Vector2(243, 241)
 
 [node name="Round2" parent="Stage/RoundManager" instance=ExtResource("4_0epgs")]
 visible = false
@@ -82,35 +84,37 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 41.5
-offset_top = 26.0
-offset_right = 444.5
-offset_bottom = 101.0
+offset_left = 17.5
+offset_top = 15.0
+offset_right = 468.5
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Enemies can only be hit by bullets of their own color
+theme_override_font_sizes/font_size = 24
+text = "Enemies can only be hit by bullets
+of their own color
 
-Use 'A' or 'S' to switch your bullet color"
+Use 'A' or 'D' to switch your bullet color"
 horizontal_alignment = 1
 
 [node name="TimerRound3" parent="Stage/RoundManager/Round2" instance=ExtResource("4_6yjpi")]
 wait_time = 2.0
 
 [node name="DummySpawner" parent="Stage/RoundManager/Round2/TimerRound3" instance=ExtResource("5_6yjpi")]
-position = Vector2(97.20001, 182)
+position = Vector2(97.20001, 241)
 
 [node name="TimerRound2" parent="Stage/RoundManager/Round2" instance=ExtResource("4_6yjpi")]
 wait_time = 3.0
 
 [node name="DummySpawner" parent="Stage/RoundManager/Round2/TimerRound2" instance=ExtResource("5_6yjpi")]
-position = Vector2(243, 182)
+position = Vector2(243, 241)
 initial_color_id = 2
 
 [node name="TimerRound" parent="Stage/RoundManager/Round2" instance=ExtResource("4_6yjpi")]
 wait_time = 4.0
 
 [node name="DummySpawner" parent="Stage/RoundManager/Round2/TimerRound" instance=ExtResource("5_6yjpi")]
-position = Vector2(388.8, 182)
+position = Vector2(388.8, 241)
 initial_color_id = 4
 
 [node name="TimerRound3" parent="Stage/RoundManager" instance=ExtResource("4_6yjpi")]
@@ -129,6 +133,7 @@ offset_right = 393.0
 offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 32
 text = "That's the end of the tutorial!"
 horizontal_alignment = 1
 

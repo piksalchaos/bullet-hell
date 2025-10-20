@@ -10,12 +10,17 @@ var found_color_to_mix := false
 
 var is_mixing = false
 @onready var bullet_timer: Timer = $BulletTimer
+
 @onready var shoot_audio: AudioStreamPlayer = $ShootAudio
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio
 @onready var switch_right_audio: AudioStreamPlayer = $SwitchRightAudio
 @onready var absorb_audio: AudioStreamPlayer = $AbsorbAudio
 @onready var color_upgrade_audio: AudioStreamPlayer = $ColorUpgradeAudio
 @onready var prepare_shot_audio: AudioStreamPlayer = $PrepareShotAudio
+@onready var release_shot_audio: AudioStreamPlayer = $ReleaseShotAudio
+@onready var release_mixed_shot_audio: AudioStreamPlayer = $ReleaseMixedShotAudio
+@onready var mix_color_audio: AudioStreamPlayer = $MixColorAudio
+@onready var fail_color_action_audio: AudioStreamPlayer = $FailColorActionAudio
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
@@ -50,16 +55,18 @@ func increment_primary_color_amount(primary_color_index) -> bool:
 	set_color_amount(primary_color_index, color_amounts[primary_color_index] + 1)
 	if color_amounts[primary_color_index] == MAX_COLOR_AMOUNT:
 		color_upgrade_audio.play()
+	elif primary_color_index == selected_primary_color_index \
+	and color_amounts[primary_color_index] == SHOT_COLOR_AMOUNT \
+	and Input.is_action_pressed("shoot"):
+		prepare_shot_audio.play()
 	return true
 
 func _input(event: InputEvent) -> void:
 	if is_mixing:
 		if event.is_action_pressed("switch_right"):
 			mix_color(true)
-			switch_left_audio.play()
 		if event.is_action_pressed("switch_left"):
 			mix_color(false)
-			switch_right_audio.play()
 	else:
 		if event.is_action_pressed("switch_right"):
 			switch_color(true)
@@ -68,7 +75,8 @@ func _input(event: InputEvent) -> void:
 			switch_color(false)
 			switch_right_audio.play()
 	if event.is_action_pressed("shoot"):
-		prepare_shot_audio.play()
+		if color_amounts[selected_primary_color_index] >= SHOT_COLOR_AMOUNT:
+			prepare_shot_audio.play()
 		is_mixing = true
 		mixed_primary_color_index = selected_primary_color_index
 		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
@@ -95,15 +103,21 @@ func mix_color(is_right: bool = true) -> void:
 	var next_primary_color_index = get_adjacent_color_index(is_right)
 	if color_amounts[next_primary_color_index] < SHOT_COLOR_AMOUNT \
 	or color_amounts[selected_primary_color_index] < SHOT_COLOR_AMOUNT:
+		fail_at_color_action()
 		return
 	switch_color(is_right)
 	found_color_to_mix = selected_primary_color_index != mixed_primary_color_index
 	SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
+	mix_color_audio.play()
 
 func shoot_bullet():
 	var color_amount = color_amounts[selected_primary_color_index]
-	if color_amount < SHOT_COLOR_AMOUNT: return
-	shoot_audio.play()
+	if color_amount < SHOT_COLOR_AMOUNT:
+		fail_at_color_action()
+		return
+	if color_amount >= MAX_COLOR_AMOUNT:
+		shoot_audio.play()
+	release_shot_audio.play()
 	var final_color_amount = color_amount % SHOT_COLOR_AMOUNT
 	set_color_amount(selected_primary_color_index, final_color_amount)
 
@@ -121,7 +135,8 @@ func shoot_mixed_bullet():
 	set_color_amount(selected_primary_color_index, color_amounts[selected_primary_color_index] - amount_subtractor)
 	set_color_amount(mixed_primary_color_index, color_amounts[mixed_primary_color_index] - amount_subtractor)
 	
-	shoot_audio.play()
+	release_mixed_shot_audio.play()
+	
 	print("mixed bullet")
 	print("selected: ", selected_primary_color_index, "   mixed: ", mixed_primary_color_index)
 	var bullet_color_id: Globals.COLOR_ID
@@ -144,6 +159,10 @@ func get_color_amount_bullet_subtractor(primary_color_index):
 func set_color_amount(primary_color_index: int, new_color_amount: int):
 	color_amounts[primary_color_index] = new_color_amount
 	SignalBus.color_amount_changed.emit(primary_color_index, float(new_color_amount) / float(MAX_COLOR_AMOUNT))
+
+func fail_at_color_action():
+	fail_color_action_audio.play()
+	SignalBus.cannot_perform_color_action.emit()
 
 func _on_bullet_timer_timeout() -> void:
 	shoot_bullet()
