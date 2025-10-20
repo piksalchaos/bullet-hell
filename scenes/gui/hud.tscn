@@ -22,27 +22,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="LeftBar"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Arrow Keys - Move
-Shift - Slow down
-
-Move close to the colored bullets
-to absorb their color
-Z - shoot absorbed colors"
-
 [node name="RightBar" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -55,18 +34,18 @@ color = Color(0, 0, 0, 1)
 
 [node name="LifeHeartContainer" type="HBoxContainer" parent="RightBar"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.3132716
-anchor_right = 1.0
-anchor_bottom = 0.41512346
-offset_left = 8.0
-offset_top = -92.0
-offset_right = -8.0
-offset_bottom = -92.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.999985
+offset_top = -204.0
+offset_right = 128.0
+offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 8
-alignment = 1
+theme_override_constants/separation = 0
 
 [node name="Palette" parent="RightBar" instance=ExtResource("2_624ws")]
 layout_mode = 1

@@ -1,8 +1,76 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg285sbaifnvs"]
+[gd_scene load_steps=11 format=3 uid="uid://cg285sbaifnvs"]
 
-[ext_resource type="Texture2D" uid="uid://cefbpjgowj6dq" path="res://assets/images/life_heart.png" id="1_viyay"]
+[ext_resource type="Script" uid="uid://8q6wd6drdtoh" path="res://scenes/gui/life_heart.gd" id="1_n1an1"]
+[ext_resource type="Texture2D" uid="uid://b0bvx1rsu637k" path="res://assets/images/life_heart.png" id="1_viyay"]
 
-[node name="LifeHeart" type="TextureRect"]
-texture = ExtResource("1_viyay")
-expand_mode = 2
-stretch_mode = 5
+[sub_resource type="AtlasTexture" id="AtlasTexture_viyay"]
+atlas = ExtResource("1_viyay")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1an1"]
+atlas = ExtResource("1_viyay")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hib45"]
+atlas = ExtResource("1_viyay")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnbhl"]
+atlas = ExtResource("1_viyay")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaf31"]
+atlas = ExtResource("1_viyay")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmoxo"]
+atlas = ExtResource("1_viyay")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3j4j"]
+atlas = ExtResource("1_viyay")
+region = Rect2(0, 1024, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2sjbj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viyay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1an1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hib45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnbhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaf31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmoxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3j4j")
+}],
+"loop": false,
+"name": &"destroy",
+"speed": 12.0
+}]
+
+[node name="LifeHeart" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 3
+script = ExtResource("1_n1an1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_2sjbj")
+animation = &"destroy"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

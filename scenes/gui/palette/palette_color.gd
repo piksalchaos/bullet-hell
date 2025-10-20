@@ -7,6 +7,7 @@ extends Control
 	set = set_radius
 @onready var circle_outline: Node2D = $CircleOutline
 @onready var inner_circle_outline: Node2D = $InnerCircleOutline
+@onready var inner_circle_outline_2: Node2D = $InnerCircleOutline2
 @onready var circle_fill: Node2D = $CircleFill
 @onready var palette_color_visual: Node2D = $PaletteColorVisual
 @onready var highlight_outline: Node2D = $HighlightOutline
@@ -17,6 +18,7 @@ func _ready() -> void:
 	$PaletteColorVisual/ColorComponent.set_color_id(color_id)
 	$CircleFill/ColorComponent.set_color_id(color_id)
 	$InnerCircleOutline/ColorComponent.set_color_id(color_id)
+	$InnerCircleOutline2/ColorComponent.set_color_id(color_id)
 
 func set_percentage(new_percentage):
 	percentage = new_percentage
@@ -40,8 +42,10 @@ func set_radius(new_radius):
 	radius = new_radius
 	circle_outline.radius = new_radius
 	inner_circle_outline.radius = new_radius / 3
+	inner_circle_outline_2.radius = new_radius / 3 * 2
+	
 	circle_fill.radius = new_radius
-	highlight_outline.radius = new_radius + 16
+	highlight_outline.radius = new_radius + 18
 	percentage = percentage #this might make it tween the color_cirlce radius while changing radius, but that's okay
 	#color_circle.radius = (circle_outline.radius+CIRCLE_OUTLINE_WIDTH) * percentage 
 

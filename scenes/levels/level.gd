@@ -7,7 +7,7 @@ extends Node
 @onready var hud: Control = $HUD
 @onready var player: Player = $Stage/Player
 
-@export var max_player_health := 3
+@export var max_player_health := 4
 var player_health = 0
 
 func _ready() -> void:
