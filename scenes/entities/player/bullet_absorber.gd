@@ -91,7 +91,7 @@ func _input(event: InputEvent) -> void:
 		aim_line.hide_with_transition()
 		SignalBus.mixed_colors_changed.emit(-1, -1)
 		if found_color_to_mix:
-			found_color_to_mix = false
+			set_found_color_to_mix(false)
 			shoot_mixed_bullet()
 		else:
 			shoot_bullet()
@@ -99,7 +99,7 @@ func _input(event: InputEvent) -> void:
 		fail_at_color_action()
 		is_shot_prepared = false
 		is_mixing = false
-		found_color_to_mix = false
+		set_found_color_to_mix(false)
 		aim_line.hide_with_transition()
 		SignalBus.mixed_colors_changed.emit(-1, -1)
 
@@ -119,7 +119,7 @@ func mix_color(is_right: bool = true) -> void:
 		fail_at_color_action()
 		return
 	switch_color(is_right)
-	found_color_to_mix = selected_primary_color_index != mixed_primary_color_index
+	set_found_color_to_mix(selected_primary_color_index != mixed_primary_color_index)
 	SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	mix_color_audio.play()
 
@@ -172,6 +172,10 @@ func get_color_amount_bullet_subtractor(primary_color_index):
 func set_color_amount(primary_color_index: int, new_color_amount: int):
 	color_amounts[primary_color_index] = new_color_amount
 	SignalBus.color_amount_changed.emit(primary_color_index, float(new_color_amount) / float(MAX_COLOR_AMOUNT))
+
+func set_found_color_to_mix(value):
+	found_color_to_mix = value
+	SignalBus.found_color_to_mix_changed.emit(value, Color.WHITE)
 
 func fail_at_color_action():
 	fail_color_action_audio.play()
