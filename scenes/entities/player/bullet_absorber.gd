@@ -79,13 +79,13 @@ func _input(event: InputEvent) -> void:
 		if color_amounts[selected_primary_color_index] >= SHOT_COLOR_AMOUNT:
 			prepare_shot_audio.play()
 		is_mixing = true
-		aim_line.show()
+		aim_line.show_with_transition()
 		mixed_primary_color_index = selected_primary_color_index
 		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	if event.is_action_released("shoot"):
 		prepare_shot_audio.stop()
 		is_mixing = false
-		aim_line.hide()
+		aim_line.hide_with_transition()
 		SignalBus.mixed_colors_changed.emit(-1, -1)
 		if found_color_to_mix:
 			found_color_to_mix = false

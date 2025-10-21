@@ -65,7 +65,7 @@ position = Vector2(0, -37)
 max_health = 4
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_xn6ix")]
-seconds_per_shot = 1.2
+seconds_per_shot = 1.5
 
 [node name="LoopedColorizer" parent="PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("7_8xymb")]
 bullet_emitters = [NodePath("../PatternAimer/PatternRepeater/PatternRandomizer/BulletEmitter")]
