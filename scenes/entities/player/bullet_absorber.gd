@@ -9,6 +9,7 @@ var mixed_primary_color_index := 0
 var found_color_to_mix := false
 
 var is_mixing = false
+var is_shot_prepared = false
 @onready var bullet_timer: Timer = $BulletTimer
 @onready var aim_line: Node2D = $AimLine
 
@@ -76,15 +77,17 @@ func _input(event: InputEvent) -> void:
 			switch_color(false)
 			switch_right_audio.play()
 	if event.is_action_pressed("shoot"):
+		is_shot_prepared = true
 		if color_amounts[selected_primary_color_index] >= SHOT_COLOR_AMOUNT:
 			prepare_shot_audio.play()
 		is_mixing = true
 		aim_line.show_with_transition()
 		mixed_primary_color_index = selected_primary_color_index
 		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
-	if event.is_action_released("shoot"):
-		prepare_shot_audio.stop()
+	if event.is_action_released("shoot") and is_shot_prepared:
+		is_shot_prepared = false
 		is_mixing = false
+		prepare_shot_audio.stop()
 		aim_line.hide_with_transition()
 		SignalBus.mixed_colors_changed.emit(-1, -1)
 		if found_color_to_mix:
@@ -92,6 +95,13 @@ func _input(event: InputEvent) -> void:
 			shoot_mixed_bullet()
 		else:
 			shoot_bullet()
+	if event.is_action_pressed("cancel") and is_shot_prepared:
+		fail_at_color_action()
+		is_shot_prepared = false
+		is_mixing = false
+		found_color_to_mix = false
+		aim_line.hide_with_transition()
+		SignalBus.mixed_colors_changed.emit(-1, -1)
 
 func get_adjacent_color_index(is_right: bool = true) -> int:
 	var primary_color_count = Globals.PRIMARY_COLORS.size()

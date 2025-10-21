@@ -236,6 +236,7 @@ stream = ExtResource("13_knby6")
 volume_db = -3.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.6)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_18p7g")
 animation = &"hit"

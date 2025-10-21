@@ -15,7 +15,7 @@ const SECONDARY_COLOR_MAP: Dictionary = {
 }
 const COLORS: Array[Color] = [
 	Color(0.98, 0.255, 0.255, 1.0),
-	Color(1.0, 0.61, 0.22, 1.0),
+	Color(1.0, 0.506, 0.22, 1.0),
 	Color(1.0, 0.99, 0.41, 1.0),
 	Color(0.46, 1.0, 0.46, 1.0),
 	Color(0.24, 0.24, 1.0, 1.0),

@@ -17,18 +17,18 @@ is_filled = false
 line_width = 2.0
 
 [node name="InnerCircleOutline" parent="." instance=ExtResource("2_xcmbf")]
-self_modulate = Color(1, 1, 1, 0.23529412)
+self_modulate = Color(1, 1, 1, 0.3529412)
 radius = 0.0
 is_filled = false
-line_width = 0.5
+line_width = 1.0
 
 [node name="ColorComponent" parent="InnerCircleOutline" instance=ExtResource("3_32xwn")]
 
 [node name="InnerCircleOutline2" parent="." instance=ExtResource("2_xcmbf")]
-self_modulate = Color(1, 1, 1, 0.3137255)
+self_modulate = Color(1, 1, 1, 0.25490198)
 radius = 0.0
 is_filled = false
-line_width = 0.5
+line_width = 1.0
 
 [node name="ColorComponent" parent="InnerCircleOutline2" instance=ExtResource("3_32xwn")]
 

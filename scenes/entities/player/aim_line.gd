@@ -23,7 +23,6 @@ func _draw() -> void:
 		var y_position_1 = maxf(-DASH_DISTANCE * i + y_offset, -line_length)
 		var y_position_2 = maxf(y_position_1 - (MAX_DASH_LENGTH * length_factor), -line_length)
 		draw_line(Vector2(0, y_position_1), Vector2(0, y_position_2), Color.WHITE, -1, true)
-	#draw_circle(Vector2(0, -line_length), 16, Color.WHITE, false, 1, true)
 	for i in 4:
 		var angle = PI/4 + i*PI/2 + PI*length_factor
 		var unit_vector = Vector2(cos(angle), sin(angle))

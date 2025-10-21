@@ -72,6 +72,7 @@ position = Vector2(1, 0)
 
 [node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_qxy0u")]
 position = Vector2(70, 111)
+color_id = 1
 ending_position = Vector2(416, 111)
 
 [node name="TimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]

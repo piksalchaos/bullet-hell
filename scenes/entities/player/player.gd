@@ -45,7 +45,7 @@ func hit() -> void:
 	if is_vulnerable:
 		got_hit.emit()
 	main_sprite.modulate.a = 0.6
-	shadow_sprite.self_modulate.a = 0.3
+	shadow_sprite.self_modulate.a = 0.2
 	is_on_cooldown = true
 	cooldown_timer.start()
 	hit_audio.play()
@@ -53,5 +53,5 @@ func hit() -> void:
 func _on_cooldown_timer_timeout() -> void:
 	is_on_cooldown = false
 	main_sprite.modulate.a = 1
-	shadow_sprite.self_modulate.a = 1
+	shadow_sprite.self_modulate.a = 0.6
 	main_sprite.position.x = 0

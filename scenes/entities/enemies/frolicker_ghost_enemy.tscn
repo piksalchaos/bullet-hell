@@ -85,6 +85,7 @@ color_component = NodePath("ColorComponent")
 pattern_root = NodePath("PatternRepeater")
 pattern_root_2 = NodePath("PatternRepeater2")
 bullet_emitter = NodePath("PatternRepeater/PatternSpreader/BulletEmitter")
+initial_color_id = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
@@ -93,6 +94,7 @@ autoplay = "default"
 frame_progress = 0.53497493
 
 [node name="ColorComponent" parent="." instance=ExtResource("3_4ma56")]
+color_id = 1
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_o0pnq")]
 health_component = NodePath("../HealthComponent")
@@ -103,11 +105,11 @@ shape = SubResource("CircleShape2D_vxwpj")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_77o0b")]
 position = Vector2(0, -55)
-max_health = 11
+max_health = 8
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_l3j2b")]
-delay_time = 2.0
-seconds_per_shot = 1.5
+delay_time = 4.0
+seconds_per_shot = 3.5
 
 [node name="PatternSpreader" parent="PatternRepeater" instance=ExtResource("10_bn713")]
 angle_range = 5.655
@@ -122,10 +124,10 @@ delay_time = 1.5
 seconds_per_shot = 0.15
 
 [node name="PatternRandomizer" parent="PatternRepeater2" instance=ExtResource("11_vkpqe")]
-angle_range = 4.366
+angle_range = 0.962
 
 [node name="BulletEmitter" parent="PatternRepeater2/PatternRandomizer" instance=ExtResource("8_vkpqe")]
 rotation = 1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 bullet_scene = ExtResource("10_vkpqe")
-color_id = 6
+color_id = 2
