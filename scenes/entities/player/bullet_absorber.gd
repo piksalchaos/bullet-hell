@@ -10,6 +10,7 @@ var found_color_to_mix := false
 
 var is_mixing = false
 @onready var bullet_timer: Timer = $BulletTimer
+@onready var aim_line: Node2D = $AimLine
 
 @onready var shoot_audio: AudioStreamPlayer = $ShootAudio
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio
@@ -78,11 +79,13 @@ func _input(event: InputEvent) -> void:
 		if color_amounts[selected_primary_color_index] >= SHOT_COLOR_AMOUNT:
 			prepare_shot_audio.play()
 		is_mixing = true
+		aim_line.show()
 		mixed_primary_color_index = selected_primary_color_index
 		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	if event.is_action_released("shoot"):
 		prepare_shot_audio.stop()
 		is_mixing = false
+		aim_line.hide()
 		SignalBus.mixed_colors_changed.emit(-1, -1)
 		if found_color_to_mix:
 			found_color_to_mix = false
@@ -137,8 +140,8 @@ func shoot_mixed_bullet():
 	
 	release_mixed_shot_audio.play()
 	
-	print("mixed bullet")
-	print("selected: ", selected_primary_color_index, "   mixed: ", mixed_primary_color_index)
+	#print("mixed bullet")
+	#print("selected: ", selected_primary_color_index, "   mixed: ", mixed_primary_color_index)
 	var bullet_color_id: Globals.COLOR_ID
 	for secondary_color_id in Globals.SECONDARY_COLOR_MAP:
 		var secondary_color_primary_ids = Globals.SECONDARY_COLOR_MAP[secondary_color_id]

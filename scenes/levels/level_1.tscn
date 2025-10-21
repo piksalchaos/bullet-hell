@@ -62,7 +62,7 @@ color_id = 4
 [node name="BaseEnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("7_dga24")]
 position = Vector2(251, 51)
 enemy_scene = ExtResource("8_qxy0u")
-color_id = 2
+color_id = 5
 
 [node name="GhostEnemySpawner2" parent="Stage/RoundManager/Round3" instance=ExtResource("5_excbq")]
 position = Vector2(396, 91)

@@ -65,7 +65,6 @@ func _on_selected_color_changed(primary_color_index):
 	selected_primary_color_index = primary_color_index
 
 func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_primary_color_index: int):
-	print("alskdjfsldkf", "selected: ", new_selected_primary_color_index, "   mixed:", mixed_primary_color_index)
 	for palette_color in color_container.get_children():
 		palette_color.set_highlight(
 			palette_color.get_index() == new_selected_primary_color_index \

@@ -1,9 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=39 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
 [ext_resource type="Texture2D" uid="uid://oukxw7ad0r61" path="res://assets/images/heart.png" id="3_1ie0h"]
 [ext_resource type="Script" uid="uid://b0nh6p70cv0b3" path="res://scenes/entities/player/aura_drawing.gd" id="3_5sj0x"]
+[ext_resource type="Script" uid="uid://dqhtil1yqb665" path="res://scenes/entities/player/aim_line.gd" id="3_18p7g"]
 [ext_resource type="Script" uid="uid://cs734ayyynx5e" path="res://scenes/entities/player/bullet_absorber.gd" id="4_42nxq"]
 [ext_resource type="AudioStream" uid="uid://dxh85agqkp0lf" path="res://assets/audio/shoot.wav" id="5_bjvvg"]
 [ext_resource type="AudioStream" uid="uid://bjcjwufid7usf" path="res://assets/audio/switch_left.wav" id="6_8akj5"]
@@ -174,6 +175,17 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_42nxq")
 
+[node name="AimLine" type="Node2D" parent="BulletAbsorber"]
+visible = false
+script = ExtResource("3_18p7g")
+
+[node name="RayCast" type="RayCast2D" parent="BulletAbsorber/AimLine"]
+z_index = -1
+target_position = Vector2(0, -800)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="AuraDrawing" type="Node2D" parent="BulletAbsorber"]
 script = ExtResource("3_5sj0x")
 
@@ -253,5 +265,6 @@ shape = SubResource("CircleShape2D_u8vuu")
 stream = ExtResource("13_xy2vv")
 
 [connection signal="area_entered" from="BulletAbsorber" to="BulletAbsorber" method="_on_area_entered"]
+[connection signal="visibility_changed" from="BulletAbsorber/AimLine" to="BulletAbsorber/AimLine" method="_on_visibility_changed"]
 [connection signal="timeout" from="BulletAbsorber/BulletTimer" to="BulletAbsorber" method="_on_bullet_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
