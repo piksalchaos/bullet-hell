@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cv6dqal5gt3w4"]
 
-[ext_resource type="Script" uid="uid://b1y3eyve8eb8n" path="res://scenes/enemy_spawners/base_enemy_spawner.gd" id="1_v2nrj"]
+[ext_resource type="Script" uid="uid://b1y3eyve8eb8n" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.gd" id="1_v2nrj"]
 
 [node name="BaseEnemySpawner" type="Marker2D" groups=["spawners"]]
 script = ExtResource("1_v2nrj")

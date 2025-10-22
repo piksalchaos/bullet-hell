@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="3_nlqja"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_0epgs"]
 [ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="4_6yjpi"]
-[ext_resource type="PackedScene" uid="uid://cke06xgosg1yn" path="res://scenes/enemy_spawners/dummy_spawner.tscn" id="5_6yjpi"]
+[ext_resource type="PackedScene" uid="uid://cke06xgosg1yn" path="res://scenes/spawners/enemy_spawners/dummy_spawner.tscn" id="5_6yjpi"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_ej4tf"]
 
 [node name="Game" type="Node"]
@@ -49,6 +49,7 @@ horizontal_alignment = 1
 visible = false
 
 [node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_0epgs")]
+visible = false
 
 [node name="Label" type="Label" parent="Stage/RoundManager/Round"]
 anchors_preset = 8

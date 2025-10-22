@@ -9,5 +9,6 @@ script = ExtResource("1_4uwxt")
 
 [node name="ColorComponent" parent="." instance=ExtResource("1_aebcy")]
 
-[node name="BulletComponent" parent="." instance=ExtResource("2_oh6mx")]
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("2_oh6mx")]
 offscreen_distance = 20.0
+color_component = NodePath("../ColorComponent")

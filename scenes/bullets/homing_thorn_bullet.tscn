@@ -44,8 +44,9 @@ sprite_frames = SubResource("SpriteFrames_7i7m4")
 autoplay = "default"
 frame_progress = 0.92644066
 
-[node name="BulletComponent" parent="." instance=ExtResource("3_s8ggy")]
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("3_s8ggy")]
 offscreen_distance = 200.0
+color_component = NodePath("../ColorComponent")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletComponent"]
 polygon = PackedVector2Array(11, 0, -11, 4, -11, -4)

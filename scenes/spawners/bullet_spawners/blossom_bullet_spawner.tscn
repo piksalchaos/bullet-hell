@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb3q42r3v7i58"]
+
+[ext_resource type="Script" uid="uid://3uux3vnxts74" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.gd" id="1_3migy"]
+
+[node name="DandelionSeedBulletSpawner" type="Marker2D" groups=["spawners"]]
+script = ExtResource("1_3migy")

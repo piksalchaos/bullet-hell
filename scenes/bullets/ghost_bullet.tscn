@@ -13,8 +13,9 @@ script = ExtResource("1_t8pb2")
 
 [node name="ColorComponent" parent="." instance=ExtResource("2_12sdl")]
 
-[node name="BulletComponent" parent="." instance=ExtResource("2_rkrj1")]
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("2_rkrj1")]
 offscreen_distance = 10.0
+color_component = NodePath("../ColorComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
 shape = SubResource("CircleShape2D_no6a4")

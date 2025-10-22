@@ -1,6 +1,6 @@
 extends Node
 
-const STAGE_WIDTH := 486
+const STAGE_WIDTH := 576
 const STAGE_HEIGHT := 648
 
 func get_position_relative_to_stage(global_position: Vector2):

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://qqp7yu3jadmi"
+path="res://.godot/imported/Nightmare Machine.mp3-53210b7fed25f94fa65ead8a0033fd93.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Nightmare Machine.mp3"
+dest_files=["res://.godot/imported/Nightmare Machine.mp3-53210b7fed25f94fa65ead8a0033fd93.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

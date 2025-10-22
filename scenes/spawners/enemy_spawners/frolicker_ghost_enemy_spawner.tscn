@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5opm1gxcprw4"]
 
-[ext_resource type="Script" uid="uid://c8x2dfxx5uccp" path="res://scenes/enemy_spawners/frolicker_ghost_enemy_spawner.gd" id="1_0e3fn"]
+[ext_resource type="Script" uid="uid://c8x2dfxx5uccp" path="res://scenes/spawners/enemy_spawners/frolicker_ghost_enemy_spawner.gd" id="1_0e3fn"]
 
 [node name="FrolickerGhostEnemySpawner" type="Marker2D" groups=["spawners"]]
 script = ExtResource("1_0e3fn")

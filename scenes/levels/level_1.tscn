@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=13 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
 [ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="3_dga24"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_qxy0u"]
-[ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
-[ext_resource type="PackedScene" uid="uid://b5opm1gxcprw4" path="res://scenes/enemy_spawners/frolicker_ghost_enemy_spawner.tscn" id="5_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/spawners/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
+[ext_resource type="PackedScene" uid="uid://bb3q42r3v7i58" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.tscn" id="5_iav0o"]
+[ext_resource type="PackedScene" uid="uid://b5opm1gxcprw4" path="res://scenes/spawners/enemy_spawners/frolicker_ghost_enemy_spawner.tscn" id="5_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_iav0o"]
-[ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
+[ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://ba1bqocppfdjj" path="res://scenes/entities/enemies/electric_ghost_enemy.tscn" id="8_qxy0u"]
+[ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_oc4kc")
@@ -24,7 +26,7 @@ grow_vertical = 2
 color = Color(0.1882353, 0.10980392, 0.14117648, 1)
 
 [node name="Stage" type="Node2D" parent="."]
-position = Vector2(333, 0)
+position = Vector2(168, 0)
 
 [node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
 position = Vector2(243, 550)
@@ -36,12 +38,86 @@ position = Vector2(243, 550)
 [node name="RoundManager" type="Node2D" parent="Stage"]
 script = ExtResource("3_dga24")
 
+[node name="BlossomRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="DandelionSeedBulletSpawner" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(209, -79)
+
+[node name="DandelionSeedBulletSpawner2" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(84, -253)
+
+[node name="DandelionSeedBulletSpawner3" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(378, -189)
+
+[node name="DandelionSeedBulletSpawner4" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(325, -443)
+
+[node name="DandelionSeedBulletSpawner5" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(168, -368)
+
+[node name="DandelionSeedBulletSpawner6" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(447, -339)
+
+[node name="DandelionSeedBulletSpawner7" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(136, -539)
+
+[node name="DandelionSeedBulletSpawner8" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(372, -621)
+
+[node name="DandelionSeedBulletSpawner9" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(192, -715)
+
+[node name="DandelionSeedBulletSpawner10" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(225, -205)
+
+[node name="DandelionSeedBulletSpawner11" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(304, -313)
+
+[node name="DandelionSeedBulletSpawner12" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(38, -411)
+
+[node name="DandelionSeedBulletSpawner13" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(446, -496)
+
+[node name="DandelionSeedBulletSpawner14" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(246, -589)
+
+[node name="DandelionSeedBulletSpawner15" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(69, -639)
+
+[node name="DandelionSeedBulletSpawner16" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(-8, -204)
+
+[node name="DandelionSeedBulletSpawner17" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(502, -158)
+
+[node name="DandelionSeedBulletSpawner18" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(553, -416)
+
+[node name="DandelionSeedBulletSpawner19" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(508, -613)
+
+[node name="DandelionSeedBulletSpawner20" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(605, -265)
+
+[node name="DandelionSeedBulletSpawner21" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(-81, -349)
+
+[node name="DandelionSeedBulletSpawner22" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(-29, -536)
+
+[node name="DandelionSeedBulletSpawner23" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
+position = Vector2(593, -550)
+
 [node name="Round" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round" instance=ExtResource("5_excbq")]
 position = Vector2(90, 65)
 
 [node name="Round2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="EnemySpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("5_excbq")]
 position = Vector2(365, 101)
@@ -54,6 +130,7 @@ position = Vector2(88, 155)
 color_id = 2
 
 [node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="GhostEnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("5_excbq")]
 position = Vector2(89, 91)
@@ -68,6 +145,7 @@ color_id = 5
 position = Vector2(396, 91)
 
 [node name="Round4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
 position = Vector2(1, 0)
 
 [node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_qxy0u")]
@@ -79,6 +157,11 @@ ending_position = Vector2(416, 111)
 wait_time = 2.0
 
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_excbq")
+volume_db = -9.0
+autoplay = true
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]

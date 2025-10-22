@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0k0cjw3bpgu8"]
+
+[ext_resource type="Script" uid="uid://dklfohuoqb32n" path="res://scenes/bullets/blossom_bullet.gd" id="1_5clc4"]
+[ext_resource type="Texture2D" uid="uid://baqf0ociqv7n1" path="res://assets/images/blossom.png" id="2_vwc6b"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_xmw85"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="4_vwc6b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xmw85"]
+radius = 26.0
+
+[node name="BlossomBullet" type="Node2D"]
+script = ExtResource("1_5clc4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_vwc6b")
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("2_xmw85")]
+offscreen_distance = 100.0
+color_component = NodePath("../ColorComponent")
+bounded_by_top = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_xmw85")
+
+[node name="ColorComponent" parent="." instance=ExtResource("4_vwc6b")]
