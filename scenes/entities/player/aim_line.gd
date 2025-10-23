@@ -4,8 +4,8 @@ const DASH_DISTANCE := 45.0
 const MAX_DASH_LENGTH := 15.0
 const MAX_Y_OFFSET_SPEED := 360.0
 const MIN_Y_OFFSET_SPEED := 60.0
-const CROSSHAIR_DISTANCE := 5.0
-const CROSSHAIR_LENGTH := 7.5
+const CROSSHAIR_DISTANCE := 7.5
+const CROSSHAIR_LENGTH := 9.5
 const TWEEN_IN_DURATION := 0.5
 const TWEEN_OUT_DURATION := 0.2
 
@@ -13,12 +13,12 @@ var y_offset := 0.0
 var y_offset_speed = MIN_Y_OFFSET_SPEED
 var length_factor := 0.0
 var tween
-@onready var ray_cast: RayCast2D = $RayCast
+@onready var shape_cast: ShapeCast2D = $ShapeCast
 
 func _draw() -> void:
 	var line_length = global_position.y
-	if ray_cast.is_colliding():
-		line_length -= ray_cast.get_collision_point().y
+	if shape_cast.is_colliding():
+		line_length -= shape_cast.get_collision_point(0).y
 	for i in line_length/DASH_DISTANCE:
 		var y_position_1 = maxf(-DASH_DISTANCE * i + y_offset, -line_length)
 		var y_position_2 = maxf(y_position_1 - (MAX_DASH_LENGTH * length_factor), -line_length)

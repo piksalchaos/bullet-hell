@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=40 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
@@ -20,6 +20,9 @@
 [ext_resource type="AudioStream" uid="uid://c6wxykvutfwgr" path="res://assets/audio/mix_color.wav" id="12_w3p2j"]
 [ext_resource type="AudioStream" uid="uid://db8cvvbndc3wh" path="res://assets/audio/fail_color_action.wav" id="13_knby6"]
 [ext_resource type="AudioStream" uid="uid://cu7li6cqg4r47" path="res://assets/audio/player_hit.wav" id="13_xy2vv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_18p7g"]
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
 radius = 45.0
@@ -176,12 +179,12 @@ collision_mask = 8
 script = ExtResource("4_42nxq")
 
 [node name="AimLine" type="Node2D" parent="BulletAbsorber"]
-visible = false
 script = ExtResource("3_18p7g")
 
-[node name="RayCast" type="RayCast2D" parent="BulletAbsorber/AimLine"]
-z_index = -1
+[node name="ShapeCast" type="ShapeCast2D" parent="BulletAbsorber/AimLine"]
+shape = SubResource("CircleShape2D_18p7g")
 target_position = Vector2(0, -800)
+max_results = 1
 collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
