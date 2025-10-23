@@ -1,0 +1,83 @@
+[gd_scene load_steps=16 format=3 uid="uid://bii2yamnyxbsi"]
+
+[ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_k5rli"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_x5bsi"]
+[ext_resource type="Texture2D" uid="uid://bhdl5b0uhp3us" path="res://assets/images/enemies/orb_enemy.png" id="3_4ir1o"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_4ir1o"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_tyrw6"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_iylbs"]
+[ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_5plm7"]
+[ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="8_5plm7"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_k2gyc"]
+[ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="9_cuhdf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyrw6"]
+atlas = ExtResource("3_4ir1o")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjbs8"]
+atlas = ExtResource("3_4ir1o")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uymv"]
+atlas = ExtResource("3_4ir1o")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iylbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyrw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjbs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uymv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjbs8"]
+radius = 60.0
+
+[node name="OrbEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root")]
+script = ExtResource("1_k5rli")
+color_component = NodePath("ColorComponent")
+pattern_root = NodePath("PatternRepeater")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_iylbs")
+autoplay = "default"
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_x5bsi")]
+color_id = 1
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_4ir1o")]
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_yjbs8")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_tyrw6")]
+
+[node name="PatternRepeater" parent="." instance=ExtResource("6_iylbs")]
+delay_time = 1.0
+seconds_per_shot = 1.0
+
+[node name="PatternAimer" parent="PatternRepeater" instance=ExtResource("7_5plm7")]
+
+[node name="LoopedColorizer" parent="PatternRepeater/PatternAimer" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_5plm7")]
+bullet_emitters = [NodePath("../PatternRepeater/BulletEmitter")]
+color_ids_to_choose = Array[int]([0, 2])
+
+[node name="PatternRepeater" parent="PatternRepeater/PatternAimer" instance=ExtResource("6_iylbs")]
+seconds_per_shot = 0.1
+max_shots = 6
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("8_k2gyc")]
+bullet_scene = ExtResource("9_cuhdf")

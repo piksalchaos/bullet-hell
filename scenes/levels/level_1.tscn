@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=18 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://ba1bqocppfdjj" path="res://scenes/entities/enemies/electric_ghost_enemy.tscn" id="8_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://bii2yamnyxbsi" path="res://scenes/entities/enemies/orb_enemy.tscn" id="10_mm8aj"]
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 
 [sub_resource type="FontVariation" id="FontVariation_mm8aj"]
@@ -47,7 +48,7 @@ color = Color(0.1882353, 0.10980392, 0.14117648, 1)
 position = Vector2(168, 0)
 
 [node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
-position = Vector2(292, 550)
+position = Vector2(292, 422)
 
 [node name="BulletContainer" type="Node2D" parent="Stage"]
 
@@ -128,34 +129,92 @@ position = Vector2(-14, -536)
 [node name="DandelionSeedBulletSpawner23" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
 position = Vector2(608, -550)
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound"]
+offset_left = 72.0
+offset_top = 477.0
+offset_right = 512.0
+offset_bottom = 564.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Absorb [b]color energy[/b] by
+grazing colored objects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound"]
+offset_left = 72.0
+offset_top = 568.0
+offset_right = 512.0
+offset_bottom = 615.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "but don't let your [b]heart[/b] get touched"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ShootingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="EnemySpawner" parent="Stage/RoundManager/ShootingRound" instance=ExtResource("5_excbq")]
 position = Vector2(292, 202)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ShootingRound"]
 offset_left = 72.0
-offset_top = 42.0
+offset_top = 20.0
 offset_right = 512.0
-offset_bottom = 126.0
+offset_bottom = 136.0
 theme = SubResource("Theme_mm8aj")
 bbcode_enabled = true
-text = "Release [img=60]assets/images/keyboard/key_s.png[/img] to [b]SHOOT[/b] the enemy"
+text = "Release [img=60]assets/images/keyboard/key_s.png[/img] to [b]SHOOT[/b] the enemy
+with your color energy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Round2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="ColorRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="EnemySpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("5_excbq")]
-position = Vector2(420, 108)
+[node name="GhostEnemySpawner" parent="Stage/RoundManager/ColorRound" instance=ExtResource("5_excbq")]
+position = Vector2(100, 175)
+color_id = 4
 
-[node name="TimerSpawner" parent="Stage/RoundManager/Round2" instance=ExtResource("6_iav0o")]
-wait_time = 0.75
+[node name="TimerSpawner" parent="Stage/RoundManager/ColorRound" instance=ExtResource("6_iav0o")]
+wait_time = 0.5
 
-[node name="GhostEnemySpawner" parent="Stage/RoundManager/Round2/TimerSpawner" instance=ExtResource("5_excbq")]
-position = Vector2(148, 176)
+[node name="EnemySpawner" parent="Stage/RoundManager/ColorRound/TimerSpawner" instance=ExtResource("5_excbq")]
+position = Vector2(484, 175)
 color_id = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ColorRound"]
+offset_left = 72.0
+offset_top = 42.0
+offset_right = 512.0
+offset_bottom = 158.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Switch colors with
+[img=60]assets/images/keyboard/key_a.png[/img] or [img=60]assets/images/keyboard/key_d.png[/img]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MixingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/MixingRound"]
+offset_left = 72.0
+offset_top = 14.0
+offset_right = 512.0
+offset_bottom = 130.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Switch colors while holding
+[img=60]assets/images/keyboard/key_s.png[/img] to mix them together"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BaseEnemySpawner" parent="Stage/RoundManager/MixingRound" instance=ExtResource("7_dga24")]
+position = Vector2(292, 174)
+enemy_scene = ExtResource("10_mm8aj")
+color_id = 1
 
 [node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false

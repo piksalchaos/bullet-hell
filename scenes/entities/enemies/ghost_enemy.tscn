@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_qvsyn"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="8_qvsyn"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vcyrx"]
-[ext_resource type="PackedScene" uid="uid://bg3mxwy62bmbu" path="res://scenes/bullets/ghost_bullet.tscn" id="9_4qyjx"]
+[ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="10_qvsyn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvsyn"]
 atlas = ExtResource("2_qvsyn")
@@ -72,6 +72,7 @@ seconds_per_shot = 1.75
 [node name="PatternSpreader" parent="PatternRepeater/PatternAimer" instance=ExtResource("8_qvsyn")]
 
 [node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternSpreader" instance=ExtResource("8_vcyrx")]
-bullet_scene = ExtResource("9_4qyjx")
+position = Vector2(4.371139e-08, 1)
+bullet_scene = ExtResource("10_qvsyn")
 
 [connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]
