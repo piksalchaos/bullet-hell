@@ -12,7 +12,6 @@ func _physics_process(_delta: float) -> void:
 	or parent.position.x > Globals.STAGE_WIDTH + offscreen_distance \
 	or (bounded_by_top and parent.position.y < -offscreen_distance) \
 	or parent.position.y > Globals.STAGE_HEIGHT + offscreen_distance:
-		print('waaw')
 		parent.queue_free()
 
 func _on_area_entered(area: Player) -> void:

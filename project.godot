@@ -37,6 +37,10 @@ bullet_components=""
 spawners=""
 pattern_components=""
 
+[gui]
+
+theme/custom_font="uid://wwj4ollhl181"
+
 [input]
 
 left={

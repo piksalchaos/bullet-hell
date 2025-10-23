@@ -1,9 +1,9 @@
 extends Control
 
-const CENTER_DISTANCE = 70.0
-const SELECTED_CENTER_DISTANCE = 115.0
-const RADIUS = 40.0
-const SELECTED_RADIUS = 80.0
+const CENTER_DISTANCE = 100.0
+const SELECTED_CENTER_DISTANCE = 150.0
+const RADIUS = 60.0
+const SELECTED_RADIUS = 110.0
 const TWEEN_DURATION = 0.35
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
