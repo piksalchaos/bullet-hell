@@ -3,6 +3,8 @@ extends Control
 @export var node_to_free_with: Node
 
 func _ready() -> void:
+	hide()
+	modulate = Color.TRANSPARENT
 	node_to_free_with.tree_exited.connect(begin_tween_out)
 
 func begin() -> void:

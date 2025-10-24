@@ -1,0 +1,53 @@
+[gd_scene load_steps=12 format=3 uid="uid://cr8oijio5o8v5"]
+
+[ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_0e3gx"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_00abf"]
+[ext_resource type="Texture2D" uid="uid://cdincgvjyb86r" path="res://assets/images/enemies/whispy_ghost.png" id="2_4oymn"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="4_vc6me"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="5_tn8os"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_vc6me"]
+[ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_hleyb"]
+[ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="8_7i4xg"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="9_wcqmy"]
+[ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="10_lxf7f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4oymn"]
+radius = 40.0
+
+[node name="WhispyGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter")]
+script = ExtResource("1_0e3gx")
+color_component = NodePath("ColorComponent")
+pattern_root = NodePath("PatternRepeater")
+bullet_emitter = NodePath("PatternRepeater/PatternSpreader/PatternAimer/BulletEmitter")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_4oymn")
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_00abf")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_vc6me")]
+position = Vector2(0, -44)
+max_health = 4
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("5_tn8os")]
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_4oymn")
+
+[node name="PatternRepeater" parent="." instance=ExtResource("6_vc6me")]
+seconds_per_shot = 2.0
+
+[node name="PatternSpreader" parent="PatternRepeater" instance=ExtResource("8_7i4xg")]
+rotation = 1.5707964
+angle_range = 5.712
+bullet_count = 10
+
+[node name="PatternAimer" parent="PatternRepeater/PatternSpreader" instance=ExtResource("7_hleyb")]
+rotation = 0.0
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternSpreader/PatternAimer" instance=ExtResource("9_wcqmy")]
+rotation = 1.5707964
+bullet_scene = ExtResource("10_lxf7f")

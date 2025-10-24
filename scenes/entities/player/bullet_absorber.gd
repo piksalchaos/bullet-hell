@@ -26,16 +26,16 @@ var is_shot_prepared = false
 
 func _on_area_entered(bullet: Area2D) -> void:
 	var color_id = bullet.capture_color_id()
-	var color_amounts_empty_before = true
-	for color_amount in color_amounts:
-		if color_amount > 0: color_amounts_empty_before = false
+	#var color_amounts_empty_before = true
+	#for color_amount in color_amounts:
+		#if color_amount > 0: color_amounts_empty_before = false
 	
 	var primary_color_indices_used = add_color_id_to_color_amounts(color_id)
 	if not primary_color_indices_used.is_empty():
 		absorb_audio.play()
-		if color_amounts_empty_before:
-			selected_primary_color_index = primary_color_indices_used[0]
-			SignalBus.selected_color_changed.emit(selected_primary_color_index)
+		#if color_amounts_empty_before:
+			#selected_primary_color_index = primary_color_indices_used[0]
+			#SignalBus.selected_color_changed.emit(selected_primary_color_index)
 	bullet.disable_color()
 
 func add_color_id_to_color_amounts(color_id: Globals.COLOR_ID) -> Array[Globals.COLOR_ID]:
