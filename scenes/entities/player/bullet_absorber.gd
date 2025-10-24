@@ -17,6 +17,7 @@ var is_shot_prepared = false
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio
 @onready var switch_right_audio: AudioStreamPlayer = $SwitchRightAudio
 @onready var absorb_audio: AudioStreamPlayer = $AbsorbAudio
+@onready var color_max_audio: AudioStreamPlayer = $ColorMaxAudio
 @onready var color_upgrade_audio: AudioStreamPlayer = $ColorUpgradeAudio
 @onready var prepare_shot_audio: AudioStreamPlayer = $PrepareShotAudio
 @onready var release_shot_audio: AudioStreamPlayer = $ReleaseShotAudio
@@ -55,12 +56,16 @@ func increment_primary_color_amount(primary_color_index) -> bool:
 	if color_amounts[primary_color_index] >= MAX_COLOR_AMOUNT:
 		return false
 	set_color_amount(primary_color_index, color_amounts[primary_color_index] + 1)
-	if color_amounts[primary_color_index] == MAX_COLOR_AMOUNT:
-		color_upgrade_audio.play()
+	var color_amount = color_amounts[primary_color_index]
+	if color_amount == MAX_COLOR_AMOUNT:
+		color_max_audio.play()
 	elif primary_color_index == selected_primary_color_index \
-	and color_amounts[primary_color_index] == SHOT_COLOR_AMOUNT \
+	and color_amount == SHOT_COLOR_AMOUNT \
 	and Input.is_action_pressed("shoot"):
 		prepare_shot_audio.play()
+	elif color_amount % SHOT_COLOR_AMOUNT == 0:
+		color_upgrade_audio.pitch_scale = 1.0 if color_amount == SHOT_COLOR_AMOUNT else 1.1
+		color_upgrade_audio.play()
 	return true
 
 func _input(event: InputEvent) -> void:

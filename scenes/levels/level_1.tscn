@@ -275,7 +275,6 @@ position = Vector2(484, 166)
 color_id = 2
 
 [node name="ColorRound2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-visible = false
 
 [node name="ControlTransition" parent="Stage/RoundManager/ColorRound2" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
@@ -296,7 +295,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TimerRound" parent="Stage/RoundManager/ColorRound2" instance=ExtResource("6_iav0o")]
-wait_time = 3.0
+wait_time = 4.0
 
 [node name="BaseEnemySpawner" parent="Stage/RoundManager/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
 position = Vector2(292, 154)
@@ -316,6 +315,7 @@ enemy_scene = ExtResource("12_iwr0g")
 color_id = 4
 
 [node name="ColorRound4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="ControlTransition" parent="Stage/RoundManager/ColorRound4" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
@@ -387,26 +387,26 @@ position = Vector2(292, 174)
 enemy_scene = ExtResource("10_mm8aj")
 color_id = 1
 
-[node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="MixingRound2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="GhostEnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner" parent="Stage/RoundManager/MixingRound2" instance=ExtResource("5_excbq")]
 position = Vector2(100, 91)
 color_id = 4
 
-[node name="BaseEnemySpawner" parent="Stage/RoundManager/Round3" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner" parent="Stage/RoundManager/MixingRound2" instance=ExtResource("7_dga24")]
 position = Vector2(292, 58)
 enemy_scene = ExtResource("8_qxy0u")
 color_id = 5
 
-[node name="GhostEnemySpawner2" parent="Stage/RoundManager/Round3" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner2" parent="Stage/RoundManager/MixingRound2" instance=ExtResource("5_excbq")]
 position = Vector2(484, 91)
 
-[node name="Round4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="MinibossRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false
 position = Vector2(1, 0)
 
-[node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/Round4" instance=ExtResource("5_qxy0u")]
+[node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/MinibossRound" instance=ExtResource("5_qxy0u")]
 position = Vector2(85, 111)
 color_id = 1
 ending_position = Vector2(491, 111)
@@ -418,7 +418,7 @@ wait_time = 2.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_excbq")
-volume_db = -9.0
+volume_db = -11.0
 autoplay = true
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
