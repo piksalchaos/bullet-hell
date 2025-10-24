@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=19 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/spawners/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
 [ext_resource type="PackedScene" uid="uid://bb3q42r3v7i58" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.tscn" id="5_iav0o"]
 [ext_resource type="PackedScene" uid="uid://b5opm1gxcprw4" path="res://scenes/spawners/enemy_spawners/frolicker_ghost_enemy_spawner.tscn" id="5_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://d4ip0nwhymo3e" path="res://scenes/round_manager/control_transition.tscn" id="5_wtwp4"]
 [ext_resource type="FontFile" uid="uid://wwj4ollhl181" path="res://assets/fonts/Nunito-VariableFont_wght.ttf" id="6_dnkej"]
 [ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_iav0o"]
 [ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
@@ -57,149 +58,14 @@ position = Vector2(292, 422)
 [node name="RoundManager" type="Node2D" parent="Stage"]
 script = ExtResource("3_dga24")
 
-[node name="BlossomRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="DandelionSeedBulletSpawner" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(224, -79)
-
-[node name="DandelionSeedBulletSpawner2" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(99, -253)
-
-[node name="DandelionSeedBulletSpawner3" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(393, -189)
-
-[node name="DandelionSeedBulletSpawner4" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(340, -443)
-
-[node name="DandelionSeedBulletSpawner5" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(183, -368)
-
-[node name="DandelionSeedBulletSpawner6" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(462, -339)
-
-[node name="DandelionSeedBulletSpawner7" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(151, -539)
-
-[node name="DandelionSeedBulletSpawner8" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(387, -621)
-
-[node name="DandelionSeedBulletSpawner9" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(207, -715)
-
-[node name="DandelionSeedBulletSpawner10" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(240, -205)
-
-[node name="DandelionSeedBulletSpawner11" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(319, -313)
-
-[node name="DandelionSeedBulletSpawner12" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(53, -411)
-
-[node name="DandelionSeedBulletSpawner13" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(461, -496)
-
-[node name="DandelionSeedBulletSpawner14" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(261, -589)
-
-[node name="DandelionSeedBulletSpawner15" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(84, -639)
-
-[node name="DandelionSeedBulletSpawner16" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(7, -204)
-
-[node name="DandelionSeedBulletSpawner17" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(517, -158)
-
-[node name="DandelionSeedBulletSpawner18" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(568, -416)
-
-[node name="DandelionSeedBulletSpawner19" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(523, -613)
-
-[node name="DandelionSeedBulletSpawner20" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(620, -265)
-
-[node name="DandelionSeedBulletSpawner21" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(-66, -349)
-
-[node name="DandelionSeedBulletSpawner22" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(-14, -536)
-
-[node name="DandelionSeedBulletSpawner23" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("5_iav0o")]
-position = Vector2(608, -550)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound"]
-offset_left = 72.0
-offset_top = 477.0
-offset_right = 512.0
-offset_bottom = 564.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
-text = "Absorb [b]color energy[/b] by
-grazing colored objects"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound"]
-offset_left = 72.0
-offset_top = 568.0
-offset_right = 512.0
-offset_bottom = 615.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
-text = "but don't let your [b]heart[/b] get touched"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ShootingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="EnemySpawner" parent="Stage/RoundManager/ShootingRound" instance=ExtResource("5_excbq")]
-position = Vector2(292, 202)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ShootingRound"]
-offset_left = 72.0
-offset_top = 20.0
-offset_right = 512.0
-offset_bottom = 136.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
-text = "Release [img=60]assets/images/keyboard/key_s.png[/img] to [b]SHOOT[/b] the enemy
-with your color energy"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="GhostEnemySpawner" parent="Stage/RoundManager/ColorRound" instance=ExtResource("5_excbq")]
-position = Vector2(100, 175)
-color_id = 4
-
-[node name="TimerSpawner" parent="Stage/RoundManager/ColorRound" instance=ExtResource("6_iav0o")]
-wait_time = 0.5
-
-[node name="EnemySpawner" parent="Stage/RoundManager/ColorRound/TimerSpawner" instance=ExtResource("5_excbq")]
-position = Vector2(484, 175)
-color_id = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ColorRound"]
-offset_left = 72.0
-offset_top = 42.0
-offset_right = 512.0
-offset_bottom = 158.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
-text = "Switch colors with
-[img=60]assets/images/keyboard/key_a.png[/img] or [img=60]assets/images/keyboard/key_d.png[/img]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="MixingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/MixingRound"]
+[node name="ControlTransition" parent="Stage/RoundManager/MixingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+node_to_free_with = NodePath("../BaseEnemySpawner")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/MixingRound/ControlTransition"]
+layout_mode = 0
 offset_left = 72.0
 offset_top = 14.0
 offset_right = 512.0
@@ -215,6 +81,163 @@ vertical_alignment = 1
 position = Vector2(292, 174)
 enemy_scene = ExtResource("10_mm8aj")
 color_id = 1
+
+[node name="StartTimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]
+
+[node name="BlossomRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+
+[node name="ControlTransition" parent="Stage/RoundManager/BlossomRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+node_to_free_with = NodePath("../Round")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 477.0
+offset_right = 512.0
+offset_bottom = 564.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Absorb [b]color energy[/b] by
+grazing colored objects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 568.0
+offset_right = 512.0
+offset_bottom = 615.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "but don't let your [b]heart[/b] get touched"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Round" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("4_qxy0u")]
+
+[node name="DandelionSeedBulletSpawner" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(224, -79)
+
+[node name="DandelionSeedBulletSpawner2" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(99, -253)
+
+[node name="DandelionSeedBulletSpawner3" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(393, -189)
+
+[node name="DandelionSeedBulletSpawner4" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(340, -443)
+
+[node name="DandelionSeedBulletSpawner5" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(183, -368)
+
+[node name="DandelionSeedBulletSpawner6" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(462, -339)
+
+[node name="DandelionSeedBulletSpawner7" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(151, -539)
+
+[node name="DandelionSeedBulletSpawner8" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(387, -621)
+
+[node name="DandelionSeedBulletSpawner9" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(207, -715)
+
+[node name="DandelionSeedBulletSpawner10" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(240, -205)
+
+[node name="DandelionSeedBulletSpawner11" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(319, -313)
+
+[node name="DandelionSeedBulletSpawner12" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(53, -411)
+
+[node name="DandelionSeedBulletSpawner13" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(461, -496)
+
+[node name="DandelionSeedBulletSpawner14" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(261, -589)
+
+[node name="DandelionSeedBulletSpawner15" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(84, -639)
+
+[node name="DandelionSeedBulletSpawner16" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(7, -204)
+
+[node name="DandelionSeedBulletSpawner17" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(517, -158)
+
+[node name="DandelionSeedBulletSpawner18" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(568, -416)
+
+[node name="DandelionSeedBulletSpawner19" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(523, -613)
+
+[node name="DandelionSeedBulletSpawner20" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(620, -265)
+
+[node name="DandelionSeedBulletSpawner21" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(-66, -349)
+
+[node name="DandelionSeedBulletSpawner22" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(-14, -536)
+
+[node name="DandelionSeedBulletSpawner23" parent="Stage/RoundManager/BlossomRound/Round" instance=ExtResource("5_iav0o")]
+position = Vector2(608, -550)
+
+[node name="ShootingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="ControlTransition" parent="Stage/RoundManager/ShootingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+node_to_free_with = NodePath("../EnemySpawner")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ShootingRound/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 20.0
+offset_right = 512.0
+offset_bottom = 136.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Release [img=60]assets/images/keyboard/key_s.png[/img] to [b]SHOOT[/b] the enemy
+with your color energy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemySpawner" parent="Stage/RoundManager/ShootingRound" instance=ExtResource("5_excbq")]
+position = Vector2(292, 202)
+
+[node name="ColorRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="ControlTransition" parent="Stage/RoundManager/ColorRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+node_to_free_with = NodePath("../Round")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ColorRound/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 42.0
+offset_right = 512.0
+offset_bottom = 158.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Switch colors with
+[img=60]assets/images/keyboard/key_a.png[/img] or [img=60]assets/images/keyboard/key_d.png[/img]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Round" parent="Stage/RoundManager/ColorRound" instance=ExtResource("4_qxy0u")]
+
+[node name="GhostEnemySpawner" parent="Stage/RoundManager/ColorRound/Round" instance=ExtResource("5_excbq")]
+position = Vector2(100, 175)
+color_id = 4
+
+[node name="TimerSpawner" parent="Stage/RoundManager/ColorRound/Round" instance=ExtResource("6_iav0o")]
+wait_time = 0.5
+
+[node name="EnemySpawner" parent="Stage/RoundManager/ColorRound/Round/TimerSpawner" instance=ExtResource("5_excbq")]
+position = Vector2(484, 175)
+color_id = 2
 
 [node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false

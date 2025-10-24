@@ -179,6 +179,7 @@ collision_mask = 8
 script = ExtResource("4_42nxq")
 
 [node name="AimLine" type="Node2D" parent="BulletAbsorber"]
+visible = false
 script = ExtResource("3_18p7g")
 
 [node name="ShapeCast" type="ShapeCast2D" parent="BulletAbsorber/AimLine"]

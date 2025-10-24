@@ -118,8 +118,8 @@ func mix_color(is_right: bool = true) -> void:
 	or color_amounts[selected_primary_color_index] < SHOT_COLOR_AMOUNT:
 		fail_at_color_action()
 		return
+	set_found_color_to_mix(next_primary_color_index != mixed_primary_color_index)
 	switch_color(is_right)
-	set_found_color_to_mix(selected_primary_color_index != mixed_primary_color_index)
 	SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	mix_color_audio.play()
 
@@ -175,7 +175,8 @@ func set_color_amount(primary_color_index: int, new_color_amount: int):
 
 func set_found_color_to_mix(value):
 	found_color_to_mix = value
-	SignalBus.found_color_to_mix_changed.emit(value, Color.WHITE)
+	print(value, ": absorber")
+	SignalBus.found_color_to_mix_changed.emit(value, 1)
 
 func fail_at_color_action():
 	fail_color_action_audio.play()

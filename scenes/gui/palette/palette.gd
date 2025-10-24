@@ -2,13 +2,16 @@ extends Control
 
 const CENTER_DISTANCE = 100.0
 const SELECTED_CENTER_DISTANCE = 150.0
+const MIX_CENTER_DISTANCE = 160.0
 const RADIUS = 60.0
 const SELECTED_RADIUS = 110.0
 const TWEEN_DURATION = 0.35
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
 @onready var color_container: Control = $ColorContainer
+@onready var mix_line: Control = $MixLine
 var selected_primary_color_index: int = 0
+var previous_primary_color_index: int = 0
 var rotation_factor: int = 0
 var vibration_amount: float = 0
 
@@ -16,6 +19,7 @@ func _ready() -> void:
 	SignalBus.color_amount_changed.connect(_on_color_amount_changed)
 	SignalBus.selected_color_changed.connect(_on_selected_color_changed)
 	SignalBus.mixed_colors_changed.connect(_on_mixed_colors_changed)
+	SignalBus.found_color_to_mix_changed.connect(_on_found_color_to_mix_changed)
 	SignalBus.cannot_perform_color_action.connect(_on_cannot_perform_color_action)
 	for i in Globals.PRIMARY_COLORS.size():
 		var palette_color = PALETTE_COLOR.instantiate()
@@ -33,6 +37,7 @@ func _on_color_amount_changed(primary_color_index, percentage):
 	color_container.get_child(primary_color_index).percentage = percentage
 
 func _on_selected_color_changed(primary_color_index):
+	#print(found_color_to_mix)
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
 	var cw_offset = (primary_color_index - selected_primary_color_index + primary_color_count) % primary_color_count
 	var ccw_offset = (selected_primary_color_index - primary_color_index + primary_color_count) % primary_color_count
@@ -62,6 +67,7 @@ func _on_selected_color_changed(primary_color_index):
 		other_tween.tween_property(previous_selected_color, "position", previous_selected_color.position.normalized() * CENTER_DISTANCE, TWEEN_DURATION) \
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	
+	previous_primary_color_index = selected_primary_color_index
 	selected_primary_color_index = primary_color_index
 
 func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_primary_color_index: int):
@@ -70,6 +76,16 @@ func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_prima
 			palette_color.get_index() == new_selected_primary_color_index \
 			or palette_color.get_index() == mixed_primary_color_index
 		)
+
+func _on_found_color_to_mix_changed(found_color_to_mix: bool, color_id: Globals.COLOR_ID):
+	if found_color_to_mix:
+		mix_line.show_with_transition(
+			color_container.get_child(selected_primary_color_index),
+			color_container.get_child(previous_primary_color_index),
+			color_id
+		)
+	else:
+		mix_line.hide_with_transition()
 
 func _on_cannot_perform_color_action():
 	vibration_amount = 8.0

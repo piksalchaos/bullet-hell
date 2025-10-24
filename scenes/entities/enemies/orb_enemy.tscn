@@ -65,6 +65,8 @@ color_component = NodePath("../ColorComponent")
 shape = SubResource("CircleShape2D_yjbs8")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_tyrw6")]
+position = Vector2(0, -59)
+max_health = 3
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_iylbs")]
 delay_time = 1.0

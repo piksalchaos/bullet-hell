@@ -1,8 +1,8 @@
 extends Node2D
 
 const SPRITE_ROTATION_SPEED = 1.0
-const VERTICAL_SPEED = 100.0
-const HORIZONTAL_SPEED = 50.0
+const VERTICAL_SPEED = 125.0
+const HORIZONTAL_SPEED = 60.0
 
 @export var initial_color_id: Globals.COLOR_ID
 var sin_offset_angle = 0
