@@ -10,11 +10,23 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_4jpu5")
 
+[node name="Highlight" parent="." instance=ExtResource("2_xcmbf")]
+visible = false
+modulate = Color(1, 1, 1, 0.18039216)
+radius = 0.0
+line_width = 2.0
+
 [node name="CircleOutline" parent="." instance=ExtResource("2_xcmbf")]
 modulate = Color(0.27, 0.27, 0.27, 1)
 radius = 30.0
 is_filled = false
 line_width = 2.0
+
+[node name="CircleFill" parent="." instance=ExtResource("2_xcmbf")]
+self_modulate = Color(0, 0, 0, 0)
+radius = 0.0
+
+[node name="ColorComponent" parent="CircleFill" instance=ExtResource("3_32xwn")]
 
 [node name="InnerCircleOutline" parent="." instance=ExtResource("2_xcmbf")]
 self_modulate = Color(1, 1, 1, 0.3529412)
@@ -32,19 +44,7 @@ line_width = 1.0
 
 [node name="ColorComponent" parent="InnerCircleOutline2" instance=ExtResource("3_32xwn")]
 
-[node name="CircleFill" parent="." instance=ExtResource("2_xcmbf")]
-self_modulate = Color(1, 1, 1, 0)
-radius = 0.0
-
-[node name="ColorComponent" parent="CircleFill" instance=ExtResource("3_32xwn")]
-
 [node name="PaletteColorVisual" type="Node2D" parent="."]
 script = ExtResource("4_rjhvv")
 
 [node name="ColorComponent" parent="PaletteColorVisual" instance=ExtResource("3_32xwn")]
-
-[node name="HighlightOutline" parent="." instance=ExtResource("2_xcmbf")]
-visible = false
-radius = 0.0
-is_filled = false
-line_width = 2.0

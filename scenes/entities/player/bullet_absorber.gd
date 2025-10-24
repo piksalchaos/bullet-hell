@@ -83,13 +83,13 @@ func _input(event: InputEvent) -> void:
 		is_mixing = true
 		aim_line.show_with_transition()
 		mixed_primary_color_index = selected_primary_color_index
-		SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
+		SignalBus.mixed_colors_changed.emit(mixed_primary_color_index)
 	if event.is_action_released("shoot") and is_shot_prepared:
 		is_shot_prepared = false
 		is_mixing = false
 		prepare_shot_audio.stop()
 		aim_line.hide_with_transition()
-		SignalBus.mixed_colors_changed.emit(-1, -1)
+		SignalBus.mixed_colors_changed.emit(-1)
 		if found_color_to_mix:
 			set_found_color_to_mix(false)
 			shoot_mixed_bullet()
@@ -101,7 +101,7 @@ func _input(event: InputEvent) -> void:
 		is_mixing = false
 		set_found_color_to_mix(false)
 		aim_line.hide_with_transition()
-		SignalBus.mixed_colors_changed.emit(-1, -1)
+		SignalBus.mixed_colors_changed.emit(-1)
 
 func get_adjacent_color_index(is_right: bool = true) -> int:
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
@@ -118,9 +118,10 @@ func mix_color(is_right: bool = true) -> void:
 	or color_amounts[selected_primary_color_index] < SHOT_COLOR_AMOUNT:
 		fail_at_color_action()
 		return
-	set_found_color_to_mix(next_primary_color_index != mixed_primary_color_index)
 	switch_color(is_right)
-	SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
+	set_found_color_to_mix(next_primary_color_index != mixed_primary_color_index)
+	
+	#SignalBus.mixed_colors_changed.emit(selected_primary_color_index, mixed_primary_color_index)
 	mix_color_audio.play()
 
 func shoot_bullet():
@@ -150,15 +151,7 @@ func shoot_mixed_bullet():
 	
 	release_mixed_shot_audio.play()
 	
-	#print("mixed bullet")
-	#print("selected: ", selected_primary_color_index, "   mixed: ", mixed_primary_color_index)
-	var bullet_color_id: Globals.COLOR_ID
-	for secondary_color_id in Globals.SECONDARY_COLOR_MAP:
-		var secondary_color_primary_ids = Globals.SECONDARY_COLOR_MAP[secondary_color_id]
-		if secondary_color_primary_ids.has(Globals.PRIMARY_COLORS[selected_primary_color_index]) \
-		and secondary_color_primary_ids.has(Globals.PRIMARY_COLORS[mixed_primary_color_index]):
-			bullet_color_id = secondary_color_id
-			break
+	var bullet_color_id = get_mixed_secondary_color_id()
 	
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.initial_color_id = bullet_color_id
@@ -175,8 +168,7 @@ func set_color_amount(primary_color_index: int, new_color_amount: int):
 
 func set_found_color_to_mix(value):
 	found_color_to_mix = value
-	print(value, ": absorber")
-	SignalBus.found_color_to_mix_changed.emit(value, 1)
+	SignalBus.found_color_to_mix_changed.emit(value, get_mixed_secondary_color_id())
 
 func fail_at_color_action():
 	fail_color_action_audio.play()
@@ -184,3 +176,13 @@ func fail_at_color_action():
 
 func _on_bullet_timer_timeout() -> void:
 	shoot_bullet()
+
+func get_mixed_secondary_color_id() -> Globals.COLOR_ID:
+	var bullet_color_id: Globals.COLOR_ID
+	for secondary_color_id in Globals.SECONDARY_COLOR_MAP:
+		var secondary_color_primary_ids = Globals.SECONDARY_COLOR_MAP[secondary_color_id]
+		if secondary_color_primary_ids.has(Globals.PRIMARY_COLORS[selected_primary_color_index]) \
+		and secondary_color_primary_ids.has(Globals.PRIMARY_COLORS[mixed_primary_color_index]):
+			bullet_color_id = secondary_color_id
+			break
+	return bullet_color_id

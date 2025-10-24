@@ -11,7 +11,6 @@ const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
 @onready var color_container: Control = $ColorContainer
 @onready var mix_line: Control = $MixLine
 var selected_primary_color_index: int = 0
-var previous_primary_color_index: int = 0
 var rotation_factor: int = 0
 var vibration_amount: float = 0
 
@@ -67,21 +66,21 @@ func _on_selected_color_changed(primary_color_index):
 		other_tween.tween_property(previous_selected_color, "position", previous_selected_color.position.normalized() * CENTER_DISTANCE, TWEEN_DURATION) \
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	
-	previous_primary_color_index = selected_primary_color_index
 	selected_primary_color_index = primary_color_index
 
-func _on_mixed_colors_changed(new_selected_primary_color_index: int, mixed_primary_color_index: int):
+func _on_mixed_colors_changed(mixed_primary_color_index):
 	for palette_color in color_container.get_children():
 		palette_color.set_highlight(
-			palette_color.get_index() == new_selected_primary_color_index \
-			or palette_color.get_index() == mixed_primary_color_index
+			palette_color.get_index() == mixed_primary_color_index
 		)
 
 func _on_found_color_to_mix_changed(found_color_to_mix: bool, color_id: Globals.COLOR_ID):
 	if found_color_to_mix:
+		var first_primary_color_index = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][0])
+		var second_primary_color_index = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][1])
 		mix_line.show_with_transition(
-			color_container.get_child(selected_primary_color_index),
-			color_container.get_child(previous_primary_color_index),
+			color_container.get_child(first_primary_color_index),
+			color_container.get_child(second_primary_color_index),
 			color_id
 		)
 	else:

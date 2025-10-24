@@ -5,6 +5,6 @@ extends Node
 
 signal color_amount_changed(primary_color_index: int, percentage: float)
 signal selected_color_changed(primary_color_index: int)
-signal mixed_colors_changed(selected_primary_color_index: int, mixed_primary_color_index: int)
+signal mixed_colors_changed(mixed_primary_color_index: int)
 signal cannot_perform_color_action()
 signal found_color_to_mix_changed(found_color_to_mix: bool, color_id: Globals.COLOR_ID)

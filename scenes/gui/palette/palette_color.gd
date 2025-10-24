@@ -10,7 +10,7 @@ extends Control
 @onready var inner_circle_outline_2: Node2D = $InnerCircleOutline2
 @onready var circle_fill: Node2D = $CircleFill
 @onready var palette_color_visual: Node2D = $PaletteColorVisual
-@onready var highlight_outline: Node2D = $HighlightOutline
+@onready var highlight: Node2D = $Highlight
 const CIRCLE_OUTLINE_WIDTH = 2.0
 const TWEEN_DURATION = 0.1
 
@@ -31,10 +31,11 @@ func set_percentage(new_percentage):
 		(circle_outline.radius + CIRCLE_OUTLINE_WIDTH) * new_percentage,
 		TWEEN_DURATION
 	)
+	var lightness = floor(new_percentage*3) * 0.15
 	tween.tween_property(
 		circle_fill,
 		"self_modulate",
-		Color(Color.WHITE, (floor(new_percentage*3)) * 0.15),
+		Color(Color(lightness, lightness, lightness)),
 		TWEEN_DURATION
 	)
 
@@ -45,9 +46,9 @@ func set_radius(new_radius):
 	inner_circle_outline_2.radius = new_radius / 3 * 2
 	
 	circle_fill.radius = new_radius
-	highlight_outline.radius = new_radius + 18
+	highlight.radius = new_radius + 24
 	percentage = percentage #this might make it tween the color_cirlce radius while changing radius, but that's okay
 	#color_circle.radius = (circle_outline.radius+CIRCLE_OUTLINE_WIDTH) * percentage 
 
 func set_highlight(is_highlighted):
-	highlight_outline.visible = is_highlighted
+	highlight.visible = is_highlighted

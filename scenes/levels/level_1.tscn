@@ -58,30 +58,6 @@ position = Vector2(292, 422)
 [node name="RoundManager" type="Node2D" parent="Stage"]
 script = ExtResource("3_dga24")
 
-[node name="MixingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="ControlTransition" parent="Stage/RoundManager/MixingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
-node_to_free_with = NodePath("../BaseEnemySpawner")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/MixingRound/ControlTransition"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 14.0
-offset_right = 512.0
-offset_bottom = 130.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
-text = "Switch colors while holding
-[img=60]assets/images/keyboard/key_s.png[/img] to mix them together"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BaseEnemySpawner" parent="Stage/RoundManager/MixingRound" instance=ExtResource("7_dga24")]
-position = Vector2(292, 174)
-enemy_scene = ExtResource("10_mm8aj")
-color_id = 1
-
 [node name="StartTimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]
 
 [node name="BlossomRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
@@ -238,6 +214,30 @@ wait_time = 0.5
 [node name="EnemySpawner" parent="Stage/RoundManager/ColorRound/Round/TimerSpawner" instance=ExtResource("5_excbq")]
 position = Vector2(484, 175)
 color_id = 2
+
+[node name="MixingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="ControlTransition" parent="Stage/RoundManager/MixingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+node_to_free_with = NodePath("../BaseEnemySpawner")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/MixingRound/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 14.0
+offset_right = 512.0
+offset_bottom = 130.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "Switch colors while holding
+[img=60]assets/images/keyboard/key_s.png[/img] to mix them together"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BaseEnemySpawner" parent="Stage/RoundManager/MixingRound" instance=ExtResource("7_dga24")]
+position = Vector2(292, 174)
+enemy_scene = ExtResource("10_mm8aj")
+color_id = 1
 
 [node name="Round3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
 visible = false
