@@ -11,7 +11,7 @@ var found_color_to_mix := false
 var is_mixing = false
 var is_shot_prepared = false
 @onready var bullet_timer: Timer = $BulletTimer
-@onready var aim_line: Node2D = $AimLine
+@onready var aim_line: Node2D = $"../AimLine"
 
 @onready var shoot_audio: AudioStreamPlayer = $ShootAudio
 @onready var switch_left_audio: AudioStreamPlayer = $SwitchLeftAudio

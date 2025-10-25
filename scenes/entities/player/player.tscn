@@ -24,11 +24,11 @@
 [ext_resource type="AudioStream" uid="uid://bwm4rnf12fdha" path="res://assets/audio/recover.wav" id="22_7dqom"]
 [ext_resource type="AudioStream" uid="uid://c5pfh8h2mjx2g" path="res://assets/audio/hit_cooldown.wav" id="22_go8vc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_18p7g"]
-radius = 16.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
 radius = 45.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_18p7g"]
+radius = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4dfn"]
 atlas = ExtResource("9_ovg4i")
@@ -193,18 +193,6 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_42nxq")
 
-[node name="AimLine" type="Node2D" parent="BulletAbsorber"]
-visible = false
-script = ExtResource("3_18p7g")
-
-[node name="ShapeCast" type="ShapeCast2D" parent="BulletAbsorber/AimLine"]
-shape = SubResource("CircleShape2D_18p7g")
-target_position = Vector2(0, -800)
-max_results = 1
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="AuraDrawing" type="Node2D" parent="BulletAbsorber"]
 script = ExtResource("3_5sj0x")
 
@@ -258,6 +246,18 @@ volume_db = -5.0
 [node name="FailColorActionAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("13_knby6")
 volume_db = -3.0
+
+[node name="AimLine" type="Node2D" parent="."]
+visible = false
+script = ExtResource("3_18p7g")
+
+[node name="ShapeCast" type="ShapeCast2D" parent="AimLine"]
+shape = SubResource("CircleShape2D_18p7g")
+target_position = Vector2(0, -800)
+max_results = 1
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.6)

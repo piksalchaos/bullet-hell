@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpfq3arc6w1h8"]
+
+[ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_sequencer.gd" id="1_tdge4"]
+
+[node name="RoundSequencer" type="Node2D" groups=["spawners"]]
+script = ExtResource("1_tdge4")

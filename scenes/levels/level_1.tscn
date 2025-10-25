@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
-[ext_resource type="Script" uid="uid://bu68n2vqivnpj" path="res://scenes/round_manager/round_manager.gd" id="3_dga24"]
+[ext_resource type="PackedScene" uid="uid://cpfq3arc6w1h8" path="res://scenes/round_manager/round_sequencer.tscn" id="3_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/spawners/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
 [ext_resource type="PackedScene" uid="uid://bb3q42r3v7i58" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.tscn" id="5_iav0o"]
@@ -56,20 +56,19 @@ position = Vector2(292, 422)
 
 [node name="EnemyContainer" type="Node2D" parent="Stage"]
 
-[node name="RoundManager" type="Node2D" parent="Stage"]
-script = ExtResource("3_dga24")
+[node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 
-[node name="StartTimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]
+[node name="StartTimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 
-[node name="BlossomRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="BlossomRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="ControlTransition" parent="Stage/RoundManager/BlossomRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/BlossomRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 node_to_free_with = NodePath("../TimerRound")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound/ControlTransition"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/BlossomRound/ControlTransition"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 477.0
@@ -82,14 +81,14 @@ grazing colored objects"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ControlTimer" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("6_iav0o")]
+[node name="ControlTimer" parent="Stage/RoundSequencer/BlossomRound" instance=ExtResource("6_iav0o")]
 wait_time = 2.5
 
-[node name="ControlTransition" parent="Stage/RoundManager/BlossomRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/BlossomRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 node_to_free_with = NodePath("../../TimerRound")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/BlossomRound/ControlTimer/ControlTransition"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/BlossomRound/ControlTimer/ControlTransition"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 568.0
@@ -101,87 +100,87 @@ text = "but don't let your [b]heart[/b] get hit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerRound" parent="Stage/RoundManager/BlossomRound" instance=ExtResource("6_iav0o")]
+[node name="TimerRound" parent="Stage/RoundSequencer/BlossomRound" instance=ExtResource("6_iav0o")]
 wait_time = 6.0
 
-[node name="DandelionSeedBulletSpawner" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(224, -79)
 
-[node name="DandelionSeedBulletSpawner2" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner2" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(99, -253)
 
-[node name="DandelionSeedBulletSpawner3" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner3" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(393, -189)
 
-[node name="DandelionSeedBulletSpawner4" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner4" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(340, -443)
 
-[node name="DandelionSeedBulletSpawner5" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner5" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(183, -368)
 
-[node name="DandelionSeedBulletSpawner6" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner6" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(462, -339)
 
-[node name="DandelionSeedBulletSpawner7" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner7" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(151, -539)
 
-[node name="DandelionSeedBulletSpawner8" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner8" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(387, -621)
 
-[node name="DandelionSeedBulletSpawner9" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner9" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(207, -715)
 
-[node name="DandelionSeedBulletSpawner10" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner10" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(240, -205)
 
-[node name="DandelionSeedBulletSpawner11" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner11" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(319, -313)
 
-[node name="DandelionSeedBulletSpawner12" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner12" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(53, -411)
 
-[node name="DandelionSeedBulletSpawner13" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner13" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(461, -496)
 
-[node name="DandelionSeedBulletSpawner14" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner14" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(261, -589)
 
-[node name="DandelionSeedBulletSpawner15" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner15" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(84, -639)
 
-[node name="DandelionSeedBulletSpawner16" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner16" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(7, -204)
 
-[node name="DandelionSeedBulletSpawner17" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner17" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(517, -158)
 
-[node name="DandelionSeedBulletSpawner18" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner18" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(568, -416)
 
-[node name="DandelionSeedBulletSpawner19" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner19" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(523, -613)
 
-[node name="DandelionSeedBulletSpawner20" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner20" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(620, -265)
 
-[node name="DandelionSeedBulletSpawner21" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner21" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(-66, -349)
 
-[node name="DandelionSeedBulletSpawner22" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner22" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(-14, -536)
 
-[node name="DandelionSeedBulletSpawner23" parent="Stage/RoundManager/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
+[node name="DandelionSeedBulletSpawner23" parent="Stage/RoundSequencer/BlossomRound/TimerRound" instance=ExtResource("5_iav0o")]
 position = Vector2(608, -550)
 
-[node name="ShootingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="ShootingRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="ControlTransition" parent="Stage/RoundManager/ShootingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ShootingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.53333336)
 node_to_free_with = NodePath("../TimerRound")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/ShootingRound/ControlTransition"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/ShootingRound/ControlTransition"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -17.0
@@ -193,15 +192,15 @@ text = "graze bullets to absorb [b]color energy[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ControlTimer" parent="Stage/RoundManager/ShootingRound" instance=ExtResource("6_iav0o")]
+[node name="ControlTimer" parent="Stage/RoundSequencer/ShootingRound" instance=ExtResource("6_iav0o")]
 wait_time = 2.5
 
-[node name="ControlTransition" parent="Stage/RoundManager/ShootingRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ShootingRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.53333336)
 node_to_free_with = NodePath("../../TimerRound")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ShootingRound/ControlTimer/ControlTransition"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/ShootingRound/ControlTimer/ControlTransition"]
 layout_mode = 0
 offset_left = 43.0
 offset_top = 38.0
@@ -213,21 +212,21 @@ text = "and release [img=60]assets/images/keyboard/key_s.png[/img] to [b]SHOOT[/
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerRound" parent="Stage/RoundManager/ShootingRound" instance=ExtResource("6_iav0o")]
+[node name="TimerRound" parent="Stage/RoundSequencer/ShootingRound" instance=ExtResource("6_iav0o")]
 wait_time = 6.0
 
-[node name="EnemySpawner" parent="Stage/RoundManager/ShootingRound/TimerRound" instance=ExtResource("5_excbq")]
+[node name="EnemySpawner" parent="Stage/RoundSequencer/ShootingRound/TimerRound" instance=ExtResource("5_excbq")]
 position = Vector2(292, 202)
 
-[node name="ColorRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="ColorRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="ControlTransition" parent="Stage/RoundManager/ColorRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.5294118)
 node_to_free_with = NodePath("../TimerRound")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/ColorRound/ControlTransition"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/ColorRound/ControlTransition"]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 17.0
@@ -239,16 +238,16 @@ text = "Enemies can only be hit by bullets of their own color"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ControlTimer" parent="Stage/RoundManager/ColorRound" instance=ExtResource("6_iav0o")]
+[node name="ControlTimer" parent="Stage/RoundSequencer/ColorRound" instance=ExtResource("6_iav0o")]
 visible = false
 wait_time = 2.5
 
-[node name="ControlTransition" parent="Stage/RoundManager/ColorRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.5294118)
 node_to_free_with = NodePath("../../TimerRound")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/ColorRound/ControlTimer/ControlTransition"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/ColorRound/ControlTimer/ControlTransition"]
 layout_mode = 0
 offset_left = 71.0
 offset_top = 486.0
@@ -261,27 +260,29 @@ text = "Switch your [b]bullet color[/b] with
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerRound" parent="Stage/RoundManager/ColorRound" instance=ExtResource("6_iav0o")]
+[node name="TimerRound" parent="Stage/RoundSequencer/ColorRound" instance=ExtResource("6_iav0o")]
 wait_time = 6.0
 
-[node name="GhostEnemySpawner" parent="Stage/RoundManager/ColorRound/TimerRound" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/ColorRound/TimerRound" instance=ExtResource("5_excbq")]
 position = Vector2(100, 166)
 color_id = 4
 
-[node name="TimerSpawner" parent="Stage/RoundManager/ColorRound/TimerRound" instance=ExtResource("6_iav0o")]
+[node name="TimerSpawner" parent="Stage/RoundSequencer/ColorRound/TimerRound" instance=ExtResource("6_iav0o")]
 
-[node name="EnemySpawner" parent="Stage/RoundManager/ColorRound/TimerRound/TimerSpawner" instance=ExtResource("5_excbq")]
+[node name="EnemySpawner" parent="Stage/RoundSequencer/ColorRound/TimerRound/TimerSpawner" instance=ExtResource("5_excbq")]
 position = Vector2(484, 166)
 color_id = 2
 
-[node name="ColorRound2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="ColorRound2" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+visible = false
 
-[node name="ControlTransition" parent="Stage/RoundManager/ColorRound2" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound2" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.5294118)
 node_to_free_with = NodePath("../TimerRound")
+metadata/_edit_use_anchors_ = true
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/ColorRound2/ControlTransition"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/ColorRound2/ControlTransition"]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 17.0
@@ -293,36 +294,36 @@ text = "The more you absorb,
 the more damage you deal"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="TimerRound" parent="Stage/RoundManager/ColorRound2" instance=ExtResource("6_iav0o")]
+[node name="TimerRound" parent="Stage/RoundSequencer/ColorRound2" instance=ExtResource("6_iav0o")]
 wait_time = 4.0
 
-[node name="BaseEnemySpawner" parent="Stage/RoundManager/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
 position = Vector2(292, 154)
 enemy_scene = ExtResource("8_qxy0u")
 color_id = 2
 
-[node name="ColorRound3" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="ColorRound3" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="BaseEnemySpawner" parent="Stage/RoundManager/ColorRound3" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/ColorRound3" instance=ExtResource("7_dga24")]
 position = Vector2(143, 134)
 enemy_scene = ExtResource("12_iwr0g")
 
-[node name="BaseEnemySpawner2" parent="Stage/RoundManager/ColorRound3" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner2" parent="Stage/RoundSequencer/ColorRound3" instance=ExtResource("7_dga24")]
 position = Vector2(440, 167)
 enemy_scene = ExtResource("12_iwr0g")
 color_id = 4
 
-[node name="ColorRound4" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
-visible = false
+[node name="ColorRound4" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 
-[node name="ControlTransition" parent="Stage/RoundManager/ColorRound4" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound4" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.5294118)
 node_to_free_with = NodePath("../MainTimerRound")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundManager/ColorRound4/ControlTransition"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/ColorRound4/ControlTransition"]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 551.0
@@ -334,42 +335,49 @@ text = "Hold [b]SHIFT[/b] to move slower"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainTimerRound" parent="Stage/RoundManager/ColorRound4" instance=ExtResource("6_iav0o")]
+[node name="MainTimerRound" parent="Stage/RoundSequencer/ColorRound4" instance=ExtResource("6_iav0o")]
 wait_time = 3.0
 
-[node name="TimerRound2" parent="Stage/RoundManager/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
+[node name="TimerRound2" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
 
-[node name="GhostEnemySpawner2" parent="Stage/RoundManager/ColorRound4/MainTimerRound/TimerRound2" instance=ExtResource("5_excbq")]
+[node name="RoundSequencer" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound2" instance=ExtResource("3_iwr0g")]
+
+[node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound2/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(277, 70)
 color_id = 2
 
-[node name="TimerRound" parent="Stage/RoundManager/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
-wait_time = 4.0
+[node name="GhostEnemySpawner3" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound2/RoundSequencer" instance=ExtResource("5_excbq")]
+position = Vector2(285, 162)
+color_id = 2
 
-[node name="GhostEnemySpawner" parent="Stage/RoundManager/ColorRound4/MainTimerRound/TimerRound" instance=ExtResource("5_excbq")]
+[node name="TimerRound" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
+wait_time = 3.0
+
+[node name="RoundSequencer" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound" instance=ExtResource("3_iwr0g")]
+
+[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(94, 93)
 
-[node name="GhostEnemySpawner6" parent="Stage/RoundManager/ColorRound4/MainTimerRound/TimerRound" instance=ExtResource("5_excbq")]
-position = Vector2(490, 183)
-
-[node name="TimerRound3" parent="Stage/RoundManager/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
-wait_time = 7.0
-
-[node name="GhostEnemySpawner3" parent="Stage/RoundManager/ColorRound4/MainTimerRound/TimerRound3" instance=ExtResource("5_excbq")]
-position = Vector2(475, 95)
-color_id = 4
-
-[node name="GhostEnemySpawner4" parent="Stage/RoundManager/ColorRound4/MainTimerRound/TimerRound3" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner4" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(74, 184)
 color_id = 4
 
-[node name="MixingRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="RoundSequencer2" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound" instance=ExtResource("3_iwr0g")]
+
+[node name="GhostEnemySpawner3" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
+position = Vector2(475, 95)
+color_id = 4
+
+[node name="GhostEnemySpawner6" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
+position = Vector2(490, 183)
+
+[node name="MixingRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="ControlTransition" parent="Stage/RoundManager/MixingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/MixingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 node_to_free_with = NodePath("../BaseEnemySpawner")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundManager/MixingRound/ControlTransition"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/MixingRound/ControlTransition"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 14.0
@@ -382,36 +390,36 @@ text = "Switch colors while holding
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BaseEnemySpawner" parent="Stage/RoundManager/MixingRound" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MixingRound" instance=ExtResource("7_dga24")]
 position = Vector2(292, 174)
 enemy_scene = ExtResource("10_mm8aj")
 color_id = 1
 
-[node name="MixingRound2" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="MixingRound2" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
-[node name="GhostEnemySpawner" parent="Stage/RoundManager/MixingRound2" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("5_excbq")]
 position = Vector2(100, 91)
 color_id = 4
 
-[node name="BaseEnemySpawner" parent="Stage/RoundManager/MixingRound2" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("7_dga24")]
 position = Vector2(292, 58)
 enemy_scene = ExtResource("8_qxy0u")
 color_id = 5
 
-[node name="GhostEnemySpawner2" parent="Stage/RoundManager/MixingRound2" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("5_excbq")]
 position = Vector2(484, 91)
 
-[node name="MinibossRound" parent="Stage/RoundManager" instance=ExtResource("4_qxy0u")]
+[node name="MinibossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 position = Vector2(1, 0)
 
-[node name="FrolickerGhostEnemySpawner" parent="Stage/RoundManager/MinibossRound" instance=ExtResource("5_qxy0u")]
+[node name="FrolickerGhostEnemySpawner" parent="Stage/RoundSequencer/MinibossRound" instance=ExtResource("5_qxy0u")]
 position = Vector2(85, 111)
 color_id = 1
 ending_position = Vector2(491, 111)
 
-[node name="TimerRound" parent="Stage/RoundManager" instance=ExtResource("6_iav0o")]
+[node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 wait_time = 2.0
 
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
@@ -423,4 +431,4 @@ autoplay = true
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
-[connection signal="finished" from="Stage/RoundManager" to="." method="_on_round_manager_finished"]
+[connection signal="tree_exiting" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_tree_exiting"]
