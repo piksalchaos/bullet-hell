@@ -2,6 +2,7 @@ extends Control
 
 const LIFE_HEART = preload("uid://cg285sbaifnvs")
 @onready var life_heart_container: HBoxContainer = $RightBar/LifeHeartContainer
+@onready var pause_menu: PanelContainer = $BattleAreaReference/PauseMenu
 
 func update_life_heart_count(new_life_heart_count: int) -> void:
 	if new_life_heart_count < 0: return
@@ -17,3 +18,9 @@ func update_life_heart_count(new_life_heart_count: int) -> void:
 	elif life_heart_count > new_life_heart_count:
 		for i in (life_heart_count - new_life_heart_count):
 			life_heart_container.get_child(life_heart_count - 1 - i).destroy()
+
+func show_pause_menu() -> void:
+	pause_menu.show()
+
+func hide_pause_menu() -> void:
+	pause_menu.hide()

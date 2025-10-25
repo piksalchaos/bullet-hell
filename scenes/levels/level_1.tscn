@@ -35,6 +35,7 @@ RichTextLabel/fonts/bold_font = SubResource("FontVariation_mm8aj")
 RichTextLabel/fonts/normal_font = SubResource("FontVariation_dnkej")
 
 [node name="Game" type="Node"]
+process_mode = 3
 script = ExtResource("1_oc4kc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -47,6 +48,7 @@ grow_vertical = 2
 color = Color(0.1882353, 0.10980392, 0.14117648, 1)
 
 [node name="Stage" type="Node2D" parent="."]
+process_mode = 1
 position = Vector2(168, 0)
 
 [node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
@@ -425,6 +427,7 @@ wait_time = 2.0
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 1
 stream = ExtResource("11_excbq")
 volume_db = -11.0
 autoplay = true

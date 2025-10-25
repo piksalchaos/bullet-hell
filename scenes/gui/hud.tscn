@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvrx8wmadvywy"]
+[gd_scene load_steps=7 format=3 uid="uid://dvrx8wmadvywy"]
 
 [ext_resource type="Script" uid="uid://xr2b6wha55l" path="res://scenes/gui/hud.gd" id="1_624ws"]
 [ext_resource type="PackedScene" uid="uid://c0hmb6lqnynne" path="res://scenes/gui/palette/palette.tscn" id="2_624ws"]
+[ext_resource type="PackedScene" uid="uid://b2cd1ymt0c23w" path="res://scenes/gui/input_button.tscn" id="2_qxonp"]
+[ext_resource type="Script" uid="uid://c3xcseld4kb7e" path="res://scenes/gui/pause_menu.gd" id="2_ueg55"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_624ws"]
+bg_color = Color(0, 0, 0, 0.85882354)
+
+[sub_resource type="FontVariation" id="FontVariation_624ws"]
+variation_opentype = {
+2003265652: 600
+}
 
 [node name="HUD" type="HBoxContainer"]
 anchors_preset = 15
@@ -9,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 script = ExtResource("1_624ws")
 
 [node name="LeftBar" type="ColorRect" parent="."]
@@ -16,10 +27,55 @@ layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0, 0, 0, 1)
 
-[node name="BattleAreaReference" type="ColorRect" parent="."]
+[node name="BattleAreaReference" type="Control" parent="."]
 custom_minimum_size = Vector2(576, 0)
 layout_mode = 2
-color = Color(0.37, 0.22816667, 0.19979998, 0)
+
+[node name="PauseMenu" type="PanelContainer" parent="BattleAreaReference"]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_624ws")
+script = ExtResource("2_ueg55")
+
+[node name="MarginContainer" type="MarginContainer" parent="BattleAreaReference/PauseMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleAreaReference/PauseMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BattleAreaReference/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_624ws")
+theme_override_font_sizes/font_size = 42
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BattleAreaReference/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionList" type="VBoxContainer" parent="BattleAreaReference/PauseMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InputButton" parent="BattleAreaReference/PauseMenu/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("2_qxonp")]
+layout_mode = 2
+
+[node name="ResetActionsButton" type="Button" parent="BattleAreaReference/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "Reset to default controls"
 
 [node name="RightBar" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(400, 0)
@@ -48,3 +104,5 @@ offset_left = -1.0
 offset_top = 135.0
 offset_right = -1.0
 offset_bottom = 135.0
+
+[connection signal="pressed" from="BattleAreaReference/PauseMenu/MarginContainer/VBoxContainer/ResetActionsButton" to="BattleAreaReference/PauseMenu" method="_on_reset_actions_button_pressed"]

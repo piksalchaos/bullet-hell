@@ -30,3 +30,11 @@ func _on_player_got_hit() -> void:
 
 func _on_round_sequencer_tree_exiting() -> void:
 		get_tree().change_scene_to_file("res://scenes/start_menu.tscn")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().paused = not get_tree().paused
+		if get_tree().paused:
+			hud.show_pause_menu()
+		else:
+			hud.hide_pause_menu()
