@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=21 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bii2yamnyxbsi" path="res://scenes/entities/enemies/orb_enemy.tscn" id="10_mm8aj"]
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="12_iwr0g"]
+[ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="17_bahl2"]
 
 [sub_resource type="FontVariation" id="FontVariation_mm8aj"]
 variation_opentype = {
@@ -34,8 +35,8 @@ default_font_size = 24
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_mm8aj")
 RichTextLabel/fonts/normal_font = SubResource("FontVariation_dnkej")
 
-[node name="Game" type="Node"]
-process_mode = 3
+[node name="Level1" type="Node"]
+process_mode = 1
 script = ExtResource("1_oc4kc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -48,7 +49,6 @@ grow_vertical = 2
 color = Color(0.1882353, 0.10980392, 0.14117648, 1)
 
 [node name="Stage" type="Node2D" parent="."]
-process_mode = 1
 position = Vector2(168, 0)
 
 [node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
@@ -427,10 +427,12 @@ wait_time = 2.0
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-process_mode = 1
 stream = ExtResource("11_excbq")
 volume_db = -11.0
 autoplay = true
+
+[node name="BlackFadeTransition" parent="." instance=ExtResource("17_bahl2")]
+is_transparent = false
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]

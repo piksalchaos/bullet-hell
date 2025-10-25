@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8n3kh1ff5dg1"]
+[gd_scene load_steps=9 format=3 uid="uid://c8n3kh1ff5dg1"]
 
-[ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/start_menu.gd" id="1_thu50"]
+[ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/gui/start_menu/start_menu.gd" id="1_thu50"]
 [ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
 [ext_resource type="Texture2D" uid="uid://brfq58ye0lxtl" path="res://assets/images/start_menu_buttons.png" id="3_fcv5n"]
-[ext_resource type="Script" uid="uid://cjjiuxpmibury" path="res://scenes/start_menu_visuals.gd" id="3_h61rw"]
+[ext_resource type="Script" uid="uid://cjjiuxpmibury" path="res://scenes/gui/start_menu/start_menu_visuals.gd" id="3_h61rw"]
 [ext_resource type="AudioStream" uid="uid://dc1tvgtya0sip" path="res://assets/audio/music/Fairytale Waltz.mp3" id="3_m7x51"]
-[ext_resource type="Script" uid="uid://cbm0gbffng0b3" path="res://scenes/hover_button.gd" id="4_4v6gu"]
+[ext_resource type="Script" uid="uid://cbm0gbffng0b3" path="res://scenes/gui/start_menu/hover_button.gd" id="4_4v6gu"]
+[ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="7_rudpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxjfj"]
 atlas = ExtResource("3_fcv5n")
@@ -94,5 +95,9 @@ expand_mode = 1
 stream = ExtResource("3_m7x51")
 autoplay = true
 
+[node name="BlackFadeTransition" parent="." instance=ExtResource("7_rudpn")]
+layout_mode = 1
+
 [connection signal="pressed" from="BeginButton" to="." method="_on_begin_button_pressed"]
 [connection signal="timeout" from="StartMenuVisuals/RedrawTimer" to="StartMenuVisuals" method="_on_redraw_timer_timeout"]
+[connection signal="finished_transition" from="BlackFadeTransition" to="." method="_on_black_fade_transition_finished_transition"]
