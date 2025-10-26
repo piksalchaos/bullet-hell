@@ -13,7 +13,7 @@ class_name Player extends Area2D
 @onready var hit_particles: CPUParticles2D = $HitParticles
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
-const WIDTH := 16.0
+const WIDTH := 12.0
 const SPEED := 240.0
 const SLOW_SPEED := 120.0
 

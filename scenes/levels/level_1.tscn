@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=22 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
 [ext_resource type="PackedScene" uid="uid://cpfq3arc6w1h8" path="res://scenes/round_manager/round_sequencer.tscn" id="3_iwr0g"]
+[ext_resource type="PackedScene" uid="uid://b27b4app5xicf" path="res://scenes/backgrounds/forest_background.tscn" id="3_np2pn"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/spawners/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
 [ext_resource type="PackedScene" uid="uid://bb3q42r3v7i58" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.tscn" id="5_iav0o"]
@@ -51,10 +52,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1882353, 0.10980392, 0.14117648, 1)
+color = Color(0.12, 0.033599995, 0.06959998, 1)
 
 [node name="Stage" type="Node2D" parent="."]
-position = Vector2(168, 0)
+position = Vector2(176, 0)
+
+[node name="ForestBackground" parent="Stage" instance=ExtResource("3_np2pn")]
 
 [node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
 position = Vector2(292, 422)

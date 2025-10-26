@@ -38,3 +38,6 @@ var enemy_container: Node2D
 
 func update_player_position(position: Vector2):
 	player_position = position
+
+func get_random_vector_factor():
+	return Vector2(randf()-0.5, randf()-0.5)
