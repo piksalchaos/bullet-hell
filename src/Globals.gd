@@ -40,4 +40,5 @@ func update_player_position(position: Vector2):
 	player_position = position
 
 func get_random_vector_factor():
-	return Vector2(randf()-0.5, randf()-0.5)
+	var angle = randf() * 2 * PI
+	return Vector2(cos(angle), sin(angle)) * randf() * 0.5

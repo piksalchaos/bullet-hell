@@ -1,0 +1,6 @@
+extends Node2D
+
+const TREE_LEAVES_REPOSITION_DISTANCE := 2.5
+const TREE_TRUNK_POSITION_OFFSET :=  Vector2(5, 10)
+const TREE_TRUNK_SIZE := Vector2(10, 60)
+const TREE_TRUNK_COLOR := Color(0.12, 0.0, 0.006, 0.8)
