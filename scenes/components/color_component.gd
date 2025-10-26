@@ -27,3 +27,15 @@ func get_color() -> Color:
 func disable() -> void:
 	disabled = true
 	set_color_id_with_tween(Globals.COLOR_ID.WHITE)
+
+func subtract_colors(primary_color_indices):
+	for primary_color_index in primary_color_indices:
+		var color_to_subtract = Globals.PRIMARY_COLORS[primary_color_index]
+		var is_primary = Globals.PRIMARY_COLORS.has(color_id)
+		if is_primary:
+			if color_id == color_to_subtract:
+				disable()
+		else:
+			var map_primary_index = Globals.SECONDARY_COLOR_MAP[color_id].find(color_to_subtract)
+			if map_primary_index != -1:
+				set_color_id_with_tween(Globals.SECONDARY_COLOR_MAP[color_id][0 if map_primary_index == 1 else 1])

@@ -25,8 +25,8 @@ var is_shot_prepared = false
 @onready var mix_color_audio: AudioStreamPlayer = $MixColorAudio
 @onready var fail_color_action_audio: AudioStreamPlayer = $FailColorActionAudio
 
-func _on_area_entered(bullet: Area2D) -> void:
-	var color_id = bullet.capture_color_id()
+func _on_area_entered(bullet_component: Area2D) -> void:
+	var color_id = bullet_component.capture_color_id()
 	#var color_amounts_empty_before = true
 	#for color_amount in color_amounts:
 		#if color_amount > 0: color_amounts_empty_before = false
@@ -34,10 +34,11 @@ func _on_area_entered(bullet: Area2D) -> void:
 	var primary_color_indices_used = add_color_id_to_color_amounts(color_id)
 	if not primary_color_indices_used.is_empty():
 		absorb_audio.play()
+	print(primary_color_indices_used)
 		#if color_amounts_empty_before:
 			#selected_primary_color_index = primary_color_indices_used[0]
 			#SignalBus.selected_color_changed.emit(selected_primary_color_index)
-	bullet.disable_color()
+	bullet_component.color_component.subtract_colors(primary_color_indices_used)
 
 func add_color_id_to_color_amounts(color_id: Globals.COLOR_ID) -> Array[Globals.COLOR_ID]:
 	var primary_color_indices_used: Array[Globals.COLOR_ID] = []
