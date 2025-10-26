@@ -10,7 +10,8 @@ func _ready() -> void:
 
 func begin() -> void:
 	show()
-	timer.start()
+	if timer.is_inside_tree():
+		timer.start()
 
 func _on_timer_timeout() -> void:
 	round_spawner.begin()

@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://bme18c4bodia7"]
+
+[ext_resource type="AudioStream" uid="uid://bd5khvvwl7t0t" path="res://assets/audio/vine-boom.mp3" id="1_0wkhc"]
+[ext_resource type="Script" uid="uid://f0exyq10gbc" path="res://scenes/gui/settings/pause_menu.gd" id="1_dl1lt"]
+
+[sub_resource type="FontVariation" id="FontVariation_sugp2"]
+variation_opentype = {
+2003265652: 600
+}
+
+[node name="PauseMenu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dl1lt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="SettingsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_sugp2")
+theme_override_font_sizes/font_size = 42
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Back to Game"
+
+[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Restart Level"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="VineBoomButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Vine Boom"
+
+[node name="VineBoomAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_0wkhc")
+volume_db = -8.0
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VineBoomButton" to="." method="_on_vine_boom_button_pressed"]

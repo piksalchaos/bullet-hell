@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8n3kh1ff5dg1"]
+[gd_scene load_steps=11 format=3 uid="uid://c8n3kh1ff5dg1"]
 
 [ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/gui/start_menu/start_menu.gd" id="1_thu50"]
 [ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
@@ -6,11 +6,16 @@
 [ext_resource type="Script" uid="uid://cjjiuxpmibury" path="res://scenes/gui/start_menu/start_menu_visuals.gd" id="3_h61rw"]
 [ext_resource type="AudioStream" uid="uid://dc1tvgtya0sip" path="res://assets/audio/music/Fairytale Waltz.mp3" id="3_m7x51"]
 [ext_resource type="Script" uid="uid://cbm0gbffng0b3" path="res://scenes/gui/start_menu/hover_button.gd" id="4_4v6gu"]
+[ext_resource type="Texture2D" uid="uid://wcsumt2iv7bo" path="res://assets/images/settings_button.png" id="4_hho7w"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="7_rudpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxjfj"]
 atlas = ExtResource("3_fcv5n")
 region = Rect2(128.99179, 387.2588, 778.90137, 427.16022)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76n7r"]
+atlas = ExtResource("4_hho7w")
+region = Rect2(0, 0, 1024, 407.68182)
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -50,11 +55,24 @@ text = "UNNAMED BULLET HELL"
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 0
 offset_left = 70.0
-offset_top = 251.0
+offset_top = 186.0
 offset_right = 428.0
-offset_bottom = 401.0
+offset_bottom = 336.0
 pivot_offset = Vector2(179, 75)
 texture_normal = SubResource("AtlasTexture_nxjfj")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_4v6gu")
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 0
+offset_left = 70.0
+offset_top = 363.0
+offset_right = 428.0
+offset_bottom = 513.0
+pivot_offset = Vector2(179, 75)
+texture_normal = SubResource("AtlasTexture_76n7r")
 ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_4v6gu")
@@ -99,5 +117,6 @@ autoplay = true
 layout_mode = 1
 
 [connection signal="pressed" from="BeginButton" to="." method="_on_begin_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="timeout" from="StartMenuVisuals/RedrawTimer" to="StartMenuVisuals" method="_on_redraw_timer_timeout"]
 [connection signal="finished_transition" from="BlackFadeTransition" to="." method="_on_black_fade_transition_finished_transition"]

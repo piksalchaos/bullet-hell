@@ -11,6 +11,8 @@ extends Node
 @export var max_player_health := 4
 var player_health = 0
 
+signal finished
+
 func _ready() -> void:
 	Globals.bullet_container = bullet_container
 	Globals.enemy_container = enemy_container
@@ -30,5 +32,6 @@ func _on_player_got_hit() -> void:
 		get_tree().call_deferred("reload_current_scene")
 	hud.update_life_heart_count(player_health)
 
-func _on_round_sequencer_tree_exiting() -> void:
-		get_tree().change_scene_to_file("res://scenes/start_menu.tscn")
+func _on_round_sequencer_finished() -> void:
+	queue_free()
+	finished.emit()

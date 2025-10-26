@@ -72,3 +72,6 @@ func _update_action_list(button, event):
 
 func _on_reset_actions_button_pressed() -> void:
 	_create_action_list()
+
+func _on_back_button_pressed() -> void:
+	hide()

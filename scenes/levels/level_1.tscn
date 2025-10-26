@@ -39,6 +39,11 @@ RichTextLabel/fonts/normal_font = SubResource("FontVariation_dnkej")
 process_mode = 1
 script = ExtResource("1_oc4kc")
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_excbq")
+volume_db = -11.0
+autoplay = true
+
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -1
 anchors_preset = 15
@@ -59,6 +64,7 @@ position = Vector2(292, 422)
 [node name="EnemyContainer" type="Node2D" parent="Stage"]
 
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
+is_root_round = true
 
 [node name="StartTimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
@@ -426,14 +432,10 @@ wait_time = 2.0
 
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_excbq")
-volume_db = -11.0
-autoplay = true
-
 [node name="BlackFadeTransition" parent="." instance=ExtResource("17_bahl2")]
 is_transparent = false
 
 [connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
+[connection signal="finished" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_finished"]
 [connection signal="tree_exiting" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_tree_exiting"]
