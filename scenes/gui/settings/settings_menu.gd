@@ -1,7 +1,7 @@
 extends PanelContainer
 const INPUT_BUTTON = preload("uid://b2cd1ymt0c23w")
 
-@onready var action_list: VBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/ActionList
+@onready var action_list: VBoxContainer = $MarginContainer/ScrollContainer/VBoxContainer/ActionList
 
 var is_remapping = false
 var action_to_remap = null

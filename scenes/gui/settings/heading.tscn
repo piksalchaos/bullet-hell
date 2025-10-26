@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://copd1gbs3pcrr"]
+
+[ext_resource type="Theme" uid="uid://dyks8ow05aakk" path="res://resources/settings_theme.tres" id="1_yevjt"]
+
+[sub_resource type="FontVariation" id="FontVariation_yevjt"]
+variation_opentype = {
+2003265652: 400
+}
+
+[node name="Heading" type="Label"]
+theme = ExtResource("1_yevjt")
+theme_override_fonts/font = SubResource("FontVariation_yevjt")
+theme_override_font_sizes/font_size = 32
+text = "Heading"
