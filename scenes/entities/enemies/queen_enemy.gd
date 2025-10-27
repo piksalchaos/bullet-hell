@@ -1,6 +1,7 @@
 extends Node2D
 
 const POSITION_RANGE := Rect2(60, 60, Globals.STAGE_WIDTH-120, Globals.STAGE_HEIGHT*0.3 - 120)
+const STAGE_TWO_POSITION = Vector2(Globals.STAGE_WIDTH*0.5, 200)
 const DEFAULT_TWEEN_ENTER_DURATION := 0.75
 const TWEEN_EXIT_DURATION := 1.5
 
@@ -39,7 +40,6 @@ func next_stage() -> void:
 	if health_component_container.get_child_count() == 0:
 		queue_free()
 		return
-	change_position_and_repeat()
 	current_health_component = health_component_container.get_child(0)
 	current_health_component.show()
 	hitbox_component.health_component = current_health_component
@@ -47,6 +47,12 @@ func next_stage() -> void:
 	
 	current_pattern_emitter = pattern_emitter_container.get_child(0)
 	current_pattern_emitter.begin()
+	
+	if current_pattern_emitter.name == "PatternEmitter2":
+		change_position(STAGE_TWO_POSITION)
+		reposition_timer.stop()
+	else:
+		change_position_and_repeat()
 
 func _on_health_component_defeated():
 	current_health_component.queue_free()

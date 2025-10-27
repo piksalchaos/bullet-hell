@@ -8,7 +8,7 @@ extends Node
 var current_index = 0
 
 func begin():
-	current_index = (current_index + 1) % color_ids_to_choose.size()
 	var color_id = color_ids_to_choose[current_index]
 	for bullet_emitter in bullet_emitters:
 		bullet_emitter.color_id = color_id
+	current_index = (current_index + 1) % color_ids_to_choose.size()

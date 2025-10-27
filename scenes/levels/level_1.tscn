@@ -80,12 +80,6 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
 
-[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
-position = Vector2(286, 78)
-enemy_scene = ExtResource("8_v6ha0")
-
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 
@@ -509,6 +503,12 @@ enemy_scene = ExtResource("12_iwr0g")
 [node name="BaseEnemySpawner3" parent="Stage/RoundSequencer/MixingRound3" instance=ExtResource("7_dga24")]
 position = Vector2(288, 59)
 enemy_scene = ExtResource("12_iwr0g")
+
+[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
+position = Vector2(286, 78)
+enemy_scene = ExtResource("8_v6ha0")
 
 [node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 wait_time = 2.0

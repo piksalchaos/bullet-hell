@@ -216,7 +216,7 @@ volume_db = -3.0
 
 [node name="AbsorbAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("8_1murt")
-volume_db = 5.0
+volume_db = 7.0
 
 [node name="ColorUpgradeAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("8_r4dfn")
