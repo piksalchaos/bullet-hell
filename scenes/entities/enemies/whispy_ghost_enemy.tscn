@@ -28,7 +28,7 @@ texture = ExtResource("2_4oymn")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_vc6me")]
 position = Vector2(0, -44)
-max_health = 4
+max_health = 3
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("5_tn8os")]
 health_component = NodePath("../HealthComponent")
@@ -42,8 +42,8 @@ seconds_per_shot = 2.0
 
 [node name="PatternSpreader" parent="PatternRepeater" instance=ExtResource("8_7i4xg")]
 rotation = 1.5707964
-angle_range = 5.712
-bullet_count = 10
+angle_range = 5.914
+bullet_count = 16
 
 [node name="PatternAimer" parent="PatternRepeater/PatternSpreader" instance=ExtResource("7_hleyb")]
 rotation = 0.0
