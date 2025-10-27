@@ -277,7 +277,7 @@ offset_right = 458.0
 offset_bottom = 115.0
 theme = SubResource("Theme_mm8aj")
 bbcode_enabled = true
-text = "Enemies can only be hit by bullets of their own color"
+text = "Enemies can [b]only[/b] be hit by bullets of their own color"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -433,18 +433,41 @@ enemy_scene = ExtResource("10_mm8aj")
 color_id = 1
 
 [node name="MixingRound2" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-visible = false
 
-[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("5_excbq")]
-position = Vector2(100, 91)
-color_id = 4
+[node name="ControlTransition" parent="Stage/RoundSequencer/MixingRound2" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+visible = true
+modulate = Color(1, 1, 1, 0.72156864)
+node_to_free_with = NodePath("../TimerRound")
 
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("7_dga24")]
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/MixingRound2/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 537.0
+offset_right = 512.0
+offset_bottom = 653.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "while holding [b]S[/b], press [b]SPACE[/b] 
+to cancel your shot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerRound" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("6_iav0o")]
+wait_time = 4.5
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MixingRound2/TimerRound" instance=ExtResource("7_dga24")]
 position = Vector2(292, 58)
 enemy_scene = ExtResource("8_qxy0u")
 color_id = 5
 
-[node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("5_excbq")]
+[node name="TimerRound" parent="Stage/RoundSequencer/MixingRound2/TimerRound" instance=ExtResource("6_iav0o")]
+wait_time = 2.0
+
+[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/MixingRound2/TimerRound/TimerRound" instance=ExtResource("5_excbq")]
+position = Vector2(100, 91)
+color_id = 4
+
+[node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/MixingRound2/TimerRound/TimerRound" instance=ExtResource("5_excbq")]
 position = Vector2(484, 91)
 
 [node name="MinibossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
@@ -473,11 +496,6 @@ color_id = 1
 
 [node name="Round" parent="Stage/RoundSequencer/MixingRound3/RoundSequencer" instance=ExtResource("4_qxy0u")]
 
-[node name="BaseEnemySpawner3" parent="Stage/RoundSequencer/MixingRound3/RoundSequencer/Round" instance=ExtResource("7_dga24")]
-position = Vector2(90, 59)
-enemy_scene = ExtResource("12_iwr0g")
-color_id = 2
-
 [node name="BaseEnemySpawner4" parent="Stage/RoundSequencer/MixingRound3/RoundSequencer/Round" instance=ExtResource("7_dga24")]
 position = Vector2(90, 219)
 enemy_scene = ExtResource("12_iwr0g")
@@ -491,11 +509,6 @@ color_id = 1
 
 [node name="Round" parent="Stage/RoundSequencer/MixingRound3/RoundSequencer2" instance=ExtResource("4_qxy0u")]
 
-[node name="BaseEnemySpawner3" parent="Stage/RoundSequencer/MixingRound3/RoundSequencer2/Round" instance=ExtResource("7_dga24")]
-position = Vector2(486, 59)
-enemy_scene = ExtResource("12_iwr0g")
-color_id = 2
-
 [node name="BaseEnemySpawner4" parent="Stage/RoundSequencer/MixingRound3/RoundSequencer2/Round" instance=ExtResource("7_dga24")]
 position = Vector2(486, 219)
 enemy_scene = ExtResource("12_iwr0g")
@@ -504,13 +517,20 @@ enemy_scene = ExtResource("12_iwr0g")
 position = Vector2(288, 59)
 enemy_scene = ExtResource("12_iwr0g")
 
+[node name="TimerRound3" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
+visible = false
+position = Vector2(1, 0)
+wait_time = 2.5
+
 [node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
 position = Vector2(286, 78)
 enemy_scene = ExtResource("8_v6ha0")
 
 [node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
+visible = false
 wait_time = 2.0
 
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]

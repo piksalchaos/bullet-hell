@@ -70,7 +70,7 @@ max_health = 3
 
 [node name="PatternRepeater" parent="." instance=ExtResource("6_iylbs")]
 delay_time = 1.0
-seconds_per_shot = 1.0
+seconds_per_shot = 1.75
 
 [node name="PatternAimer" parent="PatternRepeater" instance=ExtResource("7_5plm7")]
 
