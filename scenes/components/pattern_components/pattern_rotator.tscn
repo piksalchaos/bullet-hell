@@ -4,6 +4,3 @@
 
 [node name="PatternRotator" type="Node2D" groups=["pattern_components"]]
 script = ExtResource("1_bhb0w")
-cycle_index = 2
-is_ping_pong = true
-is_rotating_ccw = false

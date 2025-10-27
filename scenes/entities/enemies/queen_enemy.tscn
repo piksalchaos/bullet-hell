@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://viesuie2uf77"]
+[gd_scene load_steps=19 format=3 uid="uid://viesuie2uf77"]
 
 [ext_resource type="Script" uid="uid://brmq7sdh02ley" path="res://scenes/entities/enemies/queen_enemy.gd" id="1_d4ipe"]
 [ext_resource type="Texture2D" uid="uid://cl28f8sy7bpov" path="res://assets/images/enemies/queen_enemy.png" id="1_hg0l7"]
@@ -10,10 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="7_5h2jl"]
 [ext_resource type="PackedScene" uid="uid://4fbrwun0d6hr" path="res://scenes/components/pattern_components/pattern_rotator.tscn" id="8_5h2jl"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="8_luy7c"]
+[ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="8_ubs8d"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="9_veyhk"]
 [ext_resource type="PackedScene" uid="uid://dsf8p31orcxl8" path="res://scenes/bullets/homing_thorn_bullet.tscn" id="10_84s3x"]
 [ext_resource type="PackedScene" uid="uid://dbu17cqiyi67h" path="res://scenes/components/pattern_components/colorizers/randomized_colorizer.tscn" id="13_84s3x"]
 [ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="14_ubs8d"]
+[ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="15_bmkkc"]
 [ext_resource type="PackedScene" uid="uid://45i3krdr0eyc" path="res://scenes/bullets/queen_heavy_bullet.tscn" id="15_i50h1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7usf5"]
@@ -23,7 +25,11 @@ height = 80.0
 [node name="QueenEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root")]
 script = ExtResource("1_d4ipe")
 color_component = NodePath("ColorComponent")
-pattern_root = NodePath("PatternEmitter3")
+pattern_root = NodePath("PatternEmitter")
+
+[node name="RepositionTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.35, 0.35)
@@ -40,7 +46,46 @@ shape = SubResource("CapsuleShape2D_7usf5")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_jh2oi")]
 position = Vector2(0, -57)
-max_health = 4
+max_health = 3
+
+[node name="PatternEmitter" parent="." instance=ExtResource("6_i50h1")]
+
+[node name="PatternRepeater" parent="PatternEmitter" instance=ExtResource("6_d4ipe")]
+delay_time = 0.5
+seconds_per_shot = 2.0
+
+[node name="LoopedColorizer" parent="PatternEmitter/PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_ubs8d")]
+bullet_emitters = [NodePath("../PatternRepeater/PatternRotator/PatternSpreader/BulletEmitter")]
+
+[node name="PatternRepeater" parent="PatternEmitter/PatternRepeater" instance=ExtResource("6_d4ipe")]
+seconds_per_shot = 0.2
+max_shots = 3
+
+[node name="PatternRotator" parent="PatternEmitter/PatternRepeater/PatternRepeater" instance=ExtResource("8_5h2jl")]
+angle_range = 0.15
+is_ping_pong = true
+
+[node name="PatternSpreader" parent="PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator" instance=ExtResource("8_luy7c")]
+angle_range = 5.969
+bullet_count = 20
+
+[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator/PatternSpreader" instance=ExtResource("9_veyhk")]
+bullet_scene = ExtResource("15_bmkkc")
+
+[node name="PatternRepeater2" parent="PatternEmitter" instance=ExtResource("6_d4ipe")]
+seconds_per_shot = 4.0
+
+[node name="PatternRandomizer" parent="PatternEmitter/PatternRepeater2" instance=ExtResource("14_ubs8d")]
+angle_range = 3.142
+
+[node name="PatternRepeater" parent="PatternEmitter/PatternRepeater2/PatternRandomizer" instance=ExtResource("6_d4ipe")]
+seconds_per_shot = 0.1
+max_shots = 6
+
+[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater2/PatternRandomizer/PatternRepeater" instance=ExtResource("9_veyhk")]
+rotation = 1.5707964
+bullet_scene = ExtResource("10_84s3x")
+color_id = 6
 
 [node name="PatternEmitter3" parent="." instance=ExtResource("6_i50h1")]
 
@@ -81,3 +126,5 @@ angle_range = 0.85
 position = Vector2(-1, 1)
 rotation = -1.5707964
 bullet_scene = ExtResource("15_i50h1")
+
+[connection signal="timeout" from="RepositionTimer" to="." method="_on_reposition_timer_timeout"]
