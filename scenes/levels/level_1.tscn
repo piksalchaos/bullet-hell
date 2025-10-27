@@ -322,30 +322,22 @@ metadata/_edit_use_anchors_ = true
 wait_time = 4.0
 
 [node name="BaseEnemySpawner" parent="Stage/RoundSequencer/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
-position = Vector2(292, 154)
-enemy_scene = ExtResource("8_qxy0u")
-color_id = 2
-
-[node name="ColorRound3" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/ColorRound3" instance=ExtResource("7_dga24")]
 position = Vector2(143, 134)
 enemy_scene = ExtResource("12_iwr0g")
 
-[node name="BaseEnemySpawner2" parent="Stage/RoundSequencer/ColorRound3" instance=ExtResource("7_dga24")]
+[node name="BaseEnemySpawner2" parent="Stage/RoundSequencer/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
 position = Vector2(440, 167)
 enemy_scene = ExtResource("12_iwr0g")
 color_id = 4
 
-[node name="ColorRound4" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+[node name="ColorRound3" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 
-[node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound4" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+[node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound3" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
 modulate = Color(1, 1, 1, 0.5294118)
 node_to_free_with = NodePath("../MainTimerRound")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/ColorRound4/ControlTransition"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Stage/RoundSequencer/ColorRound3/ControlTransition"]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 551.0
@@ -357,40 +349,40 @@ text = "Hold [b]SHIFT[/b] to move slower"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainTimerRound" parent="Stage/RoundSequencer/ColorRound4" instance=ExtResource("6_iav0o")]
+[node name="MainTimerRound" parent="Stage/RoundSequencer/ColorRound3" instance=ExtResource("6_iav0o")]
 wait_time = 3.0
 
-[node name="TimerRound2" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
+[node name="TimerRound2" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound" instance=ExtResource("6_iav0o")]
 
-[node name="RoundSequencer" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound2" instance=ExtResource("3_iwr0g")]
+[node name="RoundSequencer" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound2" instance=ExtResource("3_iwr0g")]
 
-[node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound2/RoundSequencer" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound2/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(277, 70)
 color_id = 2
 
-[node name="GhostEnemySpawner3" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound2/RoundSequencer" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner3" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound2/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(285, 162)
 color_id = 2
 
-[node name="TimerRound" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound" instance=ExtResource("6_iav0o")]
+[node name="TimerRound" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound" instance=ExtResource("6_iav0o")]
 wait_time = 3.0
 
-[node name="RoundSequencer" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound" instance=ExtResource("3_iwr0g")]
+[node name="RoundSequencer" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound" instance=ExtResource("3_iwr0g")]
 
-[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(94, 93)
 
-[node name="GhostEnemySpawner4" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner4" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound/RoundSequencer" instance=ExtResource("5_excbq")]
 position = Vector2(74, 184)
 color_id = 4
 
-[node name="RoundSequencer2" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound" instance=ExtResource("3_iwr0g")]
+[node name="RoundSequencer2" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound" instance=ExtResource("3_iwr0g")]
 
-[node name="GhostEnemySpawner3" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner3" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
 position = Vector2(475, 95)
 color_id = 4
 
-[node name="GhostEnemySpawner6" parent="Stage/RoundSequencer/ColorRound4/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
+[node name="GhostEnemySpawner6" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
 position = Vector2(490, 183)
 
 [node name="MixingRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]

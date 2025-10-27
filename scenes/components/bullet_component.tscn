@@ -5,7 +5,5 @@
 [node name="BulletComponent" type="Area2D" groups=["bullet_components"]]
 collision_layer = 8
 script = ExtResource("1_c3qan")
-offscreen_distance = null
-bounded_by_top = null
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

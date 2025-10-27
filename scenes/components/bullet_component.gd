@@ -26,3 +26,6 @@ func capture_color_id() -> int:
 
 func disable_color():
 	color_component.disable()
+
+func destroy():
+	parent.queue_free()

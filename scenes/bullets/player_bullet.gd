@@ -28,8 +28,11 @@ func _physics_process(delta: float) -> void:
 	or position.y < -300 or position.y > Globals.STAGE_HEIGHT + RADIUS:
 		queue_free()
 
-func _on_area_entered(area: HitboxComponent) -> void:
-	if not disabled:
+func _on_area_entered(area) -> void:
+	if area is BulletComponent:
+		area.destroy()
+		return
+	if area is HitboxComponent and not disabled:
 		disabled = true
 		area.hit(damage, color_component.color_id)
 		explode()
