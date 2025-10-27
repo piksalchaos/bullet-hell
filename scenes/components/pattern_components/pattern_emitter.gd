@@ -1,4 +1,4 @@
-extends Node2D
+class_name PatternEmitter extends Node2D
 
 func begin() -> void:
 	shoot()

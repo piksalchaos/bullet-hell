@@ -5,16 +5,22 @@ const DEFAULT_TWEEN_ENTER_DURATION := 0.75
 const TWEEN_EXIT_DURATION := 1.5
 
 @export var color_component: ColorComponent
-@export var pattern_root: Node2D
 
 @export var starting_position: Vector2
 @export var initial_color_id: Globals.COLOR_ID
 @export var tween_enter_duration := DEFAULT_TWEEN_ENTER_DURATION
 
 @onready var reposition_timer: Timer = $RepositionTimer
+@onready var stage_transition_timer: Timer = $StageTransitionTimer
+@onready var health_component_container: Node2D = $HealthComponentContainer
+@onready var pattern_emitter_container: Node2D = $PatternEmitterContainer
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
+
+var current_health_component: HealthComponent
+var current_pattern_emitter
 
 func _ready() -> void:
-	change_position(starting_position, begin_attacking, tween_enter_duration)
+	change_position(starting_position, next_stage, tween_enter_duration)
 	color_component.set_color_id(initial_color_id)
 
 func change_position(
@@ -29,10 +35,24 @@ func change_position(
 		 .set_trans(Tween.TRANS_SINE)
 	tween.tween_callback(callback)
 	
-func begin_attacking() -> void:
+func next_stage() -> void:
+	if health_component_container.get_child_count() == 0:
+		queue_free()
+		return
 	change_position_and_repeat()
-	if pattern_root:
-		pattern_root.begin()
+	current_health_component = health_component_container.get_child(0)
+	current_health_component.show()
+	hitbox_component.health_component = current_health_component
+	current_health_component.defeated.connect(_on_health_component_defeated)
+	
+	current_pattern_emitter = pattern_emitter_container.get_child(0)
+	current_pattern_emitter.begin()
+
+func _on_health_component_defeated():
+	current_health_component.queue_free()
+	current_pattern_emitter.queue_free()
+	reposition_timer.stop()
+	stage_transition_timer.start()
 
 func _on_reposition_timer_timeout() -> void:
 	change_position_and_repeat()
@@ -40,3 +60,6 @@ func _on_reposition_timer_timeout() -> void:
 func change_position_and_repeat():
 	var new_position = POSITION_RANGE.position + POSITION_RANGE.size*Vector2(randf(), randf())
 	change_position(new_position, reposition_timer.start)
+
+func _on_stage_transition_timer_timeout() -> void:
+	next_stage()

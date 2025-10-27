@@ -22,13 +22,15 @@
 radius = 24.0
 height = 80.0
 
-[node name="QueenEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root")]
+[node name="QueenEnemy" type="Node2D" node_paths=PackedStringArray("color_component")]
 script = ExtResource("1_d4ipe")
 color_component = NodePath("ColorComponent")
-pattern_root = NodePath("PatternEmitter")
 
 [node name="RepositionTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="StageTransitionTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -38,93 +40,106 @@ texture = ExtResource("1_hg0l7")
 [node name="ColorComponent" parent="." instance=ExtResource("3_4i8ug")]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_fbamo")]
-health_component = NodePath("../HealthComponent")
+health_component = NodePath("../HealthComponentContainer/HealthComponent")
 color_component = NodePath("../ColorComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CapsuleShape2D_7usf5")
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_jh2oi")]
+[node name="HealthComponentContainer" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="HealthComponentContainer" instance=ExtResource("5_jh2oi")]
+visible = false
 position = Vector2(0, -57)
-max_health = 3
+free_parent_on_defeat = false
 
-[node name="PatternEmitter" parent="." instance=ExtResource("6_i50h1")]
+[node name="HealthComponent2" parent="HealthComponentContainer" instance=ExtResource("5_jh2oi")]
+visible = false
+position = Vector2(0, -57)
+max_health = 2
+free_parent_on_defeat = false
 
-[node name="PatternRepeater" parent="PatternEmitter" instance=ExtResource("6_d4ipe")]
+[node name="PatternEmitterContainer" type="Node2D" parent="."]
+
+[node name="PatternEmitter" parent="PatternEmitterContainer" instance=ExtResource("6_i50h1")]
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("6_d4ipe")]
 delay_time = 0.5
 seconds_per_shot = 2.0
 
-[node name="LoopedColorizer" parent="PatternEmitter/PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_ubs8d")]
+[node name="LoopedColorizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_ubs8d")]
 bullet_emitters = [NodePath("../PatternRepeater/PatternRotator/PatternSpreader/BulletEmitter")]
 
-[node name="PatternRepeater" parent="PatternEmitter/PatternRepeater" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" instance=ExtResource("6_d4ipe")]
 seconds_per_shot = 0.2
 max_shots = 3
 
-[node name="PatternRotator" parent="PatternEmitter/PatternRepeater/PatternRepeater" instance=ExtResource("8_5h2jl")]
+[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater" instance=ExtResource("8_5h2jl")]
 angle_range = 0.15
 is_ping_pong = true
 
-[node name="PatternSpreader" parent="PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator" instance=ExtResource("8_luy7c")]
+[node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator" instance=ExtResource("8_luy7c")]
 angle_range = 5.969
 bullet_count = 20
 
-[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator/PatternSpreader" instance=ExtResource("9_veyhk")]
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator/PatternSpreader" instance=ExtResource("9_veyhk")]
 bullet_scene = ExtResource("15_bmkkc")
 
-[node name="PatternRepeater2" parent="PatternEmitter" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater2" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("6_d4ipe")]
+delay_time = 2.0
 seconds_per_shot = 4.0
 
-[node name="PatternRandomizer" parent="PatternEmitter/PatternRepeater2" instance=ExtResource("14_ubs8d")]
+[node name="PatternRandomizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2" instance=ExtResource("14_ubs8d")]
 angle_range = 3.142
 
-[node name="PatternRepeater" parent="PatternEmitter/PatternRepeater2/PatternRandomizer" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2/PatternRandomizer" instance=ExtResource("6_d4ipe")]
 seconds_per_shot = 0.1
 max_shots = 6
 
-[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater2/PatternRandomizer/PatternRepeater" instance=ExtResource("9_veyhk")]
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2/PatternRandomizer/PatternRepeater" instance=ExtResource("9_veyhk")]
 rotation = 1.5707964
 bullet_scene = ExtResource("10_84s3x")
 color_id = 6
 
-[node name="PatternEmitter3" parent="." instance=ExtResource("6_i50h1")]
+[node name="PatternEmitter3" parent="PatternEmitterContainer" instance=ExtResource("6_i50h1")]
 
-[node name="PatternRepeater" parent="PatternEmitter3" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3" instance=ExtResource("6_d4ipe")]
 delay_time = 0.5
 seconds_per_shot = 4.0
 
-[node name="PatternAimer" parent="PatternEmitter3/PatternRepeater" instance=ExtResource("7_5h2jl")]
+[node name="PatternAimer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater" instance=ExtResource("7_5h2jl")]
 position = Vector2(0, 1)
 
-[node name="PatternRepeater" parent="PatternEmitter3/PatternRepeater/PatternAimer" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer" instance=ExtResource("6_d4ipe")]
 max_shots = 3
 
-[node name="PatternRotator" parent="PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("8_5h2jl")]
+[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("8_5h2jl")]
 angle_range = 1.397
 
-[node name="PatternRepeater" parent="PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator" instance=ExtResource("6_d4ipe")]
 seconds_per_shot = 0.1
 max_shots = 3
 
-[node name="PatternSpreader" parent="PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater" instance=ExtResource("8_luy7c")]
+[node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater" instance=ExtResource("8_luy7c")]
 angle_range = 0.5
 
-[node name="BulletEmitter" parent="PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater/PatternSpreader" instance=ExtResource("9_veyhk")]
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater/PatternSpreader" instance=ExtResource("9_veyhk")]
 bullet_scene = ExtResource("10_84s3x")
 color_id = 6
 
-[node name="PatternRepeater2" parent="PatternEmitter3" instance=ExtResource("6_d4ipe")]
+[node name="PatternRepeater2" parent="PatternEmitterContainer/PatternEmitter3" instance=ExtResource("6_d4ipe")]
 seconds_per_shot = 0.15
 
-[node name="RandomizedColorizer" parent="PatternEmitter3/PatternRepeater2" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("13_84s3x")]
+[node name="RandomizedColorizer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("13_84s3x")]
 bullet_emitters = [NodePath("../PatternRandomizer/BulletEmitter")]
 
-[node name="PatternRandomizer" parent="PatternEmitter3/PatternRepeater2" instance=ExtResource("14_ubs8d")]
+[node name="PatternRandomizer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2" instance=ExtResource("14_ubs8d")]
 angle_range = 0.85
 
-[node name="BulletEmitter" parent="PatternEmitter3/PatternRepeater2/PatternRandomizer" instance=ExtResource("9_veyhk")]
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2/PatternRandomizer" instance=ExtResource("9_veyhk")]
 position = Vector2(-1, 1)
 rotation = -1.5707964
 bullet_scene = ExtResource("15_i50h1")
 
 [connection signal="timeout" from="RepositionTimer" to="." method="_on_reposition_timer_timeout"]
+[connection signal="timeout" from="StageTransitionTimer" to="." method="_on_stage_transition_timer_timeout"]

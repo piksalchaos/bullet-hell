@@ -29,10 +29,11 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_area_entered(area) -> void:
+	if disabled: return
 	if area is BulletComponent:
 		area.destroy()
 		return
-	if area is HitboxComponent and not disabled:
+	if area is HitboxComponent:
 		disabled = true
 		area.hit(damage, color_component.color_id)
 		explode()
