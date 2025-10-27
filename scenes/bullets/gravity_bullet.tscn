@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://sfgnun5xvwnh"]
+
+[ext_resource type="Script" uid="uid://cbriinywtsxq" path="res://scenes/bullets/gravity_bullet.gd" id="1_55gjf"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_rl0gb"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="3_wpn1r"]
+
+[node name="GravityBullet" type="Node2D"]
+script = ExtResource("1_55gjf")
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_rl0gb")]
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("3_wpn1r")]
+color_component = NodePath("../ColorComponent")

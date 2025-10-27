@@ -36,7 +36,6 @@ func _on_color_amount_changed(primary_color_index, percentage):
 	color_container.get_child(primary_color_index).percentage = percentage
 
 func _on_selected_color_changed(primary_color_index):
-	#print(found_color_to_mix)
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
 	var cw_offset = (primary_color_index - selected_primary_color_index + primary_color_count) % primary_color_count
 	var ccw_offset = (selected_primary_color_index - primary_color_index + primary_color_count) % primary_color_count

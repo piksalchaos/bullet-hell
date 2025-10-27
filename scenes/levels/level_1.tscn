@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=25 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://ba1bqocppfdjj" path="res://scenes/entities/enemies/electric_ghost_enemy.tscn" id="8_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://viesuie2uf77" path="res://scenes/entities/enemies/queen_enemy.tscn" id="8_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://bii2yamnyxbsi" path="res://scenes/entities/enemies/orb_enemy.tscn" id="10_mm8aj"]
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="12_iwr0g"]
@@ -78,6 +79,12 @@ position = Vector2(292, 422)
 
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
+
+[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
+position = Vector2(286, 78)
+enemy_scene = ExtResource("8_v6ha0")
 
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
@@ -316,6 +323,7 @@ position = Vector2(484, 166)
 color_id = 2
 
 [node name="ColorRound2" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound2" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
@@ -338,6 +346,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="TimerRound" parent="Stage/RoundSequencer/ColorRound2" instance=ExtResource("6_iav0o")]
+visible = false
 wait_time = 4.0
 
 [node name="BaseEnemySpawner" parent="Stage/RoundSequencer/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
@@ -454,6 +463,7 @@ color_id = 1
 ending_position = Vector2(491, 111)
 
 [node name="TimerRound2" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
+visible = false
 position = Vector2(1, 0)
 wait_time = 2.5
 

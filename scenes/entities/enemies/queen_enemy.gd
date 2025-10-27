@@ -5,7 +5,6 @@ const TWEEN_EXIT_DURATION := 1.5
 
 @export var color_component: ColorComponent
 @export var pattern_root: Node2D
-@export var bullet_emitter: BulletEmitter
 
 @export var starting_position: Vector2
 @export var initial_color_id: Globals.COLOR_ID
@@ -14,8 +13,6 @@ const TWEEN_EXIT_DURATION := 1.5
 func _ready() -> void:
 	change_position(starting_position, begin_attacking, tween_enter_duration)
 	color_component.set_color_id(initial_color_id)
-	if bullet_emitter:
-		bullet_emitter.color_id = initial_color_id
 
 func change_position(
 	new_position: Vector2,

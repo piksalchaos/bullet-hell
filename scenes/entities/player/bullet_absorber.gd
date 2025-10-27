@@ -34,7 +34,6 @@ func _on_area_entered(bullet_component: Area2D) -> void:
 	var primary_color_indices_used = add_color_id_to_color_amounts(color_id)
 	if not primary_color_indices_used.is_empty():
 		absorb_audio.play()
-	print(primary_color_indices_used)
 		#if color_amounts_empty_before:
 			#selected_primary_color_index = primary_color_indices_used[0]
 			#SignalBus.selected_color_changed.emit(selected_primary_color_index)

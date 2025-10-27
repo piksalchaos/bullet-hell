@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://4fbrwun0d6hr"]
+
+[ext_resource type="Script" uid="uid://claa26ra0drqu" path="res://scenes/components/pattern_components/pattern_rotator.gd" id="1_bhb0w"]
+
+[node name="PatternRotator" type="Node2D" groups=["pattern_components"]]
+script = ExtResource("1_bhb0w")
+cycle_index = 2
+is_ping_pong = true
+is_rotating_ccw = false
