@@ -2,7 +2,7 @@ extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 const SHOT_COLOR_AMOUNT = 3
-const HEAL_COLOR_AMOUNT = 3
+const HEAL_COLOR_AMOUNT = 1
 const MAX_COLOR_AMOUNT = 9
 var color_amounts: Array[int] = [0, 0, 0]
 var selected_primary_color_index := 0
@@ -11,6 +11,7 @@ var found_color_to_mix := false
 
 var is_mixing = false
 var is_shot_prepared = false
+var is_healing = false
 @onready var heal_timer: Timer = $HealTimer
 @onready var heal_effect: Node2D = $"../HealEffect"
 @onready var aim_line: Node2D = $"../AimLine"
@@ -71,37 +72,38 @@ func increment_primary_color_amount(primary_color_index) -> bool:
 	return true
 
 func _input(event: InputEvent) -> void:
-	if is_mixing:
-		if event.is_action_pressed("switch_right"):
-			mix_color(true)
-		if event.is_action_pressed("switch_left"):
-			mix_color(false)
-	else:
-		if event.is_action_pressed("switch_right"):
-			switch_color(true)
-			switch_left_audio.play()
-		if event.is_action_pressed("switch_left"):
-			switch_color(false)
-			switch_right_audio.play()
-	if event.is_action_pressed("shoot"):
-		is_shot_prepared = true
-		if color_amounts[selected_primary_color_index] >= SHOT_COLOR_AMOUNT:
-			prepare_shot_audio.play()
-		is_mixing = true
-		aim_line.show_with_transition()
-		mixed_primary_color_index = selected_primary_color_index
-		SignalBus.mixed_colors_changed.emit(mixed_primary_color_index)
-	if event.is_action_released("shoot") and is_shot_prepared:
-		is_shot_prepared = false
-		is_mixing = false
-		prepare_shot_audio.stop()
-		aim_line.hide_with_transition()
-		SignalBus.mixed_colors_changed.emit(-1)
-		if found_color_to_mix:
-			set_found_color_to_mix(false)
-			shoot_mixed_bullet()
+	if not is_healing:
+		if is_mixing:
+			if event.is_action_pressed("switch_right"):
+				mix_color(true)
+			if event.is_action_pressed("switch_left"):
+				mix_color(false)
 		else:
-			shoot_bullet()
+			if event.is_action_pressed("switch_right"):
+				switch_color(true)
+				switch_left_audio.play()
+			if event.is_action_pressed("switch_left"):
+				switch_color(false)
+				switch_right_audio.play()
+		if event.is_action_pressed("shoot"):
+			is_shot_prepared = true
+			if color_amounts[selected_primary_color_index] >= SHOT_COLOR_AMOUNT:
+				prepare_shot_audio.play()
+			is_mixing = true
+			aim_line.show_with_transition()
+			mixed_primary_color_index = selected_primary_color_index
+			SignalBus.mixed_colors_changed.emit(mixed_primary_color_index)
+		if event.is_action_released("shoot") and is_shot_prepared:
+			is_shot_prepared = false
+			is_mixing = false
+			prepare_shot_audio.stop()
+			aim_line.hide_with_transition()
+			SignalBus.mixed_colors_changed.emit(-1)
+			if found_color_to_mix:
+				set_found_color_to_mix(false)
+				shoot_mixed_bullet()
+			else:
+				shoot_bullet()
 	
 	if event.is_action_pressed("cancel") and is_shot_prepared:
 		fail_at_color_action()
@@ -113,7 +115,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("heal") and not is_shot_prepared:
 		prepare_heal()
-		
 	if event.is_action_released("heal"):
 		end_heal()
 
@@ -203,7 +204,8 @@ func get_mixed_secondary_color_id() -> Globals.COLOR_ID:
 
 func prepare_heal() -> void:
 	var empty_health = Globals.max_player_health - Globals.player_health
-	if color_amounts.min() > HEAL_COLOR_AMOUNT and empty_health >= 1:
+	if color_amounts.min() >= HEAL_COLOR_AMOUNT and empty_health >= 1:
+		is_healing = true
 		heal_timer.start()
 		heal_effect.start()
 		var tween = create_tween()
@@ -213,10 +215,12 @@ func prepare_heal() -> void:
 func _on_heal_timer_timeout() -> void:
 	Globals.player_health += 1
 	end_heal()
+	heal_effect.emit_success_particles()
 	for i in color_amounts.size():
 		set_color_amount(i, color_amounts[i] - HEAL_COLOR_AMOUNT)
 
 func end_heal() -> void:
+	is_healing = false
 	heal_timer.stop()
 	heal_effect.stop()
 	var tween = create_tween()

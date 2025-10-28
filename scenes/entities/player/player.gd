@@ -50,6 +50,7 @@ func update_animation(velocity_x):
 func hit() -> void:
 	if is_vulnerable:
 		Globals.player_health -= 1
+	bullet_absorber.end_heal()
 	main_sprite.modulate.a = 0.4
 	shadow_sprite.self_modulate.a = 0.15
 	heart_sprite.modulate.a = 0.12
