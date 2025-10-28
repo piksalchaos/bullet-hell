@@ -191,7 +191,7 @@ script = ExtResource("1_g2els")
 
 [node name="BulletAbsorber" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 24
 script = ExtResource("4_42nxq")
 
 [node name="HealTimer" type="Timer" parent="BulletAbsorber"]

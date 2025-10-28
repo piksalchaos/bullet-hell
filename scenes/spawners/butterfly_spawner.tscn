@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://y7rk33nkp4vr"]
+
+[ext_resource type="Script" uid="uid://c0eegovak041d" path="res://scenes/spawners/butterfly_spawner.gd" id="1_6yljf"]
+
+[node name="ButterflySpawner" type="Marker2D" groups=["spawners"]]
+script = ExtResource("1_6yljf")

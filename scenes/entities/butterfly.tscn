@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=3 uid="uid://d4l2pjdrcg7w5"]
+
+[ext_resource type="Script" uid="uid://ckef4eae6k2sa" path="res://scenes/entities/butterfly.gd" id="1_8808o"]
+[ext_resource type="Texture2D" uid="uid://u7hoss46f68v" path="res://assets/images/butterfly.png" id="1_duade"]
+[ext_resource type="Texture2D" uid="uid://d7cpaatpjyc3" path="res://assets/images/heal_particle.png" id="3_c82m3"]
+
+[sub_resource type="Curve" id="Curve_8808o"]
+_data = [Vector2(0.019519523, 0.87500006), 0.0, 0.4504871, 0, 0, Vector2(0.9684684, 0), -2.9390416, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_c82m3"]
+offsets = PackedFloat32Array(0, 0.14333333, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 0.58000004, 0.65700006, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_824xh"]
+offsets = PackedFloat32Array(0, 0.14333333, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.58000004, 0.804, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_muo6c"]
+offsets = PackedFloat32Array(0, 0.14333333, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 0.99300003, 0.58000004, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8808o"]
+atlas = ExtResource("1_duade")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c82m3"]
+atlas = ExtResource("1_duade")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_824xh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8808o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c82m3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_duade"]
+radius = 16.0
+
+[node name="Butterfly" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_8808o")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture = ExtResource("3_c82m3")
+lifetime = 1.5
+emission_shape = 1
+emission_sphere_radius = 18.77
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.0
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_8808o")
+color_ramp = SubResource("Gradient_c82m3")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+texture = ExtResource("3_c82m3")
+lifetime = 1.5
+emission_shape = 1
+emission_sphere_radius = 18.77
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.0
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_8808o")
+color_ramp = SubResource("Gradient_824xh")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+texture = ExtResource("3_c82m3")
+lifetime = 1.5
+emission_shape = 1
+emission_sphere_radius = 18.77
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.0
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_8808o")
+color_ramp = SubResource("Gradient_muo6c")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0.85, 0.85, 1)
+position = Vector2(1, 0)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_824xh")
+autoplay = "default"
+frame_progress = 0.11844632
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_duade")

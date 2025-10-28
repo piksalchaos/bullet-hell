@@ -4,7 +4,6 @@
 
 [node name="ControlTransition" type="Control" groups=["spawners"]]
 visible = false
-modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -28,19 +28,19 @@ var is_healing = false
 @onready var mix_color_audio: AudioStreamPlayer = $MixColorAudio
 @onready var fail_color_action_audio: AudioStreamPlayer = $FailColorActionAudio
 
-func _on_area_entered(bullet_component: Area2D) -> void:
-	var color_id = bullet_component.capture_color_id()
-	#var color_amounts_empty_before = true
-	#for color_amount in color_amounts:
-		#if color_amount > 0: color_amounts_empty_before = false
-	
-	var primary_color_indices_used = add_color_id_to_color_amounts(color_id)
-	if not primary_color_indices_used.is_empty():
-		absorb_audio.play()
-		#if color_amounts_empty_before:
-			#selected_primary_color_index = primary_color_indices_used[0]
-			#SignalBus.selected_color_changed.emit(selected_primary_color_index)
-	bullet_component.color_component.subtract_colors(primary_color_indices_used)
+func _on_area_entered(area: Area2D) -> void:
+	if area is Butterfly:
+		for i in color_amounts.size():
+			set_color_amount(i, MAX_COLOR_AMOUNT)
+		color_max_audio.play()
+		area.destroy()
+	elif area is BulletComponent:
+		var color_id = area.capture_color_id()
+		
+		var primary_color_indices_used = add_color_id_to_color_amounts(color_id)
+		if not primary_color_indices_used.is_empty():
+			absorb_audio.play()
+		area.color_component.subtract_colors(primary_color_indices_used)
 
 func add_color_id_to_color_amounts(color_id: Globals.COLOR_ID) -> Array[Globals.COLOR_ID]:
 	var primary_color_indices_used: Array[Globals.COLOR_ID] = []
