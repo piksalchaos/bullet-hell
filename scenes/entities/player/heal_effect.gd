@@ -7,15 +7,23 @@ const PARTICLE_DISTANCE := 100.0
 @onready var particle_timer: Timer = $ParticleTimer
 @onready var particle_container: Node2D = $ParticleContainer
 @onready var success_particles: CPUParticles2D = $SuccessParticles
+@onready var heal_audio: AudioStreamPlayer = $HealAudio
+@onready var heal_success_audio: AudioStreamPlayer = $HealSuccessAudio
 
 func start():
 	particle_timer.start()
+	particle_container.modulate = Color.WHITE
+	heal_audio.play()
 
 func stop():
 	particle_timer.stop()
+	var tween = create_tween()
+	tween.tween_property(particle_container, "modulate", Color.TRANSPARENT, 0.16)
+	heal_audio.stop()
 
-func emit_success_particles():
+func start_success_effect():
 	success_particles.emitting = true
+	heal_success_audio.play()
 
 func spawn_particle():
 	var particle = CIRCLE_DRAWING.instantiate()

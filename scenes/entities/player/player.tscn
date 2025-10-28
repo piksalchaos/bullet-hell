@@ -195,6 +195,7 @@ collision_mask = 8
 script = ExtResource("4_42nxq")
 
 [node name="HealTimer" type="Timer" parent="BulletAbsorber"]
+wait_time = 1.5
 one_shot = true
 
 [node name="AuraDrawing" type="Node2D" parent="BulletAbsorber"]

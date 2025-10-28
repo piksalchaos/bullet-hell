@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://qx42g2jl247e"]
+[gd_scene load_steps=7 format=3 uid="uid://qx42g2jl247e"]
 
 [ext_resource type="Script" uid="uid://cjtj34t7gcu3e" path="res://scenes/entities/player/heal_effect.gd" id="1_wvtos"]
 [ext_resource type="Texture2D" uid="uid://d7cpaatpjyc3" path="res://assets/images/heal_particle.png" id="2_44v6g"]
+[ext_resource type="AudioStream" uid="uid://c5h71cu64306w" path="res://assets/audio/heal.wav" id="3_a363l"]
+[ext_resource type="AudioStream" uid="uid://c0wmq8naumqc2" path="res://assets/audio/heal_success.wav" id="3_bhhh6"]
 
 [sub_resource type="Curve" id="Curve_bhhh6"]
 _data = [Vector2(0, 0.21428579), 0.0, 1.5938883, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -21,7 +23,7 @@ wait_time = 0.075
 
 [node name="SuccessParticles" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 6
+amount = 12
 texture = ExtResource("2_44v6g")
 lifetime = 0.6
 one_shot = true
@@ -30,7 +32,7 @@ randomness = 1.0
 direction = Vector2(0, -1)
 spread = 180.0
 gravity = Vector2(0, 245)
-initial_velocity_min = 194.45
+initial_velocity_min = 138.89
 initial_velocity_max = 222.22
 damping_min = 50.0
 damping_max = 100.0
@@ -38,5 +40,12 @@ scale_amount_min = 0.25
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_bhhh6")
 color_ramp = SubResource("Gradient_a363l")
+
+[node name="HealAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a363l")
+
+[node name="HealSuccessAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bhhh6")
+volume_db = 3.0
 
 [connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

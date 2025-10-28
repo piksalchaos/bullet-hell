@@ -17,6 +17,7 @@ var input_actions = {
 	"cancel": "Cancel shot",
 	"switch_left": "Switch color left",
 	"switch_right": "Switch color right",
+	"heal": "Heal",
 }
 
 func _ready() -> void:

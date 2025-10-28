@@ -2,7 +2,7 @@ extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 const SHOT_COLOR_AMOUNT = 3
-const HEAL_COLOR_AMOUNT = 1
+const HEAL_COLOR_AMOUNT = 9
 const MAX_COLOR_AMOUNT = 9
 var color_amounts: Array[int] = [0, 0, 0]
 var selected_primary_color_index := 0
@@ -215,7 +215,7 @@ func prepare_heal() -> void:
 func _on_heal_timer_timeout() -> void:
 	Globals.player_health += 1
 	end_heal()
-	heal_effect.emit_success_particles()
+	heal_effect.start_success_effect()
 	for i in color_amounts.size():
 		set_color_amount(i, color_amounts[i] - HEAL_COLOR_AMOUNT)
 

@@ -80,13 +80,6 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
 
-[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
-position = Vector2(286, 78)
-enemy_scene = ExtResource("8_v6ha0")
-
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 
@@ -112,7 +105,6 @@ vertical_alignment = 1
 wait_time = 4.0
 
 [node name="BlossomRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-visible = false
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/BlossomRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
@@ -348,7 +340,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TimerRound" parent="Stage/RoundSequencer/ColorRound2" instance=ExtResource("6_iav0o")]
 visible = false
-wait_time = 4.0
+wait_time = 3.0
 
 [node name="BaseEnemySpawner" parent="Stage/RoundSequencer/ColorRound2/TimerRound" instance=ExtResource("7_dga24")]
 position = Vector2(143, 174)
@@ -419,27 +411,34 @@ position = Vector2(490, 183)
 visible = false
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/MixingRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
-node_to_free_with = NodePath("../BaseEnemySpawner")
+visible = true
+modulate = Color(1, 1, 1, 1)
+node_to_free_with = NodePath("../TimerRound")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/MixingRound/ControlTransition"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 14.0
 offset_right = 512.0
-offset_bottom = 130.0
+offset_bottom = 178.0
 theme = SubResource("Theme_mm8aj")
 bbcode_enabled = true
-text = "Switch colors while holding
-[img=60]assets/images/keyboard/key_s.png[/img] to mix them together"
+text = "while holding [img=60]assets/images/keyboard/key_s.png[/img] :
+switch your color with [img=60]assets/images/keyboard/key_a.png[/img] or [img=60]assets/images/keyboard/key_d.png[/img]
+to [b]mix colors together[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MixingRound" instance=ExtResource("7_dga24")]
-position = Vector2(292, 174)
+[node name="TimerRound" parent="Stage/RoundSequencer/MixingRound" instance=ExtResource("6_iav0o")]
+wait_time = 4.0
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MixingRound/TimerRound" instance=ExtResource("7_dga24")]
+position = Vector2(292, 244)
 enemy_scene = ExtResource("10_mm8aj")
 color_id = 1
 
 [node name="MixingRound2" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+visible = false
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/MixingRound2" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true
@@ -454,8 +453,8 @@ offset_right = 512.0
 offset_bottom = 653.0
 theme = SubResource("Theme_mm8aj")
 bbcode_enabled = true
-text = "while holding [b]S[/b], press [b]SPACE[/b] 
-to cancel your shot"
+text = "while holding [img=60]assets/images/keyboard/key_s.png[/img], press [b]SPACE[/b] 
+to cancel your shot if needed"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -528,6 +527,13 @@ enemy_scene = ExtResource("12_iwr0g")
 visible = false
 position = Vector2(1, 0)
 wait_time = 2.5
+
+[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
+position = Vector2(286, 78)
+enemy_scene = ExtResource("8_v6ha0")
 
 [node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
