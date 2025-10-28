@@ -14,6 +14,8 @@ var levels = [LEVEL_1]
 func create_start_menu():
 	if is_instance_valid(start_menu): return
 	start_menu = START_MENU.instantiate()
+	start_menu.ready_to_begin.connect(_on_start_menu_ready_to_begin)
+	start_menu.ready_to_open_settings.connect(_on_start_menu_ready_to_open_settings)
 	add_child(start_menu)
 
 func is_playing_level():

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://qx42g2jl247e"]
+
+[ext_resource type="Script" uid="uid://cjtj34t7gcu3e" path="res://scenes/entities/player/heal_effect.gd" id="1_wvtos"]
+
+[node name="HealEffect" type="Node2D"]
+script = ExtResource("1_wvtos")
+
+[node name="ParticleTimer" type="Timer" parent="."]
+wait_time = 0.08
+
+[node name="ParticleContainer" type="Node2D" parent="."]
+
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

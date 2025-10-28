@@ -22,7 +22,6 @@ func begin() -> void:
 			cycle_index += 1
 		else:
 			cycle_index = cycle_bullet_count - 1
-	print(cycle_index)
 
 func shoot() -> void:
 	for emitter in get_children():

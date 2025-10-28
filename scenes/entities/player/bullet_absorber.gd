@@ -2,15 +2,17 @@ extends Area2D
 
 const PLAYER_BULLET = preload("res://scenes/bullets/player_bullet.tscn")
 const SHOT_COLOR_AMOUNT = 3
+const HEAL_COLOR_AMOUNT = 3
 const MAX_COLOR_AMOUNT = 9
-var color_amounts := [0, 0, 0]
+var color_amounts: Array[int] = [0, 0, 0]
 var selected_primary_color_index := 0
 var mixed_primary_color_index := 0
 var found_color_to_mix := false
 
 var is_mixing = false
 var is_shot_prepared = false
-@onready var bullet_timer: Timer = $BulletTimer
+@onready var heal_timer: Timer = $HealTimer
+@onready var heal_effect: Node2D = $"../HealEffect"
 @onready var aim_line: Node2D = $"../AimLine"
 
 @onready var shoot_audio: AudioStreamPlayer = $ShootAudio
@@ -100,6 +102,7 @@ func _input(event: InputEvent) -> void:
 			shoot_mixed_bullet()
 		else:
 			shoot_bullet()
+	
 	if event.is_action_pressed("cancel") and is_shot_prepared:
 		fail_at_color_action()
 		is_shot_prepared = false
@@ -107,6 +110,12 @@ func _input(event: InputEvent) -> void:
 		set_found_color_to_mix(false)
 		aim_line.hide_with_transition()
 		SignalBus.mixed_colors_changed.emit(-1)
+	
+	if event.is_action_pressed("heal") and not is_shot_prepared:
+		prepare_heal()
+		
+	if event.is_action_released("heal"):
+		end_heal()
 
 func get_adjacent_color_index(is_right: bool = true) -> int:
 	var primary_color_count = Globals.PRIMARY_COLORS.size()
@@ -143,6 +152,7 @@ func shoot_bullet():
 	var bullet = PLAYER_BULLET.instantiate()
 	bullet.initial_color_id = Globals.PRIMARY_COLORS[selected_primary_color_index]
 	bullet.position = get_parent().position
+	@warning_ignore("integer_division")
 	bullet.damage = (color_amount - final_color_amount) / SHOT_COLOR_AMOUNT
 	Globals.bullet_container.add_child(bullet)
 
@@ -165,6 +175,7 @@ func shoot_mixed_bullet():
 	Globals.bullet_container.add_child(bullet)
 
 func get_color_amount_bullet_subtractor(primary_color_index):
+	@warning_ignore("integer_division")
 	return color_amounts[primary_color_index]/SHOT_COLOR_AMOUNT * SHOT_COLOR_AMOUNT
 
 func set_color_amount(primary_color_index: int, new_color_amount: int):
@@ -179,8 +190,6 @@ func fail_at_color_action():
 	fail_color_action_audio.play()
 	SignalBus.cannot_perform_color_action.emit()
 
-func _on_bullet_timer_timeout() -> void:
-	shoot_bullet()
 
 func get_mixed_secondary_color_id() -> Globals.COLOR_ID:
 	var bullet_color_id: Globals.COLOR_ID
@@ -191,3 +200,25 @@ func get_mixed_secondary_color_id() -> Globals.COLOR_ID:
 			bullet_color_id = secondary_color_id
 			break
 	return bullet_color_id
+
+func prepare_heal() -> void:
+	var empty_health = Globals.max_player_health - Globals.player_health
+	if color_amounts.min() > HEAL_COLOR_AMOUNT and empty_health >= 1:
+		heal_timer.start()
+		heal_effect.start()
+		var tween = create_tween()
+		tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+		monitoring = false
+
+func _on_heal_timer_timeout() -> void:
+	Globals.player_health += 1
+	end_heal()
+	for i in color_amounts.size():
+		set_color_amount(i, color_amounts[i] - HEAL_COLOR_AMOUNT)
+
+func end_heal() -> void:
+	heal_timer.stop()
+	heal_effect.stop()
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1, 1), 0.25).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	monitoring = true

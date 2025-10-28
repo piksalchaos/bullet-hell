@@ -1,10 +1,11 @@
-[gd_scene load_steps=46 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=47 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
 [ext_resource type="Texture2D" uid="uid://oukxw7ad0r61" path="res://assets/images/heart.png" id="3_1ie0h"]
 [ext_resource type="Script" uid="uid://b0nh6p70cv0b3" path="res://scenes/entities/player/aura_drawing.gd" id="3_5sj0x"]
 [ext_resource type="Script" uid="uid://dqhtil1yqb665" path="res://scenes/entities/player/aim_line.gd" id="3_18p7g"]
+[ext_resource type="PackedScene" uid="uid://qx42g2jl247e" path="res://scenes/entities/player/heal_effect.tscn" id="3_wghkl"]
 [ext_resource type="Script" uid="uid://cs734ayyynx5e" path="res://scenes/entities/player/bullet_absorber.gd" id="4_42nxq"]
 [ext_resource type="AudioStream" uid="uid://dxh85agqkp0lf" path="res://assets/audio/shoot.wav" id="5_bjvvg"]
 [ext_resource type="AudioStream" uid="uid://bjcjwufid7usf" path="res://assets/audio/switch_left.wav" id="6_8akj5"]
@@ -193,14 +194,14 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_42nxq")
 
+[node name="HealTimer" type="Timer" parent="BulletAbsorber"]
+one_shot = true
+
 [node name="AuraDrawing" type="Node2D" parent="BulletAbsorber"]
 script = ExtResource("3_5sj0x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletAbsorber"]
 shape = SubResource("CircleShape2D_1ie0h")
-
-[node name="BulletTimer" type="Timer" parent="BulletAbsorber"]
-wait_time = 0.2
 
 [node name="ShootAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("5_bjvvg")
@@ -316,6 +317,8 @@ scale_amount_curve = SubResource("Curve_fg2wu")
 color_ramp = SubResource("Gradient_fg2wu")
 hue_variation_curve = SubResource("Curve_7dqom")
 
+[node name="HealEffect" parent="." instance=ExtResource("3_wghkl")]
+
 [connection signal="area_entered" from="BulletAbsorber" to="BulletAbsorber" method="_on_area_entered"]
-[connection signal="timeout" from="BulletAbsorber/BulletTimer" to="BulletAbsorber" method="_on_bullet_timer_timeout"]
+[connection signal="timeout" from="BulletAbsorber/HealTimer" to="BulletAbsorber" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

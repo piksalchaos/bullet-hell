@@ -20,8 +20,6 @@ const SLOW_SPEED := 120.0
 var is_active = false
 var is_on_cooldown = false
 
-signal got_hit()
-
 func _physics_process(delta: float) -> void:
 	if not is_active: return
 	var x_direction = Input.get_axis("left", "right")
@@ -51,7 +49,7 @@ func update_animation(velocity_x):
 
 func hit() -> void:
 	if is_vulnerable:
-		got_hit.emit()
+		Globals.player_health -= 1
 	main_sprite.modulate.a = 0.4
 	shadow_sprite.self_modulate.a = 0.15
 	heart_sprite.modulate.a = 0.12

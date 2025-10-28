@@ -80,6 +80,13 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
 
+[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+visible = false
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
+position = Vector2(286, 78)
+enemy_scene = ExtResource("8_v6ha0")
+
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 
@@ -522,13 +529,6 @@ visible = false
 position = Vector2(1, 0)
 wait_time = 2.5
 
-[node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-visible = false
-
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
-position = Vector2(286, 78)
-enemy_scene = ExtResource("8_v6ha0")
-
 [node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 wait_time = 2.0
@@ -538,7 +538,6 @@ wait_time = 2.0
 [node name="BlackFadeTransition" parent="." instance=ExtResource("17_bahl2")]
 is_transparent = false
 
-[connection signal="got_hit" from="Stage/Player" to="." method="_on_player_got_hit"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
 [connection signal="finished" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_finished"]
 [connection signal="tree_exiting" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_tree_exiting"]
