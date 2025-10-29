@@ -31,7 +31,8 @@ func change_position(
 	tween.tween_callback(callback)
 	
 func begin_attacking() -> void:
-	pattern_repeater.begin()
+	if is_instance_valid(pattern_repeater):
+		pattern_repeater.begin()
 	
 func _on_exit_timer_timeout() -> void:
 	var new_position = Vector2(

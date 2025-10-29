@@ -16,12 +16,17 @@ const TWEEN_EXIT_DURATION := 1.5
 @onready var health_component_container: Node2D = $HealthComponentContainer
 @onready var pattern_emitter_container: Node2D = $PatternEmitterContainer
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var death_particles: CPUParticles2D = $DeathParticles
+@onready var death_circle_drawing: Node2D = $DeathCircleDrawing
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var boss_die_audio: AudioStreamPlayer = $BossDieAudio
+@onready var boss_explode_audio: AudioStreamPlayer = $BossExplodeAudio
 
 var current_health_component: HealthComponent
 var current_pattern_emitter
 
 func _ready() -> void:
-	change_position(starting_position, next_stage, tween_enter_duration)
+	change_position(starting_position, next_stage, 5)
 	color_component.set_color_id(initial_color_id)
 
 func change_position(
@@ -38,7 +43,6 @@ func change_position(
 	
 func next_stage() -> void:
 	if health_component_container.get_child_count() == 0:
-		queue_free()
 		return
 	current_health_component = health_component_container.get_child(0)
 	current_health_component.show()
@@ -47,6 +51,10 @@ func next_stage() -> void:
 	
 	current_pattern_emitter = pattern_emitter_container.get_child(0)
 	current_pattern_emitter.begin()
+	
+	if current_pattern_emitter.name == "PatternEmitter":
+		hitbox_component.monitorable = true
+		hitbox_component.set_deferred("monitoring", true)
 	
 	if current_pattern_emitter.name == "PatternEmitter2":
 		change_position(STAGE_TWO_POSITION)
@@ -69,3 +77,22 @@ func change_position_and_repeat():
 
 func _on_stage_transition_timer_timeout() -> void:
 	next_stage()
+
+func _on_health_component_3_defeated() -> void:
+	reposition_timer.stop()
+	death_particles.emitting = true
+	boss_die_audio.play()
+	var tween = create_tween()
+	tween.set_parallel()
+	tween.tween_property(self, "modulate", Color.WHITE, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(death_circle_drawing, "modulate", Color.WHITE, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	var radius_tween = create_tween()
+	radius_tween.tween_property(death_circle_drawing, "radius", 60, 1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	radius_tween.tween_callback(func():
+		sprite_2d.visible = false
+		death_particles.emitting = false
+		boss_explode_audio.play()
+	)
+	radius_tween.tween_property(death_circle_drawing, "radius", 200, 1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	radius_tween.parallel().tween_property(self, "modulate", Color.TRANSPARENT, 1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	radius_tween.tween_callback(queue_free)

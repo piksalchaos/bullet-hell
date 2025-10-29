@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://viesuie2uf77"]
+[gd_scene load_steps=26 format=3 uid="uid://viesuie2uf77"]
 
 [ext_resource type="Script" uid="uid://brmq7sdh02ley" path="res://scenes/entities/enemies/queen_enemy.gd" id="1_d4ipe"]
 [ext_resource type="Texture2D" uid="uid://cl28f8sy7bpov" path="res://assets/images/enemies/queen_enemy.png" id="1_hg0l7"]
@@ -18,10 +18,21 @@
 [ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="14_ubs8d"]
 [ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="15_bmkkc"]
 [ext_resource type="PackedScene" uid="uid://45i3krdr0eyc" path="res://scenes/bullets/queen_heavy_bullet.tscn" id="15_i50h1"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="19_pituj"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="20_lgrha"]
+[ext_resource type="AudioStream" uid="uid://bbf7rhadkgwfn" path="res://assets/audio/boss_die.wav" id="21_qh7nq"]
+[ext_resource type="AudioStream" uid="uid://c5sksln2oqfrb" path="res://assets/audio/boss_explode.wav" id="22_5b63c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7usf5"]
 radius = 24.0
 height = 80.0
+
+[sub_resource type="Curve" id="Curve_pituj"]
+_data = [Vector2(0, 0), 0.0, 2.0025778, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lgrha"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="QueenEnemy" type="Node2D" node_paths=PackedStringArray("color_component")]
 script = ExtResource("1_d4ipe")
@@ -41,8 +52,11 @@ texture = ExtResource("1_hg0l7")
 [node name="ColorComponent" parent="." instance=ExtResource("3_4i8ug")]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_fbamo")]
+monitoring = false
+monitorable = false
 health_component = NodePath("../HealthComponentContainer/HealthComponent")
 color_component = NodePath("../ColorComponent")
+disable_on_defeat = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CapsuleShape2D_7usf5")
@@ -53,19 +67,16 @@ shape = SubResource("CapsuleShape2D_7usf5")
 visible = false
 position = Vector2(0, -57)
 max_health = 3
-free_parent_on_defeat = false
 
 [node name="HealthComponent2" parent="HealthComponentContainer" instance=ExtResource("5_jh2oi")]
 visible = false
 position = Vector2(0, -57)
 max_health = 5
-free_parent_on_defeat = false
 
 [node name="HealthComponent3" parent="HealthComponentContainer" instance=ExtResource("5_jh2oi")]
 visible = false
 position = Vector2(0, -57)
 max_health = 3
-free_parent_on_defeat = false
 
 [node name="PatternEmitterContainer" type="Node2D" parent="."]
 
@@ -210,5 +221,33 @@ position = Vector2(-1, 1)
 rotation = -1.5707964
 bullet_scene = ExtResource("15_i50h1")
 
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "pattern_root", "sprite") instance=ExtResource("19_pituj")]
+hitbox_component = NodePath("../HitboxComponent")
+pattern_root = NodePath("../PatternEmitterContainer")
+sprite = NodePath("../Sprite2D")
+
+[node name="DeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 350.0
+scale_amount_min = 16.67
+scale_amount_max = 56.56
+scale_amount_curve = SubResource("Curve_pituj")
+color_ramp = SubResource("Gradient_lgrha")
+
+[node name="DeathCircleDrawing" parent="." instance=ExtResource("20_lgrha")]
+modulate = Color(1, 1, 1, 0)
+radius = 0.1
+
+[node name="BossDieAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_qh7nq")
+
+[node name="BossExplodeAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_5b63c")
+
 [connection signal="timeout" from="RepositionTimer" to="." method="_on_reposition_timer_timeout"]
 [connection signal="timeout" from="StageTransitionTimer" to="." method="_on_stage_transition_timer_timeout"]
+[connection signal="defeated" from="HealthComponentContainer/HealthComponent3" to="." method="_on_health_component_3_defeated"]

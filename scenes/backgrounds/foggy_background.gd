@@ -31,7 +31,6 @@ func _process(delta: float) -> void:
 			or cloud.position.x > Globals.STAGE_WIDTH + CLOUD_OFFSCREEN_DISTANCE
 		):
 			cloud.queue_free()
-			print('fred')
 
 func create_cloud_position() -> Vector2:
 	var cloud_position := Vector2(-CLOUD_OFFSCREEN_DISTANCE, -CLOUD_OFFSCREEN_DISTANCE)

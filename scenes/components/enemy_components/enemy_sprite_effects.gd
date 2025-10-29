@@ -13,8 +13,10 @@ var vibration_amount := 0.0
 @export var free_parent_on_fade_end: bool = true
 
 func _ready() -> void:
-	hitbox_component.got_hit.connect(_on_hitbox_component_got_hit)
-	health_component.defeated.connect(_on_health_component_defeated)
+	if hitbox_component:
+		hitbox_component.got_hit.connect(_on_hitbox_component_got_hit)
+	if health_component:
+		health_component.defeated.connect(_on_health_component_defeated)
 
 func _on_health_component_defeated():
 	var scale_tween = create_tween()
