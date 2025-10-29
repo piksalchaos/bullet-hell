@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq7yid8wyu7q"]
+
+[ext_resource type="Script" uid="uid://bka0lgs05p34b" path="res://scenes/components/enemy_components/enemy_sprite_effects.gd" id="1_edum5"]
+
+[node name="EnemySpriteEffects" type="Node2D"]
+script = ExtResource("1_edum5")

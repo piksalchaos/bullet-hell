@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bii2yamnyxbsi"]
+[gd_scene load_steps=17 format=3 uid="uid://bii2yamnyxbsi"]
 
 [ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_k5rli"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_x5bsi"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="8_5plm7"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_k2gyc"]
 [ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="9_cuhdf"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="11_k2gyc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tyrw6"]
 atlas = ExtResource("3_4ir1o")
@@ -84,3 +85,8 @@ max_shots = 6
 
 [node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("8_k2gyc")]
 bullet_scene = ExtResource("9_cuhdf")
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("11_k2gyc")]
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../AnimatedSprite2D")

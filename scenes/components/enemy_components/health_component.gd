@@ -3,7 +3,7 @@ class_name HealthComponent extends Node
 const HEART_TEXTURE = preload("uid://ca7ucvqcibr7o")
 const HEALTH_UNIT_WIDTH = 12.0
 @export var max_health: int = 1
-@export var free_parent_on_defeat: bool = true
+@export var free_parent_on_defeat: bool = false
 @onready var health = max_health
 
 @onready var heart_container: HBoxContainer = $HeartContainer

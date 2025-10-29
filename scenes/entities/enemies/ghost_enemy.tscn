@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgmdfxt0ngpi6"]
+[gd_scene load_steps=16 format=3 uid="uid://dgmdfxt0ngpi6"]
 
 [ext_resource type="Script" uid="uid://ynoen8cogpu6" path="res://scenes/entities/enemies/ghost_enemy.gd" id="1_h5v6m"]
 [ext_resource type="Texture2D" uid="uid://ciwk430dbpqv5" path="res://assets/images/enemies/ghost_enemy.png" id="2_qvsyn"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="8_qvsyn"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vcyrx"]
 [ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="10_qvsyn"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="11_vcyrx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvsyn"]
 atlas = ExtResource("2_qvsyn")
@@ -74,5 +75,10 @@ seconds_per_shot = 1.75
 [node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternSpreader" instance=ExtResource("8_vcyrx")]
 position = Vector2(4.371139e-08, 1)
 bullet_scene = ExtResource("10_qvsyn")
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("11_vcyrx")]
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../AnimatedSprite2D")
 
 [connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]

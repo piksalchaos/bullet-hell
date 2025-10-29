@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn0cnxlnduxm7"]
+[gd_scene load_steps=12 format=3 uid="uid://dn0cnxlnduxm7"]
 
 [ext_resource type="Script" uid="uid://mhrmws40cvwd" path="res://scenes/entities/enemies/dummy_enemy.gd" id="1_ummet"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_4b57w"]
 [ext_resource type="Texture2D" uid="uid://d3chwqdylu5q7" path="res://assets/images/enemies/dummy_enemy.png" id="2_imctr"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="3_jtsvo"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_xwkor"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_glh40"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_glh40"]
@@ -20,6 +21,11 @@ script = ExtResource("1_ummet")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_imctr")
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component") instance=ExtResource("3_jtsvo")]
+scale = Vector2(0.25, 0.25)
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
 
 [node name="ColorComponent" parent="." instance=ExtResource("2_4b57w")]
 

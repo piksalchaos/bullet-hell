@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4h4q8uea4l2x"]
+[gd_scene load_steps=23 format=3 uid="uid://c4h4q8uea4l2x"]
 
 [ext_resource type="Script" uid="uid://coswjkrcjpnhd" path="res://scenes/entities/enemies/frolicker_ghost_enemy.gd" id="1_kdqb8"]
 [ext_resource type="Texture2D" uid="uid://di30i84l2ucut" path="res://assets/images/enemies/frolicker_ghost_enemy.png" id="2_vxwpj"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_bn713"]
 [ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="10_vkpqe"]
 [ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="11_vkpqe"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="12_sc6tb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3j2b"]
 atlas = ExtResource("2_vxwpj")
@@ -131,3 +132,8 @@ rotation = 1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 bullet_scene = ExtResource("10_vkpqe")
 color_id = 2
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("12_sc6tb")]
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../AnimatedSprite2D")

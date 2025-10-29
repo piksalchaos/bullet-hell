@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cr8oijio5o8v5"]
+[gd_scene load_steps=13 format=3 uid="uid://cr8oijio5o8v5"]
 
 [ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_0e3gx"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_00abf"]
 [ext_resource type="Texture2D" uid="uid://cdincgvjyb86r" path="res://assets/images/enemies/whispy_ghost.png" id="2_4oymn"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="2_lxf7f"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="4_vc6me"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="5_tn8os"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_vc6me"]
@@ -20,6 +21,11 @@ color_component = NodePath("ColorComponent")
 pattern_root = NodePath("PatternRepeater")
 bullet_emitter = NodePath("PatternRepeater/PatternSpreader/PatternAimer/BulletEmitter")
 
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("2_lxf7f")]
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Sprite2D")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_4oymn")
@@ -29,6 +35,7 @@ texture = ExtResource("2_4oymn")
 [node name="HealthComponent" parent="." instance=ExtResource("4_vc6me")]
 position = Vector2(0, -44)
 max_health = 3
+free_parent_on_defeat = false
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("5_tn8os")]
 health_component = NodePath("../HealthComponent")
