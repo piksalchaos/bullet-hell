@@ -76,9 +76,10 @@ seconds_per_shot = 1.75
 position = Vector2(4.371139e-08, 1)
 bullet_scene = ExtResource("10_qvsyn")
 
-[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("11_vcyrx")]
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("11_vcyrx")]
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternRepeater")
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("12_4qyjx")]

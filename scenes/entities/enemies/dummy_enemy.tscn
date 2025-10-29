@@ -22,10 +22,12 @@ script = ExtResource("1_ummet")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_imctr")
 
-[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component") instance=ExtResource("3_jtsvo")]
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("3_jtsvo")]
 scale = Vector2(0.25, 0.25)
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternRepeater")
+sprite = NodePath("../Sprite2D")
 
 [node name="ColorComponent" parent="." instance=ExtResource("2_4b57w")]
 

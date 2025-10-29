@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4h4q8uea4l2x"]
+[gd_scene load_steps=25 format=3 uid="uid://c4h4q8uea4l2x"]
 
 [ext_resource type="Script" uid="uid://coswjkrcjpnhd" path="res://scenes/entities/enemies/frolicker_ghost_enemy.gd" id="1_kdqb8"]
 [ext_resource type="Texture2D" uid="uid://di30i84l2ucut" path="res://assets/images/enemies/frolicker_ghost_enemy.png" id="2_vxwpj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_o0pnq"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_77o0b"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="6_l3j2b"]
+[ext_resource type="PackedScene" uid="uid://bbnpupe0f58tx" path="res://scenes/components/pattern_components/pattern_emitter.tscn" id="6_vq4g0"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vkpqe"]
 [ext_resource type="PackedScene" uid="uid://dsf8p31orcxl8" path="res://scenes/bullets/homing_thorn_bullet.tscn" id="9_l3j2b"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_bn713"]
@@ -81,12 +82,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxwpj"]
 radius = 46.0
 
-[node name="FrolickerGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "pattern_root_2", "bullet_emitter")]
+[node name="FrolickerGhostEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter")]
 script = ExtResource("1_kdqb8")
 color_component = NodePath("ColorComponent")
-pattern_root = NodePath("PatternRepeater")
-pattern_root_2 = NodePath("PatternRepeater2")
-bullet_emitter = NodePath("PatternRepeater/PatternSpreader/BulletEmitter")
+pattern_root = NodePath("PatternEmitter")
+bullet_emitter = NodePath("PatternEmitter/PatternRepeater/PatternSpreader/BulletEmitter")
 initial_color_id = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -109,34 +109,37 @@ shape = SubResource("CircleShape2D_vxwpj")
 position = Vector2(0, -55)
 max_health = 6
 
-[node name="PatternRepeater" parent="." instance=ExtResource("6_l3j2b")]
+[node name="PatternEmitter" parent="." instance=ExtResource("6_vq4g0")]
+
+[node name="PatternRepeater" parent="PatternEmitter" instance=ExtResource("6_l3j2b")]
 delay_time = 4.0
 seconds_per_shot = 3.5
 
-[node name="PatternSpreader" parent="PatternRepeater" instance=ExtResource("10_bn713")]
+[node name="PatternSpreader" parent="PatternEmitter/PatternRepeater" instance=ExtResource("10_bn713")]
 angle_range = 5.655
 bullet_count = 10
 
-[node name="BulletEmitter" parent="PatternRepeater/PatternSpreader" instance=ExtResource("8_vkpqe")]
+[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternSpreader" instance=ExtResource("8_vkpqe")]
 rotation = 1.5707964
 bullet_scene = ExtResource("9_l3j2b")
 
-[node name="PatternRepeater2" parent="." instance=ExtResource("6_l3j2b")]
+[node name="PatternRepeater2" parent="PatternEmitter" instance=ExtResource("6_l3j2b")]
 delay_time = 1.5
 seconds_per_shot = 0.15
 
-[node name="PatternRandomizer" parent="PatternRepeater2" instance=ExtResource("11_vkpqe")]
+[node name="PatternRandomizer" parent="PatternEmitter/PatternRepeater2" instance=ExtResource("11_vkpqe")]
 angle_range = 0.962
 
-[node name="BulletEmitter" parent="PatternRepeater2/PatternRandomizer" instance=ExtResource("8_vkpqe")]
+[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater2/PatternRandomizer" instance=ExtResource("8_vkpqe")]
 rotation = 1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 bullet_scene = ExtResource("10_vkpqe")
 color_id = 2
 
-[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("12_sc6tb")]
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("12_sc6tb")]
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternEmitter")
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("13_4wmut")]

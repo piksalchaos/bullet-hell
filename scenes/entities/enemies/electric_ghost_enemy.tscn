@@ -83,9 +83,10 @@ max_shots = 3
 [node name="BulletEmitter" parent="PatternRepeater/PatternAimer/PatternRepeater/PatternRandomizer" instance=ExtResource("8_gjgqk")]
 bullet_scene = ExtResource("10_8xymb")
 
-[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("12_5j65i")]
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("12_5j65i")]
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternRepeater")
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("13_jtqpr")]

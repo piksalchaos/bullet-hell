@@ -8,6 +8,7 @@ var vibration_amount := 0.0
 
 @export var hitbox_component: HitboxComponent
 @export var health_component: HealthComponent
+@export var pattern_root: Node2D
 @export var sprite: Node2D
 @export var free_parent_on_fade_end: bool = true
 
@@ -24,6 +25,8 @@ func _on_health_component_defeated():
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	if free_parent_on_fade_end:
 		transparency_tween.tween_callback(get_parent().queue_free)
+	if pattern_root:
+		pattern_root.queue_free()
 
 func _on_hitbox_component_got_hit():
 	vibration_amount = MAX_VIBRATION_AMOUNT

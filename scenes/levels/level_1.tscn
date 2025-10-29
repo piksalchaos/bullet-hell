@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=27 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bii2yamnyxbsi" path="res://scenes/entities/enemies/orb_enemy.tscn" id="10_mm8aj"]
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="12_iwr0g"]
+[ext_resource type="PackedScene" uid="uid://db53bja3d4iq0" path="res://scenes/spawners/foggy_background_spawner.tscn" id="12_mkypq"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="17_bahl2"]
 [ext_resource type="PackedScene" uid="uid://y7rk33nkp4vr" path="res://scenes/spawners/butterfly_spawner.tscn" id="17_gmpev"]
 
@@ -68,7 +69,9 @@ texture = SubResource("GradientTexture2D_v6ha0")
 [node name="Stage" type="Node2D" parent="."]
 position = Vector2(176, 0)
 
-[node name="ForestBackground" parent="Stage" instance=ExtResource("3_np2pn")]
+[node name="BackgroundContainer" type="Node2D" parent="Stage"]
+
+[node name="ForestBackground" parent="Stage/BackgroundContainer" instance=ExtResource("3_np2pn")]
 z_index = -1
 
 [node name="Player" parent="Stage" instance=ExtResource("2_s8va5")]
@@ -555,6 +558,8 @@ enemy_scene = ExtResource("12_iwr0g")
 [node name="BaseEnemySpawner3" parent="Stage/RoundSequencer/MixingRound3" instance=ExtResource("7_dga24")]
 position = Vector2(288, 59)
 enemy_scene = ExtResource("12_iwr0g")
+
+[node name="FoggyBackgroundSpawner" parent="Stage/RoundSequencer" instance=ExtResource("12_mkypq")]
 
 [node name="RecoveryRound2" parent="Stage/RoundSequencer" instance=ExtResource("3_iwr0g")]
 visible = false

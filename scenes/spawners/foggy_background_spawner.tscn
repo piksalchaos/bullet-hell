@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db53bja3d4iq0"]
+
+[ext_resource type="Script" uid="uid://d0ol245qbamj6" path="res://scenes/spawners/foggy_background_spawner.gd" id="1_ffq5j"]
+
+[node name="FoggyBackgroundSpawner" type="Node" groups=["spawners"]]
+script = ExtResource("1_ffq5j")

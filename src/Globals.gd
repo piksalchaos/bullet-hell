@@ -33,6 +33,7 @@ var player_position: Vector2
 var bullet_container: Node2D
 var enemy_container: Node2D
 var collectible_container: Node2D
+var background_container: Node2D
 
 var max_player_health: int = 4
 var player_health: int = max_player_health:

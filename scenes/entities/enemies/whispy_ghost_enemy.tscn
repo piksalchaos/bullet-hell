@@ -22,9 +22,10 @@ color_component = NodePath("ColorComponent")
 pattern_root = NodePath("PatternRepeater")
 bullet_emitter = NodePath("PatternRepeater/PatternSpreader/PatternAimer/BulletEmitter")
 
-[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "sprite") instance=ExtResource("2_lxf7f")]
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("2_lxf7f")]
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternRepeater")
 sprite = NodePath("../Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -6,6 +6,7 @@ extends Node
 @onready var enemy_container: Node2D = $Stage/EnemyContainer
 @onready var collectible_container: Node2D = $Stage/CollectibleContainer
 @onready var round_sequencer: Node2D = $Stage/RoundSequencer
+@onready var background_container: Node2D = $Stage/BackgroundContainer
 @onready var hud: Control = $HUD
 @onready var player: Player = $Stage/Player
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	Globals.bullet_container = bullet_container
 	Globals.enemy_container = enemy_container
 	Globals.collectible_container = collectible_container
+	Globals.background_container = background_container
 	Globals.stage_position = stage.position
 	start_game()
 	black_fade_transition.transition_to_transparent()
