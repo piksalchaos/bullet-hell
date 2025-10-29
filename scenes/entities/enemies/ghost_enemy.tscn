@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgmdfxt0ngpi6"]
+[gd_scene load_steps=17 format=3 uid="uid://dgmdfxt0ngpi6"]
 
 [ext_resource type="Script" uid="uid://ynoen8cogpu6" path="res://scenes/entities/enemies/ghost_enemy.gd" id="1_h5v6m"]
 [ext_resource type="Texture2D" uid="uid://ciwk430dbpqv5" path="res://assets/images/enemies/ghost_enemy.png" id="2_qvsyn"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="8_vcyrx"]
 [ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="10_qvsyn"]
 [ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="11_vcyrx"]
+[ext_resource type="PackedScene" uid="uid://dncgas2m20uxj" path="res://scenes/droppers/color_collectible_dropper.tscn" id="12_4qyjx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvsyn"]
 atlas = ExtResource("2_qvsyn")
@@ -59,7 +60,6 @@ position = Vector2(0, -35)
 max_health = 2
 
 [node name="ColorComponent" parent="." instance=ExtResource("5_chsm8")]
-color_id = null
 
 [node name="ExitTimer" type="Timer" parent="."]
 wait_time = 4.0
@@ -80,5 +80,9 @@ bullet_scene = ExtResource("10_qvsyn")
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("12_4qyjx")]
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
 
 [connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]

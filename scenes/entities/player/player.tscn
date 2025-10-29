@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=49 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
@@ -22,10 +22,14 @@
 [ext_resource type="AudioStream" uid="uid://c6wxykvutfwgr" path="res://assets/audio/mix_color.wav" id="12_w3p2j"]
 [ext_resource type="AudioStream" uid="uid://db8cvvbndc3wh" path="res://assets/audio/fail_color_action.wav" id="13_knby6"]
 [ext_resource type="AudioStream" uid="uid://cu7li6cqg4r47" path="res://assets/audio/player_hit.wav" id="13_xy2vv"]
+[ext_resource type="Script" uid="uid://bo5agxxef356h" path="res://scenes/entities/player/collectible_absorber.gd" id="15_yk2xr"]
 [ext_resource type="AudioStream" uid="uid://bwm4rnf12fdha" path="res://assets/audio/recover.wav" id="22_7dqom"]
 [ext_resource type="AudioStream" uid="uid://c5pfh8h2mjx2g" path="res://assets/audio/hit_cooldown.wav" id="22_go8vc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wghkl"]
 radius = 45.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_18p7g"]
@@ -191,7 +195,7 @@ script = ExtResource("1_g2els")
 
 [node name="BulletAbsorber" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 24
+collision_mask = 8
 script = ExtResource("4_42nxq")
 
 [node name="HealTimer" type="Timer" parent="BulletAbsorber"]
@@ -248,6 +252,14 @@ volume_db = -5.0
 [node name="FailColorActionAudio" type="AudioStreamPlayer" parent="BulletAbsorber"]
 stream = ExtResource("13_knby6")
 volume_db = -3.0
+
+[node name="CollectibleAbsorber" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("15_yk2xr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleAbsorber"]
+shape = SubResource("CircleShape2D_wghkl")
 
 [node name="AimLine" type="Node2D" parent="."]
 visible = false
@@ -322,4 +334,5 @@ hue_variation_curve = SubResource("Curve_7dqom")
 
 [connection signal="area_entered" from="BulletAbsorber" to="BulletAbsorber" method="_on_area_entered"]
 [connection signal="timeout" from="BulletAbsorber/HealTimer" to="BulletAbsorber" method="_on_heal_timer_timeout"]
+[connection signal="area_entered" from="CollectibleAbsorber" to="CollectibleAbsorber" method="_on_area_entered"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

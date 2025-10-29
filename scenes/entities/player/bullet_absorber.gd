@@ -28,13 +28,15 @@ var is_healing = false
 @onready var mix_color_audio: AudioStreamPlayer = $MixColorAudio
 @onready var fail_color_action_audio: AudioStreamPlayer = $FailColorActionAudio
 
+func _ready() -> void:
+	SignalBus.collected_color_collectible.connect(_on_collected_color_collectible)
+
+func _on_collected_color_collectible(color_id: Globals.COLOR_ID) -> void:
+	for i in 3:
+		add_color_id_to_color_amounts(color_id)
+
 func _on_area_entered(area: Area2D) -> void:
-	if area is Butterfly:
-		for i in color_amounts.size():
-			set_color_amount(i, MAX_COLOR_AMOUNT)
-		color_max_audio.play()
-		area.destroy()
-	elif area is BulletComponent:
+	if area is BulletComponent:
 		var color_id = area.capture_color_id()
 		
 		var primary_color_indices_used = add_color_id_to_color_amounts(color_id)

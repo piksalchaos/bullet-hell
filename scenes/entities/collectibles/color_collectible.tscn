@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://b10er0vdastih"]
+
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="1_76y0r"]
+[ext_resource type="Script" uid="uid://dmff0p2l5qhpx" path="res://scenes/entities/collectibles/color_collectible.gd" id="1_qe1vw"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_qe1vw"]
+[ext_resource type="PackedScene" uid="uid://dau82fnomybj" path="res://scenes/components/collectible_component.tscn" id="4_cmkci"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmkci"]
+radius = 18.0
+
+[sub_resource type="Animation" id="Animation_cmkci"]
+resource_name = "main"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorCircleDrawing:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(2.9281673, 2.378415),
+"update": 0,
+"values": [9.0, 12.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OutlineCircleDrawing:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06666667, 0.3),
+"transitions": PackedFloat32Array(2.3784142, 2.4622886),
+"update": 0,
+"values": [14.0, 18.0]
+}
+
+[sub_resource type="Animation" id="Animation_30mka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorCircleDrawing:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [10.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OutlineCircleDrawing:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [10.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnlgb"]
+_data = {
+&"RESET": SubResource("Animation_30mka"),
+&"main": SubResource("Animation_cmkci")
+}
+
+[node name="ColorCollectible" type="Node2D"]
+script = ExtResource("1_qe1vw")
+
+[node name="ColorCircleDrawing" parent="." instance=ExtResource("1_76y0r")]
+
+[node name="OutlineCircleDrawing" parent="." instance=ExtResource("1_76y0r")]
+self_modulate = Color(1, 1, 1, 0.41568628)
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_qe1vw")]
+
+[node name="CollectibleComponent" parent="." instance=ExtResource("4_cmkci")]
+bounded_by_top = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
+shape = SubResource("CircleShape2D_cmkci")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dnlgb")
+}
+autoplay = "main"
+
+[connection signal="collected" from="CollectibleComponent" to="." method="_on_collectible_component_collected"]

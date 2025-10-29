@@ -32,6 +32,7 @@ var stage_position: Vector2
 var player_position: Vector2
 var bullet_container: Node2D
 var enemy_container: Node2D
+var collectible_container: Node2D
 
 var max_player_health: int = 4
 var player_health: int = max_player_health:
@@ -40,9 +41,6 @@ var player_health: int = max_player_health:
 func set_player_health(value):
 	player_health = value
 	SignalBus.player_health_changed.emit(value)
-
-#var color_absorption: Array[float] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-#var selected_color := 0
 
 func update_player_position(position: Vector2):
 	player_position = position

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dncgas2m20uxj"]
+
+[ext_resource type="Script" uid="uid://nv14aopdn22r" path="res://scenes/droppers/color_collectible_dropper.gd" id="1_g0ln5"]
+
+[node name="ColorCollectibleDropper" type="Node2D"]
+script = ExtResource("1_g0ln5")
