@@ -18,4 +18,4 @@ func collect():
 	set_deferred("monitorable", false)
 	var tween = create_tween()
 	tween.tween_property(parent, "modulate", Color(Color.BLACK, 0), 0.2)
-	tween.tween_callback(queue_free)
+	tween.tween_callback(parent.queue_free)

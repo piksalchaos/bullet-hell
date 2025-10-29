@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4h4q8uea4l2x"]
+[gd_scene load_steps=24 format=3 uid="uid://c4h4q8uea4l2x"]
 
 [ext_resource type="Script" uid="uid://coswjkrcjpnhd" path="res://scenes/entities/enemies/frolicker_ghost_enemy.gd" id="1_kdqb8"]
 [ext_resource type="Texture2D" uid="uid://di30i84l2ucut" path="res://assets/images/enemies/frolicker_ghost_enemy.png" id="2_vxwpj"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="10_vkpqe"]
 [ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="11_vkpqe"]
 [ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="12_sc6tb"]
+[ext_resource type="PackedScene" uid="uid://dncgas2m20uxj" path="res://scenes/droppers/color_collectible_dropper.tscn" id="13_4wmut"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3j2b"]
 atlas = ExtResource("2_vxwpj")
@@ -137,3 +138,13 @@ color_id = 2
 hitbox_component = NodePath("../HitboxComponent")
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("13_4wmut")]
+position = Vector2(-27, 0)
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="ColorCollectibleDropper2" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("13_4wmut")]
+position = Vector2(31, 0)
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")

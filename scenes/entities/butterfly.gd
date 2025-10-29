@@ -1,4 +1,4 @@
-class_name Butterfly extends Area2D
+extends Node2D
 
 const Y_VELOCITY := 64.0
 const X_VELOCITY_ANGLE_SPEED := 1.5
@@ -13,8 +13,5 @@ func _physics_process(delta: float) -> void:
 	x_velocity_angle += X_VELOCITY_ANGLE_SPEED * delta
 	sprite.modulate.ok_hsl_h += HUE_SPEED * delta
 
-func destroy():
-	set_deferred("monitorable", false)
-	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.4)
-	tween.tween_callback(queue_free)
+func _on_collectible_component_collected() -> void:
+	SignalBus.butterfly_collected.emit()

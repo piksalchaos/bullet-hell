@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4l2pjdrcg7w5"]
+[gd_scene load_steps=13 format=3 uid="uid://d4l2pjdrcg7w5"]
 
 [ext_resource type="Script" uid="uid://ckef4eae6k2sa" path="res://scenes/entities/butterfly.gd" id="1_8808o"]
 [ext_resource type="Texture2D" uid="uid://u7hoss46f68v" path="res://assets/images/butterfly.png" id="1_duade"]
 [ext_resource type="Texture2D" uid="uid://d7cpaatpjyc3" path="res://assets/images/heal_particle.png" id="3_c82m3"]
+[ext_resource type="PackedScene" uid="uid://dau82fnomybj" path="res://scenes/components/collectible_component.tscn" id="4_824xh"]
 
 [sub_resource type="Curve" id="Curve_8808o"]
 _data = [Vector2(0.019519523, 0.87500006), 0.0, 0.4504871, 0, 0, Vector2(0.9684684, 0), -2.9390416, 0.0, 0, 0]
@@ -45,9 +46,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_duade"]
 radius = 16.0
 
-[node name="Butterfly" type="Area2D"]
-collision_layer = 16
-collision_mask = 0
+[node name="Butterfly" type="Node2D"]
 script = ExtResource("1_8808o")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -112,6 +111,10 @@ sprite_frames = SubResource("SpriteFrames_824xh")
 autoplay = "default"
 frame_progress = 0.11844632
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollectibleComponent" parent="." instance=ExtResource("4_824xh")]
+bounded_by_top = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
 shape = SubResource("CircleShape2D_duade")
+
+[connection signal="collected" from="CollectibleComponent" to="." method="_on_collectible_component_collected"]

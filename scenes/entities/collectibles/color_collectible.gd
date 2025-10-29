@@ -1,6 +1,6 @@
 extends Node2D
 
-const INITIAL_Y_VELOCITY = -125
+const INITIAL_Y_VELOCITY = -100
 const Y_ACCELERATION = 150
 
 var y_velocity = INITIAL_Y_VELOCITY

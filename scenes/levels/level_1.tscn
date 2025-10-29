@@ -108,7 +108,6 @@ wait_time = 4.0
 
 [node name="BlossomRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
-is_disabled = true
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/BlossomRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
 visible = true

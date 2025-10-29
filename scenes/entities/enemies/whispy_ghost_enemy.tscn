@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr8oijio5o8v5"]
+[gd_scene load_steps=14 format=3 uid="uid://cr8oijio5o8v5"]
 
 [ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_0e3gx"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_00abf"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="8_7i4xg"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="9_wcqmy"]
 [ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="10_lxf7f"]
+[ext_resource type="PackedScene" uid="uid://dncgas2m20uxj" path="res://scenes/droppers/color_collectible_dropper.tscn" id="12_y3pi6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4oymn"]
 radius = 40.0
@@ -35,7 +36,6 @@ texture = ExtResource("2_4oymn")
 [node name="HealthComponent" parent="." instance=ExtResource("4_vc6me")]
 position = Vector2(0, -44)
 max_health = 3
-free_parent_on_defeat = false
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("5_tn8os")]
 health_component = NodePath("../HealthComponent")
@@ -58,3 +58,7 @@ rotation = 0.0
 [node name="BulletEmitter" parent="PatternRepeater/PatternSpreader/PatternAimer" instance=ExtResource("9_wcqmy")]
 rotation = 1.5707964
 bullet_scene = ExtResource("10_lxf7f")
+
+[node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("12_y3pi6")]
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
