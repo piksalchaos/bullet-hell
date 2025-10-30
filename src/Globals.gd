@@ -28,11 +28,14 @@ const LAYER_ENEMY_HITBOXES := 2
 const LAYER_PLAYER_BULLETS := 3
 const LAYER_ENEMY_BULLETS := 4
 
+var high_score: int = 0
 var score: int = 0:
 	set = set_score
 
 func set_score(value):
 	score = value
+	if value > high_score:
+		high_score = value
 	SignalBus.score_updated.emit(value)
 
 var stage_position: Vector2
@@ -42,7 +45,7 @@ var enemy_container: Node2D
 var collectible_container: Node2D
 var background_container: Node2D
 
-var max_player_health: int = 1
+var max_player_health: int = 4
 var player_health: int = max_player_health:
 	set = set_player_health
 

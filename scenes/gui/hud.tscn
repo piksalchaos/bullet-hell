@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvrx8wmadvywy"]
+[gd_scene load_steps=9 format=3 uid="uid://dvrx8wmadvywy"]
 
 [ext_resource type="Script" uid="uid://xr2b6wha55l" path="res://scenes/gui/hud.gd" id="1_624ws"]
 [ext_resource type="PackedScene" uid="uid://c0hmb6lqnynne" path="res://scenes/gui/palette/palette.tscn" id="2_624ws"]
 [ext_resource type="PackedScene" uid="uid://cg285sbaifnvs" path="res://scenes/gui/life_heart.tscn" id="2_qxonp"]
+[ext_resource type="FontFile" uid="uid://wwj4ollhl181" path="res://assets/fonts/Nunito-VariableFont_wght.ttf" id="2_ueg55"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxonp"]
 bg_color = Color(0, 0, 0, 1)
@@ -12,11 +13,18 @@ variation_opentype = {
 2003265652: 500
 }
 
+[sub_resource type="FontVariation" id="FontVariation_aoesn"]
+base_font = ExtResource("2_ueg55")
+variation_opentype = {
+2003265652: 300
+}
+
 [sub_resource type="FontVariation" id="FontVariation_624ws"]
 variation_opentype = {
 2003265652: 600
 }
-spacing_glyph = 6
+variation_transform = Transform2D(1.4, 0, 0, 1, 0, 0)
+spacing_glyph = 12
 
 [node name="HUD" type="HBoxContainer"]
 anchors_preset = 15
@@ -37,6 +45,7 @@ custom_minimum_size = Vector2(576, 0)
 layout_mode = 2
 
 [node name="StageClearScreen" type="PanelContainer" parent="BattleAreaReference"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,16 +120,47 @@ layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0, 0, 0, 1)
 
-[node name="ScoreLabel" type="Label" parent="RightBar"]
+[node name="ScoreDisplay" type="VBoxContainer" parent="RightBar"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 7.0
-offset_top = 37.0
-offset_bottom = 82.0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = -38.0
+offset_bottom = 93.0
 grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightBar/ScoreDisplay"]
+layout_mode = 2
+
+[node name="ScoreWord" type="Label" parent="RightBar/ScoreDisplay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_aoesn")
+theme_override_font_sizes/font_size = 18
+text = "High Score"
+
+[node name="HighScoreLabel" type="Label" parent="RightBar/ScoreDisplay/HBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_624ws")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
+text = "00000000"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="RightBar/ScoreDisplay"]
+layout_mode = 2
+
+[node name="ScoreWord" type="Label" parent="RightBar/ScoreDisplay/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_aoesn")
+theme_override_font_sizes/font_size = 18
+text = "Score"
+
+[node name="ScoreLabel" type="Label" parent="RightBar/ScoreDisplay/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_624ws")
+theme_override_font_sizes/font_size = 24
 text = "00000000"
 horizontal_alignment = 1
 
@@ -129,9 +169,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 72.0
-offset_top = 97.0
+offset_top = 119.0
 offset_right = -72.0
-offset_bottom = 161.0
+offset_bottom = 183.0
 grow_horizontal = 2
 theme_override_constants/separation = 0
 
@@ -150,6 +190,6 @@ layout_mode = 2
 [node name="Palette" parent="RightBar" instance=ExtResource("2_624ws")]
 layout_mode = 1
 offset_left = -1.0
-offset_top = 135.0
+offset_top = 148.0
 offset_right = -1.0
-offset_bottom = 135.0
+offset_bottom = 148.0
