@@ -31,6 +31,7 @@ func _ready() -> void:
 		else:
 			palette_color.position = Vector2(cos(angle), sin(angle)) * CENTER_DISTANCE
 			palette_color.radius = RADIUS
+	
 
 func _on_color_amount_changed(primary_color_index, percentage):
 	color_container.get_child(primary_color_index).percentage = percentage

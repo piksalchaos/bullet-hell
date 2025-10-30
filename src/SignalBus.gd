@@ -16,3 +16,5 @@ signal collected_color_collectible(color_id: Globals.COLOR_ID)
 signal butterfly_collected
 
 signal score_updated(new_score: int)
+
+signal progress_indicator_reached

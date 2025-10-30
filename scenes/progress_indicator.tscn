@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drepeaab5x320"]
+
+[ext_resource type="Script" uid="uid://dkkk3lugcwf2u" path="res://scenes/progress_indicator.gd" id="1_e5ibk"]
+
+[node name="ProgressIndicator" type="Node" groups=["spawners"]]
+script = ExtResource("1_e5ibk")

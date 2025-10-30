@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0f1sgbgv5y71"]
+
+[ext_resource type="Texture2D" uid="uid://cqka56opvwqm5" path="res://assets/images/progress_icons.png" id="1_tyxjh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pnwd"]
+atlas = ExtResource("1_tyxjh")
+region = Rect2(0, 0, 128, 128)
+
+[node name="ProgressIcon" type="TextureRect"]
+texture = SubResource("AtlasTexture_2pnwd")
+expand_mode = 4
+stretch_mode = 5

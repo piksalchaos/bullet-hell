@@ -1,6 +1,11 @@
 extends Control
 
 const LIFE_HEART = preload("uid://cg285sbaifnvs")
+const PROGRESS_ICON = preload("uid://c0f1sgbgv5y71")
+const ROUND_TEXTURE = preload("uid://tffba6sdncrd")
+const MINIBOSS_ROUND_TEXTURE = preload("uid://cjd336jyoail")
+const BOSS_ROUND_TEXTURE = preload("uid://d2afr0j2303sv")
+
 const NUMBER_OF_DIGITS_ON_LABEL := 8
 
 @onready var life_heart_container: HBoxContainer = $RightBar/LifeHeartContainer
@@ -9,12 +14,19 @@ const NUMBER_OF_DIGITS_ON_LABEL := 8
 @onready var stage_clear_screen: PanelContainer = $BattleAreaReference/StageClearScreen
 @onready var time_label: Label = $BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeDisplay/TimeLabel
 @onready var time_bonus_label: Label = $BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeBonusDisplay/TimeBonusLabel
+@onready var progress_sequence: VBoxContainer = $LeftBar/ProgressSequence
+@onready var progress_arrow: TextureRect = $LeftBar/ProgressArrow
+
+var progress_index = -1
 
 func _ready() -> void:
 	stage_clear_screen.visible = false
 	stage_clear_screen.modulate = Color.TRANSPARENT
 	SignalBus.score_updated.connect(_on_score_updated)
 	update_score_label(Globals.score)
+	SignalBus.progress_indicator_reached.connect(_on_progress_indicator_reached)
+	for progress_icon in progress_sequence.get_children():
+		progress_icon.queue_free()
 
 func update_life_heart_count(new_life_heart_count: int) -> void:
 	if new_life_heart_count < 0: return
@@ -57,3 +69,26 @@ func show_stage_clear_screen(time_seconds: int, time_bonus: int):
 	stage_clear_screen.show()
 	var tween = create_tween()
 	tween.tween_property(stage_clear_screen, "modulate", Color.WHITE, 0.75)
+
+func add_progress_icon(progress_type: ProgressIndicator.PROGRESS_TYPE):
+	var progress_icon = PROGRESS_ICON.instantiate()
+	match progress_type:
+		ProgressIndicator.PROGRESS_TYPE.NORMAL:
+			progress_icon.texture = ROUND_TEXTURE
+		ProgressIndicator.PROGRESS_TYPE.MINIBOSS:
+			progress_icon.texture = MINIBOSS_ROUND_TEXTURE
+		ProgressIndicator.PROGRESS_TYPE.BOSS:
+			progress_icon.texture = BOSS_ROUND_TEXTURE
+	progress_sequence.add_child(progress_icon)
+	progress_sequence.move_child(progress_icon, 0)
+
+func _on_progress_indicator_reached():
+	progress_index += 1
+	print(progress_index)
+	call_deferred("update_progress_arrow_position")
+	
+
+func update_progress_arrow_position():
+	progress_arrow.position = progress_sequence.get_child(-1-progress_index).global_position
+	for child in progress_sequence.get_children():
+		print(child.global_position)

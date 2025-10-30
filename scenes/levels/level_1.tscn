@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=28 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="12_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://db53bja3d4iq0" path="res://scenes/spawners/foggy_background_spawner.tscn" id="12_mkypq"]
+[ext_resource type="PackedScene" uid="uid://drepeaab5x320" path="res://scenes/progress_indicator.tscn" id="12_ndtll"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="17_bahl2"]
 [ext_resource type="PackedScene" uid="uid://y7rk33nkp4vr" path="res://scenes/spawners/butterfly_spawner.tscn" id="17_gmpev"]
 
@@ -86,6 +87,8 @@ position = Vector2(292, 422)
 
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
+
+[node name="ProgressIndicator6" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
 
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
@@ -267,6 +270,8 @@ wait_time = 6.0
 [node name="EnemySpawner" parent="Stage/RoundSequencer/ShootingRound/TimerRound" instance=ExtResource("5_excbq")]
 position = Vector2(292, 202)
 
+[node name="ProgressIndicator" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
+
 [node name="ColorRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
@@ -445,6 +450,8 @@ position = Vector2(287.5, -39)
 [node name="TimerRound" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("6_iav0o")]
 wait_time = 4.0
 
+[node name="ProgressIndicator2" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
+
 [node name="MixingRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 
@@ -513,6 +520,9 @@ color_id = 4
 [node name="GhostEnemySpawner2" parent="Stage/RoundSequencer/MixingRound2/TimerRound/TimerRound" instance=ExtResource("5_excbq")]
 position = Vector2(484, 91)
 
+[node name="ProgressIndicator3" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
+type = 1
+
 [node name="MinibossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
 position = Vector2(1, 0)
@@ -526,6 +536,8 @@ ending_position = Vector2(491, 111)
 visible = false
 position = Vector2(1, 0)
 wait_time = 2.5
+
+[node name="ProgressIndicator4" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
 
 [node name="MixingRound3" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
@@ -571,6 +583,9 @@ position = Vector2(287.5, -39)
 
 [node name="TimerRound" parent="Stage/RoundSequencer/RecoveryRound2" instance=ExtResource("6_iav0o")]
 wait_time = 3.0
+
+[node name="ProgressIndicator5" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
+type = 2
 
 [node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false

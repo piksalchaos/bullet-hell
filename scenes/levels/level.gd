@@ -23,6 +23,10 @@ func _ready() -> void:
 	if is_first_level:
 		Globals.score = 0
 	
+	for spawner in round_sequencer.get_children():
+		if spawner is ProgressIndicator:
+			hud.add_progress_icon(spawner.type)
+	
 	SignalBus.player_health_changed.connect(_on_player_health_changed)
 	Globals.bullet_container = bullet_container
 	Globals.enemy_container = enemy_container
