@@ -7,6 +7,7 @@ const MINIBOSS_ROUND_TEXTURE = preload("uid://cjd336jyoail")
 const BOSS_ROUND_TEXTURE = preload("uid://d2afr0j2303sv")
 
 const NUMBER_OF_DIGITS_ON_LABEL := 8
+const PROGRESS_ARROW_OFFSET = Vector2(-50, 8)
 
 @onready var life_heart_container: HBoxContainer = $RightBar/LifeHeartContainer
 @onready var high_score_label: Label = $RightBar/ScoreDisplay/HBoxContainer/HighScoreLabel
@@ -25,8 +26,7 @@ func _ready() -> void:
 	SignalBus.score_updated.connect(_on_score_updated)
 	update_score_label(Globals.score)
 	SignalBus.progress_indicator_reached.connect(_on_progress_indicator_reached)
-	for progress_icon in progress_sequence.get_children():
-		progress_icon.queue_free()
+	
 
 func update_life_heart_count(new_life_heart_count: int) -> void:
 	if new_life_heart_count < 0: return
@@ -85,10 +85,10 @@ func add_progress_icon(progress_type: ProgressIndicator.PROGRESS_TYPE):
 func _on_progress_indicator_reached():
 	progress_index += 1
 	print(progress_index)
-	call_deferred("update_progress_arrow_position")
-	
-
-func update_progress_arrow_position():
-	progress_arrow.position = progress_sequence.get_child(-1-progress_index).global_position
-	for child in progress_sequence.get_children():
-		print(child.global_position)
+	var progress_icon_position = progress_sequence.get_child(-1-progress_index).global_position
+	if progress_index == 0:
+		progress_arrow.visible = true
+		progress_arrow.position = Vector2(progress_icon_position.x + PROGRESS_ARROW_OFFSET.x, Globals.STAGE_HEIGHT + 64)
+	var tween = create_tween()
+	tween.tween_property(progress_arrow, "position", progress_icon_position + PROGRESS_ARROW_OFFSET, 0.5) \
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)

@@ -88,8 +88,6 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
 
-[node name="ProgressIndicator6" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
-
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 
@@ -112,6 +110,8 @@ vertical_alignment = 1
 
 [node name="TimerRound" parent="Stage/RoundSequencer/IntroRound" instance=ExtResource("6_iav0o")]
 wait_time = 4.0
+
+[node name="ProgressIndicator6" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
 
 [node name="BlossomRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 visible = false
