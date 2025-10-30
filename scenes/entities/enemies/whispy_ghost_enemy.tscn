@@ -37,6 +37,7 @@ texture = ExtResource("2_4oymn")
 [node name="HealthComponent" parent="." instance=ExtResource("4_vc6me")]
 position = Vector2(0, -44)
 max_health = 3
+score_amount = 5
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("5_tn8os")]
 health_component = NodePath("../HealthComponent")

@@ -39,6 +39,7 @@ func _on_area_entered(area) -> void:
 		explode()
 
 func explode():
+	Globals.score += damage * 3 * (2 if Globals.SECONDARY_COLOR_MAP.has(color_component.color_id) else 1)
 	explode_audio.play()
 	bullet_particles.emitting = false
 	explosion_circle.show()

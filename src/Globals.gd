@@ -28,6 +28,13 @@ const LAYER_ENEMY_HITBOXES := 2
 const LAYER_PLAYER_BULLETS := 3
 const LAYER_ENEMY_BULLETS := 4
 
+var score: int = 0:
+	set = set_score
+
+func set_score(value):
+	score = value
+	SignalBus.score_updated.emit(value)
+
 var stage_position: Vector2
 var player_position: Vector2
 var bullet_container: Node2D

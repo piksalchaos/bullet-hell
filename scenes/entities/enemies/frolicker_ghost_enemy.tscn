@@ -108,6 +108,7 @@ shape = SubResource("CircleShape2D_vxwpj")
 [node name="HealthComponent" parent="." instance=ExtResource("5_77o0b")]
 position = Vector2(0, -55)
 max_health = 6
+score_amount = 20
 
 [node name="PatternEmitter" parent="." instance=ExtResource("6_vq4g0")]
 

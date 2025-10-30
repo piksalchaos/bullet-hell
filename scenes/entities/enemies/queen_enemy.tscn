@@ -67,16 +67,19 @@ shape = SubResource("CapsuleShape2D_7usf5")
 visible = false
 position = Vector2(0, -57)
 max_health = 3
+score_amount = 15
 
 [node name="HealthComponent2" parent="HealthComponentContainer" instance=ExtResource("5_jh2oi")]
 visible = false
 position = Vector2(0, -57)
 max_health = 5
+score_amount = 20
 
 [node name="HealthComponent3" parent="HealthComponentContainer" instance=ExtResource("5_jh2oi")]
 visible = false
 position = Vector2(0, -57)
 max_health = 3
+score_amount = 30
 
 [node name="PatternEmitterContainer" type="Node2D" parent="."]
 

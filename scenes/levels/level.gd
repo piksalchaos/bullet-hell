@@ -13,6 +13,7 @@ extends Node
 signal finished
 
 func _ready() -> void:
+	Globals.score = 0 #only for first level
 	SignalBus.player_health_changed.connect(_on_player_health_changed)
 	Globals.bullet_container = bullet_container
 	Globals.enemy_container = enemy_container

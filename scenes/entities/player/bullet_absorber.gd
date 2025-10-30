@@ -40,6 +40,7 @@ func _on_butterfly_collected() -> void:
 	for i in color_amounts.size():
 		set_color_amount(i, MAX_COLOR_AMOUNT)
 	color_max_audio.play()
+	Globals.score += 15
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is BulletComponent:
@@ -66,6 +67,7 @@ func add_color_id_to_color_amounts(color_id: Globals.COLOR_ID) -> Array[Globals.
 func increment_primary_color_amount(primary_color_index) -> bool:
 	if color_amounts[primary_color_index] >= MAX_COLOR_AMOUNT:
 		return false
+	Globals.score += 1
 	set_color_amount(primary_color_index, color_amounts[primary_color_index] + 1)
 	var color_amount = color_amounts[primary_color_index]
 	if color_amount == MAX_COLOR_AMOUNT:

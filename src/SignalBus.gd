@@ -14,3 +14,5 @@ signal player_health_changed(new_player_health: int)
 
 signal collected_color_collectible(color_id: Globals.COLOR_ID)
 signal butterfly_collected
+
+signal score_updated(new_score: int)
