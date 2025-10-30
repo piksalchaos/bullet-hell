@@ -45,3 +45,6 @@ func _on_pause_menu_ready_to_restart() -> void:
 
 func _on_level_finished() -> void:
 	create_start_menu()
+
+func _on_pause_menu_ready_to_exit_to_start_menu() -> void:
+	level_container.get_child(0).finish()

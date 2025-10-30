@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bme18c4bodia7"]
+[gd_scene load_steps=5 format=3 uid="uid://bme18c4bodia7"]
 
 [ext_resource type="AudioStream" uid="uid://bd5khvvwl7t0t" path="res://assets/audio/vine-boom.mp3" id="1_0wkhc"]
 [ext_resource type="Script" uid="uid://f0exyq10gbc" path="res://scenes/gui/settings/pause_menu.gd" id="1_dl1lt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl1lt"]
+bg_color = Color(0, 0, 0, 0.93333334)
 
 [sub_resource type="FontVariation" id="FontVariation_sugp2"]
 variation_opentype = {
@@ -14,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dl1lt")
 script = ExtResource("1_dl1lt")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -43,6 +47,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Restart Level"
 
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Exit to Main Menu
+"
+
 [node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -59,5 +69,6 @@ volume_db = -8.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VineBoomButton" to="." method="_on_vine_boom_button_pressed"]

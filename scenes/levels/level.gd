@@ -70,8 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_black_fade_transition_finished_transition() -> void:
 	if not black_fade_transition.is_transparent:
-		queue_free()
-		finished.emit()
+		finish()
 
 func _on_player_died() -> void:
 	music_audio.stop()
@@ -80,3 +79,10 @@ func _on_player_died() -> void:
 func set_process_modes_after_death():
 	stage.process_mode = Node.PROCESS_MODE_DISABLED
 	player.process_mode = Node.PROCESS_MODE_ALWAYS
+
+func _on_player_finished_death_animation() -> void:
+	finish()
+
+func finish():
+	queue_free()
+	finished.emit()

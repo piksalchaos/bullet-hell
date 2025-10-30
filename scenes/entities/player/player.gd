@@ -27,7 +27,8 @@ var is_on_cooldown = false
 var is_dead = false
 var heart_sprite_death_vibration := 0.0
 
-signal died()
+signal died
+signal finished_death_animation
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -130,6 +131,10 @@ func die():
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		heart_death_tween.parallel().tween_property(heart_sprite, "modulate", Color.TRANSPARENT, 1) \
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		heart_death_tween.tween_callback(func():
+			
+			finished_death_animation.emit()
+		)
 	)
 	
 	
