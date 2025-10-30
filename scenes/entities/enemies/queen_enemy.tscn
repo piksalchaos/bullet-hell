@@ -206,7 +206,7 @@ max_shots = 3
 [node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater" instance=ExtResource("8_luy7c")]
 angle_range = 0.5
 
-[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater/PatternSpreader" instance=ExtResource("9_veyhk")]
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater" instance=ExtResource("9_veyhk")]
 bullet_scene = ExtResource("10_84s3x")
 color_id = 6
 
@@ -217,7 +217,7 @@ seconds_per_shot = 0.15
 bullet_emitters = [NodePath("../PatternRandomizer/BulletEmitter")]
 
 [node name="PatternRandomizer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2" instance=ExtResource("14_ubs8d")]
-angle_range = 0.85
+angle_range = 1.0
 
 [node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2/PatternRandomizer" instance=ExtResource("9_veyhk")]
 position = Vector2(-1, 1)

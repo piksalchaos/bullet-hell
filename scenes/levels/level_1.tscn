@@ -51,8 +51,9 @@ RichTextLabel/fonts/normal_font = SubResource("FontVariation_dnkej")
 [node name="Level1" type="Node"]
 process_mode = 1
 script = ExtResource("1_oc4kc")
+is_first_level = true
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="MusicAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_excbq")
 volume_db = -11.0
 autoplay = true
@@ -578,9 +579,11 @@ visible = false
 position = Vector2(286, 78)
 enemy_scene = ExtResource("8_v6ha0")
 
+[node name="Round" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+is_disabled = true
+
 [node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
-visible = false
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
 

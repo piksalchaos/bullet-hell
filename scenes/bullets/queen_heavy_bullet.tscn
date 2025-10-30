@@ -8,6 +8,7 @@ radius = 12.0
 
 [node name="QueenHeavyBullet" instance=ExtResource("1_u34c3")]
 initial_speed = 200.0
+max_speed = 250
 acceleration = Vector2(0, 200)
 
 [node name="BulletComponent" parent="." index="1"]

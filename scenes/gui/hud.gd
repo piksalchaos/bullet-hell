@@ -5,8 +5,13 @@ const NUMBER_OF_DIGITS_ON_LABEL := 8
 
 @onready var life_heart_container: HBoxContainer = $RightBar/LifeHeartContainer
 @onready var score_label: Label = $RightBar/ScoreLabel
+@onready var stage_clear_screen: PanelContainer = $BattleAreaReference/StageClearScreen
+@onready var time_label: Label = $BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeDisplay/TimeLabel
+@onready var time_bonus_label: Label = $BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeBonusDisplay/TimeBonusLabel
 
 func _ready() -> void:
+	stage_clear_screen.visible = false
+	stage_clear_screen.modulate = Color.TRANSPARENT
 	SignalBus.score_updated.connect(_on_score_updated)
 	update_score_label(Globals.score)
 
@@ -36,3 +41,15 @@ func update_score_label(new_score: int):
 		score_label.text = "0".repeat(NUMBER_OF_DIGITS_ON_LABEL - number_of_digits) + str(new_score)
 	else:
 		score_label.text = str(new_score)
+
+func show_stage_clear_screen(time_seconds: int, time_bonus: int):
+	var minutes_shown = floori(time_seconds/60.0)
+	var seconds_shown = time_seconds % 60
+	if seconds_shown < 10:
+		time_label.text = str(minutes_shown) + ":0" + str(seconds_shown)
+	else:
+		time_label.text = str(minutes_shown) + ":" + str(seconds_shown)
+	time_bonus_label.text = str(time_bonus)
+	stage_clear_screen.show()
+	var tween = create_tween()
+	tween.tween_property(stage_clear_screen, "modulate", Color.WHITE, 0.75)
