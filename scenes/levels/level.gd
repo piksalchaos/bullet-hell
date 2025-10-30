@@ -14,6 +14,7 @@ class_name Level extends Node
 @onready var music_audio: AudioStreamPlayer = $MusicAudio
 
 var is_playing := false
+var is_ready_to_finish := false
 var play_time := 0.0
 
 signal finished
@@ -45,6 +46,9 @@ func _on_player_health_changed(new_player_health) -> void:
 
 func _on_round_sequencer_finished() -> void:
 	is_playing = false
+	is_ready_to_finish = true
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	var play_time_bonus = maxi(0, (390 - floori(play_time)) * 3)
 	Globals.score += play_time_bonus
 	hud.show_stage_clear_screen(floori(play_time), play_time_bonus)
@@ -57,3 +61,12 @@ func _on_round_sequencer_finished() -> void:
 func _process(delta: float) -> void:
 	if is_playing:
 		play_time += delta
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_ready_to_finish and event.is_action_pressed("shoot"):
+		black_fade_transition.transition_to_black()
+
+func _on_black_fade_transition_finished_transition() -> void:
+	if not black_fade_transition.is_transparent:
+		queue_free()
+		finished.emit()

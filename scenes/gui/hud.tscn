@@ -55,6 +55,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "STAGE CLEAR"
@@ -92,6 +93,17 @@ size_flags_horizontal = 3
 theme_override_fonts/font = SubResource("FontVariation_qxonp")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "Press [b]S[/b] to continue"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="RightBar" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(400, 0)

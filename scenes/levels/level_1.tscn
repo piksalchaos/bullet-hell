@@ -579,11 +579,8 @@ visible = false
 position = Vector2(286, 78)
 enemy_scene = ExtResource("8_v6ha0")
 
-[node name="Round" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
+[node name="DisabledRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
 is_disabled = true
-
-[node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
-wait_time = 3.0
 
 [node name="HUD" parent="." instance=ExtResource("7_dnkej")]
 
@@ -593,3 +590,4 @@ is_transparent = false
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
 [connection signal="finished" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_finished"]
 [connection signal="tree_exiting" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_tree_exiting"]
+[connection signal="finished_transition" from="BlackFadeTransition" to="." method="_on_black_fade_transition_finished_transition"]

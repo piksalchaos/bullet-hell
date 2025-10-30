@@ -56,3 +56,7 @@ func update_player_position(position: Vector2):
 func get_random_vector_factor():
 	var angle = randf() * 2 * PI
 	return Vector2(cos(angle), sin(angle)) * randf() * 0.5
+
+func clear_all_bullets():
+	for bullet in bullet_container.get_children():
+		bullet.queue_free()

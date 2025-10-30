@@ -79,6 +79,7 @@ func _on_stage_transition_timer_timeout() -> void:
 	next_stage()
 
 func _on_health_component_3_defeated() -> void:
+	Globals.clear_all_bullets()
 	reposition_timer.stop()
 	death_particles.emitting = true
 	boss_die_audio.play()
