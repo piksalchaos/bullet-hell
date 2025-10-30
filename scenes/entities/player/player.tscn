@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://whf6whxkmq2"]
+[gd_scene load_steps=52 format=3 uid="uid://whf6whxkmq2"]
 
 [ext_resource type="Script" uid="uid://deng3hl1wlyd8" path="res://scenes/entities/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cy08ihc1yq76b" path="res://assets/images/player.png" id="2_1murt"]
@@ -23,8 +23,11 @@
 [ext_resource type="AudioStream" uid="uid://db8cvvbndc3wh" path="res://assets/audio/fail_color_action.wav" id="13_knby6"]
 [ext_resource type="AudioStream" uid="uid://cu7li6cqg4r47" path="res://assets/audio/player_hit.wav" id="13_xy2vv"]
 [ext_resource type="Script" uid="uid://bo5agxxef356h" path="res://scenes/entities/player/collectible_absorber.gd" id="15_yk2xr"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="20_qko2e"]
 [ext_resource type="AudioStream" uid="uid://bwm4rnf12fdha" path="res://assets/audio/recover.wav" id="22_7dqom"]
 [ext_resource type="AudioStream" uid="uid://c5pfh8h2mjx2g" path="res://assets/audio/hit_cooldown.wav" id="22_go8vc"]
+[ext_resource type="AudioStream" uid="uid://cvvit1bn4sqhb" path="res://assets/audio/player_die.wav" id="24_vs62q"]
+[ext_resource type="AudioStream" uid="uid://02y4pnukhl3g" path="res://assets/audio/player_heart_explode.wav" id="26_6u2ft"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ie0h"]
 radius = 45.0
@@ -178,11 +181,11 @@ animations = [{
 radius = 2.0
 
 [sub_resource type="Curve" id="Curve_fg2wu"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6479597, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 16.055359, 0, 0, Vector2(0.15765765, 0.9940477), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6479597, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_fg2wu"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.5254902, 1, 1, 1, 0)
 
 [sub_resource type="Curve" id="Curve_7dqom"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
@@ -285,6 +288,11 @@ script = ExtResource("9_j0oqr")
 
 [node name="ColorComponent" parent="ShadowSprite" instance=ExtResource("9_7wli1")]
 
+[node name="DeathCircle" parent="." instance=ExtResource("20_qko2e")]
+visible = false
+modulate = Color(0, 0, 0, 0.7411765)
+radius = 0.0
+
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_ovg4i")
@@ -292,7 +300,7 @@ autoplay = "default"
 frame_progress = 0.2953438
 
 [node name="HeartSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.11, 0.11)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("3_1ie0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -307,6 +315,13 @@ volume_db = 5.0
 
 [node name="HitCooldownAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_go8vc")
+
+[node name="DieAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_vs62q")
+volume_db = 3.0
+
+[node name="HeartExplodeAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_6u2ft")
 
 [node name="RecoverAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_7dqom")
@@ -331,6 +346,24 @@ color_ramp = SubResource("Gradient_fg2wu")
 hue_variation_curve = SubResource("Curve_7dqom")
 
 [node name="HealEffect" parent="." instance=ExtResource("3_wghkl")]
+
+[node name="DeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+damping_min = 80.0
+damping_max = 125.0
+scale_amount_min = 0.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_fg2wu")
+color_ramp = SubResource("Gradient_fg2wu")
+hue_variation_curve = SubResource("Curve_7dqom")
 
 [connection signal="area_entered" from="BulletAbsorber" to="BulletAbsorber" method="_on_area_entered"]
 [connection signal="timeout" from="BulletAbsorber/HealTimer" to="BulletAbsorber" method="_on_heal_timer_timeout"]

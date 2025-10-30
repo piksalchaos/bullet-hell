@@ -41,7 +41,9 @@ func start_game():
 
 func _on_player_health_changed(new_player_health) -> void:
 	if new_player_health < 0:
-		get_tree().call_deferred("reload_current_scene")
+		pass
+		#player.process_mode = Node.PROCESS_MODE_DISABLED
+		#get_tree().call_deferred("reload_current_scene")
 	hud.update_life_heart_count(new_player_health)
 
 func _on_round_sequencer_finished() -> void:
@@ -70,3 +72,11 @@ func _on_black_fade_transition_finished_transition() -> void:
 	if not black_fade_transition.is_transparent:
 		queue_free()
 		finished.emit()
+
+func _on_player_died() -> void:
+	music_audio.stop()
+	call_deferred("set_process_modes_after_death")
+
+func set_process_modes_after_death():
+	stage.process_mode = Node.PROCESS_MODE_DISABLED
+	player.process_mode = Node.PROCESS_MODE_ALWAYS

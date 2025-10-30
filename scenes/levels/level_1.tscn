@@ -587,6 +587,7 @@ is_disabled = true
 [node name="BlackFadeTransition" parent="." instance=ExtResource("17_bahl2")]
 is_transparent = false
 
+[connection signal="died" from="Stage/Player" to="." method="_on_player_died"]
 [connection signal="child_entered_tree" from="Stage/BulletContainer" to="Stage/BulletContainer" method="_on_child_entered_tree"]
 [connection signal="finished" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_finished"]
 [connection signal="tree_exiting" from="Stage/RoundSequencer" to="." method="_on_round_sequencer_tree_exiting"]
