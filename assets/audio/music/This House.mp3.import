@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://8pfbnw410msv"
+path="res://.godot/imported/This House.mp3-25de41e133ef5863c0d16002fd7a7fcb.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/This House.mp3"
+dest_files=["res://.godot/imported/This House.mp3-25de41e133ef5863c0d16002fd7a7fcb.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

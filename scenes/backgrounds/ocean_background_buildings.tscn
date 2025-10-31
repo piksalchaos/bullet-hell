@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0tyh1mjnts0m"]
+
+[ext_resource type="Script" uid="uid://c6vb2oflyu5jw" path="res://scenes/backgrounds/ocean_background_buildings.gd" id="1_57gqa"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_57gqa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57gqa"]
+shadow_to_opacity = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_3kwm8"]
+material = SubResource("StandardMaterial3D_57gqa")
+size = Vector3(1, 5, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_57gqa"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_whoah"]
+sky_material = SubResource("ProceduralSkyMaterial_57gqa")
+
+[sub_resource type="Environment" id="Environment_alveh"]
+background_mode = 2
+sky = SubResource("Sky_whoah")
+tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[node name="OceanBackgroundBuildings" type="SubViewportContainer"]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1728.0
+offset_bottom = 1944.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.333, 0.333)
+script = ExtResource("1_57gqa")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1728, 1944)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.7982888, 0.6022749, 0, -0.6022749, 0.7982888, 0, 4.5854044, 2.691634)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.419017, 2.323933)
+mesh = SubResource("SphereMesh_57gqa")
+skeleton = NodePath("")
+
+[node name="BuildingContainer" type="Node3D" parent="SubViewport"]
+
+[node name="Node3D" type="Node3D" parent="SubViewport/BuildingContainer"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/BuildingContainer/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_3kwm8")
+skeleton = NodePath("../../..")
+
+[node name="Node3D2" type="Node3D" parent="SubViewport/BuildingContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4356451, 0, -6.4327726)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/BuildingContainer/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3079376, 0, 0)
+mesh = SubResource("BoxMesh_3kwm8")
+skeleton = NodePath("../../..")
+
+[node name="Node3D3" type="Node3D" parent="SubViewport/BuildingContainer/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2655404, 0, 2.9603705)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/BuildingContainer/Node3D2/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3079376, 0, 0)
+mesh = SubResource("BoxMesh_3kwm8")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0747702, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_alveh")

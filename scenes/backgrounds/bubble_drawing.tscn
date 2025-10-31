@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cft6p7t11ie53"]
+
+[ext_resource type="Script" uid="uid://bjq7ojt5q7eoh" path="res://scenes/backgrounds/bubble_drawing.gd" id="1_nemyj"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="2_73ohv"]
+
+[node name="BubbleDrawing" type="Node2D"]
+modulate = Color(1, 1, 1, 0.05882353)
+script = ExtResource("1_nemyj")
+
+[node name="CircleDrawing" parent="." instance=ExtResource("2_73ohv")]

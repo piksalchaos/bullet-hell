@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c32s877hon2bw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3037s"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_whoah"]
+sky_material = SubResource("ProceduralSkyMaterial_3037s")
+
+[sub_resource type="Environment" id="Environment_2f6dx"]
+background_mode = 2
+sky = SubResource("Sky_whoah")
+tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_3037s"]
+
+[node name="A" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2f6dx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3037s")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5595772)

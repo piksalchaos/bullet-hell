@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dertuunn0830b"]
+
+[ext_resource type="Script" uid="uid://bk5doipf3nu6f" path="res://scenes/backgrounds/ocean_background.gd" id="1_3kwm8"]
+[ext_resource type="PackedScene" uid="uid://d0tyh1mjnts0m" path="res://scenes/backgrounds/ocean_background_buildings.tscn" id="2_8w78f"]
+
+[node name="OceanBackground" type="Node2D"]
+script = ExtResource("1_3kwm8")
+
+[node name="Buildings" parent="." instance=ExtResource("2_8w78f")]
+
+[node name="BubbleContainer" type="Node2D" parent="."]
