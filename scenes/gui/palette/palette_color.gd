@@ -15,10 +15,16 @@ const CIRCLE_OUTLINE_WIDTH = 2.0
 const TWEEN_DURATION = 0.1
 
 func _ready() -> void:
-	$PaletteColorVisual/ColorComponent.set_color_id(color_id)
-	$CircleFill/ColorComponent.set_color_id(color_id)
-	$InnerCircleOutline/ColorComponent.set_color_id(color_id)
-	$InnerCircleOutline2/ColorComponent.set_color_id(color_id)
+	change_to_original_color()
+
+func change_color(new_color_id):
+	$PaletteColorVisual/ColorComponent.set_color_id_with_tween(new_color_id)
+	$CircleFill/ColorComponent.set_color_id_with_tween(new_color_id)
+	$InnerCircleOutline/ColorComponent.set_color_id_with_tween(new_color_id)
+	$InnerCircleOutline2/ColorComponent.set_color_id_with_tween(new_color_id)
+
+func change_to_original_color():
+	change_color(color_id)
 
 func set_percentage(new_percentage):
 	percentage = new_percentage
@@ -52,3 +58,9 @@ func set_radius(new_radius):
 
 func set_highlight(is_highlighted):
 	highlight.visible = is_highlighted
+
+#func set_prepare_mix(is_preparing_mix):
+	#var lightness = 0.3 if is_preparing_mix else 1.0
+	#var tween = create_tween()
+	#tween.tween_property(self, "modulate", Color(lightness, lightness, lightness, 1.0), 0.3) \
+		#.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)

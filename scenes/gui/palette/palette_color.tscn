@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dbirraxa2obfj" path="res://scenes/gui/palette/palette_color.gd" id="1_4jpu5"]
 [ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="2_xcmbf"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_32xwn"]
-[ext_resource type="Script" uid="uid://ckq7ytvfouvh1" path="res://scenes/gui/palette/palette_color_visual.gd" id="4_rjhvv"]
+[ext_resource type="PackedScene" uid="uid://ck1o78q5r7yo3" path="res://scenes/gui/palette/palette_color_visual.tscn" id="4_rjhvv"]
 
 [node name="PaletteColor" type="Control"]
 layout_mode = 3
@@ -44,7 +44,6 @@ line_width = 1.0
 
 [node name="ColorComponent" parent="InnerCircleOutline2" instance=ExtResource("3_32xwn")]
 
-[node name="PaletteColorVisual" type="Node2D" parent="."]
-script = ExtResource("4_rjhvv")
+[node name="PaletteColorVisual" parent="." instance=ExtResource("4_rjhvv")]
 
 [node name="ColorComponent" parent="PaletteColorVisual" instance=ExtResource("3_32xwn")]

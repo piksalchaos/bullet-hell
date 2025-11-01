@@ -6,12 +6,13 @@ const POINT_COUNT := 24
 	set = set_radius
 @export var has_spikes: bool = false:
 	set = set_has_spikes
+@export var color: Color = Color.WHITE
 
 func _draw():
 	if has_spikes:
-		draw_colored_polygon(get_polygon_points(), Color.WHITE)
+		draw_colored_polygon(get_polygon_points(), color)
 	else:
-		draw_circle(Vector2.ZERO, radius, Color.WHITE, true, -1.0, true)
+		draw_circle(Vector2.ZERO, radius, color, true, -1.0, true)
 
 func _process(delta: float) -> void:
 	if has_spikes:

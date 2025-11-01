@@ -35,6 +35,7 @@ func _ready() -> void:
 			palette_color.radius = RADIUS
 	for secondary_color_id in Globals.SECONDARY_COLOR_MAP.keys():
 		var mix_line = MIX_LINE.instantiate()
+		mix_line.name = str(secondary_color_id)
 		mix_line.color_id = secondary_color_id
 		
 		var primary_color_index_1 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[secondary_color_id][0])
@@ -94,15 +95,17 @@ func _on_mixed_colors_changed(mixed_primary_color_index):
 #
 func _on_found_color_to_mix_changed(found_color_to_mix: bool, color_id: Globals.COLOR_ID):
 	if found_color_to_mix:
-		var first_primary_color_index = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][0])
-		var second_primary_color_index = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][1])
-		mix_line.show_with_transition(
-			color_container.get_child(first_primary_color_index),
-			color_container.get_child(second_primary_color_index),
-			color_id
-		)
+		var primary_color_index_1 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][0])
+		var primary_color_index_2 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][1])
+		color_container.get_child(primary_color_index_1).change_color(color_id)
+		color_container.get_child(primary_color_index_2).change_color(color_id)
+		
+		mix_line_container.get_node(str(color_id)).set_is_mixing(true)
 	else:
-		mix_line.hide_with_transition()
+		for palette_color in color_container.get_children():
+			palette_color.change_to_original_color()
+		for mix_line in mix_line_container.get_children():
+			mix_line.set_is_mixing(false)
 
 func _on_cannot_perform_color_action():
 	vibration_amount = 8.0

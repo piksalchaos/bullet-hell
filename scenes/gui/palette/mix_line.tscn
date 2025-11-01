@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbou5jm73pq6i"]
+[gd_scene load_steps=3 format=3 uid="uid://bbou5jm73pq6i"]
 
 [ext_resource type="Script" uid="uid://br12x7hiw2r5a" path="res://scenes/gui/palette/mix_line.gd" id="1_pgfgq"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_l42df"]
 
 [node name="MixLine" type="Control"]
 modulate = Color(1, 1, 1, 0.3529412)
@@ -11,3 +12,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pgfgq")
+
+[node name="Container" type="Node2D" parent="."]
+
+[node name="Line" type="Line2D" parent="Container"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 0.0
+
+[node name="ColorComponent" parent="Container" instance=ExtResource("3_l42df")]
