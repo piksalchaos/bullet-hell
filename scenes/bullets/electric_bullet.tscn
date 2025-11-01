@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://xapp2c4vr12o"]
 
-[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/angled_bullet.tscn" id="1_nfouj"]
+[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/base_bullets/angled_bullet.tscn" id="1_nfouj"]
 [ext_resource type="Texture2D" uid="uid://dqiej8sf8wg5y" path="res://assets/images/bullets/electric_bullet.png" id="2_rjy4c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjy4c"]

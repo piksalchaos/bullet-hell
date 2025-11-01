@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://fpsablwbyj3y"]
 
-[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/angled_bullet.tscn" id="1_rjoa5"]
+[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/base_bullets/angled_bullet.tscn" id="1_rjoa5"]
 [ext_resource type="Texture2D" uid="uid://nsceybpc061q" path="res://assets/images/bullets/dummy_bullet.png" id="2_rc0km"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjoa5"]

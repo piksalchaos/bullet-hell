@@ -21,7 +21,7 @@ func _ready():
 	scale_radians = 2 * PI * randf()
 	circle_drawing.radius = main_radius + main_radius*RADIUS_SCALE_AMOUNT*cos(scale_radians)
 	direction = Vector2.DOWN.rotated(randf()-0.5)
-	modulate = Color.from_hsv(randf(), 0.3, 1, 0.1)
+	modulate = Color.from_hsv(randf(), 0.3, 1, 0.05)
 
 func _process(delta: float) -> void:
 	scale_radians += SCALE_ANGLE_SPEED * delta

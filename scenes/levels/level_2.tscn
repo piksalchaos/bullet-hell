@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bcx57y8kx223d"]
+[gd_scene load_steps=20 format=3 uid="uid://bcx57y8kx223d"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_sbygb"]
 [ext_resource type="AudioStream" uid="uid://8pfbnw410msv" path="res://assets/audio/music/This House.mp3" id="2_tv7cl"]
@@ -10,6 +10,8 @@
 [ext_resource type="FontFile" uid="uid://wwj4ollhl181" path="res://assets/fonts/Nunito-VariableFont_wght.ttf" id="8_r6ket"]
 [ext_resource type="PackedScene" uid="uid://drepeaab5x320" path="res://scenes/progress_indicator.tscn" id="9_xworo"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="10_wwjag"]
+[ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="11_r88tb"]
+[ext_resource type="PackedScene" uid="uid://dhfjqwsfxdpot" path="res://scenes/entities/enemies/singer_enemy.tscn" id="12_1yj8c"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="21_keip3"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="22_exwx8"]
 
@@ -50,6 +52,7 @@ volume_db = -11.0
 autoplay = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 z_index = -2
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,6 +65,7 @@ texture = SubResource("GradientTexture2D_tv7cl")
 position = Vector2(176, 0)
 
 [node name="BackgroundContainer" type="Node2D" parent="Stage"]
+z_index = -1
 
 [node name="OceanBackground" parent="Stage/BackgroundContainer" instance=ExtResource("4_r88tb")]
 
@@ -93,7 +97,7 @@ offset_bottom = 116.0
 theme = SubResource("Theme_mm8aj")
 bbcode_enabled = true
 text = "STAGE 2
-The Floating Ocean"
+The Empty Ocean"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -102,11 +106,11 @@ wait_time = 4.0
 
 [node name="ProgressIndicator6" parent="Stage/RoundSequencer" instance=ExtResource("9_xworo")]
 
-[node name="DisabledRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
-is_disabled = true
+[node name="Round" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
 
-[node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_mx6s3")]
-wait_time = 1000.0
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/Round" instance=ExtResource("11_r88tb")]
+position = Vector2(279, 88)
+enemy_scene = ExtResource("12_1yj8c")
 
 [node name="HUD" parent="." instance=ExtResource("21_keip3")]
 

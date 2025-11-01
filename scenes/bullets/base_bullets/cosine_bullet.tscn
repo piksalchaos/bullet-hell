@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp0aog44rjxyj"]
+
+[ext_resource type="Script" uid="uid://dabjura1y40nc" path="res://scenes/bullets/base_bullets/cosine_bullet.gd" id="1_xunj4"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_oobam"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="3_ionfx"]
+
+[node name="CosineBullet" type="Node2D"]
+script = ExtResource("1_xunj4")
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_oobam")]
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("3_ionfx")]
+color_component = NodePath("../ColorComponent")

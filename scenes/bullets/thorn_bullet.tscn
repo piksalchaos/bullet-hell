@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://djqnll3rqvsn6"]
 
-[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/angled_bullet.tscn" id="1_g263w"]
+[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/base_bullets/angled_bullet.tscn" id="1_g263w"]
 [ext_resource type="Texture2D" uid="uid://ckaup6i8u6ilw" path="res://assets/images/bullets/thorn_bullet.png" id="1_uagqa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qiuud"]

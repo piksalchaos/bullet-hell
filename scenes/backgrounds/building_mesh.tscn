@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnrl577ysn660"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57gqa"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3kwm8"]
+material = SubResource("StandardMaterial3D_57gqa")
+size = Vector3(1, 5, 1)
+
+[node name="BuildingMesh" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_3kwm8")
+skeleton = NodePath("../..")

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="2_73ohv"]
 
 [node name="BubbleDrawing" type="Node2D"]
-modulate = Color(1, 1, 1, 0.05882353)
+modulate = Color(1, 1, 1, 0.03137255)
 script = ExtResource("1_nemyj")
 
 [node name="CircleDrawing" parent="." instance=ExtResource("2_73ohv")]
