@@ -2,13 +2,19 @@ class_name ColorComponent extends Node
 
 const TWEEN_DURATION = 0.2
 @export var color_id: Globals.COLOR_ID
-@export var alpha := 1.0
+@export var alpha := 1.0:
+	set = set_alpha
 @onready var parent = get_parent()
 
 var disabled = false
 
 func _ready():
 	parent.modulate = Color(Globals.COLORS[color_id], alpha)
+
+func set_alpha(value):
+	alpha = value
+	parent.modulate.a = alpha
+	
 
 func set_color_id(new_color_id):
 	color_id = new_color_id

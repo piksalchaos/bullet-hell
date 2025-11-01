@@ -13,12 +13,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dv22i")
 
-[node name="MixLineContainer" type="Control" parent="."]
+[node name="ColorContainer" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorContainer" type="Control" parent="."]
+[node name="MixLineContainer" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

@@ -95,15 +95,19 @@ func _on_mixed_colors_changed(mixed_primary_color_index):
 #
 func _on_found_color_to_mix_changed(found_color_to_mix: bool, color_id: Globals.COLOR_ID):
 	if found_color_to_mix:
-		var primary_color_index_1 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][0])
-		var primary_color_index_2 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][1])
-		color_container.get_child(primary_color_index_1).change_color(color_id)
-		color_container.get_child(primary_color_index_2).change_color(color_id)
-		
-		mix_line_container.get_node(str(color_id)).set_is_mixing(true)
+		for palette_color in color_container.get_children():
+			if Globals.SECONDARY_COLOR_MAP[color_id].has(palette_color.color_id):
+				palette_color.change_color(color_id)
+				palette_color.saturate_highlight_color()
+			else:
+				palette_color.change_to_original_color()
+				palette_color.desaturate_highlight_color()
+		for mix_line in mix_line_container.get_children():
+			mix_line.set_is_mixing(mix_line.color_id == color_id)
 	else:
 		for palette_color in color_container.get_children():
 			palette_color.change_to_original_color()
+			palette_color.desaturate_highlight_color()
 		for mix_line in mix_line_container.get_children():
 			mix_line.set_is_mixing(false)
 

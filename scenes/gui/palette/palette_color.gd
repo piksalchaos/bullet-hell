@@ -11,10 +11,14 @@ extends Control
 @onready var circle_fill: Node2D = $CircleFill
 @onready var palette_color_visual: Node2D = $PaletteColorVisual
 @onready var highlight: Node2D = $Highlight
+@onready var highlight_outer: Node2D = $Highlight/HighlightOuter
+@onready var highlight_inner: Node2D = $Highlight/HighlightInner
+@onready var highlight_color_component: ColorComponent = $Highlight/HighlightColorComponent
 const CIRCLE_OUTLINE_WIDTH = 2.0
 const TWEEN_DURATION = 0.1
 
 func _ready() -> void:
+	#highlight_color_component.set_color_id(color_id)
 	change_to_original_color()
 
 func change_color(new_color_id):
@@ -25,6 +29,12 @@ func change_color(new_color_id):
 
 func change_to_original_color():
 	change_color(color_id)
+
+func saturate_highlight_color():
+	highlight_color_component.set_color_id_with_tween(color_id)
+
+func desaturate_highlight_color():
+	highlight_color_component.set_color_id_with_tween(Globals.COLOR_ID.WHITE)
 
 func set_percentage(new_percentage):
 	percentage = new_percentage
@@ -37,13 +47,15 @@ func set_percentage(new_percentage):
 		(circle_outline.radius + CIRCLE_OUTLINE_WIDTH) * new_percentage,
 		TWEEN_DURATION
 	)
-	var lightness = floor(new_percentage*3) * 0.15
+	var fill_lightness = floor(new_percentage*3) * 0.15
 	tween.tween_property(
 		circle_fill,
 		"self_modulate",
-		Color(Color(lightness, lightness, lightness)),
+		Color(Color(fill_lightness, fill_lightness, fill_lightness)),
 		TWEEN_DURATION
 	)
+	var highlight_lightness = (floor(new_percentage*3)+1) * 0.05
+	highlight_color_component.alpha = highlight_lightness
 
 func set_radius(new_radius):
 	radius = new_radius
@@ -52,15 +64,10 @@ func set_radius(new_radius):
 	inner_circle_outline_2.radius = new_radius / 3 * 2
 	
 	circle_fill.radius = new_radius
-	highlight.radius = new_radius + 24
+	highlight_outer.radius = new_radius * 1.3
+	highlight_inner.radius = new_radius * 1.15
 	percentage = percentage #this might make it tween the color_cirlce radius while changing radius, but that's okay
 	#color_circle.radius = (circle_outline.radius+CIRCLE_OUTLINE_WIDTH) * percentage 
 
 func set_highlight(is_highlighted):
 	highlight.visible = is_highlighted
-
-#func set_prepare_mix(is_preparing_mix):
-	#var lightness = 0.3 if is_preparing_mix else 1.0
-	#var tween = create_tween()
-	#tween.tween_property(self, "modulate", Color(lightness, lightness, lightness, 1.0), 0.3) \
-		#.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
