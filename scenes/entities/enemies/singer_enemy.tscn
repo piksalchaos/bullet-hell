@@ -1,29 +1,32 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhfjqwsfxdpot"]
+[gd_scene load_steps=15 format=3 uid="uid://dhfjqwsfxdpot"]
 
-[ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_swe76"]
+[ext_resource type="Script" uid="uid://bucuuo5v8j2ww" path="res://scenes/entities/enemies/singer_enemy.gd" id="1_gliya"]
+[ext_resource type="Texture2D" uid="uid://dwdwsf5lgrcvj" path="res://assets/images/enemies/singing_enemy.png" id="2_msehn"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="2_wm1b4"]
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="3_lo5nh"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="4_popep"]
-[ext_resource type="Texture2D" uid="uid://ckansyr46u7rk" path="res://assets/images/ghost_placeholder.png" id="5_pw2p0"]
 [ext_resource type="PackedScene" uid="uid://bbnpupe0f58tx" path="res://scenes/components/pattern_components/pattern_emitter.tscn" id="6_pw2p0"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="7_p0mmk"]
 [ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="8_gliya"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="9_jh2tx"]
 [ext_resource type="PackedScene" uid="uid://cipsef8ipnfk8" path="res://scenes/bullets/music_bullet.tscn" id="10_p0mmk"]
 [ext_resource type="PackedScene" uid="uid://3dhkhebjdkmx" path="res://scenes/bullets/music_bullet_reversed.tscn" id="11_gliya"]
+[ext_resource type="PackedScene" uid="uid://dncgas2m20uxj" path="res://scenes/droppers/color_collectible_dropper.tscn" id="12_jh2tx"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="13_msehn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_swe76"]
 radius = 30.0
 
-[node name="SingerEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter")]
-script = ExtResource("1_swe76")
+[node name="SingerEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root", "bullet_emitter_1", "bullet_emitter_2")]
+script = ExtResource("1_gliya")
 color_component = NodePath("ColorComponent")
 pattern_root = NodePath("PatternEmitter")
-bullet_emitter = NodePath("PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater/BulletEmitter")
+bullet_emitter_1 = NodePath("PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater/BulletEmitter")
+bullet_emitter_2 = NodePath("PatternEmitter/PatternRepeater2/PatternAimer/PatternRepeater/BulletEmitter")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_pw2p0")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_msehn")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("2_wm1b4")]
 health_component = NodePath("../HealthComponent")
@@ -34,21 +37,21 @@ shape = SubResource("CircleShape2D_swe76")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_lo5nh")]
 position = Vector2(0, -42)
-max_health = 3
-free_parent_on_defeat = true
+max_health = 2
+score_amount = 5
 
 [node name="ColorComponent" parent="." instance=ExtResource("4_popep")]
 
 [node name="PatternEmitter" parent="." instance=ExtResource("6_pw2p0")]
 
 [node name="PatternRepeater" parent="PatternEmitter" instance=ExtResource("7_p0mmk")]
-seconds_per_shot = 3.0
+seconds_per_shot = 4.0
 
 [node name="PatternAimer" parent="PatternEmitter/PatternRepeater" instance=ExtResource("8_gliya")]
 
 [node name="PatternRepeater" parent="PatternEmitter/PatternRepeater/PatternAimer" instance=ExtResource("7_p0mmk")]
 rotation = -1.5707964
-seconds_per_shot = 0.3
+seconds_per_shot = 0.4
 max_shots = 3
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("9_jh2tx")]
@@ -56,16 +59,26 @@ rotation = 1.5707964
 bullet_scene = ExtResource("10_p0mmk")
 
 [node name="PatternRepeater2" parent="PatternEmitter" instance=ExtResource("7_p0mmk")]
-delay_time = 1.5
-seconds_per_shot = 3.0
+delay_time = 2.0
+seconds_per_shot = 4.0
 
 [node name="PatternAimer" parent="PatternEmitter/PatternRepeater2" instance=ExtResource("8_gliya")]
 
 [node name="PatternRepeater" parent="PatternEmitter/PatternRepeater2/PatternAimer" instance=ExtResource("7_p0mmk")]
 rotation = -1.5707964
-seconds_per_shot = 0.3
+seconds_per_shot = 0.4
 max_shots = 3
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater2/PatternAimer/PatternRepeater" instance=ExtResource("9_jh2tx")]
 rotation = 1.5707964
 bullet_scene = ExtResource("11_gliya")
+
+[node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("12_jh2tx")]
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("13_msehn")]
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternEmitter")
+sprite = NodePath("../Sprite2D")

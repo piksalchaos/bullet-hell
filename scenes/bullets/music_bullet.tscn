@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmppmmuyhja12" path="res://scenes/drawings/music_bullet_drawing.tscn" id="2_5bgo4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_361k0"]
+radius = 7.5
 
 [node name="MusicBullet" instance=ExtResource("1_361k0")]
 

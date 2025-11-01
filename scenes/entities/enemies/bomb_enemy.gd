@@ -1,0 +1,34 @@
+extends Node2D
+
+const DEFAULT_TWEEN_ENTER_DURATION := 0.75
+const TWEEN_EXIT_DURATION := 1.5
+
+@export var color_component: ColorComponent
+@export var pattern_root: Node2D
+@export var bullet_emitter: BulletEmitter
+
+@export var starting_position: Vector2
+@export var initial_color_id: Globals.COLOR_ID
+@export var tween_enter_duration := DEFAULT_TWEEN_ENTER_DURATION
+
+func _ready() -> void:
+	change_position(starting_position, begin_attacking, tween_enter_duration)
+	color_component.set_color_id(initial_color_id)
+	if bullet_emitter:
+		bullet_emitter.color_id = initial_color_id
+
+func change_position(
+	new_position: Vector2,
+	callback: Callable = func(): pass,
+	tween_duration: float = tween_enter_duration,
+	ease_type: Tween.EaseType = Tween.EASE_OUT
+) -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", new_position, tween_duration) \
+	 	 .set_ease(ease_type) \
+		 .set_trans(Tween.TRANS_SINE)
+	tween.tween_callback(callback)
+	
+func begin_attacking() -> void:
+	if pattern_root:
+		pattern_root.begin()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bcx57y8kx223d"]
+[gd_scene load_steps=23 format=3 uid="uid://bcx57y8kx223d"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_sbygb"]
 [ext_resource type="AudioStream" uid="uid://8pfbnw410msv" path="res://assets/audio/music/This House.mp3" id="2_tv7cl"]
@@ -8,10 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_mx6s3"]
 [ext_resource type="PackedScene" uid="uid://d4ip0nwhymo3e" path="res://scenes/round_manager/control_transition.tscn" id="7_7d3nu"]
 [ext_resource type="FontFile" uid="uid://wwj4ollhl181" path="res://assets/fonts/Nunito-VariableFont_wght.ttf" id="8_r6ket"]
+[ext_resource type="PackedScene" uid="uid://csearv3hqm7c7" path="res://scenes/entities/enemies/bomb_enemy.tscn" id="8_v8d84"]
 [ext_resource type="PackedScene" uid="uid://drepeaab5x320" path="res://scenes/progress_indicator.tscn" id="9_xworo"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="10_wwjag"]
 [ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="11_r88tb"]
 [ext_resource type="PackedScene" uid="uid://dhfjqwsfxdpot" path="res://scenes/entities/enemies/singer_enemy.tscn" id="12_1yj8c"]
+[ext_resource type="Script" uid="uid://nke5gij7chmn" path="res://scenes/round_manager/round.gd" id="13_1yj8c"]
+[ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="14_ndlae"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="21_keip3"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="22_exwx8"]
 
@@ -81,6 +84,12 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("5_1a10c")]
 is_root_round = true
 
+[node name="Round3" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/Round3" instance=ExtResource("11_r88tb")]
+position = Vector2(241, 106)
+enemy_scene = ExtResource("8_v8d84")
+
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_mx6s3")]
 visible = false
 
@@ -97,7 +106,7 @@ offset_bottom = 116.0
 theme = SubResource("Theme_mm8aj")
 bbcode_enabled = true
 text = "STAGE 2
-The Moutains"
+The Mountains"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -111,6 +120,31 @@ wait_time = 4.0
 [node name="BaseEnemySpawner" parent="Stage/RoundSequencer/Round" instance=ExtResource("11_r88tb")]
 position = Vector2(279, 88)
 enemy_scene = ExtResource("12_1yj8c")
+
+[node name="Round2" type="Node2D" parent="Stage/RoundSequencer"]
+script = ExtResource("13_1yj8c")
+metadata/_custom_type_script = "uid://nke5gij7chmn"
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/Round2" instance=ExtResource("11_r88tb")]
+position = Vector2(90, 106)
+enemy_scene = ExtResource("12_1yj8c")
+color_id = 5
+
+[node name="TimerRound" parent="Stage/RoundSequencer/Round2" instance=ExtResource("6_mx6s3")]
+wait_time = 3.0
+
+[node name="BaseEnemySpawner2" parent="Stage/RoundSequencer/Round2/TimerRound" instance=ExtResource("11_r88tb")]
+position = Vector2(495, 170)
+enemy_scene = ExtResource("12_1yj8c")
+color_id = 3
+
+[node name="TimerRound2" parent="Stage/RoundSequencer/Round2" instance=ExtResource("6_mx6s3")]
+wait_time = 6.0
+
+[node name="BaseEnemySpawner3" parent="Stage/RoundSequencer/Round2/TimerRound2" instance=ExtResource("11_r88tb")]
+position = Vector2(298, 73)
+enemy_scene = ExtResource("14_ndlae")
+color_id = 1
 
 [node name="HUD" parent="." instance=ExtResource("21_keip3")]
 
