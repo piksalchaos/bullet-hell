@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0hmb6lqnynne"]
+[gd_scene load_steps=2 format=3 uid="uid://c0hmb6lqnynne"]
 
 [ext_resource type="Script" uid="uid://b0tkj077blslc" path="res://scenes/gui/palette/palette.gd" id="1_dv22i"]
-[ext_resource type="Script" uid="uid://br12x7hiw2r5a" path="res://scenes/gui/palette/mix_line.gd" id="2_j3s2e"]
 
 [node name="Palette" type="Control"]
 layout_mode = 3
@@ -14,14 +13,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dv22i")
 
-[node name="MixLine" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_j3s2e")
+[node name="MixLineContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="ColorContainer" type="Control" parent="."]
 anchors_preset = 0

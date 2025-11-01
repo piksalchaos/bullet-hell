@@ -88,6 +88,37 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("3_iwr0g")]
 is_root_round = true
 
+[node name="RecoveryRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
+position = Vector2(1, 0)
+
+[node name="ControlTransition" parent="Stage/RoundSequencer/RecoveryRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
+visible = true
+node_to_free_with = NodePath("../RoundSequencer")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/RecoveryRound/ControlTransition"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 504.0
+offset_right = 512.0
+offset_bottom = 668.0
+theme = SubResource("Theme_mm8aj")
+bbcode_enabled = true
+text = "When all 3 colors are maxed out,
+Hold [img=60]assets/images/keyboard/key_w.png[/img] to [b]heal[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundSequencer" parent="Stage/RoundSequencer/RecoveryRound" instance=ExtResource("3_iwr0g")]
+
+[node name="TimerRound2" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("6_iav0o")]
+wait_time = 3.0
+
+[node name="ButterflySpawner" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("17_gmpev")]
+position = Vector2(287.5, -39)
+
+[node name="TimerRound" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("6_iav0o")]
+wait_time = 4.0
+
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
 visible = false
 
@@ -418,37 +449,6 @@ color_id = 4
 
 [node name="GhostEnemySpawner6" parent="Stage/RoundSequencer/ColorRound3/MainTimerRound/TimerRound/RoundSequencer2" instance=ExtResource("5_excbq")]
 position = Vector2(490, 183)
-
-[node name="RecoveryRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
-position = Vector2(1, 0)
-
-[node name="ControlTransition" parent="Stage/RoundSequencer/RecoveryRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
-visible = true
-node_to_free_with = NodePath("../RoundSequencer")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/RecoveryRound/ControlTransition"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 504.0
-offset_right = 512.0
-offset_bottom = 668.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
-text = "When all 3 colors are maxed out,
-Hold [img=60]assets/images/keyboard/key_w.png[/img] to [b]heal[/b]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RoundSequencer" parent="Stage/RoundSequencer/RecoveryRound" instance=ExtResource("3_iwr0g")]
-
-[node name="TimerRound2" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("6_iav0o")]
-wait_time = 3.0
-
-[node name="ButterflySpawner" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("17_gmpev")]
-position = Vector2(287.5, -39)
-
-[node name="TimerRound" parent="Stage/RoundSequencer/RecoveryRound/RoundSequencer" instance=ExtResource("6_iav0o")]
-wait_time = 4.0
 
 [node name="ProgressIndicator2" parent="Stage/RoundSequencer" instance=ExtResource("12_ndtll")]
 

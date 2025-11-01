@@ -8,8 +8,10 @@ const SELECTED_RADIUS = 110.0
 const TWEEN_DURATION = 0.35
 
 const PALETTE_COLOR = preload("uid://cnfbbe0r3do7e")
+const MIX_LINE = preload("uid://bbou5jm73pq6i")
+
 @onready var color_container: Control = $ColorContainer
-@onready var mix_line: Control = $MixLine
+@onready var mix_line_container: Control = $MixLineContainer
 var selected_primary_color_index: int = 0
 var rotation_factor: int = 0
 var vibration_amount: float = 0
@@ -31,7 +33,17 @@ func _ready() -> void:
 		else:
 			palette_color.position = Vector2(cos(angle), sin(angle)) * CENTER_DISTANCE
 			palette_color.radius = RADIUS
-	
+	for secondary_color_id in Globals.SECONDARY_COLOR_MAP.keys():
+		var mix_line = MIX_LINE.instantiate()
+		mix_line.color_id = secondary_color_id
+		
+		var primary_color_index_1 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[secondary_color_id][0])
+		var primary_color_index_2 = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[secondary_color_id][1])
+		
+		mix_line.palette_color_1 = color_container.get_child(primary_color_index_1)
+		mix_line.palette_color_2 = color_container.get_child(primary_color_index_2)
+		
+		mix_line_container.add_child(mix_line)
 
 func _on_color_amount_changed(primary_color_index, percentage):
 	color_container.get_child(primary_color_index).percentage = percentage
@@ -73,7 +85,13 @@ func _on_mixed_colors_changed(mixed_primary_color_index):
 		palette_color.set_highlight(
 			palette_color.get_index() == mixed_primary_color_index
 		)
-
+	for mix_line in mix_line_container.get_children():
+		var primary_color_id = Globals.PRIMARY_COLORS[mixed_primary_color_index]
+		mix_line.set_highlight(
+			false if mixed_primary_color_index == -1
+			else Globals.SECONDARY_COLOR_MAP[mix_line.color_id].has(primary_color_id)
+		)
+#
 func _on_found_color_to_mix_changed(found_color_to_mix: bool, color_id: Globals.COLOR_ID):
 	if found_color_to_mix:
 		var first_primary_color_index = Globals.PRIMARY_COLORS.find(Globals.SECONDARY_COLOR_MAP[color_id][0])

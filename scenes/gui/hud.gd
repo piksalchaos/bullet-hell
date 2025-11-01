@@ -84,7 +84,6 @@ func add_progress_icon(progress_type: ProgressIndicator.PROGRESS_TYPE):
 
 func _on_progress_indicator_reached():
 	progress_index += 1
-	print(progress_index)
 	var progress_icon_position = progress_sequence.get_child(-1-progress_index).global_position
 	if progress_index == 0:
 		progress_arrow.visible = true
