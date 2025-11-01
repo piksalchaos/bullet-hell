@@ -62,4 +62,5 @@ func get_random_vector_factor():
 
 func clear_all_bullets():
 	for bullet in bullet_container.get_children():
-		bullet.queue_free()
+		if not bullet is PlayerBullet:
+			bullet.queue_free()

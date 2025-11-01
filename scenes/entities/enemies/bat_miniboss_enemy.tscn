@@ -17,7 +17,7 @@ radius = 50.0
 [node name="BatMinibossEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root")]
 script = ExtResource("1_n5myj")
 color_component = NodePath("ColorComponent")
-pattern_root = NodePath("PatternRepeater")
+pattern_root = NodePath("BulletEmitter")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
@@ -25,7 +25,7 @@ texture = ExtResource("1_bngh8")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_nvbe1")]
 position = Vector2(0, -64)
-max_health = 8
+max_health = 6
 score_amount = 28
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_jkkbb")]
@@ -44,13 +44,30 @@ pattern_root = NodePath("../PatternRepeater")
 sprite = NodePath("../Sprite2D")
 
 [node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("7_n5myj")]
+position = Vector2(11, -30)
 color_component = NodePath("../ColorComponent")
 health_component = NodePath("../HealthComponent")
 
 [node name="PatternRepeater" parent="." instance=ExtResource("8_mrx7j")]
 seconds_per_shot = 4.0
 
-[node name="BulletEmitter" parent="PatternRepeater" instance=ExtResource("9_ewla2")]
+[node name="BulletEmitter" parent="." instance=ExtResource("9_ewla2")]
 rotation = 1.5620697
 bullet_scene = ExtResource("10_3xplj")
 color_id = 6
+
+[node name="RepositionTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="ColorCollectibleDropper2" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("7_n5myj")]
+position = Vector2(16, 21)
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="ColorCollectibleDropper3" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("7_n5myj")]
+position = Vector2(-36, -1)
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
+
+[connection signal="defeated" from="HealthComponent" to="." method="_on_health_component_defeated"]
+[connection signal="timeout" from="RepositionTimer" to="." method="_on_reposition_timer_timeout"]

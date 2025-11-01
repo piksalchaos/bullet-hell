@@ -1,4 +1,4 @@
-extends Area2D
+class_name PlayerBullet extends Area2D
 
 const RADIUS := 16.0
 const SPEED := 1600.0

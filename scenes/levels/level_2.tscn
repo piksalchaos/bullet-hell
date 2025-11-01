@@ -89,13 +89,6 @@ position = Vector2(292, 422)
 [node name="RoundSequencer" parent="Stage" instance=ExtResource("5_1a10c")]
 is_root_round = true
 
-[node name="MinibossRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
-
-[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MinibossRound" instance=ExtResource("11_r88tb")]
-position = Vector2(288, 127)
-enemy_scene = ExtResource("20_sbygb")
-color_id = 4
-
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_mx6s3")]
 visible = false
 
@@ -259,6 +252,13 @@ color_id = 5
 
 [node name="ProgressIndicator3" parent="Stage/RoundSequencer" instance=ExtResource("9_xworo")]
 type = 1
+
+[node name="MinibossRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
+
+[node name="BaseEnemySpawner" parent="Stage/RoundSequencer/MinibossRound" instance=ExtResource("11_r88tb")]
+position = Vector2(288, 127)
+enemy_scene = ExtResource("20_sbygb")
+color_id = 4
 
 [node name="HUD" parent="." instance=ExtResource("21_keip3")]
 
