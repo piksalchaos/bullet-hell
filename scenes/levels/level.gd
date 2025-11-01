@@ -13,13 +13,12 @@ class_name Level extends Node
 @onready var player: Player = $Stage/Player
 @onready var music_audio: AudioStreamPlayer = $MusicAudio
 
-
-
 var is_playing := false
 var is_ready_to_finish := false
 var play_time := 0.0
 
 signal finished
+signal game_ended
 
 func _ready() -> void:
 	if is_first_level:
@@ -87,8 +86,13 @@ func set_process_modes_after_death():
 	player.process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _on_player_finished_death_animation() -> void:
-	finish()
+	queue_free()
+	game_ended.emit()
 
 func finish():
 	queue_free()
 	finished.emit()
+
+func end_game():
+	queue_free()
+	game_ended.emit()

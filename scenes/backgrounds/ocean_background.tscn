@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dertuunn0830b"]
+[gd_scene load_steps=6 format=3 uid="uid://dertuunn0830b"]
 
 [ext_resource type="Script" uid="uid://bk5doipf3nu6f" path="res://scenes/backgrounds/ocean_background.gd" id="1_3kwm8"]
 [ext_resource type="PackedScene" uid="uid://d0tyh1mjnts0m" path="res://scenes/backgrounds/ocean_background_buildings.tscn" id="2_8w78f"]
 
 [sub_resource type="Gradient" id="Gradient_8w78f"]
-colors = PackedColorArray(0.16133332, 0.1496, 0.22, 0, 0.16179407, 0.14747289, 0.21852866, 1)
+colors = PackedColorArray(0.11563488, 0.11563488, 0.115634836, 0, 0.18502277, 0.16923916, 0.2476236, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w5whh"]
+gradient = SubResource("Gradient_8w78f")
+fill = 1
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8w78f"]
 gradient = SubResource("Gradient_8w78f")
 fill = 1
 fill_from = Vector2(0.5, 0)
@@ -16,8 +22,10 @@ fill_to = Vector2(0.5, 1)
 script = ExtResource("1_3kwm8")
 
 [node name="Buildings" parent="." instance=ExtResource("2_8w78f")]
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(576, 648)
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,5 +35,27 @@ offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_w5whh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(576, 648)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 576.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(576, 648)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 576.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_8w78f")
 
 [node name="BubbleContainer" type="Node2D" parent="."]

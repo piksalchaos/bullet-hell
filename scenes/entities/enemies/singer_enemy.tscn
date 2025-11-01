@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhfjqwsfxdpot"]
+[gd_scene load_steps=13 format=3 uid="uid://dhfjqwsfxdpot"]
 
 [ext_resource type="Script" uid="uid://cle2yfbjvr7ao" path="res://scenes/entities/enemies/base_enemy.gd" id="1_swe76"]
 [ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="2_wm1b4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="8_gliya"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="9_jh2tx"]
 [ext_resource type="PackedScene" uid="uid://cipsef8ipnfk8" path="res://scenes/bullets/music_bullet.tscn" id="10_p0mmk"]
+[ext_resource type="PackedScene" uid="uid://3dhkhebjdkmx" path="res://scenes/bullets/music_bullet_reversed.tscn" id="11_gliya"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_swe76"]
 radius = 30.0
@@ -33,7 +34,7 @@ shape = SubResource("CircleShape2D_swe76")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_lo5nh")]
 position = Vector2(0, -42)
-max_health = 2
+max_health = 3
 free_parent_on_defeat = true
 
 [node name="ColorComponent" parent="." instance=ExtResource("4_popep")]
@@ -41,15 +42,30 @@ free_parent_on_defeat = true
 [node name="PatternEmitter" parent="." instance=ExtResource("6_pw2p0")]
 
 [node name="PatternRepeater" parent="PatternEmitter" instance=ExtResource("7_p0mmk")]
-seconds_per_shot = 2.0
+seconds_per_shot = 3.0
 
 [node name="PatternAimer" parent="PatternEmitter/PatternRepeater" instance=ExtResource("8_gliya")]
 
 [node name="PatternRepeater" parent="PatternEmitter/PatternRepeater/PatternAimer" instance=ExtResource("7_p0mmk")]
 rotation = -1.5707964
-seconds_per_shot = 0.2
+seconds_per_shot = 0.3
 max_shots = 3
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("9_jh2tx")]
 rotation = 1.5707964
 bullet_scene = ExtResource("10_p0mmk")
+
+[node name="PatternRepeater2" parent="PatternEmitter" instance=ExtResource("7_p0mmk")]
+delay_time = 1.5
+seconds_per_shot = 3.0
+
+[node name="PatternAimer" parent="PatternEmitter/PatternRepeater2" instance=ExtResource("8_gliya")]
+
+[node name="PatternRepeater" parent="PatternEmitter/PatternRepeater2/PatternAimer" instance=ExtResource("7_p0mmk")]
+rotation = -1.5707964
+seconds_per_shot = 0.3
+max_shots = 3
+
+[node name="BulletEmitter" parent="PatternEmitter/PatternRepeater2/PatternAimer/PatternRepeater" instance=ExtResource("9_jh2tx")]
+rotation = 1.5707964
+bullet_scene = ExtResource("11_gliya")

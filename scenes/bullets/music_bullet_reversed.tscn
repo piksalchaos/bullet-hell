@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3dhkhebjdkmx"]
+
+[ext_resource type="PackedScene" uid="uid://cipsef8ipnfk8" path="res://scenes/bullets/music_bullet.tscn" id="1_6hxjd"]
+
+[node name="MusicBulletReversed" instance=ExtResource("1_6hxjd")]
+cos_radian_offset = 3.142

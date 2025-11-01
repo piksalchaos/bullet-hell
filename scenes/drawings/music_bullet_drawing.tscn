@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmppmmuyhja12"]
+
+[ext_resource type="Script" uid="uid://b0kacn0m13rt2" path="res://scenes/drawings/music_bullet_drawing.gd" id="1_o8t6y"]
+
+[node name="MusicBulletDrawing" type="Node2D"]
+script = ExtResource("1_o8t6y")

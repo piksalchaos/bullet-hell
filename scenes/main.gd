@@ -28,6 +28,7 @@ func start_level():
 		child.queue_free()
 	var level = levels[current_level_index].instantiate()
 	level.finished.connect(_on_level_finished)
+	level.game_ended.connect(_on_level_game_ended)
 	level_container.add_child(level)
 
 func _on_start_menu_ready_to_begin() -> void:
@@ -52,5 +53,8 @@ func _on_level_finished() -> void:
 	else:
 		create_start_menu()
 
+func _on_level_game_ended() -> void:
+	create_start_menu()
+
 func _on_pause_menu_ready_to_exit_to_start_menu() -> void:
-	level_container.get_child(0).finish()
+	level_container.get_child(0).end_game()

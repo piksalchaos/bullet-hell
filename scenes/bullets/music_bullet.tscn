@@ -1,13 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://cipsef8ipnfk8"]
 
 [ext_resource type="PackedScene" uid="uid://cp0aog44rjxyj" path="res://scenes/bullets/base_bullets/cosine_bullet.tscn" id="1_361k0"]
-[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="4_p0rxy"]
+[ext_resource type="PackedScene" uid="uid://bmppmmuyhja12" path="res://scenes/drawings/music_bullet_drawing.tscn" id="2_5bgo4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_361k0"]
 
 [node name="MusicBullet" instance=ExtResource("1_361k0")]
 
+[node name="BulletComponent" parent="." index="1"]
+offscreen_distance = 40.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent" index="0"]
 shape = SubResource("CircleShape2D_361k0")
 
-[node name="CircleDrawing" parent="." index="2" instance=ExtResource("4_p0rxy")]
+[node name="MusicBulletDrawing" parent="." index="2" instance=ExtResource("2_5bgo4")]
