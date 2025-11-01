@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://chrt6p27pqixr"]
+
+[ext_resource type="Script" uid="uid://duvdy8fqo7m4t" path="res://scenes/bullets/homing_circle_bullet.gd" id="1_gyl2n"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_lchkw"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_6pu4h"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="4_sofu5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pp2y1"]
+radius = 6.0
+
+[node name="HomingCircleBullet" type="Node2D"]
+script = ExtResource("1_gyl2n")
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("2_lchkw")]
+offscreen_distance = 200.0
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_pp2y1")
+
+[node name="ColorComponent" parent="." instance=ExtResource("3_6pu4h")]
+
+[node name="CircleDrawing" parent="." instance=ExtResource("4_sofu5")]
+radius = 4.0
+
+[node name="CircleDrawing2" parent="." instance=ExtResource("4_sofu5")]
+radius = 8.0
+is_filled = false
+line_width = 2.0

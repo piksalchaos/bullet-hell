@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://csearv3hqm7c7"]
+[gd_scene load_steps=15 format=3 uid="uid://csearv3hqm7c7"]
 
 [ext_resource type="Texture2D" uid="uid://cqow0yunv0rp3" path="res://assets/images/enemies/bomb_enemy.png" id="1_7txgk"]
 [ext_resource type="Script" uid="uid://dd71epqhgdft6" path="res://scenes/entities/enemies/bomb_enemy.gd" id="1_wj87i"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="9_fq7rf"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="10_fkobg"]
 [ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="12_fq7rf"]
+[ext_resource type="PackedScene" uid="uid://dncgas2m20uxj" path="res://scenes/droppers/color_collectible_dropper.tscn" id="13_ohdsx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpbdv"]
 radius = 24.8
@@ -36,7 +37,7 @@ shape = SubResource("CircleShape2D_vpbdv")
 [node name="HealthComponent" parent="." instance=ExtResource("3_ekusr")]
 position = Vector2(0, -42)
 max_health = 4
-score_amount = 4
+score_amount = 6
 
 [node name="ColorComponent" parent="." instance=ExtResource("4_wj87i")]
 
@@ -48,7 +49,8 @@ sprite = NodePath("../Sprite2D")
 [node name="PatternEmitter" parent="." instance=ExtResource("6_ygt53")]
 
 [node name="PatternRepeater" parent="PatternEmitter" instance=ExtResource("7_3hfd7")]
-seconds_per_shot = 6.0
+delay_time = 7.0
+seconds_per_shot = 7.0
 
 [node name="PatternRandomizer" parent="PatternEmitter/PatternRepeater" instance=ExtResource("9_fq7rf")]
 
@@ -88,3 +90,7 @@ bullet_count = 20
 rotation = 4.1887903
 bullet_scene = ExtResource("12_fq7rf")
 color_id = 2
+
+[node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("13_ohdsx")]
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")

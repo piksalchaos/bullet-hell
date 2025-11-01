@@ -1,8 +1,8 @@
 extends Node2D
 
-const INITIAL_DISTANCE := 125.0
-const TWEEN_DURATION := 0.5
-const ACCELERATION = 800.0
+const INITIAL_DISTANCE := 75.0
+const TWEEN_DURATION := 1
+const ACCELERATION = 500.0
 @export var initial_color_id: Globals.COLOR_ID
 @onready var color_component: ColorComponent = $ColorComponent
 
