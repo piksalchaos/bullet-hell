@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdhseghbd6ixv"]
+
+[ext_resource type="Script" uid="uid://bo0g4he263mut" path="res://scenes/bullets/splitter_bullets/splitter_bullet_final.gd" id="1_t0xop"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_v41lr"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="3_2xmwo"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="4_v41lr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0xop"]
+radius = 4.0
+
+[node name="SplitterBulletFinal" type="Node2D"]
+script = ExtResource("1_t0xop")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(8, 0, 0, -5, -8, 0, 0, 5)
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("2_v41lr")]
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_t0xop")
+
+[node name="CircleDrawing" parent="." instance=ExtResource("3_2xmwo")]
+visible = false
+radius = 6.0
+
+[node name="ColorComponent" parent="." instance=ExtResource("4_v41lr")]

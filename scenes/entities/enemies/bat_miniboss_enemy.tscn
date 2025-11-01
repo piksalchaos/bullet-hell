@@ -1,0 +1,56 @@
+[gd_scene load_steps=12 format=3 uid="uid://cjrd2nfpsp0l4"]
+
+[ext_resource type="Texture2D" uid="uid://qxsuua2dh1vy" path="res://assets/images/enemies/bat_miniboss_enemy.png" id="1_bngh8"]
+[ext_resource type="Script" uid="uid://btvq77annlk0n" path="res://scenes/entities/enemies/bat_miniboss_enemy.gd" id="1_n5myj"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="3_nvbe1"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_jkkbb"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="5_n5myj"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="6_jkkbb"]
+[ext_resource type="PackedScene" uid="uid://dncgas2m20uxj" path="res://scenes/droppers/color_collectible_dropper.tscn" id="7_n5myj"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="8_mrx7j"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="9_ewla2"]
+[ext_resource type="PackedScene" uid="uid://dk2726nirtct0" path="res://scenes/bullets/splitter_bullets/splitter_bullet.tscn" id="10_3xplj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrx7j"]
+radius = 50.0
+
+[node name="BatMinibossEnemy" type="Node2D" node_paths=PackedStringArray("color_component", "pattern_root")]
+script = ExtResource("1_n5myj")
+color_component = NodePath("ColorComponent")
+pattern_root = NodePath("PatternRepeater")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_bngh8")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_nvbe1")]
+position = Vector2(0, -64)
+max_health = 8
+score_amount = 28
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_jkkbb")]
+health_component = NodePath("../HealthComponent")
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_mrx7j")
+
+[node name="ColorComponent" parent="." instance=ExtResource("5_n5myj")]
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "health_component", "pattern_root", "sprite") instance=ExtResource("6_jkkbb")]
+hitbox_component = NodePath("../HitboxComponent")
+health_component = NodePath("../HealthComponent")
+pattern_root = NodePath("../PatternRepeater")
+sprite = NodePath("../Sprite2D")
+
+[node name="ColorCollectibleDropper" parent="." node_paths=PackedStringArray("color_component", "health_component") instance=ExtResource("7_n5myj")]
+color_component = NodePath("../ColorComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="PatternRepeater" parent="." instance=ExtResource("8_mrx7j")]
+seconds_per_shot = 4.0
+
+[node name="BulletEmitter" parent="PatternRepeater" instance=ExtResource("9_ewla2")]
+rotation = 1.5620697
+bullet_scene = ExtResource("10_3xplj")
+color_id = 6

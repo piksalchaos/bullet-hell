@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://dk2726nirtct0"]
+
+[ext_resource type="Script" uid="uid://dya0o21u2ww03" path="res://scenes/bullets/splitter_bullets/splitter_bullet.gd" id="1_ng4pg"]
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="2_nleso"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_1v6if"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="4_nleso"]
+[ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="5_1v6if"]
+[ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="5_co2mq"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="6_00dty"]
+[ext_resource type="PackedScene" uid="uid://bdhseghbd6ixv" path="res://scenes/bullets/splitter_bullets/splitter_bullet_final.tscn" id="7_00dty"]
+[ext_resource type="PackedScene" uid="uid://dbu17cqiyi67h" path="res://scenes/components/pattern_components/colorizers/randomized_colorizer.tscn" id="9_oadvd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nleso"]
+radius = 16.0
+
+[node name="SplitterBullet" type="Node2D"]
+script = ExtResource("1_ng4pg")
+initial_color_id = 6
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("2_nleso")]
+offscreen_distance = 10.0
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_nleso")
+
+[node name="ColorComponent" parent="." instance=ExtResource("3_1v6if")]
+color_id = 6
+
+[node name="CircleDrawing" parent="." instance=ExtResource("4_nleso")]
+
+[node name="CircleDrawing2" parent="." instance=ExtResource("4_nleso")]
+radius = 18.0
+is_filled = false
+line_width = 3.0
+
+[node name="PatternRandomizer" parent="." instance=ExtResource("5_co2mq")]
+angle_range = 6.283
+
+[node name="PatternSpreader" parent="PatternRandomizer" instance=ExtResource("5_1v6if")]
+angle_range = 5.385
+bullet_count = 6
+
+[node name="BulletEmitter" parent="PatternRandomizer/PatternSpreader" instance=ExtResource("6_00dty")]
+bullet_scene = ExtResource("7_00dty")
+
+[node name="RandomizedColorizer" parent="PatternRandomizer/PatternSpreader" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("9_oadvd")]
+bullet_emitters = [NodePath("../BulletEmitter")]
+color_ids_to_choose = Array[int]([0, 1, 2, 3, 4, 5])
