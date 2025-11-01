@@ -59,8 +59,8 @@ seconds_per_shot = 0.15
 max_shots = 6
 
 [node name="PatternSpreader" parent="PatternEmitter/PatternRepeater/PatternRandomizer/PatternRepeater" instance=ExtResource("8_3hfd7")]
-angle_range = 5.984
-bullet_count = 20
+angle_range = 5.913
+bullet_count = 16
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternRandomizer/PatternRepeater/PatternSpreader" instance=ExtResource("10_fkobg")]
 rotation = 2.0943952
@@ -71,8 +71,8 @@ seconds_per_shot = 0.15
 max_shots = 6
 
 [node name="PatternSpreader" parent="PatternEmitter/PatternRepeater/PatternRandomizer/PatternRepeater2" instance=ExtResource("8_3hfd7")]
-angle_range = 5.984
-bullet_count = 20
+angle_range = 5.913
+bullet_count = 16
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternRandomizer/PatternRepeater2/PatternSpreader" instance=ExtResource("10_fkobg")]
 bullet_scene = ExtResource("12_fq7rf")
@@ -83,8 +83,8 @@ seconds_per_shot = 0.15
 max_shots = 6
 
 [node name="PatternSpreader" parent="PatternEmitter/PatternRepeater/PatternRandomizer/PatternRepeater4" instance=ExtResource("8_3hfd7")]
-angle_range = 5.984
-bullet_count = 20
+angle_range = 5.913
+bullet_count = 16
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternRandomizer/PatternRepeater4/PatternSpreader" instance=ExtResource("10_fkobg")]
 rotation = 4.1887903

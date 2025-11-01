@@ -2,7 +2,8 @@ extends Node2D
 
 const INITIAL_DISTANCE := 75.0
 const TWEEN_DURATION := 1
-const ACCELERATION = 500.0
+const ACCELERATION = 200.0
+const MAX_SPEED := 250.0
 @export var initial_color_id: Globals.COLOR_ID
 @onready var color_component: ColorComponent = $ColorComponent
 
@@ -30,4 +31,5 @@ func chase_player():
 func _physics_process(delta: float) -> void:
 	if is_chasing_player:
 		speed += ACCELERATION * delta #i think there's a way to make this more accurate w calculus, but dont worry abt it for now
+		if speed > MAX_SPEED: speed = MAX_SPEED
 		position += direction * speed * delta

@@ -58,16 +58,16 @@ seconds_per_shot = 10.0
 [node name="PatternRepeater2" parent="PatternEmitter/PatternRepeater/PatternAimer" instance=ExtResource("7_rhah8")]
 position = Vector2(1, 6)
 rotation = -1.5707964
-seconds_per_shot = 0.375
+seconds_per_shot = 0.3
 max_shots = 2
 
 [node name="PatternRepeater" parent="PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater2" instance=ExtResource("7_rhah8")]
 seconds_per_shot = 0.075
-max_shots = 5
+max_shots = 4
 
 [node name="PatternRotator" parent="PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater2/PatternRepeater" instance=ExtResource("8_4y6r6")]
-angle_range = 1.25
-cycle_bullet_count = 5
+angle_range = 1.1
+cycle_bullet_count = 4
 is_ping_pong = true
 
 [node name="BulletEmitter" parent="PatternEmitter/PatternRepeater/PatternAimer/PatternRepeater2/PatternRepeater/PatternRotator" instance=ExtResource("10_7sbpv")]
@@ -83,17 +83,17 @@ seconds_per_shot = 10.0
 [node name="PatternRepeater2" parent="PatternEmitter/PatternRepeater2/PatternAimer" instance=ExtResource("7_rhah8")]
 position = Vector2(1, 6)
 rotation = -1.5707964
-seconds_per_shot = 0.375
+seconds_per_shot = 0.3
 max_shots = 2
 
 [node name="PatternRepeater" parent="PatternEmitter/PatternRepeater2/PatternAimer/PatternRepeater2" instance=ExtResource("7_rhah8")]
 seconds_per_shot = 0.075
-max_shots = 5
+max_shots = 4
 
 [node name="PatternRotator" parent="PatternEmitter/PatternRepeater2/PatternAimer/PatternRepeater2/PatternRepeater" instance=ExtResource("8_4y6r6")]
-angle_range = 1.25
-cycle_bullet_count = 5
-cycle_index = 4
+angle_range = 1.1
+cycle_bullet_count = 4
+cycle_index = 3
 is_ping_pong = true
 is_rotating_ccw = false
 

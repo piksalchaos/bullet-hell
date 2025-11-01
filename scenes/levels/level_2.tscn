@@ -166,13 +166,13 @@ color_id = 4
 position = Vector2(522, 205)
 color_id = 2
 
-[node name="ProgressIndicator2" parent="Stage/RoundSequencer" instance=ExtResource("9_xworo")]
-
-[node name="ButterflyRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
+[node name="ButterflyRound2" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
 visible = false
 
-[node name="ButterflySpawner" parent="Stage/RoundSequencer/ButterflyRound" instance=ExtResource("17_p4se4")]
+[node name="ButterflySpawner" parent="Stage/RoundSequencer/ButterflyRound2" instance=ExtResource("17_p4se4")]
 position = Vector2(226, -18)
+
+[node name="ProgressIndicator2" parent="Stage/RoundSequencer" instance=ExtResource("9_xworo")]
 
 [node name="TimerRound" parent="Stage/RoundSequencer" instance=ExtResource("6_mx6s3")]
 visible = false
@@ -242,14 +242,6 @@ position = Vector2(467, 150)
 enemy_scene = ExtResource("8_lkn2k")
 color_id = 1
 
-[node name="TimerRound2" parent="Stage/RoundSequencer/Round5/TimerRound3" instance=ExtResource("6_mx6s3")]
-wait_time = 4.0
-
-[node name="BaseEnemySpawner2" parent="Stage/RoundSequencer/Round5/TimerRound3/TimerRound2" instance=ExtResource("11_r88tb")]
-position = Vector2(283, 198)
-enemy_scene = ExtResource("8_lkn2k")
-color_id = 5
-
 [node name="ProgressIndicator3" parent="Stage/RoundSequencer" instance=ExtResource("9_xworo")]
 type = 1
 
@@ -259,6 +251,12 @@ type = 1
 position = Vector2(288, 127)
 enemy_scene = ExtResource("20_sbygb")
 color_id = 4
+
+[node name="ButterflyRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
+visible = false
+
+[node name="ButterflySpawner" parent="Stage/RoundSequencer/ButterflyRound" instance=ExtResource("17_p4se4")]
+position = Vector2(226, -18)
 
 [node name="HUD" parent="." instance=ExtResource("21_keip3")]
 
