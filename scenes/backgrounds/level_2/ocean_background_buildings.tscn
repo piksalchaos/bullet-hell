@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0tyh1mjnts0m"]
 
-[ext_resource type="Script" uid="uid://c6vb2oflyu5jw" path="res://scenes/backgrounds/ocean_background_buildings.gd" id="1_57gqa"]
+[ext_resource type="Script" uid="uid://c6vb2oflyu5jw" path="res://scenes/backgrounds/level_2/ocean_background_buildings.gd" id="1_57gqa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_57gqa"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

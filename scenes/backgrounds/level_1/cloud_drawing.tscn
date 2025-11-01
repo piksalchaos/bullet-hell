@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cu0uxg030b16a"]
 
-[ext_resource type="Script" uid="uid://da82wgmbml3i" path="res://scenes/backgrounds/cloud_drawing.gd" id="1_u35tp"]
+[ext_resource type="Script" uid="uid://da82wgmbml3i" path="res://scenes/backgrounds/level_1/cloud_drawing.gd" id="1_u35tp"]
 
 [node name="CloudDrawing" type="Node2D"]
 script = ExtResource("1_u35tp")

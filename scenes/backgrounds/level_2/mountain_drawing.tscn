@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwo4xwjnyvykl"]
+
+[ext_resource type="Script" uid="uid://dkimo7mg6c6vg" path="res://scenes/backgrounds/level_2/mountain_drawing.gd" id="1_b7sad"]
+
+[sub_resource type="Gradient" id="Gradient_b7sad"]
+offsets = PackedFloat32Array(0, 0.99655175)
+colors = PackedColorArray(0, 0, 0, 1, 0.3618, 0.39446998, 0.54, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n16jv"]
+gradient = SubResource("Gradient_b7sad")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[node name="MountainDrawing" type="Node2D"]
+script = ExtResource("1_b7sad")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture = SubResource("GradientTexture2D_n16jv")
+texture_scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(0, 0, 30, 80, 60, 160, 90, 240, -90, 240, -60, 160, -30, 80)
+uv = PackedVector2Array(146.50177, 45.447647, 31.527405, 94.165596, 31.527405, 94.165596)

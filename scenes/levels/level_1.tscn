@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
 [ext_resource type="PackedScene" uid="uid://cpfq3arc6w1h8" path="res://scenes/round_manager/round_sequencer.tscn" id="3_iwr0g"]
-[ext_resource type="PackedScene" uid="uid://b27b4app5xicf" path="res://scenes/backgrounds/forest_background.tscn" id="3_np2pn"]
+[ext_resource type="PackedScene" uid="uid://b27b4app5xicf" path="res://scenes/backgrounds/level_1/forest_background.tscn" id="3_np2pn"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="4_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/spawners/enemy_spawners/ghost_enemy_spawner.tscn" id="5_excbq"]
 [ext_resource type="PackedScene" uid="uid://bb3q42r3v7i58" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.tscn" id="5_iav0o"]

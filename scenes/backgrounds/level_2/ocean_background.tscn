@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dertuunn0830b"]
+
+[ext_resource type="Script" uid="uid://dolv7g3w5eu72" path="res://scenes/backgrounds/level_2/mountain_container.gd" id="1_pe63k"]
+[ext_resource type="Script" uid="uid://rwu2plmxudjd" path="res://scenes/backgrounds/level_2/bubble_container.gd" id="2_pe63k"]
+
+[sub_resource type="Gradient" id="Gradient_8w78f"]
+colors = PackedColorArray(0.326764, 0.3153241, 0.5118016, 0, 0.077999994, 0.080099985, 0.12, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8w78f"]
+gradient = SubResource("Gradient_8w78f")
+fill = 1
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[node name="OceanBackground" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(576, 648)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 576.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MountainContainer" type="Node2D" parent="."]
+script = ExtResource("1_pe63k")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(576, 648)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 576.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_8w78f")
+
+[node name="BubbleContainer" type="Node2D" parent="."]
+script = ExtResource("2_pe63k")

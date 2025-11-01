@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bd3idbrv612oi"]
 
-[ext_resource type="Script" uid="uid://b2gi5qmvxal4v" path="res://scenes/backgrounds/foggy_background.gd" id="1_uttnc"]
+[ext_resource type="Script" uid="uid://b2gi5qmvxal4v" path="res://scenes/backgrounds/level_1/foggy_background.gd" id="1_uttnc"]
 
 [node name="FoggyBackground" type="Node2D"]
 script = ExtResource("1_uttnc")

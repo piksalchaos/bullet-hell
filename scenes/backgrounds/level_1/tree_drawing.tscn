@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://djagoqhr17stx"]
 
-[ext_resource type="Script" uid="uid://bpuuau7703318" path="res://scenes/backgrounds/tree_drawing.gd" id="1_mo5yv"]
-[ext_resource type="Script" uid="uid://d3kvw8t6xi2e1" path="res://scenes/backgrounds/tree_leaves_drawing.gd" id="2_8hb1x"]
+[ext_resource type="Script" uid="uid://bpuuau7703318" path="res://scenes/backgrounds/level_1/tree_drawing.gd" id="1_mo5yv"]
+[ext_resource type="Script" uid="uid://d3kvw8t6xi2e1" path="res://scenes/backgrounds/level_1/tree_leaves_drawing.gd" id="2_8hb1x"]
 [ext_resource type="Texture2D" uid="uid://do4t0gmo3jd68" path="res://assets/images/tree_trunk.png" id="2_qnhdd"]
 
 [node name="TreeDrawing" type="Node2D"]

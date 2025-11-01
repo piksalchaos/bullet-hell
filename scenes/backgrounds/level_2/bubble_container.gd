@@ -9,8 +9,6 @@ const SPAWN_BUBBLE_TIMER_MAX := 1.1
 
 var spawn_bubble_timer = SPAWN_BUBBLE_TIMER_MAX
 
-@onready var bubble_container: Node2D = $BubbleContainer
-
 func _ready() -> void:
 	for i in 60:
 		var y_offset = i * 15
@@ -23,7 +21,7 @@ func _process(delta: float) -> void:
 		new_bubble(create_bubble_position(false))
 		new_bubble(create_bubble_position(true))
 	
-	for bubble in bubble_container.get_children():
+	for bubble in get_children():
 		if (
 			bubble.position.y > Globals.STAGE_HEIGHT + BUBBLE_OFFSCREEN_DISTANCE
 			or bubble.position.x < -BUBBLE_OFFSCREEN_DISTANCE
@@ -39,4 +37,4 @@ func create_bubble_position(y_offset: float = 0) -> Vector2:
 func new_bubble(bubble_position: Vector2) -> void:
 	var bubble = BUBBLE_DRAWING.instantiate()
 	bubble.position = bubble_position
-	bubble_container.add_child(bubble)
+	add_child(bubble)
