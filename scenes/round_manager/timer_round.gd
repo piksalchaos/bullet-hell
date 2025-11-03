@@ -7,11 +7,15 @@ extends Node2D
 
 func _ready() -> void:
 	hide()
-	timer.wait_time = wait_time
+	if wait_time > 0:
+		timer.wait_time = wait_time
 	round_spawner.is_disabled = is_disabled
 
 func begin() -> void:
 	show()
+	if wait_time <= 0:
+		round_spawner.begin()
+		return
 	if timer.is_inside_tree():
 		timer.start()
 

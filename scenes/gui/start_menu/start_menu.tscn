@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8n3kh1ff5dg1"]
+[gd_scene load_steps=13 format=3 uid="uid://c8n3kh1ff5dg1"]
 
 [ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/gui/start_menu/start_menu.gd" id="1_thu50"]
 [ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://wcsumt2iv7bo" path="res://assets/images/settings_button.png" id="4_hho7w"]
 [ext_resource type="Script" uid="uid://3l6udlgjgfxt" path="res://scenes/gui/start_menu/difficulty_button.gd" id="7_76n7r"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="7_rudpn"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="8_sqkoj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxjfj"]
 atlas = ExtResource("3_fcv5n")
@@ -143,7 +144,6 @@ text = "EASY"
 script = ExtResource("7_76n7r")
 
 [node name="DescriptionLabel" type="Label" parent="SelectScreen/VBoxContainer/EasyButton"]
-visible = false
 layout_mode = 0
 offset_left = 503.0
 offset_top = -28.75
@@ -152,6 +152,13 @@ offset_bottom = 405.25
 theme_override_font_sizes/font_size = 48
 text = "6 hearts total
 Healing recovers 3 hearts"
+
+[node name="LabelTranslator" parent="SelectScreen/VBoxContainer/EasyButton/DescriptionLabel" instance=ExtResource("8_sqkoj")]
+japanese_text = "合計6ハート
+回復でハート3個回復"
+
+[node name="LabelTranslator" parent="SelectScreen/VBoxContainer/EasyButton" instance=ExtResource("8_sqkoj")]
+japanese_text = "イージー"
 
 [node name="NormalButton" type="Button" parent="SelectScreen/VBoxContainer"]
 layout_mode = 2
@@ -171,6 +178,13 @@ theme_override_font_sizes/font_size = 48
 text = "4 hearts total
 Healing recovers 2 hearts"
 
+[node name="LabelTranslator" parent="SelectScreen/VBoxContainer/NormalButton/DescriptionLabel" instance=ExtResource("8_sqkoj")]
+japanese_text = "合計4ハート
+回復でハート2個回復"
+
+[node name="LabelTranslator" parent="SelectScreen/VBoxContainer/NormalButton" instance=ExtResource("8_sqkoj")]
+japanese_text = "ノーマル"
+
 [node name="HardButton" type="Button" parent="SelectScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -189,7 +203,14 @@ theme_override_font_sizes/font_size = 48
 text = "2 hearts total
 Healing recovers 1 heart"
 
-[node name="CheckButton" type="CheckButton" parent="SelectScreen"]
+[node name="LabelTranslator" parent="SelectScreen/VBoxContainer/HardButton/DescriptionLabel" instance=ExtResource("8_sqkoj")]
+japanese_text = "合計2ハート
+回復でハート1個回復"
+
+[node name="LabelTranslator" parent="SelectScreen/VBoxContainer/HardButton" instance=ExtResource("8_sqkoj")]
+japanese_text = "ハード"
+
+[node name="TutorialButton" type="CheckButton" parent="SelectScreen"]
 layout_mode = 0
 offset_left = 49.0
 offset_top = 105.0
@@ -199,6 +220,19 @@ theme_override_constants/h_separation = 10
 theme_override_font_sizes/font_size = 36
 button_pressed = true
 text = "PLAY WITH TUTORIAL"
+
+[node name="LabelTranslator" parent="SelectScreen/TutorialButton" instance=ExtResource("8_sqkoj")]
+japanese_text = "チュートリアルあり"
+
+[node name="BackButton" type="Button" parent="SelectScreen"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 24
+text = "Go Back"
+
+[node name="LabelTranslator" parent="SelectScreen/BackButton" instance=ExtResource("8_sqkoj")]
+japanese_text = "戻る"
 
 [node name="BlackFadeTransition" parent="." instance=ExtResource("7_rudpn")]
 layout_mode = 1
@@ -214,4 +248,6 @@ autoplay = true
 [connection signal="pressed" from="SelectScreen/VBoxContainer/EasyButton" to="." method="_on_easy_button_pressed"]
 [connection signal="pressed" from="SelectScreen/VBoxContainer/NormalButton" to="." method="_on_normal_button_pressed"]
 [connection signal="pressed" from="SelectScreen/VBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]
+[connection signal="toggled" from="SelectScreen/TutorialButton" to="." method="_on_tutorial_button_toggled"]
+[connection signal="pressed" from="SelectScreen/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="finished_transition" from="BlackFadeTransition" to="." method="_on_black_fade_transition_finished_transition"]

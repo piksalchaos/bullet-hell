@@ -257,12 +257,6 @@ position = Vector2(288, 127)
 enemy_scene = ExtResource("20_sbygb")
 color_id = 4
 
-[node name="ButterflyRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
-visible = false
-
-[node name="ButterflySpawner" parent="Stage/RoundSequencer/ButterflyRound" instance=ExtResource("17_p4se4")]
-position = Vector2(226, -18)
-
 [node name="ProgressIndicator4" parent="Stage/RoundSequencer" instance=ExtResource("9_xworo")]
 
 [node name="Round6" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
@@ -336,6 +330,12 @@ enemy_scene = ExtResource("14_ndlae")
 position = Vector2(287, 54)
 enemy_scene = ExtResource("14_ndlae")
 color_id = 2
+
+[node name="ButterflyRound" parent="Stage/RoundSequencer" instance=ExtResource("10_wwjag")]
+visible = false
+
+[node name="ButterflySpawner" parent="Stage/RoundSequencer/ButterflyRound" instance=ExtResource("17_p4se4")]
+position = Vector2(226, -18)
 
 [node name="HUD" parent="." instance=ExtResource("21_keip3")]
 

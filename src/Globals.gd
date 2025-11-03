@@ -29,6 +29,7 @@ const LAYER_PLAYER_BULLETS := 3
 const LAYER_ENEMY_BULLETS := 4
 
 var is_japanese: bool = false
+var is_tutorial_on: bool = true
 
 var high_score: int = 0
 var score: int = 0:

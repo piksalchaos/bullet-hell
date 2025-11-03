@@ -36,8 +36,8 @@ shape = SubResource("CircleShape2D_vpbdv")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ekusr")]
 position = Vector2(0, -42)
-max_health = 2
-score_amount = 5
+max_health = 3
+score_amount = 6
 
 [node name="ColorComponent" parent="." instance=ExtResource("4_wj87i")]
 

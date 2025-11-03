@@ -13,9 +13,11 @@ func _ready() -> void:
 	black_fade_transition.transition_to_transparent()
 
 func _on_begin_button_pressed() -> void:
-	#main_screen.hide()
-	#select_screen.show()
 	is_on_main_screen = false
+	black_fade_transition.transition_to_black()
+
+func _on_back_button_pressed() -> void:
+	is_on_main_screen = true
 	black_fade_transition.transition_to_black()
 
 func _on_black_fade_transition_finished_transition() -> void:
@@ -41,3 +43,6 @@ func _on_normal_button_pressed() -> void:
 func _on_hard_button_pressed() -> void:
 	selected_difficulty = "hard"
 	black_fade_transition.transition_to_black()
+
+func _on_tutorial_button_toggled(toggled_on: bool) -> void:
+	Globals.is_tutorial_on = toggled_on

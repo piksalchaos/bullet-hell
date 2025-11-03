@@ -2,6 +2,7 @@ extends Node
 
 const START_MENU = preload("uid://c8n3kh1ff5dg1")
 const LEVEL_1 = preload("uid://bp24suxtg5xp5")
+const LEVEL_1_NO_TUTORIAL = preload("uid://t8tu50ycrbqy")
 const LEVEL_2 = preload("uid://bcx57y8kx223d")
 
 var levels = [LEVEL_1, LEVEL_2]
@@ -32,7 +33,12 @@ func is_playing_level():
 func start_level():
 	for child in level_container.get_children():
 		child.queue_free()
-	var level = levels[current_level_index].instantiate()
+	
+	var level
+	if current_level_index == 0 and not Globals.is_tutorial_on:
+		level = LEVEL_1_NO_TUTORIAL.instantiate()
+	else:
+		level = levels[current_level_index].instantiate()
 	level.finished.connect(_on_level_finished)
 	level.game_ended.connect(_on_level_game_ended)
 	level_container.add_child(level)
