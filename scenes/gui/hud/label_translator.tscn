@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1yp25rsccu51"]
 
-[ext_resource type="Script" uid="uid://dfxi13gfaapf" path="res://scenes/gui/label_translator.gd" id="1_tihrf"]
+[ext_resource type="Script" uid="uid://dfxi13gfaapf" path="res://scenes/gui/hud/label_translator.gd" id="1_tihrf"]
 
 [node name="LabelTranslator" type="Node"]
 script = ExtResource("1_tihrf")

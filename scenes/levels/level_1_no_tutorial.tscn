@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b5opm1gxcprw4" path="res://scenes/spawners/enemy_spawners/frolicker_ghost_enemy_spawner.tscn" id="19_5pfnj"]
 [ext_resource type="PackedScene" uid="uid://db53bja3d4iq0" path="res://scenes/spawners/foggy_background_spawner.tscn" id="20_1b42p"]
 [ext_resource type="PackedScene" uid="uid://viesuie2uf77" path="res://scenes/entities/enemies/queen_enemy.tscn" id="21_73cjd"]
-[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="22_w4b0a"]
+[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud/hud.tscn" id="22_w4b0a"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="23_uqpav"]
 
 [sub_resource type="Gradient" id="Gradient_np2pn"]

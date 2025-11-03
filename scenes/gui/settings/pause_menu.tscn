@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://bd5khvvwl7t0t" path="res://assets/audio/vine-boom.mp3" id="1_0wkhc"]
 [ext_resource type="Script" uid="uid://f0exyq10gbc" path="res://scenes/gui/settings/pause_menu.gd" id="1_dl1lt"]
-[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="2_u30rr"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/hud/label_translator.tscn" id="2_u30rr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl1lt"]
 bg_color = Color(0, 0, 0, 0.93333334)
@@ -49,14 +49,6 @@ text = "Back to Game"
 [node name="LabelTranslator" parent="MarginContainer/VBoxContainer/BackButton" instance=ExtResource("2_u30rr")]
 japanese_text = "ゲームに戻る"
 
-[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Restart Level"
-
-[node name="LabelTranslator" parent="MarginContainer/VBoxContainer/RestartButton" instance=ExtResource("2_u30rr")]
-japanese_text = "ステージをやり直す"
-
 [node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -84,7 +76,6 @@ stream = ExtResource("1_0wkhc")
 volume_db = -8.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VineBoomButton" to="." method="_on_vine_boom_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

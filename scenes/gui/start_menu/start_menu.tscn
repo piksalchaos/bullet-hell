@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://wcsumt2iv7bo" path="res://assets/images/settings_button.png" id="4_hho7w"]
 [ext_resource type="Script" uid="uid://3l6udlgjgfxt" path="res://scenes/gui/start_menu/difficulty_button.gd" id="7_76n7r"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="7_rudpn"]
-[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="8_sqkoj"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/hud/label_translator.tscn" id="8_sqkoj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxjfj"]
 atlas = ExtResource("3_fcv5n")

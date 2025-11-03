@@ -11,12 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://d4ip0nwhymo3e" path="res://scenes/round_manager/control_transition.tscn" id="5_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_iav0o"]
 [ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
-[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_dnkej"]
+[ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud/hud.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://bqin0s4ewr523" path="res://scenes/gui/translated_rich_text_label.tscn" id="8_ndtll"]
 [ext_resource type="PackedScene" uid="uid://ba1bqocppfdjj" path="res://scenes/entities/enemies/electric_ghost_enemy.tscn" id="8_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://viesuie2uf77" path="res://scenes/entities/enemies/queen_enemy.tscn" id="8_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://bii2yamnyxbsi" path="res://scenes/entities/enemies/orb_enemy.tscn" id="10_mm8aj"]
-[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="11_7h2jl"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/hud/label_translator.tscn" id="11_7h2jl"]
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="12_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://db53bja3d4iq0" path="res://scenes/spawners/foggy_background_spawner.tscn" id="12_mkypq"]
@@ -615,7 +615,6 @@ wait_time = 3.0
 type = 2
 
 [node name="BossRound" parent="Stage/RoundSequencer" instance=ExtResource("4_qxy0u")]
-visible = false
 
 [node name="BaseEnemySpawner" parent="Stage/RoundSequencer/BossRound" instance=ExtResource("7_dga24")]
 position = Vector2(286, 78)

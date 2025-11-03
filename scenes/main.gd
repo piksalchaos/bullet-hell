@@ -65,9 +65,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_start_menu_ready_to_open_settings() -> void:
 	settings_menu.show()
 
-func _on_pause_menu_ready_to_restart() -> void:
-	start_level()
-
 func _on_level_finished() -> void:
 	current_level_index += 1
 	if current_level_index < levels.size():

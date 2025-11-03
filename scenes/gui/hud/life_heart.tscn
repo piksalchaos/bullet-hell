@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cg285sbaifnvs"]
 
-[ext_resource type="Script" uid="uid://8q6wd6drdtoh" path="res://scenes/gui/life_heart.gd" id="1_n1an1"]
+[ext_resource type="Script" uid="uid://8q6wd6drdtoh" path="res://scenes/gui/hud/life_heart.gd" id="1_n1an1"]
 [ext_resource type="Texture2D" uid="uid://b0bvx1rsu637k" path="res://assets/images/life_heart.png" id="1_viyay"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_viyay"]

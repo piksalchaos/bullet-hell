@@ -23,6 +23,5 @@ z_index = 2
 [node name="LevelContainer" type="Node" parent="."]
 
 [connection signal="ready_to_exit_to_start_menu" from="SettingsLayer/PauseMenu" to="." method="_on_pause_menu_ready_to_exit_to_start_menu"]
-[connection signal="ready_to_restart" from="SettingsLayer/PauseMenu" to="." method="_on_pause_menu_ready_to_restart"]
 [connection signal="ready_to_begin" from="StartMenu" to="." method="_on_start_menu_ready_to_begin"]
 [connection signal="ready_to_open_settings" from="StartMenu" to="." method="_on_start_menu_ready_to_open_settings"]

@@ -1,0 +1,257 @@
+[gd_scene load_steps=26 format=3 uid="uid://bqg4ypw6r1ke3"]
+
+[ext_resource type="Script" uid="uid://fiqqua67xng8" path="res://scenes/entities/enemies/bat_boss_enemy.gd" id="1_jeaop"]
+[ext_resource type="Texture2D" uid="uid://nmhirnxvaeqe" path="res://assets/images/enemies/bat_boss_enemy.png" id="2_jeaop"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="3_wamro"]
+[ext_resource type="PackedScene" uid="uid://m6r4ofi4qdxx" path="res://scenes/components/enemy_components/hitbox_component.tscn" id="4_p3mwh"]
+[ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_w4d8h"]
+[ext_resource type="PackedScene" uid="uid://bbnpupe0f58tx" path="res://scenes/components/pattern_components/pattern_emitter.tscn" id="6_1fbk7"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="7_3gd13"]
+[ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="8_5rqut"]
+[ext_resource type="PackedScene" uid="uid://4fbrwun0d6hr" path="res://scenes/components/pattern_components/pattern_rotator.tscn" id="9_0c3dn"]
+[ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_tbn1m"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="11_f444j"]
+[ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="12_yn8dv"]
+[ext_resource type="PackedScene" uid="uid://c6hr3vdkca36h" path="res://scenes/components/pattern_components/pattern_randomizer.tscn" id="13_e20ak"]
+[ext_resource type="PackedScene" uid="uid://dsf8p31orcxl8" path="res://scenes/bullets/homing_thorn_bullet.tscn" id="14_yb00a"]
+[ext_resource type="PackedScene" uid="uid://fpsablwbyj3y" path="res://scenes/bullets/dummy_bullet.tscn" id="15_uaviv"]
+[ext_resource type="PackedScene" uid="uid://ck23ayao5qg1t" path="res://scenes/components/pattern_components/pattern_aimer.tscn" id="16_4prxj"]
+[ext_resource type="PackedScene" uid="uid://dbu17cqiyi67h" path="res://scenes/components/pattern_components/colorizers/randomized_colorizer.tscn" id="17_poiov"]
+[ext_resource type="PackedScene" uid="uid://45i3krdr0eyc" path="res://scenes/bullets/queen_heavy_bullet.tscn" id="18_alt7q"]
+[ext_resource type="PackedScene" uid="uid://cq7yid8wyu7q" path="res://scenes/components/enemy_components/enemy_sprite_effects.tscn" id="19_owwk2"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="20_k4lef"]
+[ext_resource type="AudioStream" uid="uid://bbf7rhadkgwfn" path="res://assets/audio/boss_die.wav" id="21_w4udh"]
+[ext_resource type="AudioStream" uid="uid://c5sksln2oqfrb" path="res://assets/audio/boss_explode.wav" id="22_rdl7l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7usf5"]
+radius = 30.0
+height = 150.0
+
+[sub_resource type="Curve" id="Curve_pituj"]
+_data = [Vector2(0, 0), 0.0, 2.0025778, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lgrha"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="BatBossEnemy" type="Node2D" node_paths=PackedStringArray("color_component")]
+script = ExtResource("1_jeaop")
+color_component = NodePath("ColorComponent")
+
+[node name="RepositionTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="StageTransitionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_jeaop")
+
+[node name="ColorComponent" parent="." instance=ExtResource("3_wamro")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "color_component") instance=ExtResource("4_p3mwh")]
+monitoring = false
+monitorable = false
+health_component = NodePath("../HealthComponentContainer/HealthComponent")
+color_component = NodePath("../ColorComponent")
+disable_on_defeat = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_7usf5")
+
+[node name="HealthComponentContainer" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="HealthComponentContainer" instance=ExtResource("5_w4d8h")]
+visible = false
+position = Vector2(0, -57)
+max_health = 3
+score_amount = 15
+
+[node name="HealthComponent2" parent="HealthComponentContainer" instance=ExtResource("5_w4d8h")]
+visible = false
+position = Vector2(0, -57)
+max_health = 5
+score_amount = 20
+
+[node name="HealthComponent3" parent="HealthComponentContainer" instance=ExtResource("5_w4d8h")]
+visible = false
+position = Vector2(0, -57)
+max_health = 3
+score_amount = 30
+
+[node name="PatternEmitterContainer" type="Node2D" parent="."]
+
+[node name="PatternEmitter" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("7_3gd13")]
+delay_time = 0.5
+seconds_per_shot = 2.0
+
+[node name="LoopedColorizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_5rqut")]
+bullet_emitters = [NodePath("../PatternRepeater/PatternRotator/PatternSpreader/BulletEmitter")]
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" instance=ExtResource("7_3gd13")]
+seconds_per_shot = 0.2
+max_shots = 3
+
+[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater" instance=ExtResource("9_0c3dn")]
+angle_range = 0.15
+is_ping_pong = true
+
+[node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator" instance=ExtResource("10_tbn1m")]
+angle_range = 5.969
+bullet_count = 20
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator/PatternSpreader" instance=ExtResource("11_f444j")]
+bullet_scene = ExtResource("12_yn8dv")
+
+[node name="PatternRepeater2" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("7_3gd13")]
+delay_time = 2.0
+seconds_per_shot = 4.0
+
+[node name="PatternRandomizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2" instance=ExtResource("13_e20ak")]
+angle_range = 3.142
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2/PatternRandomizer" instance=ExtResource("7_3gd13")]
+seconds_per_shot = 0.1
+max_shots = 6
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2/PatternRandomizer/PatternRepeater" instance=ExtResource("11_f444j")]
+rotation = 1.5707964
+bullet_scene = ExtResource("14_yb00a")
+color_id = 6
+
+[node name="PatternEmitter2" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter2" instance=ExtResource("7_3gd13")]
+delay_time = 1.0
+seconds_per_shot = 0.2
+
+[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater" instance=ExtResource("9_0c3dn")]
+angle_range = 6.252
+cycle_bullet_count = 200
+
+[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator" instance=ExtResource("9_0c3dn")]
+angle_range = 6.021
+cycle_bullet_count = 24
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator/PatternRotator" instance=ExtResource("11_f444j")]
+bullet_scene = ExtResource("15_uaviv")
+color_id = 4
+
+[node name="BulletEmitter2" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator/PatternRotator" instance=ExtResource("11_f444j")]
+rotation = 2.0943952
+bullet_scene = ExtResource("15_uaviv")
+color_id = 4
+
+[node name="BulletEmitter3" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator/PatternRotator" instance=ExtResource("11_f444j")]
+rotation = 4.1887903
+bullet_scene = ExtResource("15_uaviv")
+color_id = 4
+
+[node name="PatternRotator2" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator" instance=ExtResource("9_0c3dn")]
+angle_range = 6.021
+cycle_bullet_count = 24
+is_rotating_ccw = false
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator/PatternRotator2" instance=ExtResource("11_f444j")]
+bullet_scene = ExtResource("15_uaviv")
+color_id = 4
+
+[node name="BulletEmitter2" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator/PatternRotator2" instance=ExtResource("11_f444j")]
+rotation = 2.0943952
+bullet_scene = ExtResource("15_uaviv")
+color_id = 4
+
+[node name="BulletEmitter3" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater/PatternRotator/PatternRotator2" instance=ExtResource("11_f444j")]
+rotation = 4.1887903
+bullet_scene = ExtResource("15_uaviv")
+color_id = 4
+
+[node name="PatternRepeater2" parent="PatternEmitterContainer/PatternEmitter2" instance=ExtResource("7_3gd13")]
+delay_time = 1.0
+seconds_per_shot = 1.5
+
+[node name="PatternAimer" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater2" instance=ExtResource("16_4prxj")]
+
+[node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater2/PatternAimer" instance=ExtResource("10_tbn1m")]
+rotation = -1.5707964
+angle_range = 6.032
+bullet_count = 25
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter2/PatternRepeater2/PatternAimer/PatternSpreader" instance=ExtResource("11_f444j")]
+bullet_scene = ExtResource("12_yn8dv")
+
+[node name="PatternEmitter3" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3" instance=ExtResource("7_3gd13")]
+delay_time = 2.0
+seconds_per_shot = 5.0
+
+[node name="PatternAimer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater" instance=ExtResource("16_4prxj")]
+position = Vector2(0, 1)
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer" instance=ExtResource("7_3gd13")]
+max_shots = 3
+
+[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater" instance=ExtResource("9_0c3dn")]
+angle_range = 1.397
+
+[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator" instance=ExtResource("7_3gd13")]
+seconds_per_shot = 0.1
+max_shots = 3
+
+[node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater" instance=ExtResource("10_tbn1m")]
+angle_range = 0.5
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater/PatternAimer/PatternRepeater/PatternRotator/PatternRepeater" instance=ExtResource("11_f444j")]
+bullet_scene = ExtResource("14_yb00a")
+color_id = 6
+
+[node name="PatternRepeater2" parent="PatternEmitterContainer/PatternEmitter3" instance=ExtResource("7_3gd13")]
+seconds_per_shot = 0.15
+
+[node name="RandomizedColorizer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("17_poiov")]
+bullet_emitters = [NodePath("../PatternRandomizer/BulletEmitter")]
+
+[node name="PatternRandomizer" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2" instance=ExtResource("13_e20ak")]
+angle_range = 1.0
+
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter3/PatternRepeater2/PatternRandomizer" instance=ExtResource("11_f444j")]
+position = Vector2(-1, 1)
+rotation = -1.5707964
+bullet_scene = ExtResource("18_alt7q")
+
+[node name="EnemySpriteEffects" parent="." node_paths=PackedStringArray("hitbox_component", "pattern_root", "sprite") instance=ExtResource("19_owwk2")]
+hitbox_component = NodePath("../HitboxComponent")
+pattern_root = NodePath("../PatternEmitterContainer")
+sprite = NodePath("../Sprite2D")
+
+[node name="DeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 350.0
+scale_amount_min = 16.67
+scale_amount_max = 56.56
+scale_amount_curve = SubResource("Curve_pituj")
+color_ramp = SubResource("Gradient_lgrha")
+
+[node name="DeathCircleDrawing" parent="." instance=ExtResource("20_k4lef")]
+modulate = Color(1, 1, 1, 0)
+radius = 0.1
+
+[node name="BossDieAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_w4udh")
+
+[node name="BossExplodeAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_rdl7l")
+
+[connection signal="timeout" from="RepositionTimer" to="." method="_on_reposition_timer_timeout"]
+[connection signal="timeout" from="StageTransitionTimer" to="." method="_on_stage_transition_timer_timeout"]
+[connection signal="defeated" from="HealthComponentContainer/HealthComponent3" to="." method="_on_health_component_3_defeated"]

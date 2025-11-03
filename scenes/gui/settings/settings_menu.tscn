@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://d282phv7dvnwu"]
 
 [ext_resource type="Script" uid="uid://c3xcseld4kb7e" path="res://scenes/gui/settings/settings_menu.gd" id="1_1eo1i"]
-[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="2_3ij1x"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/hud/label_translator.tscn" id="2_3ij1x"]
 [ext_resource type="PackedScene" uid="uid://b2cd1ymt0c23w" path="res://scenes/gui/settings/input_button.tscn" id="2_loim0"]
 [ext_resource type="PackedScene" uid="uid://copd1gbs3pcrr" path="res://scenes/gui/settings/heading.tscn" id="2_x7inc"]
 
