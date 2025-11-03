@@ -18,3 +18,5 @@ signal butterfly_collected
 signal score_updated(new_score: int)
 
 signal progress_indicator_reached
+
+signal language_changed(is_japanese: bool)

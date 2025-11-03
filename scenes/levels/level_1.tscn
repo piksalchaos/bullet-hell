@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bp24suxtg5xp5"]
+[gd_scene load_steps=29 format=3 uid="uid://bp24suxtg5xp5"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://whf6whxkmq2" path="res://scenes/entities/player/player.tscn" id="2_s8va5"]
@@ -9,13 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://bb3q42r3v7i58" path="res://scenes/spawners/bullet_spawners/blossom_bullet_spawner.tscn" id="5_iav0o"]
 [ext_resource type="PackedScene" uid="uid://b5opm1gxcprw4" path="res://scenes/spawners/enemy_spawners/frolicker_ghost_enemy_spawner.tscn" id="5_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://d4ip0nwhymo3e" path="res://scenes/round_manager/control_transition.tscn" id="5_wtwp4"]
-[ext_resource type="FontFile" uid="uid://wwj4ollhl181" path="res://assets/fonts/Nunito-VariableFont_wght.ttf" id="6_dnkej"]
 [ext_resource type="PackedScene" uid="uid://dcit7wu58ad5n" path="res://scenes/round_manager/timer_round.tscn" id="6_iav0o"]
 [ext_resource type="PackedScene" uid="uid://cv6dqal5gt3w4" path="res://scenes/spawners/enemy_spawners/base_enemy_spawner.tscn" id="7_dga24"]
 [ext_resource type="PackedScene" uid="uid://dvrx8wmadvywy" path="res://scenes/gui/hud.tscn" id="7_dnkej"]
+[ext_resource type="PackedScene" uid="uid://bqin0s4ewr523" path="res://scenes/gui/translated_rich_text_label.tscn" id="8_ndtll"]
 [ext_resource type="PackedScene" uid="uid://ba1bqocppfdjj" path="res://scenes/entities/enemies/electric_ghost_enemy.tscn" id="8_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://viesuie2uf77" path="res://scenes/entities/enemies/queen_enemy.tscn" id="8_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://bii2yamnyxbsi" path="res://scenes/entities/enemies/orb_enemy.tscn" id="10_mm8aj"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="11_7h2jl"]
 [ext_resource type="AudioStream" uid="uid://qqp7yu3jadmi" path="res://assets/audio/music/Nightmare Machine.mp3" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://cr8oijio5o8v5" path="res://scenes/entities/enemies/whispy_ghost_enemy.tscn" id="12_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://db53bja3d4iq0" path="res://scenes/spawners/foggy_background_spawner.tscn" id="12_mkypq"]
@@ -38,13 +39,8 @@ variation_opentype = {
 }
 
 [sub_resource type="FontVariation" id="FontVariation_dnkej"]
-base_font = ExtResource("6_dnkej")
-variation_opentype = {
-2003265652: 700
-}
 
 [sub_resource type="Theme" id="Theme_mm8aj"]
-default_font = ExtResource("6_dnkej")
 default_font_size = 24
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_mm8aj")
 RichTextLabel/fonts/normal_font = SubResource("FontVariation_dnkej")
@@ -95,18 +91,17 @@ visible = false
 visible = true
 node_to_free_with = NodePath("../TimerRound")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/IntroRound/ControlTransition"]
+[node name="TranslatedRichTextLabel" parent="Stage/RoundSequencer/IntroRound/ControlTransition" instance=ExtResource("8_ndtll")]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 29.0
 offset_right = 512.0
 offset_bottom = 116.0
-theme = SubResource("Theme_mm8aj")
-bbcode_enabled = true
 text = "STAGE 1
-The Forest"
-horizontal_alignment = 1
-vertical_alignment = 1
+The Forest
+"
+japanese_text = "ステージ1
+森"
 
 [node name="TimerRound" parent="Stage/RoundSequencer/IntroRound" instance=ExtResource("6_iav0o")]
 wait_time = 4.0
@@ -121,6 +116,7 @@ visible = true
 node_to_free_with = NodePath("../TimerRound")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/BlossomRound/ControlTransition"]
+visible = false
 layout_mode = 0
 offset_left = 72.0
 offset_top = 477.0
@@ -132,6 +128,16 @@ text = "Absorb [b]color energy[/b] by
 grazing colored objects"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TranslatedRichTextLabel" parent="Stage/RoundSequencer/BlossomRound/ControlTransition" instance=ExtResource("8_ndtll")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 477.0
+offset_right = 512.0
+offset_bottom = 564.0
+text = "Absorb [b]color energy[/b] by
+grazing colored objects"
+japanese_text = "色のついたオブジェクトをかすめて色エネルギーを吸収"
 
 [node name="ControlTimer" parent="Stage/RoundSequencer/BlossomRound" instance=ExtResource("6_iav0o")]
 wait_time = 2.5
@@ -151,6 +157,9 @@ bbcode_enabled = true
 text = "but don't let your [b]heart[/b] get hit"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/BlossomRound/ControlTimer/ControlTransition/RichTextLabel2" instance=ExtResource("11_7h2jl")]
+japanese_text = "でもハートに当たらないように"
 
 [node name="TimerRound" parent="Stage/RoundSequencer/BlossomRound" instance=ExtResource("6_iav0o")]
 wait_time = 6.0
@@ -244,6 +253,9 @@ text = "graze bullets to absorb [b]color energy[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LabelTranslator" parent="Stage/RoundSequencer/ShootingRound/ControlTransition/RichTextLabel2" instance=ExtResource("11_7h2jl")]
+japanese_text = "弾をかすって色エネルギーを吸収"
+
 [node name="ControlTimer" parent="Stage/RoundSequencer/ShootingRound" instance=ExtResource("6_iav0o")]
 wait_time = 2.5
 
@@ -263,6 +275,9 @@ bbcode_enabled = true
 text = "and release [img=60]assets/images/keyboard/key_s.png[/img] to [b]SHOOT[/b] color energy"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/ShootingRound/ControlTimer/ControlTransition/RichTextLabel" instance=ExtResource("11_7h2jl")]
+japanese_text = "そして[img=60]assets/images/keyboard/key_s.png[/img]を離して色エネルギーを発射"
 
 [node name="TimerRound" parent="Stage/RoundSequencer/ShootingRound" instance=ExtResource("6_iav0o")]
 wait_time = 6.0
@@ -292,8 +307,10 @@ text = "Enemies can [b]only[/b] be hit by bullets of their own color"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LabelTranslator" parent="Stage/RoundSequencer/ColorRound/ControlTransition/RichTextLabel2" instance=ExtResource("11_7h2jl")]
+japanese_text = "敵は同色の弾でのみ倒せる"
+
 [node name="ControlTimer" parent="Stage/RoundSequencer/ColorRound" instance=ExtResource("6_iav0o")]
-visible = false
 wait_time = 2.5
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/ColorRound/ControlTimer" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
@@ -313,6 +330,10 @@ text = "Switch your [b]bullet color[/b] with
 [img=60]assets/images/keyboard/key_a.png[/img] or [img=60]assets/images/keyboard/key_d.png[/img]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/ColorRound/ControlTimer/ControlTransition/RichTextLabel" instance=ExtResource("11_7h2jl")]
+japanese_text = "[img=60]assets/images/keyboard/key_a.png[/img]か[img=60]assets/images/keyboard/key_d.png[/img]
+で弾色を変更"
 
 [node name="TimerRound" parent="Stage/RoundSequencer/ColorRound" instance=ExtResource("6_iav0o")]
 wait_time = 6.0
@@ -350,6 +371,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="LabelTranslator" parent="Stage/RoundSequencer/ColorRound2/ControlTransition/RichTextLabel2" instance=ExtResource("11_7h2jl")]
+japanese_text = "吸収するほど
+ダメージが増える"
+
 [node name="TimerRound" parent="Stage/RoundSequencer/ColorRound2" instance=ExtResource("6_iav0o")]
 visible = false
 wait_time = 3.0
@@ -382,6 +407,9 @@ bbcode_enabled = true
 text = "Hold [b]SHIFT[/b] to move slower"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/ColorRound3/ControlTransition/RichTextLabel2" instance=ExtResource("11_7h2jl")]
+japanese_text = " SHIFTを押して低速移動"
 
 [node name="MainTimerRound" parent="Stage/RoundSequencer/ColorRound3" instance=ExtResource("6_iav0o")]
 wait_time = 3.0
@@ -420,6 +448,7 @@ color_id = 4
 position = Vector2(490, 183)
 
 [node name="RecoveryRound" parent="Stage/RoundSequencer" instance=ExtResource("6_iav0o")]
+visible = false
 position = Vector2(1, 0)
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/RecoveryRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("5_wtwp4")]
@@ -438,6 +467,10 @@ text = "When all 3 colors are maxed out,
 Hold [img=60]assets/images/keyboard/key_w.png[/img] to [b]heal[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/RecoveryRound/ControlTransition/RichTextLabel" instance=ExtResource("11_7h2jl")]
+japanese_text = "3色全てが最大になったら、
+[img=60]assets/images/keyboard/key_w.png[/img]長押しで回復"
 
 [node name="RoundSequencer" parent="Stage/RoundSequencer/RecoveryRound" instance=ExtResource("3_iwr0g")]
 
@@ -501,6 +534,10 @@ text = "while holding [img=60]assets/images/keyboard/key_s.png[/img], press [b]S
 to cancel your shot if needed"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/MixingRound2/ControlTransition/RichTextLabel" instance=ExtResource("11_7h2jl")]
+japanese_text = "[img=60]assets/images/keyboard/key_s.png[/img]を押しながらSPACEを押す
+必要なら弾をキャンセルできる"
 
 [node name="TimerRound" parent="Stage/RoundSequencer/MixingRound2" instance=ExtResource("6_iav0o")]
 wait_time = 4.5

@@ -90,10 +90,8 @@ position = Vector2(292, 422)
 is_root_round = true
 
 [node name="IntroRound" parent="Stage/RoundSequencer" instance=ExtResource("6_mx6s3")]
-visible = false
 
 [node name="ControlTransition" parent="Stage/RoundSequencer/IntroRound" node_paths=PackedStringArray("node_to_free_with") instance=ExtResource("7_7d3nu")]
-visible = true
 node_to_free_with = NodePath("../TimerRound")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Stage/RoundSequencer/IntroRound/ControlTransition"]

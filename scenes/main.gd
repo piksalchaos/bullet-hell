@@ -12,6 +12,12 @@ var levels = [LEVEL_1, LEVEL_2]
 @onready var pause_menu: PanelContainer = $SettingsLayer/PauseMenu
 @onready var level_container: Node = $LevelContainer
 
+func _ready() -> void:
+	SignalBus.language_changed.connect(change_language)
+
+func change_language(is_japanese):
+	Globals.is_japanese = is_japanese
+
 func create_start_menu():
 	if is_instance_valid(start_menu): return
 	current_level_index = 0

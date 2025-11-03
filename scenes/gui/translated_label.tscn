@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dblwelmiym6m1"]
+
+[ext_resource type="Script" uid="uid://0ew3oaq7hrr0" path="res://scenes/gui/translated_label.gd" id="1_ckwce"]
+
+[node name="TranslatedLabel" type="Label"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+script = ExtResource("1_ckwce")

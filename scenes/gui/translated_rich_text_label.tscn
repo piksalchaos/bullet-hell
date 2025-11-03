@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqin0s4ewr523"]
+
+[ext_resource type="Script" uid="uid://u1j18d0kuxma" path="res://scenes/gui/translated_rich_text_label.gd" id="1_3khun"]
+
+[sub_resource type="FontVariation" id="FontVariation_3khun"]
+variation_opentype = {
+2003265652: 1000
+}
+
+[sub_resource type="FontVariation" id="FontVariation_2cuti"]
+
+[sub_resource type="Theme" id="Theme_16haa"]
+default_font_size = 24
+RichTextLabel/fonts/bold_font = SubResource("FontVariation_3khun")
+RichTextLabel/fonts/normal_font = SubResource("FontVariation_2cuti")
+
+[node name="TranslatedRichTextLabel" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_16haa")
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_3khun")
