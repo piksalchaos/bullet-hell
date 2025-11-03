@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bcx57y8kx223d"]
+[gd_scene load_steps=29 format=3 uid="uid://bcx57y8kx223d"]
 
 [ext_resource type="Script" uid="uid://jttxe4pbb07u" path="res://scenes/levels/level.gd" id="1_sbygb"]
 [ext_resource type="AudioStream" uid="uid://8pfbnw410msv" path="res://assets/audio/music/This House.mp3" id="2_tv7cl"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://wwj4ollhl181" path="res://assets/fonts/Nunito-VariableFont_wght.ttf" id="8_r6ket"]
 [ext_resource type="PackedScene" uid="uid://ckqi0do87033d" path="res://scenes/entities/enemies/bat_enemy.tscn" id="8_sibr7"]
 [ext_resource type="PackedScene" uid="uid://csearv3hqm7c7" path="res://scenes/entities/enemies/bomb_enemy.tscn" id="8_v8d84"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="9_5niy6"]
 [ext_resource type="PackedScene" uid="uid://d1qnmgu3nadmv" path="res://scenes/spawners/enemy_spawners/ghost_enemy_spawner.tscn" id="9_gw1l3"]
 [ext_resource type="PackedScene" uid="uid://drepeaab5x320" path="res://scenes/progress_indicator.tscn" id="9_xworo"]
 [ext_resource type="PackedScene" uid="uid://473s7ceqps1b" path="res://scenes/round_manager/round.tscn" id="10_wwjag"]
@@ -106,6 +107,10 @@ text = "STAGE 2
 The Mountains"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelTranslator" parent="Stage/RoundSequencer/IntroRound/ControlTransition/RichTextLabel" instance=ExtResource("9_5niy6")]
+japanese_text = "ステージ2
+山岳"
 
 [node name="TimerRound" parent="Stage/RoundSequencer/IntroRound" instance=ExtResource("6_mx6s3")]
 wait_time = 4.0

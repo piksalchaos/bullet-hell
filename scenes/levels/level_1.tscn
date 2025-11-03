@@ -506,6 +506,11 @@ to [b]mix colors together[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LabelTranslator" parent="Stage/RoundSequencer/MixingRound/ControlTransition/RichTextLabel" instance=ExtResource("11_7h2jl")]
+japanese_text = "[img=60]assets/images/keyboard/key_s.png[/img]を押しながら：
+[img=60]assets/images/keyboard/key_a.png[/img]または[img=60]assets/images/keyboard/key_d.png[/img]で色を切り替えて
+色をミックス"
+
 [node name="TimerRound" parent="Stage/RoundSequencer/MixingRound" instance=ExtResource("6_iav0o")]
 wait_time = 4.0
 

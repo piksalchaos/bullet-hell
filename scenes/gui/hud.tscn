@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvrx8wmadvywy"]
+[gd_scene load_steps=10 format=3 uid="uid://dvrx8wmadvywy"]
 
 [ext_resource type="Script" uid="uid://xr2b6wha55l" path="res://scenes/gui/hud.gd" id="1_624ws"]
 [ext_resource type="PackedScene" uid="uid://c0hmb6lqnynne" path="res://scenes/gui/palette/palette.tscn" id="2_624ws"]
 [ext_resource type="Texture2D" uid="uid://bif0t36m1jouu" path="res://assets/images/progress_arrow.png" id="2_aoesn"]
 [ext_resource type="PackedScene" uid="uid://cg285sbaifnvs" path="res://scenes/gui/life_heart.tscn" id="2_qxonp"]
 [ext_resource type="PackedScene" uid="uid://dblwelmiym6m1" path="res://scenes/gui/translated_label.tscn" id="3_2pnwd"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="3_gbuxp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxonp"]
 bg_color = Color(0, 0, 0, 1)
@@ -88,6 +89,9 @@ theme_override_font_sizes/font_size = 48
 text = "STAGE CLEAR"
 horizontal_alignment = 1
 
+[node name="LabelTranslator" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/Label" instance=ExtResource("3_gbuxp")]
+japanese_text = "ステージクリア"
+
 [node name="TimeDisplay" type="HBoxContainer" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -96,6 +100,9 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_qxonp")
 theme_override_font_sizes/font_size = 32
 text = "TIME: "
+
+[node name="LabelTranslator" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeDisplay/TimeWord" instance=ExtResource("3_gbuxp")]
+japanese_text = "タイム："
 
 [node name="TimeLabel" type="Label" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeDisplay"]
 layout_mode = 2
@@ -114,6 +121,9 @@ theme_override_fonts/font = SubResource("FontVariation_qxonp")
 theme_override_font_sizes/font_size = 32
 text = "TIME BONUS:"
 
+[node name="LabelTranslator" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeBonusDisplay/TimeBonusWord" instance=ExtResource("3_gbuxp")]
+japanese_text = "タイムボーナス："
+
 [node name="TimeBonusLabel" type="Label" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/TimeBonusDisplay"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -131,6 +141,9 @@ text = "Press [b]S[/b] to continue"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="LabelTranslator" parent="BattleAreaReference/StageClearScreen/MarginContainer/VBoxContainer/RichTextLabel" instance=ExtResource("3_gbuxp")]
+japanese_text = "Sを押して続ける"
 
 [node name="RightBar" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(400, 0)

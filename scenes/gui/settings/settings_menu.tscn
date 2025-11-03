@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d282phv7dvnwu"]
+[gd_scene load_steps=10 format=3 uid="uid://d282phv7dvnwu"]
 
 [ext_resource type="Script" uid="uid://c3xcseld4kb7e" path="res://scenes/gui/settings/settings_menu.gd" id="1_1eo1i"]
 [ext_resource type="PackedScene" uid="uid://b2cd1ymt0c23w" path="res://scenes/gui/settings/input_button.tscn" id="2_loim0"]
@@ -11,6 +11,18 @@ bg_color = Color(0, 0, 0, 0.93333334)
 variation_opentype = {
 2003265652: 600
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7inc"]
+bg_color = Color(1, 1, 1, 0.078431375)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dg5d"]
+bg_color = Color(1, 1, 1, 0.11764706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ij1x"]
+bg_color = Color(1, 1, 1, 0.11764706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcqvx"]
+bg_color = Color(1, 1, 1, 0.11764706)
 
 [node name="SettingsMenu" type="PanelContainer"]
 z_index = 1
@@ -51,6 +63,69 @@ size_flags_stretch_ratio = 0.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "Go Back "
+
+[node name="ControlsHeading2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_x7inc")]
+layout_mode = 2
+text = "Language"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnglishButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_x7inc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6dg5d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3ij1x")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vcqvx")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "English"
+
+[node name="EnglishButton2" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_x7inc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6dg5d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3ij1x")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vcqvx")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "日本語"
 
 [node name="ControlsHeading" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_x7inc")]
 layout_mode = 2
