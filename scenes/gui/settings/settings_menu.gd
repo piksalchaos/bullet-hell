@@ -8,20 +8,21 @@ var action_to_remap = null
 var remapping_button = null
 
 var input_actions = {
-	"left": "Move left",
-	"right": "Move right",
-	"up": "Move up",
-	"down": "Move down",
-	"slow": "Slow down",
-	"shoot": "Shoot bullet",
-	"cancel": "Cancel shot",
-	"switch_left": "Switch color left",
-	"switch_right": "Switch color right",
-	"heal": "Heal",
+	"left": ["Move left", "左に移動"],
+	"right": ["Move right", "右に移動"],
+	"up": ["Move up", "上に移動"],
+	"down": ["Move down", "下に移動"],
+	"slow": ["Slow down", "低速移動"],
+	"shoot": ["Shoot bullet", "弾を発射"],
+	"cancel": ["Cancel shot", "ショットキャンセル"],
+	"switch_left": ["Switch color left", "左の色に切り替え"],
+	"switch_right": ["Switch color right", "右の色に切り替え"],
+	"heal": ["Heal", "回復"],
 }
 
 func _ready() -> void:
 	_create_action_list()
+
 
 func _create_action_list() -> void:
 	InputMap.load_from_project_settings()
@@ -31,8 +32,10 @@ func _create_action_list() -> void:
 	for action in input_actions:
 		var button = INPUT_BUTTON.instantiate()
 		var action_label = button.find_child("ActionLabel")
+		var action_label_translator = button.find_child("ActionLabelTranslator")
 		var input_label = button.find_child("InputLabel")
-		action_label.text = input_actions[action]
+		action_label.text = input_actions[action][0]
+		action_label_translator.japanese_text = input_actions[action][1]
 		var events = InputMap.action_get_events(action)
 		if events.size() > 0:
 			input_label.text = events[0].as_text().trim_suffix(" (Physical)")
@@ -76,3 +79,9 @@ func _on_reset_actions_button_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	hide()
+
+func _on_english_button_pressed() -> void:
+	SignalBus.language_changed.emit(false)
+
+func _on_japanese_button_pressed() -> void:
+	SignalBus.language_changed.emit(true)

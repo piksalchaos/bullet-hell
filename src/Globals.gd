@@ -28,7 +28,7 @@ const LAYER_ENEMY_HITBOXES := 2
 const LAYER_PLAYER_BULLETS := 3
 const LAYER_ENEMY_BULLETS := 4
 
-var is_japanese: bool = true
+var is_japanese: bool = false
 
 var high_score: int = 0
 var score: int = 0:

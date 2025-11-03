@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bme18c4bodia7"]
+[gd_scene load_steps=6 format=3 uid="uid://bme18c4bodia7"]
 
 [ext_resource type="AudioStream" uid="uid://bd5khvvwl7t0t" path="res://assets/audio/vine-boom.mp3" id="1_0wkhc"]
 [ext_resource type="Script" uid="uid://f0exyq10gbc" path="res://scenes/gui/settings/pause_menu.gd" id="1_dl1lt"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="2_u30rr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl1lt"]
 bg_color = Color(0, 0, 0, 0.93333334)
@@ -30,22 +31,44 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="SettingsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="PauseLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_sugp2")
 theme_override_font_sizes/font_size = 42
 text = "Paused"
 horizontal_alignment = 1
 
+[node name="LabelTranslator" parent="MarginContainer/VBoxContainer/PauseLabel" instance=ExtResource("2_u30rr")]
+japanese_text = "ポーズ"
+
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Back to Game"
 
+[node name="LabelTranslator" parent="MarginContainer/VBoxContainer/BackButton" instance=ExtResource("2_u30rr")]
+japanese_text = "ゲームに戻る"
+
 [node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Restart Level"
+
+[node name="LabelTranslator" parent="MarginContainer/VBoxContainer/RestartButton" instance=ExtResource("2_u30rr")]
+japanese_text = "ステージをやり直す"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="LabelTranslator" parent="MarginContainer/VBoxContainer/SettingsButton" instance=ExtResource("2_u30rr")]
+japanese_text = "設定"
+
+[node name="VineBoomButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Vine Boom"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,15 +76,8 @@ theme_override_font_sizes/font_size = 32
 text = "Exit to Main Menu
 "
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Settings"
-
-[node name="VineBoomButton" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Vine Boom"
+[node name="LabelTranslator" parent="MarginContainer/VBoxContainer/ExitButton" instance=ExtResource("2_u30rr")]
+japanese_text = "メインメニューに戻る"
 
 [node name="VineBoomAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_0wkhc")
@@ -69,6 +85,6 @@ volume_db = -8.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VineBoomButton" to="." method="_on_vine_boom_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

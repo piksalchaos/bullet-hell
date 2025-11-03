@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d282phv7dvnwu"]
+[gd_scene load_steps=11 format=3 uid="uid://d282phv7dvnwu"]
 
 [ext_resource type="Script" uid="uid://c3xcseld4kb7e" path="res://scenes/gui/settings/settings_menu.gd" id="1_1eo1i"]
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="2_3ij1x"]
 [ext_resource type="PackedScene" uid="uid://b2cd1ymt0c23w" path="res://scenes/gui/settings/input_button.tscn" id="2_loim0"]
 [ext_resource type="PackedScene" uid="uid://copd1gbs3pcrr" path="res://scenes/gui/settings/heading.tscn" id="2_x7inc"]
 
@@ -57,6 +58,9 @@ theme_override_font_sizes/font_size = 42
 text = "Settings"
 horizontal_alignment = 1
 
+[node name="LabelTranslator" parent="MarginContainer/ScrollContainer/VBoxContainer/SettingsLabel" instance=ExtResource("2_3ij1x")]
+japanese_text = "設定"
+
 [node name="BackButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -64,9 +68,15 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "Go Back "
 
-[node name="ControlsHeading2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_x7inc")]
+[node name="LabelTranslator" parent="MarginContainer/ScrollContainer/VBoxContainer/BackButton" instance=ExtResource("2_3ij1x")]
+japanese_text = "戻る"
+
+[node name="LanguageHeading" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_x7inc")]
 layout_mode = 2
 text = "Language"
+
+[node name="LabelTranslator" parent="MarginContainer/ScrollContainer/VBoxContainer/LanguageHeading" instance=ExtResource("2_3ij1x")]
+japanese_text = "言語"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -99,7 +109,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "English"
 
-[node name="EnglishButton2" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="JapaneseButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,7 +119,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_6dg5d")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3ij1x")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_vcqvx")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/JapaneseButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,7 +131,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton2/MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/JapaneseButton/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
@@ -130,6 +140,9 @@ text = "日本語"
 [node name="ControlsHeading" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_x7inc")]
 layout_mode = 2
 text = "Edit Controls"
+
+[node name="LabelTranslator" parent="MarginContainer/ScrollContainer/VBoxContainer/ControlsHeading" instance=ExtResource("2_3ij1x")]
+japanese_text = "操作設定"
 
 [node name="ActionList" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -151,5 +164,10 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "Reset to default controls"
 
+[node name="LabelTranslator" parent="MarginContainer/ScrollContainer/VBoxContainer/ResetActionsButton" instance=ExtResource("2_3ij1x")]
+japanese_text = "初期設定に戻す"
+
 [connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnglishButton" to="." method="_on_english_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/JapaneseButton" to="." method="_on_japanese_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/ResetActionsButton" to="." method="_on_reset_actions_button_pressed"]

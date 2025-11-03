@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2cd1ymt0c23w"]
+[gd_scene load_steps=4 format=3 uid="uid://b2cd1ymt0c23w"]
+
+[ext_resource type="PackedScene" uid="uid://1yp25rsccu51" path="res://scenes/gui/label_translator.tscn" id="1_7fxe7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxonp"]
 bg_color = Color(1, 1, 1, 0.078431375)
@@ -38,6 +40,8 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "Action"
 horizontal_alignment = 1
+
+[node name="ActionLabelTranslator" parent="MarginContainer/HBoxContainer/ActionLabel" instance=ExtResource("1_7fxe7")]
 
 [node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
