@@ -37,8 +37,18 @@ func start_level():
 	level.game_ended.connect(_on_level_game_ended)
 	level_container.add_child(level)
 
-func _on_start_menu_ready_to_begin() -> void:
+func _on_start_menu_ready_to_begin(difficulty: String) -> void:
 	start_menu.queue_free()
+	match difficulty:
+		"easy":
+			Globals.max_player_health = 6
+			Globals.heal_amount = 3
+		"normal":
+			Globals.max_player_health = 4
+			Globals.heal_amount = 2
+		"hard":
+			Globals.max_player_health = 2
+			Globals.heal_amount = 1
 	start_level()
 
 func _unhandled_input(event: InputEvent) -> void:

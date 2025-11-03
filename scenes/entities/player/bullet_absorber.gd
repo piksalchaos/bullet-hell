@@ -223,7 +223,7 @@ func prepare_heal() -> void:
 		monitoring = false
 
 func _on_heal_timer_timeout() -> void:
-	Globals.player_health += 1
+	Globals.player_health += Globals.heal_amount
 	end_heal()
 	heal_effect.start_success_effect()
 	for i in color_amounts.size():

@@ -48,6 +48,7 @@ var collectible_container: Node2D
 var background_container: Node2D
 
 var max_player_health: int = 4
+var heal_amount: int = 2
 var player_health: int = max_player_health:
 	set = set_player_health
 

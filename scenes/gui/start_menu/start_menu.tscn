@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8n3kh1ff5dg1"]
+[gd_scene load_steps=12 format=3 uid="uid://c8n3kh1ff5dg1"]
 
 [ext_resource type="Script" uid="uid://b2unioa7d75e1" path="res://scenes/gui/start_menu/start_menu.gd" id="1_thu50"]
 [ext_resource type="Texture2D" uid="uid://cve3gyc726c37" path="res://assets/images/startmenuimageplaceholder.png" id="2_m7x51"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dc1tvgtya0sip" path="res://assets/audio/music/Fairytale Waltz.mp3" id="3_m7x51"]
 [ext_resource type="Script" uid="uid://cbm0gbffng0b3" path="res://scenes/gui/start_menu/hover_button.gd" id="4_4v6gu"]
 [ext_resource type="Texture2D" uid="uid://wcsumt2iv7bo" path="res://assets/images/settings_button.png" id="4_hho7w"]
+[ext_resource type="Script" uid="uid://3l6udlgjgfxt" path="res://scenes/gui/start_menu/difficulty_button.gd" id="7_76n7r"]
 [ext_resource type="PackedScene" uid="uid://svpr2alboaqf" path="res://scenes/gui/black_fade_transition.tscn" id="7_rudpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxjfj"]
@@ -35,23 +36,28 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="MainScreen" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="MainScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -558.0
-offset_top = -301.0
-offset_right = 28.0
-offset_bottom = -232.0
+offset_left = -6.5
+offset_top = 1.0
+offset_right = 588.5
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "UNNAMED BULLET HELL"
 
-[node name="BeginButton" type="TextureButton" parent="."]
+[node name="BeginButton" type="TextureButton" parent="MainScreen"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 0
 offset_left = 70.0
@@ -64,7 +70,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_4v6gu")
 
-[node name="SettingsButton" type="TextureButton" parent="."]
+[node name="SettingsButton" type="TextureButton" parent="MainScreen"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 0
 offset_left = 70.0
@@ -77,8 +83,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_4v6gu")
 
-[node name="StartMenuVisuals" type="Control" parent="."]
-layout_mode = 1
+[node name="StartMenuVisuals" type="Control" parent="MainScreen"]
 anchors_preset = 0
 offset_left = 818.0
 offset_top = 327.0
@@ -87,11 +92,11 @@ offset_bottom = 327.0
 mouse_filter = 2
 script = ExtResource("3_h61rw")
 
-[node name="RedrawTimer" type="Timer" parent="StartMenuVisuals"]
+[node name="RedrawTimer" type="Timer" parent="MainScreen/StartMenuVisuals"]
 wait_time = 0.75
 autostart = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="MainScreen"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -99,25 +104,114 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 44.0
-offset_top = -147.0
-offset_right = 833.94507
-offset_bottom = 445.45874
+offset_left = 600.0
+offset_top = 157.0
+offset_right = 1389.9451
+offset_bottom = 749.45874
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5384341, 0.5384341)
 texture = ExtResource("2_m7x51")
 expand_mode = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_m7x51")
-autoplay = true
+[node name="SelectScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectScreen"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 31.0
+offset_top = -132.25
+offset_right = 496.0
+offset_bottom = 176.25
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="EasyButton" type="Button" parent="SelectScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "EASY"
+script = ExtResource("7_76n7r")
+
+[node name="DescriptionLabel" type="Label" parent="SelectScreen/VBoxContainer/EasyButton"]
+visible = false
+layout_mode = 0
+offset_left = 503.0
+offset_top = -28.75
+offset_right = 1090.0
+offset_bottom = 405.25
+theme_override_font_sizes/font_size = 48
+text = "6 hearts total
+Healing recovers 3 hearts"
+
+[node name="NormalButton" type="Button" parent="SelectScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "NORMAL"
+script = ExtResource("7_76n7r")
+
+[node name="DescriptionLabel" type="Label" parent="SelectScreen/VBoxContainer/NormalButton"]
+visible = false
+layout_mode = 0
+offset_left = 503.0
+offset_top = -28.75
+offset_right = 1090.0
+offset_bottom = 405.25
+theme_override_font_sizes/font_size = 48
+text = "4 hearts total
+Healing recovers 2 hearts"
+
+[node name="HardButton" type="Button" parent="SelectScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "HARD"
+script = ExtResource("7_76n7r")
+
+[node name="DescriptionLabel" type="Label" parent="SelectScreen/VBoxContainer/HardButton"]
+visible = false
+layout_mode = 0
+offset_left = 503.0
+offset_top = -28.75
+offset_right = 1090.0
+offset_bottom = 405.25
+theme_override_font_sizes/font_size = 48
+text = "2 hearts total
+Healing recovers 1 heart"
+
+[node name="CheckButton" type="CheckButton" parent="SelectScreen"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 105.0
+offset_right = 476.0
+offset_bottom = 166.0
+theme_override_constants/h_separation = 10
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "PLAY WITH TUTORIAL"
 
 [node name="BlackFadeTransition" parent="." instance=ExtResource("7_rudpn")]
 layout_mode = 1
 is_transparent = false
 
-[connection signal="pressed" from="BeginButton" to="." method="_on_begin_button_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="timeout" from="StartMenuVisuals/RedrawTimer" to="StartMenuVisuals" method="_on_redraw_timer_timeout"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_m7x51")
+autoplay = true
+
+[connection signal="pressed" from="MainScreen/BeginButton" to="." method="_on_begin_button_pressed"]
+[connection signal="pressed" from="MainScreen/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="timeout" from="MainScreen/StartMenuVisuals/RedrawTimer" to="MainScreen/StartMenuVisuals" method="_on_redraw_timer_timeout"]
+[connection signal="pressed" from="SelectScreen/VBoxContainer/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="SelectScreen/VBoxContainer/NormalButton" to="." method="_on_normal_button_pressed"]
+[connection signal="pressed" from="SelectScreen/VBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]
 [connection signal="finished_transition" from="BlackFadeTransition" to="." method="_on_black_fade_transition_finished_transition"]
