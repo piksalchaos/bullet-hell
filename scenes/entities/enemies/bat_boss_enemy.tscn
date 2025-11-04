@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqg4ypw6r1ke3"]
+[gd_scene load_steps=25 format=3 uid="uid://bqg4ypw6r1ke3"]
 
 [ext_resource type="Script" uid="uid://fiqqua67xng8" path="res://scenes/entities/enemies/bat_boss_enemy.gd" id="1_jeaop"]
 [ext_resource type="Texture2D" uid="uid://nmhirnxvaeqe" path="res://assets/images/enemies/bat_boss_enemy.png" id="2_jeaop"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_w4d8h"]
 [ext_resource type="PackedScene" uid="uid://bbnpupe0f58tx" path="res://scenes/components/pattern_components/pattern_emitter.tscn" id="6_1fbk7"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="7_3gd13"]
-[ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="8_5rqut"]
 [ext_resource type="PackedScene" uid="uid://4fbrwun0d6hr" path="res://scenes/components/pattern_components/pattern_rotator.tscn" id="9_0c3dn"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_tbn1m"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="11_f444j"]
@@ -87,44 +86,13 @@ score_amount = 30
 [node name="PatternEmitter" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
 
 [node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("7_3gd13")]
-delay_time = 0.5
-seconds_per_shot = 2.0
+seconds_per_shot = 1.5
 
-[node name="LoopedColorizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_5rqut")]
-bullet_emitters = [NodePath("../PatternRepeater/PatternRotator/PatternSpreader/BulletEmitter")]
-
-[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" instance=ExtResource("7_3gd13")]
-seconds_per_shot = 0.2
-max_shots = 3
-
-[node name="PatternRotator" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater" instance=ExtResource("9_0c3dn")]
-angle_range = 0.15
-is_ping_pong = true
-
-[node name="PatternSpreader" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator" instance=ExtResource("10_tbn1m")]
-angle_range = 5.969
-bullet_count = 20
-
-[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater/PatternRepeater/PatternRotator/PatternSpreader" instance=ExtResource("11_f444j")]
-bullet_scene = ExtResource("12_yn8dv")
-
-[node name="PatternRepeater2" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("7_3gd13")]
-delay_time = 2.0
-seconds_per_shot = 4.0
-
-[node name="PatternRandomizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2" instance=ExtResource("13_e20ak")]
-angle_range = 3.142
-
-[node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2/PatternRandomizer" instance=ExtResource("7_3gd13")]
-seconds_per_shot = 0.1
-max_shots = 6
-
-[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater2/PatternRandomizer/PatternRepeater" instance=ExtResource("11_f444j")]
+[node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" instance=ExtResource("11_f444j")]
 rotation = 1.5707964
-bullet_scene = ExtResource("14_yb00a")
-color_id = 6
 
 [node name="PatternEmitter2" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
+visible = false
 
 [node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter2" instance=ExtResource("7_3gd13")]
 delay_time = 1.0
@@ -186,6 +154,7 @@ bullet_count = 25
 bullet_scene = ExtResource("12_yn8dv")
 
 [node name="PatternEmitter3" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
+visible = false
 
 [node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter3" instance=ExtResource("7_3gd13")]
 delay_time = 2.0

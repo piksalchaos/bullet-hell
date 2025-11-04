@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbq75if4fyh1b"]
+
+[ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="1_gos3y"]
+[ext_resource type="Script" uid="uid://blfngkobhsk4p" path="res://scenes/bullets/rotating_emitter_bullet.gd" id="1_j2xqw"]
+[ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_j2xqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gos3y"]
+radius = 16.0
+
+[node name="RotatingEmitterBullet" type="Node2D"]
+script = ExtResource("1_j2xqw")
+
+[node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("1_gos3y")]
+color_component = NodePath("../ColorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
+shape = SubResource("CircleShape2D_gos3y")
+
+[node name="ColorComponent" parent="." instance=ExtResource("2_j2xqw")]
+color_id = 6
