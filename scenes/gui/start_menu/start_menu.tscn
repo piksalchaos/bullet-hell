@@ -144,6 +144,7 @@ text = "EASY"
 script = ExtResource("7_76n7r")
 
 [node name="DescriptionLabel" type="Label" parent="SelectScreen/VBoxContainer/EasyButton"]
+visible = false
 layout_mode = 0
 offset_left = 503.0
 offset_top = -28.75

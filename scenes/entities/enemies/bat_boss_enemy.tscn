@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqg4ypw6r1ke3"]
+[gd_scene load_steps=27 format=3 uid="uid://bqg4ypw6r1ke3"]
 
 [ext_resource type="Script" uid="uid://fiqqua67xng8" path="res://scenes/entities/enemies/bat_boss_enemy.gd" id="1_jeaop"]
 [ext_resource type="Texture2D" uid="uid://nmhirnxvaeqe" path="res://assets/images/enemies/bat_boss_enemy.png" id="2_jeaop"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://djgvpk2hk284t" path="res://scenes/components/enemy_components/health_component.tscn" id="5_w4d8h"]
 [ext_resource type="PackedScene" uid="uid://bbnpupe0f58tx" path="res://scenes/components/pattern_components/pattern_emitter.tscn" id="6_1fbk7"]
 [ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="7_3gd13"]
+[ext_resource type="PackedScene" uid="uid://dol55n63ye15h" path="res://scenes/components/pattern_components/colorizers/looped_colorizer.tscn" id="8_5rqut"]
 [ext_resource type="PackedScene" uid="uid://4fbrwun0d6hr" path="res://scenes/components/pattern_components/pattern_rotator.tscn" id="9_0c3dn"]
+[ext_resource type="PackedScene" uid="uid://bbq75if4fyh1b" path="res://scenes/bullets/rotating_emitter_bullet.tscn" id="9_jeaop"]
 [ext_resource type="PackedScene" uid="uid://bsa2fd4o0c5bh" path="res://scenes/components/pattern_components/pattern_spreader.tscn" id="10_tbn1m"]
 [ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="11_f444j"]
 [ext_resource type="PackedScene" uid="uid://djqnll3rqvsn6" path="res://scenes/bullets/thorn_bullet.tscn" id="12_yn8dv"]
@@ -38,7 +40,7 @@ script = ExtResource("1_jeaop")
 color_component = NodePath("ColorComponent")
 
 [node name="RepositionTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 
 [node name="StageTransitionTimer" type="Timer" parent="."]
@@ -66,7 +68,7 @@ shape = SubResource("CapsuleShape2D_7usf5")
 [node name="HealthComponent" parent="HealthComponentContainer" instance=ExtResource("5_w4d8h")]
 visible = false
 position = Vector2(0, -57)
-max_health = 3
+max_health = 5
 score_amount = 15
 
 [node name="HealthComponent2" parent="HealthComponentContainer" instance=ExtResource("5_w4d8h")]
@@ -86,10 +88,15 @@ score_amount = 30
 [node name="PatternEmitter" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
 
 [node name="PatternRepeater" parent="PatternEmitterContainer/PatternEmitter" instance=ExtResource("7_3gd13")]
-seconds_per_shot = 1.5
+seconds_per_shot = 3.75
+
+[node name="LoopedColorizer" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" node_paths=PackedStringArray("bullet_emitters") instance=ExtResource("8_5rqut")]
+bullet_emitters = [NodePath("../BulletEmitter")]
+color_ids_to_choose = Array[int]([0, 2, 4])
 
 [node name="BulletEmitter" parent="PatternEmitterContainer/PatternEmitter/PatternRepeater" instance=ExtResource("11_f444j")]
 rotation = 1.5707964
+bullet_scene = ExtResource("9_jeaop")
 
 [node name="PatternEmitter2" parent="PatternEmitterContainer" instance=ExtResource("6_1fbk7")]
 visible = false

@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbq75if4fyh1b"]
+[gd_scene load_steps=10 format=3 uid="uid://bbq75if4fyh1b"]
 
 [ext_resource type="PackedScene" uid="uid://b3wyhqtcgs161" path="res://scenes/components/bullet_component.tscn" id="1_gos3y"]
 [ext_resource type="Script" uid="uid://blfngkobhsk4p" path="res://scenes/bullets/rotating_emitter_bullet.gd" id="1_j2xqw"]
 [ext_resource type="PackedScene" uid="uid://xqi3gat184am" path="res://scenes/components/color_component.tscn" id="2_j2xqw"]
+[ext_resource type="PackedScene" uid="uid://dgkrbms6vnxf5" path="res://scenes/drawings/rotating_emitter_bullet_drawing.tscn" id="4_yr3b6"]
+[ext_resource type="PackedScene" uid="uid://bvwrgsurk7ecc" path="res://scenes/components/pattern_components/pattern_repeater.tscn" id="5_xl47w"]
+[ext_resource type="PackedScene" uid="uid://4fbrwun0d6hr" path="res://scenes/components/pattern_components/pattern_rotator.tscn" id="6_xgwun"]
+[ext_resource type="PackedScene" uid="uid://dn1fmn3in30iu" path="res://scenes/components/pattern_components/bullet_emitter.tscn" id="7_rnwi7"]
+[ext_resource type="PackedScene" uid="uid://co16bqvygccw8" path="res://scenes/bullets/ring_bullet.tscn" id="8_rnwi7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gos3y"]
 radius = 16.0
@@ -11,6 +16,7 @@ radius = 16.0
 script = ExtResource("1_j2xqw")
 
 [node name="BulletComponent" parent="." node_paths=PackedStringArray("color_component") instance=ExtResource("1_gos3y")]
+offscreen_distance = 20.0
 color_component = NodePath("../ColorComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent"]
@@ -18,3 +24,18 @@ shape = SubResource("CircleShape2D_gos3y")
 
 [node name="ColorComponent" parent="." instance=ExtResource("2_j2xqw")]
 color_id = 6
+
+[node name="RotatingEmitterBulletDrawing" parent="." instance=ExtResource("4_yr3b6")]
+z_index = 1
+
+[node name="PatternRepeater" parent="." instance=ExtResource("5_xl47w")]
+delay_time = 0.2
+seconds_per_shot = 0.1
+
+[node name="PatternRotator" parent="PatternRepeater" instance=ExtResource("6_xgwun")]
+angle_range = 5.8
+cycle_bullet_count = 12
+
+[node name="BulletEmitter" parent="PatternRepeater/PatternRotator" instance=ExtResource("7_rnwi7")]
+rotation = 3.1415927
+bullet_scene = ExtResource("8_rnwi7")

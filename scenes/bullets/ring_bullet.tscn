@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://co16bqvygccw8"]
+
+[ext_resource type="PackedScene" uid="uid://brjl1igieycsd" path="res://scenes/bullets/base_bullets/angled_bullet.tscn" id="1_ihso4"]
+[ext_resource type="PackedScene" uid="uid://dstuu3qr7iaia" path="res://scenes/drawings/circle_drawing.tscn" id="2_3e5c7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihso4"]
+radius = 6.0
+
+[node name="RingBullet" instance=ExtResource("1_ihso4")]
+speed = 170.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletComponent" index="0"]
+shape = SubResource("CircleShape2D_ihso4")
+
+[node name="CircleDrawing" parent="." index="2" instance=ExtResource("2_3e5c7")]
+radius = 6.0
+is_filled = false
+line_width = 4.0

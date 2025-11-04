@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgkrbms6vnxf5"]
+
+[ext_resource type="Script" uid="uid://d3vsjlae16nbd" path="res://scenes/drawings/rotating_emitter_bullet_drawing.gd" id="1_dy87m"]
+
+[node name="RotatingEmitterBulletDrawing" type="Node2D"]
+script = ExtResource("1_dy87m")
